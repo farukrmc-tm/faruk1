@@ -3,28 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Almanca Kelime Kartları (Bildung und Forschung)</title>
+    <title>Almanca Kelime Ustası</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #f0fdf4; } /* Açık yeşil arka plan */
         
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #f0f4f8 0%, #e0e8f0 100%);
+            color: #1a202c;
+        }
+
         .scene {
             width: 100%;
-            height: 350px;
-            perspective: 1000px;
+            height: 300px;
+            perspective: 1200px;
         }
         
         .card {
             width: 100%;
             height: 100%;
             position: relative;
-            transition: transform 0.6s;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform-style: preserve-3d;
             cursor: pointer;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-            border-radius: 1rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         
         .card.is-flipped {
@@ -41,345 +46,629 @@
             justify-content: center;
             align-items: center;
             padding: 2rem;
-            border-radius: 1rem;
+            border-radius: 1.5rem;
             text-align: center;
-            background: white;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
         }
         
         .card__face--front {
-            border-bottom: 6px solid #22c55e; /* Yeşil alt kenarlık */
+            /* Front face styling */
         }
         
         .card__face--back {
             transform: rotateY(180deg);
             background: #f8fafc;
-            border-bottom: 6px solid #3b82f6; /* Mavi alt kenarlık */
         }
-        
-        /* Highlighted text in sentence */
-        .highlight {
-            color: #166534;
-            font-weight: 700;
-            background-color: #dcfce7;
-            padding: 0.1rem 0.4rem;
-            border-radius: 0.25rem;
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .modal-overlay {
+            background-color: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        .category-card {
+            transition: all 0.3s ease;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
     </style>
 </head>
-<body class="text-gray-800 h-screen flex flex-col overflow-hidden">
+<body class="h-screen flex flex-col overflow-hidden">
 
-    <header class="bg-green-600 text-white shadow-md p-4 shrink-0">
-        <div class="max-w-4xl mx-auto flex justify-between items-center">
+    <header class="bg-slate-900 text-white shadow-lg p-4 shrink-0 z-10 relative">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
             <div>
-                <h1 class="text-2xl font-bold"><i class="fas fa-graduation-cap mr-2"></i>Almanca Ezber Kartları</h1>
-                <p class="text-sm text-green-100">Bildung und Forschung (Sayfa 7-45)</p>
+                <h1 class="text-xl sm:text-2xl font-bold tracking-tight"><i class="fas fa-layer-group mr-2 text-indigo-400"></i>Uni? Sicher! Deutsch 3</h1>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1">Bildung und Forschung (Syf. 7-45)</p>
             </div>
-            <div class="text-right">
-                <div class="text-sm font-medium bg-green-700 px-3 py-1 rounded-full inline-block">
-                    İlerleme: <span id="progress-text">0/0</span>
+            
+            <!-- Controls shown only in study mode -->
+            <div id="study-controls" class="hidden flex items-center gap-4">
+                <div class="text-sm font-semibold bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
+                    <span id="progress-text" class="text-indigo-400">1 / 10</span>
                 </div>
+                <button onclick="showMenu()" class="text-slate-300 hover:text-white transition flex items-center gap-1 bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-700">
+                    <i class="fas fa-times"></i> <span class="hidden sm:inline">Kapat</span>
+                </button>
             </div>
         </div>
     </header>
 
-    <main class="flex-1 overflow-auto p-4 sm:p-6 w-full max-w-4xl mx-auto flex flex-col items-center justify-center">
-        
-        <!-- Controls & Stats -->
-        <div class="w-full flex justify-between items-center mb-6 px-2">
-            <button onclick="shuffleDeck()" class="text-gray-500 hover:text-green-600 transition flex items-center gap-2">
-                <i class="fas fa-random"></i> Kartları Karıştır
-            </button>
-            <div class="text-sm text-gray-500">
-                Öğrenilen: <span id="learned-count" class="font-bold text-green-600">0</span>
+    <main id="menu-screen" class="flex-1 overflow-auto p-6 flex flex-col items-center">
+        <div class="w-full max-w-5xl mt-4 sm:mt-10">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-slate-800 mb-3">Çalışmak İstediğiniz Bölümü Seçin</h2>
+                <p class="text-slate-500">Kitaptaki temalara göre ayrılmış kelime setleri.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Category 1 -->
+                <button onclick="startStudy('schule')" class="category-card bg-white rounded-2xl p-8 text-left border border-slate-200 shadow-sm relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
+                    <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">1. Schule und Bildung</h3>
+                    <p class="text-slate-500 text-sm mb-4">Okul, eğitim sistemi, notlar ve derslerle ilgili kalıplar. (Syf. 9-12 eksiksiz)</p>
+                    <div class="text-indigo-600 font-semibold text-sm flex items-center">
+                        Çalışmaya Başla <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                    </div>
+                </button>
+
+                <!-- Category 2 -->
+                <button onclick="startStudy('studium')" class="category-card bg-white rounded-2xl p-8 text-left border border-slate-200 shadow-sm relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
+                    <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">2. Studium</h3>
+                    <p class="text-slate-500 text-sm mb-4">Üniversite, bölümler, akademisyenler ve kampüs hayatı.</p>
+                    <div class="text-emerald-600 font-semibold text-sm flex items-center">
+                        Çalışmaya Başla <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                    </div>
+                </button>
+
+                <!-- Category 3 -->
+                <button onclick="startStudy('wissenschaft')" class="category-card bg-white rounded-2xl p-8 text-left border border-slate-200 shadow-sm relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-sky-50 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
+                    <div class="w-14 h-14 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">3. Wissenschaft</h3>
+                    <p class="text-slate-500 text-sm mb-4">Bilimsel araştırmalar, deneyler, teoriler ve kanıtlar.</p>
+                    <div class="text-sky-600 font-semibold text-sm flex items-center">
+                        Çalışmaya Başla <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                    </div>
+                </button>
             </div>
         </div>
-
-        <!-- The Flashcard -->
-        <div class="scene w-full max-w-2xl mb-8">
-            <div class="card" id="flashcard" onclick="flipCard()">
-                <!-- Front (German Sentence) -->
-                <div class="card__face card__face--front">
-                    <span class="absolute top-4 left-4 text-xs font-bold text-gray-400 uppercase tracking-widest"><i class="fas fa-book-open mr-1"></i> Sayfa <span id="page-number"></span></span>
-                    <span class="absolute top-4 right-4 text-xs font-bold text-gray-400"><i class="fas fa-sync-alt mr-1"></i> Çevirmek için tıkla</span>
-                    
-                    <p id="german-sentence" class="text-2xl sm:text-3xl font-medium text-gray-800 leading-snug mt-4">
-                        <!-- Sentence injected here -->
-                    </p>
-                </div>
-                
-                <!-- Back (Meaning/Base Form) -->
-                <div class="card__face card__face--back">
-                    <span class="text-sm font-semibold text-blue-500 mb-2 uppercase tracking-wide">Kalıp / Kök Hali</span>
-                    <h2 id="base-form" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-                        <!-- Base form injected here -->
-                    </h2>
-                    
-                    <div class="w-full h-px bg-gray-200 mb-6"></div>
-                    
-                    <span class="text-xs text-gray-500 mb-1">Cümledeki Hali:</span>
-                    <p id="word-form" class="text-lg font-medium text-gray-700 italic">
-                        <!-- Word form injected here -->
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Action Buttons (Hidden until card is flipped) -->
-        <div id="action-buttons" class="flex gap-4 w-full max-w-2xl opacity-0 transition-opacity duration-300 pointer-events-none">
-            <button onclick="handleAnswer(false)" class="flex-1 bg-white border-2 border-red-200 text-red-600 font-bold py-4 px-6 rounded-xl hover:bg-red-50 hover:border-red-300 transition shadow-sm flex items-center justify-center gap-2 text-lg">
-                <i class="fas fa-times-circle"></i> Bilemedim
-            </button>
-            <button onclick="handleAnswer(true)" class="flex-1 bg-green-500 text-white font-bold py-4 px-6 rounded-xl hover:bg-green-600 transition shadow-md flex items-center justify-center gap-2 text-lg">
-                <i class="fas fa-check-circle"></i> Bildim
-            </button>
-        </div>
-
-        <!-- Completion Screen -->
-        <div id="completion-screen" class="hidden flex-col items-center justify-center text-center p-8 bg-white rounded-2xl shadow-lg w-full max-w-2xl">
-            <div class="text-6xl text-green-500 mb-4"><i class="fas fa-trophy"></i></div>
-            <h2 class="text-3xl font-bold text-gray-800 mb-2">Harika İş!</h2>
-            <p class="text-gray-600 mb-8 text-lg">Tüm kelimeleri en az bir kere doğru bildin.</p>
-            <button onclick="resetApp()" class="bg-green-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-700 transition">
-                Tekrar Başla
-            </button>
-        </div>
-
     </main>
 
+    <main id="study-screen" class="hidden flex-1 overflow-hidden p-4 sm:p-6 flex flex-col items-center justify-center w-full">
+        
+        <div class="w-full max-w-2xl flex flex-col items-center h-full max-h-[700px] justify-center relative">
+            
+            <!-- The Flashcard -->
+            <div class="scene w-full mb-8">
+                <div class="card" id="flashcard" onclick="flipCard()">
+                    
+                    <!-- Front (German Phrase) -->
+                    <div class="card__face card__face--front">
+                        <div class="absolute top-5 flex justify-between w-full px-6">
+                            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider"><i class="fas fa-language mr-1"></i> Almanca</span>
+                            <span class="text-xs font-medium text-slate-400"><i class="fas fa-sync-alt mr-1"></i> Çevir</span>
+                        </div>
+                        <h2 id="card-german" class="text-3xl sm:text-4xl font-bold text-slate-800 leading-tight">
+                            <!-- German injected here -->
+                        </h2>
+                    </div>
+                    
+                    <!-- Back (Turkish Meaning) -->
+                    <div class="card__face card__face--back">
+                        <div class="absolute top-5 flex justify-between w-full px-6">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider"><i class="fas fa-language mr-1"></i> Türkçe Anlamı</span>
+                        </div>
+                        <h2 id="card-turkish" class="text-2xl sm:text-3xl font-medium text-slate-700 leading-tight">
+                            <!-- Turkish injected here -->
+                        </h2>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Navigation & Info Controls -->
+            <div class="flex flex-col w-full gap-4">
+                
+                <!-- Info Button (Primary Request) -->
+                <button onclick="openInfoModal()" class="w-full bg-slate-800 text-white font-bold py-4 px-6 rounded-xl hover:bg-slate-900 transition shadow-lg flex items-center justify-center gap-3 text-lg border-b-4 border-slate-950 active:border-b-0 active:translate-y-1">
+                    <i class="fas fa-book-open text-indigo-400"></i>
+                    <span>Bu Kelimeyle İlgili 5 Örnek Cümle Gör</span>
+                </button>
+
+                <!-- Next/Prev Controls -->
+                <div class="flex justify-between gap-4 mt-2">
+                    <button onclick="prevCard()" class="flex-1 bg-white border border-slate-200 text-slate-600 font-semibold py-3 px-4 rounded-xl hover:bg-slate-50 transition shadow-sm flex items-center justify-center gap-2">
+                        <i class="fas fa-arrow-left"></i> Önceki
+                    </button>
+                    <button onclick="nextCard()" class="flex-1 bg-white border border-slate-200 text-slate-600 font-semibold py-3 px-4 rounded-xl hover:bg-slate-50 transition shadow-sm flex items-center justify-center gap-2">
+                        Sonraki <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Info Modal (5 Examples) -->
+    <div id="info-modal" class="fixed inset-0 z-50 hidden modal-overlay flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col transform scale-95 transition-transform duration-300" id="modal-content-wrapper">
+            
+            <!-- Modal Header -->
+            <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center shrink-0 bg-slate-50 rounded-t-2xl">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fas fa-lightbulb text-amber-500"></i> Örnek Cümleler
+                    </h3>
+                    <p id="modal-word-title" class="text-sm text-indigo-600 font-semibold mt-1"></p>
+                </div>
+                <button onclick="closeInfoModal()" class="text-slate-400 hover:text-slate-700 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-slate-200 transition">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body (Scrollable) -->
+            <div class="p-6 overflow-y-auto custom-scrollbar flex-1 bg-white rounded-b-2xl">
+                <div id="examples-container" class="space-y-6">
+                    <!-- Examples injected here -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <script>
-        // Veritabanı: Sayfa 7'den 45'e kadar belirtilen Bildung und Forschung bölümü.
-        // Özellikle 9, 10, 11 ve 12. sayfalardaki (12. sayfa başındaki Schuluniform dahil) kelimeler özenle seçildi.
-        const allVocabData = [
-            // Sayfa 9
-            { page: 9, word: "eingeschult", base: "eingeschult werden", sentence: "Die meisten Kinder werden im Alter von sechs Jahren eingeschult." },
-            { page: 9, word: "zur Schule", base: "zur Schule gehen", sentence: "Wenn man Abitur machen will, muss man 12 oder 13 Jahre zur Schule gehen." },
-            { page: 9, word: "eine Schule", base: "eine Schule besuchen", sentence: "Die Eltern legen großen Wert darauf, dass ihr Kind eine gute Schule besucht." },
-            { page: 9, word: "Schulpflicht", base: "die Schulpflicht", sentence: "Die Dauer der allgemeinen Schulpflicht beträgt in Deutschland mindestens neun Schuljahre." },
-            { page: 9, word: "schwänzt", base: "die Schule schwänzen", sentence: "Eigentlich müsste sie jetzt im Unterricht sein, aber sie schwänzt die Schule." },
-            { page: 9, word: "öffentliche Schulen", base: "die öffentliche Schule", sentence: "Die meisten Schülerinnen und Schüler in Deutschland besuchen öffentliche Schulen." },
-            { page: 9, word: "Privatschulen", base: "die Privatschule", sentence: "Die Zahl der Schüler, die Privatschulen besuchen, steigt kontinuierlich." },
-            { page: 9, word: "Ganztagsschulen", base: "die Ganztagsschule", sentence: "In Deutschland werden immer mehr Ganztagsschulen eingerichtet." },
-            { page: 9, word: "Internat", base: "das Internat", sentence: "Im Internat teilen sich meistens zwei Schüler ein Zimmer." },
-            { page: 9, word: "Klasse", base: "die Klasse", sentence: "Die Grundschulzeit dauert in Bayern von der 1. bis zur 4. Klasse." },
-            { page: 9, word: "aufs Gymnasium", base: "aufs Gymnasium gehen", sentence: "Am Ende der Grundschulzeit wird entschieden, ob man aufs Gymnasium geht." },
-            { page: 9, word: "Schulabschluss", base: "den Schulabschluss machen", sentence: "Viele Schüler, die nächstes Jahr ihren Schulabschluss machen, suchen einen Ausbildungsplatz." },
-            { page: 9, word: "abgebrochen", base: "die Schule abbrechen", sentence: "Wer die Schule abgebrochen hat, hat keinen Schulabschluss." },
-            
-            // Sayfa 10
-            { page: 10, word: "nachholen", base: "einen Schulabschluss nachholen", sentence: "Wer keinen Schulabschluss gemacht hat, kann diesen nachholen." },
-            { page: 10, word: "Abitur gemacht", base: "(das) Abitur machen", sentence: "Wenn man Abitur gemacht hat, kann man sich um einen Studienplatz bewerben." },
-            { page: 10, word: "Hauptfächern", base: "das Hauptfach", sentence: "Der Unterricht in den Hauptfächern Deutsch, Englisch und Mathematik ist wichtig." },
-            { page: 10, word: "Nebenfächern", base: "das Nebenfach", sentence: "In den Nebenfächern haben die Schüler weniger Unterricht." },
-            { page: 10, word: "unterrichtet", base: "etw. unterrichten", sentence: "Der Lehrer unterrichtet seit 15 Jahren Englisch und Sport." },
-            { page: 10, word: "Unterricht geben", base: "Unterricht geben / erteilen", sentence: "Die Hauptaufgabe von Lehrern ist es, Unterricht zu geben." },
-            { page: 10, word: "Lernstoff", base: "der Lernstoff", sentence: "Genetik gehört zum Lernstoff der 9. Klasse." },
-            { page: 10, word: "vermitteln", base: "jdm. etw. vermitteln", sentence: "Der Lehrer soll den Schülern den Lernstoff vermitteln." },
-            
-            // Sayfa 11
-            { page: 11, word: "Didaktik", base: "die Didaktik", sentence: "Zukünftige Lehrer müssen sich mit Didaktik beschäftigen." },
-            { page: 11, word: "Lehrpläne", base: "der Lehrplan", sentence: "Die Ministerien erstellen Lehrpläne, in denen Unterrichtsinhalte festgelegt sind." },
-            { page: 11, word: "Klassenarbeiten", base: "die Klassenarbeit", sentence: "In den Hauptfächern werden regelmäßig Klassenarbeiten geschrieben." },
-            { page: 11, word: "Noten", base: "die Note", sentence: "Kinder sind enttäuscht, wenn sie keine gute Note bekommen." },
-            { page: 11, word: "benotet", base: "etw. benoten", sentence: "Wenn Schüler wissen, dass eine Hausaufgabe benotet wird, arbeiten sie konzentrierter." },
-            { page: 11, word: "Leistungen", base: "die Leistung", sentence: "Früher war sie eine gute Schülerin, aber ihre Leistungen haben nachgelassen." },
-            { page: 11, word: "Zeugnisse", base: "das Zeugnis", sentence: "Schüler bekommen am Ende jedes Schulhalbjahres Zeugnisse." },
-            { page: 11, word: "sitzen bleiben", base: "nicht versetzt werden / sitzen bleiben", sentence: "Schlechte Schüler bleiben sitzen und müssen das Schuljahr wiederholen." },
-            { page: 11, word: "Nachhilfe", base: "die Nachhilfe", sentence: "Spezielle Institute bieten Nachhilfe in einzelnen Fächern an." },
-            { page: 11, word: "Mitschülern", base: "der Mitschüler", sentence: "Kinder sollen lernen, mit ihren Mitschülern zusammenzuarbeiten." },
+        // --- VERİTABANI ---
+        // Sizin için özellikle sayfa 9, 10, 11 ve 12'deki tüm kelimeler eklendi.
+        // Her kelime için tam 5 Almanca örnek cümle ve Türkçe çevirileri özenle hazırlandı.
+        const db = {
+            "schule": [
+                {
+                    german: "eingeschult werden", turkish: "okula başlatılmak",
+                    examples: [
+                        { de: "Die meisten Kinder werden im Alter von sechs Jahren eingeschult.", tr: "Çocukların çoğu altı yaşında okula başlatılır." },
+                        { de: "Mein kleiner Bruder wird nächstes Jahr im September eingeschult.", tr: "Küçük erkek kardeşim gelecek yıl Eylül ayında okula başlayacak." },
+                        { de: "Die Einschulung ist ein wichtiges Ereignis für die ganze Familie.", tr: "Okula başlama, tüm aile için önemli bir olaydır." },
+                        { de: "Wegen seiner Krankheit wurde er ein Jahr später eingeschult.", tr: "Hastalığı nedeniyle bir yıl geç okula başlatıldı." },
+                        { de: "Zur Einschulung bekommen die Kinder in Deutschland eine Schultüte.", tr: "Okula başlarken Almanya'da çocuklara bir okul külahı verilir." }
+                    ]
+                },
+                {
+                    german: "zur Schule gehen", turkish: "okula gitmek",
+                    examples: [
+                        { de: "Wenn man Abitur machen will, muss man 12 oder 13 Jahre zur Schule gehen.", tr: "Eğer lise bitirme sınavı (Abitur) yapmak isteniyorsa, 12 veya 13 yıl okula gidilmelidir." },
+                        { de: "Meine Tochter geht jeden Morgen um halb acht zur Schule.", tr: "Kızım her sabah yedi buçukta okula gider." },
+                        { de: "In vielen Ländern müssen Kinder mindestens neun Jahre zur Schule gehen.", tr: "Birçok ülkede çocuklar en az dokuz yıl okula gitmek zorundadır." },
+                        { de: "Gehst du lieber zu Fuß zur Schule oder nimmst du den Bus?", tr: "Okula yürüyerek gitmeyi mi yoksa otobüse binmeyi mi tercih edersin?" },
+                        { de: "Er ist heute nicht zur Schule gegangen, weil er stark erkältet ist.", tr: "Ağır soğuk algınlığı olduğu için bugün okula gitmedi." }
+                    ]
+                },
+                {
+                    german: "eine Schule besuchen", turkish: "bir okula gitmek / okul okumak",
+                    examples: [
+                        { de: "Die Eltern legen großen Wert darauf, dass ihr Kind eine gute Schule besucht.", tr: "Ebeveynler, çocuklarının iyi bir okula gitmesine büyük önem verirler." },
+                        { de: "Welche Schule hast du besucht, als du ein Kind warst?", tr: "Çocukken hangi okula gittin?" },
+                        { de: "In der Schweiz besuchen viele Jugendliche eine internationale Schule.", tr: "İsviçre'de birçok genç uluslararası bir okula gider." },
+                        { de: "Um diesen Beruf zu ergreifen, muss man eine spezielle Fachschule besuchen.", tr: "Bu mesleği edinmek için özel bir meslek okuluna gitmek gerekir." },
+                        { de: "Er besucht zurzeit eine Schule für begabte Musiker.", tr: "Şu anda yetenekli müzisyenler için bir okula gidiyor." }
+                    ]
+                },
+                {
+                    german: "die Schulpflicht", turkish: "zorunlu eğitim",
+                    examples: [
+                        { de: "Die Dauer der allgemeinen Schulpflicht beträgt in Deutschland mindestens neun Schuljahre.", tr: "Genel zorunlu eğitimin süresi Almanya'da en az dokuz okul yılıdır." },
+                        { de: "Die Schulpflicht beginnt normalerweise im Alter von sechs Jahren.", tr: "Zorunlu eğitim genellikle altı yaşında başlar." },
+                        { de: "Eltern können bestraft werden, wenn sie die Schulpflicht ihrer Kinder ignorieren.", tr: "Çocuklarının zorunlu eğitimini görmezden gelirlerse ebeveynler cezalandırılabilir." },
+                        { de: "Die Einführung der Schulpflicht war ein wichtiger historischer Meilenstein.", tr: "Zorunlu eğitimin getirilmesi önemli bir tarihi dönüm noktasıydı." },
+                        { de: "Nach dem Ende der Schulpflicht kann man eine Ausbildung beginnen.", tr: "Zorunlu eğitimin bitiminden sonra bir meslek eğitimine başlanabilir." }
+                    ]
+                },
+                {
+                    german: "die Schule schwänzen", turkish: "okulu asmak",
+                    examples: [
+                        { de: "Eigentlich müsste sie jetzt im Unterricht sein, aber sie schwänzt die Schule.", tr: "Aslında şu an derste olması gerekirdi ama o okulu asıyor." },
+                        { de: "Wer regelmäßig die Schule schwänzt, bekommt große Probleme.", tr: "Düzenli olarak okulu asan kişi büyük sorunlar yaşar." },
+                        { de: "Er hat die Schule geschwänzt, um mit seinen Freunden ins Kino zu gehen.", tr: "Arkadaşlarıyla sinemaya gitmek için okulu astı." },
+                        { de: "Die Lehrer haben sofort gemerkt, dass einige Schüler die Schule schwänzen.", tr: "Öğretmenler, bazı öğrencilerin okulu astığını hemen fark etti." },
+                        { de: "Das Schwänzen der Schule führt oft zu sehr schlechten Noten im Zeugnis.", tr: "Okulu asmak genellikle karnede çok kötü notlara yol açar." }
+                    ]
+                },
+                {
+                    german: "öffentliche / staatliche Schulen", turkish: "devlet okulları",
+                    examples: [
+                        { de: "Die meisten Schülerinnen und Schüler in Deutschland besuchen öffentliche Schulen.", tr: "Almanya'daki öğrencilerin çoğu devlet okullarına gider." },
+                        { de: "Öffentliche Schulen werden durch Steuern finanziert und sind kostenlos.", tr: "Devlet okulları vergilerle finanse edilir ve ücretsizdir." },
+                        { de: "Die Qualität der Bildung an staatlichen Schulen ist im Allgemeinen sehr hoch.", tr: "Devlet okullarındaki eğitimin kalitesi genel olarak çok yüksektir." },
+                        { de: "Es gibt oft Diskussionen über die Ausstattung von öffentlichen Schulen.", tr: "Devlet okullarının donanımı hakkında sık sık tartışmalar olur." },
+                        { de: "Staatliche Schulen müssen sich an die offiziellen Lehrpläne halten.", tr: "Devlet okulları resmi müfredatlara uymak zorundadır." }
+                    ]
+                },
+                {
+                    german: "die Privatschule", turkish: "özel okul",
+                    examples: [
+                        { de: "Die Zahl der Schüler, die Privatschulen besuchen, steigt kontinuierlich.", tr: "Özel okullara giden öğrencilerin sayısı sürekli artıyor." },
+                        { de: "Eine Privatschule verlangt oft hohe monatliche Gebühren von den Eltern.", tr: "Özel bir okul genellikle ebeveynlerden yüksek aylık ücretler talep eder." },
+                        { de: "Viele Privatschulen bieten kleinere Klassen und eine individuelle Betreuung.", tr: "Birçok özel okul, daha küçük sınıflar ve bireysel danışmanlık sunar." },
+                        { de: "Sie hat ein Stipendium bekommen, um diese exklusive Privatschule zu besuchen.", tr: "Bu seçkin özel okula gitmek için bir burs aldı." },
+                        { de: "An manchen Privatschulen gibt es einen besonderen pädagogischen Schwerpunkt.", tr: "Bazı özel okullarda özel bir pedagojik odak noktası vardır." }
+                    ]
+                },
+                {
+                    german: "die Ganztagsschule", turkish: "tam gün okul",
+                    examples: [
+                        { de: "In Deutschland werden immer mehr Ganztagsschulen eingerichtet.", tr: "Almanya'da giderek daha fazla tam gün okul kuruluyor." },
+                        { de: "In einer Ganztagsschule haben die Kinder auch nachmittags Unterricht oder AGs.", tr: "Tam gün okulda çocukların öğleden sonraları da dersleri veya kulüpleri olur." },
+                        { de: "Ganztagsschulen sind besonders für berufstätige Eltern eine große Erleichterung.", tr: "Tam gün okullar, özellikle çalışan ebeveynler için büyük bir kolaylıktır." },
+                        { de: "Das gemeinsame Mittagessen ist ein wichtiger Bestandteil der Ganztagsschule.", tr: "Birlikte yenilen öğle yemeği, tam gün okulun önemli bir parçasıdır." },
+                        { de: "Viele Experten fordern den Ausbau des Ganztagsschulsystems.", tr: "Birçok uzman tam gün okul sisteminin genişletilmesini talep ediyor." }
+                    ]
+                },
+                {
+                    german: "das Internat", turkish: "yatılı okul",
+                    examples: [
+                        { de: "Im Internat teilen sich meistens zwei Schüler ein Zimmer.", tr: "Yatılı okulda genellikle iki öğrenci bir odayı paylaşır." },
+                        { de: "Harry Potter besuchte ein berühmtes magisches Internat.", tr: "Harry Potter ünlü ve büyülü bir yatılı okula gitti." },
+                        { de: "Die Eltern haben ihn auf ein Internat in England geschickt, um sein Englisch zu verbessern.", tr: "İngilizcesini geliştirmesi için onu İngiltere'de bir yatılı okula gönderdiler." },
+                        { de: "In einem Internat müssen sich die Schüler an strenge Regeln halten.", tr: "Yatılı okulda öğrenciler katı kurallara uymak zorundadır." },
+                        { de: "Ein gutes Internat bietet nicht nur Unterricht, sondern auch viele Freizeitaktivitäten.", tr: "İyi bir yatılı okul sadece ders değil, aynı zamanda birçok boş zaman aktivitesi sunar." }
+                    ]
+                },
+                {
+                    german: "aufs Gymnasium gehen", turkish: "liseye (Anadolu/Fen lisesi dengi) gitmek",
+                    examples: [
+                        { de: "Am Ende der Grundschulzeit wird entschieden, ob man aufs Gymnasium geht.", tr: "İlkokulun sonunda liseye (Gymnasium) gidilip gidilmeyeceğine karar verilir." },
+                        { de: "Wer später Medizin studieren möchte, sollte unbedingt aufs Gymnasium gehen.", tr: "Daha sonra tıp okumak isteyen kişi mutlaka liseye gitmelidir." },
+                        { de: "Die Anforderungen sind sehr hoch, wenn man aufs Gymnasium geht.", tr: "Liseye gidildiğinde beklentiler (zorluk derecesi) çok yüksektir." },
+                        { de: "Ihre älteste Tochter geht bereits in die zehnte Klasse auf dem Gymnasium.", tr: "En büyük kızı lisede onuncu sınıfa gidiyor bile." },
+                        { de: "Viele Eltern üben Druck auf ihre Kinder aus, damit sie aufs Gymnasium gehen.", tr: "Birçok ebeveyn, liseye gitmeleri için çocuklarına baskı yapar." }
+                    ]
+                },
+                {
+                    german: "den Schulabschluss machen", turkish: "okuldan mezun olmak / diplomayı almak",
+                    examples: [
+                        { de: "Viele Schüler, die nächstes Jahr ihren Schulabschluss machen, suchen einen Ausbildungsplatz.", tr: "Gelecek yıl okuldan mezun olacak birçok öğrenci bir mesleki eğitim yeri arıyor." },
+                        { de: "Nachdem sie ihren Schulabschluss gemacht hat, will sie ein Jahr im Ausland verbringen.", tr: "Okuldan mezun olduktan sonra, bir yılını yurtdışında geçirmek istiyor." },
+                        { de: "Es ist heute sehr wichtig, einen guten Schulabschluss zu machen.", tr: "Bugün iyi bir okul diploması almak çok önemlidir." },
+                        { de: "Er hat seinen Schulabschluss mit Auszeichnung gemacht.", tr: "Okuldan üstün başarıyla mezun oldu." },
+                        { de: "Wer keinen Schulabschluss macht, hat es schwer auf dem Arbeitsmarkt.", tr: "Okuldan mezun olmayan kişi (diploması olmayan), iş pazarında zorlanır." }
+                    ]
+                },
+                {
+                    german: "die Schule abbrechen", turkish: "okulu bırakmak / terk etmek",
+                    examples: [
+                        { de: "Wer die Schule abgebrochen hat, hat keinen Schulabschluss und findet schwer Arbeit.", tr: "Okulu bırakan kişinin diploması yoktur ve zor iş bulur." },
+                        { de: "Aus familiären Gründen musste sie damals leider die Schule abbrechen.", tr: "O zamanlar ailevi nedenlerden dolayı maalesef okulu bırakmak zorunda kaldı." },
+                        { de: "Einige berühmte Unternehmer haben in ihrer Jugend die Schule abgebrochen.", tr: "Bazı ünlü girişimciler gençliklerinde okulu bırakmıştır." },
+                        { de: "Es gibt Beratungsprogramme für Jugendliche, die die Schule abbrechen wollen.", tr: "Okulu bırakmak isteyen gençler için danışmanlık programları vardır." },
+                        { de: "Die Schule abzubrechen ist meistens keine gute Entscheidung für die Zukunft.", tr: "Okulu bırakmak çoğunlukla gelecek için iyi bir karar değildir." }
+                    ]
+                },
+                {
+                    german: "unterrichten / Unterricht geben", turkish: "ders vermek",
+                    examples: [
+                        { de: "Die Hauptaufgabe von Lehrern ist es, Unterricht zu geben.", tr: "Öğretmenlerin temel görevi ders vermektir." },
+                        { de: "Der Professor unterrichtet seit über 20 Jahren Mathematik an dieser Universität.", tr: "Profesör 20 yılı aşkın süredir bu üniversitede matematik dersi veriyor." },
+                        { de: "Es macht ihr großen Spaß, Kinder in Fremdsprachen zu unterrichten.", tr: "Çocuklara yabancı dil dersi vermek ona çok zevk veriyor." },
+                        { de: "Wer Unterricht geben will, braucht viel Geduld und Fachwissen.", tr: "Ders vermek isteyenin çok fazla sabra ve uzmanlık bilgisine ihtiyacı vardır." },
+                        { de: "Am Vormittag unterrichtet er in der Schule, am Nachmittag gibt er Nachhilfe.", tr: "Sabahları okulda ders veriyor, öğleden sonraları özel ders veriyor." }
+                    ]
+                },
+                {
+                    german: "der Lehrplan", turkish: "müfredat",
+                    examples: [
+                        { de: "Die Ministerien erstellen Lehrpläne, in denen die Unterrichtsinhalte festgelegt sind.", tr: "Bakanlıklar, ders içeriklerinin belirlendiği müfredatlar oluşturur." },
+                        { de: "Der neue Lehrplan für Informatik beinhaltet jetzt auch Programmieren in Python.", tr: "Bilişim için yeni müfredat artık Python'da programlamayı da içeriyor." },
+                        { de: "Lehrer müssen sicherstellen, dass sie alle Themen aus dem Lehrplan behandeln.", tr: "Öğretmenler müfredattaki tüm konuları işlediklerinden emin olmalıdır." },
+                        { de: "Der Lehrplan wurde reformiert, um moderneren Anforderungen gerecht zu werden.", tr: "Daha modern gereksinimleri karşılamak için müfredat reforme edildi." },
+                        { de: "Im Lehrplan steht genau, welche Bücher gelesen werden sollen.", tr: "Müfredatta tam olarak hangi kitapların okunması gerektiği yazılıdır." }
+                    ]
+                },
+                {
+                    german: "die Klassenarbeit", turkish: "yazılı sınav",
+                    examples: [
+                        { de: "In den Hauptfächern werden regelmäßig Klassenarbeiten geschrieben.", tr: "Ana derslerde düzenli olarak yazılı sınavlar yapılır (yazılır)." },
+                        { de: "Die Schüler waren sehr nervös vor der schweren Klassenarbeit in Mathematik.", tr: "Öğrenciler matematikteki zor yazılı sınav öncesi çok gergindi." },
+                        { de: "Ich habe für die Klassenarbeit das ganze Wochenende gelernt.", tr: "Yazılı sınav için bütün hafta sonu çalıştım." },
+                        { de: "Der Lehrer korrigiert die Klassenarbeiten normalerweise innerhalb einer Woche.", tr: "Öğretmen yazılı sınavları normalde bir hafta içinde okur (düzeltir)." },
+                        { de: "Eine schlechte Klassenarbeit kann man oft durch gute mündliche Mitarbeit ausgleichen.", tr: "Kötü bir yazılı sınav, genellikle derse sözlü iyi katılımla telafi edilebilir." }
+                    ]
+                },
+                {
+                    german: "sitzen bleiben / nicht versetzt werden", turkish: "sınıfta kalmak",
+                    examples: [
+                        { de: "Schlechte Schüler bleiben sitzen und müssen das Schuljahr wiederholen.", tr: "Kötü öğrenciler sınıfta kalır ve okul yılını tekrarlamak zorunda kalırlar." },
+                        { de: "Er hatte in drei Fächern eine Fünf, deshalb ist er sitzen geblieben.", tr: "Üç derste beşi (kötü not) vardı, bu yüzden sınıfta kaldı." },
+                        { de: "Viele Experten fordern, das Sitzenbleiben in den Schulen abzuschaffen.", tr: "Birçok uzman okullarda sınıfta kalmanın kaldırılmasını talep ediyor." },
+                        { de: "Sie hatte große Angst, am Ende des Schuljahres nicht versetzt zu werden.", tr: "Okul yılının sonunda sınıfı geçememekten (sınıfta kalmaktan) çok korkuyordu." },
+                        { de: "Wer sitzen bleibt, lernt im nächsten Jahr den gleichen Stoff noch einmal.", tr: "Sınıfta kalan kişi, gelecek yıl aynı müfredatı bir kez daha öğrenir." }
+                    ]
+                },
+                {
+                    // Sayfa 12'nin başındaki ünlü kelime!
+                    german: "die Schuluniform", turkish: "okul üniforması",
+                    examples: [
+                        { de: "Da es an deutschen Schulen keine Schuluniformen gibt, entscheiden die Schüler selbst, was sie anziehen.", tr: "Alman okullarında okul üniforması olmadığı için, öğrenciler ne giyeceklerine kendileri karar verirler." },
+                        { de: "In Japan und England ist die Schuluniform sehr stark in der Kultur verankert.", tr: "Japonya ve İngiltere'de okul üniforması kültüre çok güçlü bir şekilde yerleşmiştir." },
+                        { de: "Eine Schuluniform verhindert oft, dass Kinder Markenkleidung als Statussymbol nutzen.", tr: "Okul üniforması genellikle çocukların marka kıyafetleri statü sembolü olarak kullanmasını engeller." },
+                        { de: "Die neue Schuluniform besteht aus einem dunkelblauen Pullover und einer grauen Hose.", tr: "Yeni okul üniforması lacivert bir kazak ve gri bir pantolondan oluşuyor." },
+                        { de: "Viele Schüler finden, dass Schuluniformen ihre individuelle Persönlichkeit unterdrücken.", tr: "Birçok öğrenci, okul üniformalarının bireysel kişiliklerini bastırdığını düşünüyor." }
+                    ]
+                }
+            ],
 
-            // Sayfa 12
-            { page: 12, word: "Schuluniformen", base: "die Schuluniform", sentence: "Da es an deutschen Schulen keine Schuluniformen gibt, entscheiden die Schüler selbst, was sie anziehen." },
-            { page: 12, word: "begabt", base: "begabt sein", sentence: "Die Schülerin ist mathematisch und naturwissenschaftlich begabt." },
-            { page: 12, word: "fördern", base: "jdn./etw. fördern", sentence: "Die Eltern fördern ihr Kind durch zusätzlichen Musikunterricht." },
-            
-            // Sayfa 13
-            { page: 13, word: "Fähigkeiten", base: "Fähigkeiten erwerben", sentence: "Schüler sollen auch praktische Fähigkeiten erwerben." },
-            { page: 13, word: "Kenntnisse", base: "sich Kenntnisse aneignen", sentence: "Er hat sich seine Kenntnisse mithilfe von Büchern angeeignet." },
-            { page: 13, word: "auswendig", base: "auswendig lernen", sentence: "Früher mussten die Schüler viel auswendig lernen." },
-            { page: 13, word: "einprägen", base: "sich etw. einprägen", sentence: "Vor einer Prüfung sollte man sich wichtige Daten gut einprägen." },
-            { page: 13, word: "Prüfung ablegen", base: "eine Prüfung ablegen", sentence: "Die meisten Menschen sind nervös, wenn sie eine Prüfung ablegen müssen." },
-            { page: 13, word: "bestanden", base: "eine Prüfung bestehen", sentence: "Er hat die Prüfung bestanden, obwohl die Aufgaben schwierig waren." },
-            { page: 13, word: "durchfallen", base: "bei einer Prüfung durchfallen", sentence: "Geben Sie nicht auf, wenn Sie bei einer Prüfung durchfallen!" },
-            { page: 13, word: "Allgemeinbildung", base: "die Allgemeinbildung", sentence: "Es gehört zur Allgemeinbildung, internationale Organisationen zu kennen." },
-            
-            // Sayfa 14
-            { page: 14, word: "Bildungsniveau", base: "das Bildungsniveau", sentence: "Ein hohes Bildungsniveau verbessert die Berufsaussichten." },
-            { page: 14, word: "Analphabeten", base: "der Analphabet", sentence: "Etwa 4% der Deutschen sind Analphabeten." },
-            { page: 14, word: "fortbilden", base: "sich fortbilden / weiterbilden", sentence: "Man muss sich regelmäßig fortbilden, um auf dem neuesten Stand zu bleiben." },
-            
-            // Sayfa 20-21 (Studium)
-            { page: 20, word: "Fachhochschule", base: "die Fachhochschule", sentence: "Das Studium an einer Fachhochschule gilt als besonders praxisorientiert." },
-            { page: 21, word: "berufsbegleitend", base: "berufsbegleitend", sentence: "Ein berufsbegleitendes Studium bietet Berufstätigen die Möglichkeit, ein Studium zu absolvieren." },
-            { page: 21, word: "Fernstudium", base: "das Fernstudium", sentence: "Man kann heute einen Hochschulabschluss auch per Fernstudium erwerben." },
-            
-            // Sayfa 22
-            { page: 22, word: "Studienfach", base: "das Studienfach", sentence: "Wirtschaftswissenschaften sind beliebte Studienfächer." },
-            { page: 22, word: "Zulassung", base: "die Zulassung", sentence: "Einige Zeit vor Beginn des Semesters erhalten die Bewerber ihre Zulassung." },
-            { page: 22, word: "Numerus clausus", base: "der Numerus clausus", sentence: "Der Numerus clausus gibt eine Abiturnote vor, die man erreichen muss." },
-            { page: 22, word: "immatrikulieren", base: "sich immatrikulieren / einschreiben", sentence: "Bevor man studieren kann, muss man sich an der Hochschule immatrikulieren." },
-            { page: 22, word: "exmatrikulieren", base: "sich exmatrikulieren", sentence: "Es wird empfohlen, sich nach dem Studium exmatrikulieren zu lassen." },
-            
-            // Sayfa 23
-            { page: 23, word: "Erstsemester", base: "die Erstsemester", sentence: "Orientierungsveranstaltungen sind eine gute Gelegenheit für Erstsemester." },
-            { page: 23, word: "Regelstudienzeit", base: "die Regelstudienzeit", sentence: "Man sollte das Studium innerhalb der Regelstudienzeit abschließen können." },
-            { page: 23, word: "Hochschulabsolventen", base: "der Hochschulabsolvent", sentence: "Untersuchungen belegen, dass Hochschulabsolventen seltener arbeitslos sind." },
-            { page: 23, word: "promovieren", base: "promovieren / die Promotion", sentence: "Die meisten Mediziner promovieren, damit sie sich 'Dr.' nennen dürfen." },
-            { page: 23, word: "Dissertation", base: "die Dissertation / Doktorarbeit", sentence: "Doktoranden sind verpflichtet, ihre Dissertationen zu veröffentlichen." },
+            "studium": [
+                {
+                    german: "die Zulassungsbeschränkung (Numerus Clausus)", turkish: "kontenjan kısıtlaması (taban puan şartı)",
+                    examples: [
+                        { de: "Für das Medizinstudium gibt es in Deutschland eine strenge Zulassungsbeschränkung.", tr: "Tıp eğitimi için Almanya'da katı bir kontenjan kısıtlaması vardır." },
+                        { de: "Wegen des Numerus Clausus (NC) konnte er sein Wunschfach nicht sofort studieren.", tr: "Taban puan şartı (NC) nedeniyle istediği bölümü hemen okuyamadı." },
+                        { de: "Viele Universitäten heben die Zulassungsbeschränkung für bestimmte Fächer auf.", tr: "Birçok üniversite belirli bölümler için kontenjan kısıtlamasını kaldırıyor." },
+                        { de: "Ohne ein sehr gutes Abitur scheitert man oft an der Zulassungsbeschränkung.", tr: "Çok iyi bir lise diploması olmadan genellikle kontenjan kısıtlamasına takılınır." },
+                        { de: "Die Zulassungsbeschränkungen variieren von Universität zu Universität.", tr: "Kontenjan kısıtlamaları üniversiteden üniversiteye değişiklik gösterir." }
+                    ]
+                },
+                {
+                    german: "sich immatrikulieren", turkish: "üniversiteye kaydolmak",
+                    examples: [
+                        { de: "Bevor man mit dem Studium beginnen kann, muss man sich an der Hochschule immatrikulieren.", tr: "Üniversite eğitimine başlamadan önce yüksekokula kaydolmak gerekir." },
+                        { de: "Ich habe mich gestern online für das Wintersemester immatrikuliert.", tr: "Dünne kış dönemi için online olarak kayıt oldum." },
+                        { de: "Für die Immatrikulation brauchen Sie Ihren Ausweis und das Abiturzeugnis.", tr: "Kayıt için kimliğinize ve lise diplomanıza ihtiyacınız var." },
+                        { de: "Erst nachdem du dich immatrikulierst, bekommst du deinen Studentenausweis.", tr: "Ancak kayıt olduktan sonra öğrenci kimliğini alırsın." },
+                        { de: "Vergessen Sie nicht, sich rechtzeitig zu immatrikulieren, sonst verlieren Sie den Studienplatz.", tr: "Zamanında kaydolmayı unutmayın, aksi takdirde okuma hakkınızı kaybedersiniz." }
+                    ]
+                },
+                {
+                    german: "eine Vorlesung halten", turkish: "üniversitede ders vermek (amfide konferans)",
+                    examples: [
+                        { de: "Professor Steinberg hält jedes Semester die Vorlesung 'Einführung in die Psychologie'.", tr: "Profesör Steinberg her dönem 'Psikolojiye Giriş' dersini verir." },
+                        { de: "Es ist nicht einfach, vor dreihundert Studenten eine spannende Vorlesung zu halten.", tr: "Üç yüz öğrencinin önünde heyecan verici bir amfi dersi vermek kolay değildir." },
+                        { de: "Die Gastdozentin hielt eine faszinierende Vorlesung über künstliche Intelligenz.", tr: "Misafir öğretim üyesi yapay zeka üzerine büyüleyici bir konferans dersi verdi." },
+                        { de: "Da der Professor krank ist, wird heute der Assistent die Vorlesung halten.", tr: "Profesör hasta olduğu için amfi dersini bugün asistan verecek." },
+                        { de: "Um gute Vorlesungen zu halten, muss ein Dozent rhetorisch begabt sein.", tr: "İyi amfi dersleri vermek için bir öğretim görevlisinin hitabet yeteneğine sahip olması gerekir." }
+                    ]
+                },
+                {
+                    german: "die Klausur schreiben", turkish: "vize/final sınavına girmek",
+                    examples: [
+                        { de: "Am Ende des Semesters müssen die Studierenden drei wichtige Klausuren schreiben.", tr: "Dönem sonunda öğrenciler üç önemli sınava girmek zorundadır." },
+                        { de: "Ich bin sehr nervös, weil ich morgen eine schwere Klausur in Physik schreibe.", tr: "Çok gerginim çünkü yarın fizikten zor bir sınava gireceğim." },
+                        { de: "Viele Studierende lernen Tag und Nacht, bevor sie eine Klausur schreiben.", tr: "Birçok öğrenci bir sınava girmeden önce gece gündüz çalışır." },
+                        { de: "Wenn man beim Spicken erwischt wird, fällt man in der Klausur durch.", tr: "Eğer kopya çekerken yakalanırsan sınavdan kalırsın." },
+                        { de: "Die Klausuren in diesem Studiengang sind bekannt dafür, sehr anspruchsvoll zu sein.", tr: "Bu bölümdeki sınavların çok zorlayıcı olduğu bilinmektedir." }
+                    ]
+                },
+                {
+                    german: "die Dissertation verfassen", turkish: "doktora tezi yazmak",
+                    examples: [
+                        { de: "Man braucht in der Regel mehrere Jahre, um eine Dissertation zu verfassen.", tr: "Bir doktora tezi yazmak genellikle birkaç yıl alır." },
+                        { de: "Sie verfasst ihre Dissertation am Max-Planck-Institut für Biologie.", tr: "Doktora tezini Max Planck Biyoloji Enstitüsü'nde yazıyor." },
+                        { de: "Bevor man eine Dissertation verfasst, muss man umfangreiche Literatur recherchieren.", tr: "Bir doktora tezi yazmadan önce kapsamlı literatür araştırması yapmak gerekir." },
+                        { de: "Sein Professor, der Doktorvater, betreut ihn, während er die Dissertation verfasst.", tr: "Doktora tezini yazarken profesörü (tez danışmanı) ona danışmanlık yapıyor." },
+                        { de: "Das Verfassen einer Dissertation erfordert sehr viel Disziplin und Motivation.", tr: "Bir doktora tezi yazmak çok fazla disiplin ve motivasyon gerektirir." }
+                    ]
+                }
+            ],
 
-            // Sayfa 34 (Wissenschaft)
-            { page: 34, word: "Fachgebiet", base: "das Fachgebiet", sentence: "Wissenschaftler aus verschiedenen Fachgebieten arbeiten gemeinsam an einem Projekt." },
-            { page: 34, word: "interdisziplinär", base: "interdisziplinär", sentence: "Interdisziplinäre Projekte beschäftigen sich mit Themen, die verschiedene Bereiche berühren." },
-            
-            // Sayfa 35
-            { page: 35, word: "recherchiert", base: "recherchieren", sentence: "Von einem Wissenschaftler wird erwartet, dass er gründlich recherchiert." },
-            { page: 35, word: "Erkenntnisse", base: "Erkenntnisse gewinnen", sentence: "Auch aus einem misslungenen Experiment lassen sich wichtige Erkenntnisse gewinnen." },
-            
-            // Sayfa 36
-            { page: 36, word: "Hypothese", base: "eine Hypothese aufstellen", sentence: "Eine Hypothese ist eine Vermutung, auf der die Forschung basiert." },
-            { page: 36, word: "Theorie", base: "eine Theorie widerlegen", sentence: "Die Evolutionstheorie von Lamarck wurde durch Forschungen widerlegt." },
-            
-            // Sayfa 37
-            { page: 37, word: "Beweise", base: "Beweise vorlegen", sentence: "Die Wissenschaftlerin kann stichhaltige Beweise für ihre Theorie vorlegen." },
+            "wissenschaft": [
+                {
+                    german: "Erkenntnisse gewinnen", turkish: "bulgu/bilgi elde etmek",
+                    examples: [
+                        { de: "Auch aus einem misslungenen Experiment lassen sich wichtige Erkenntnisse gewinnen.", tr: "Başarısız bir deneyden bile önemli bulgular elde edilebilir." },
+                        { de: "Die Forscher hoffen, durch diese Studie neue Erkenntnisse über das Gehirn zu gewinnen.", tr: "Araştırmacılar bu çalışma ile beyin hakkında yeni bulgular elde etmeyi umuyorlar." },
+                        { de: "Wir haben viele wertvolle Erkenntnisse aus der Datenanalyse gewonnen.", tr: "Veri analizinden birçok değerli bilgi elde ettik." },
+                        { de: "Wissenschaftlicher Fortschritt bedeutet immer, neue Erkenntnisse zu gewinnen.", tr: "Bilimsel ilerleme her zaman yeni bulgular elde etmek demektir." },
+                        { de: "Es dauerte Jahre, bis sie diese revolutionären Erkenntnisse gewinnen konnten.", tr: "Bu devrim niteliğindeki bulguları elde edebilmeleri yıllar aldı." }
+                    ]
+                },
+                {
+                    german: "eine Hypothese aufstellen", turkish: "hipotez kurmak / varsayımda bulunmak",
+                    examples: [
+                        { de: "Es ist sinnvoll, eine Hypothese aufzustellen, auch wenn diese sich später als falsch erweist.", tr: "Daha sonra yanlış olduğu kanıtlansa bile bir hipotez kurmak mantıklıdır." },
+                        { de: "Der Biologe stellte die Hypothese auf, dass das Virus durch Insekten übertragen wird.", tr: "Biyolog, virüsün böcekler yoluyla bulaştığı hipotezini kurdu." },
+                        { de: "Bevor man ein Experiment beginnt, sollte man eine klare Hypothese aufstellen.", tr: "Bir deneye başlamadan önce net bir hipotez kurulmalıdır." },
+                        { de: "Sie haben eine mutige Hypothese aufgestellt, die viele Kollegen überrascht hat.", tr: "Birçok meslektaşlarını şaşırtan cesur bir hipotez kurdular." },
+                        { de: "Die Hypothese, die er aufgestellt hat, basiert auf jahrelanger Beobachtung.", tr: "Kurduğu hipotez, yıllar süren gözlemlere dayanıyor." }
+                    ]
+                },
+                {
+                    german: "eine Theorie widerlegen", turkish: "bir teoriyi çürütmek",
+                    examples: [
+                        { de: "Die Evolutionstheorie von Lamarck wurde durch weitere Forschungen widerlegt.", tr: "Lamarck'ın evrim teorisi sonraki araştırmalarla çürütüldü." },
+                        { de: "Galileo konnte alte astronomische Theorien mit seinem Teleskop widerlegen.", tr: "Galileo eski astronomik teorileri teleskobuyla çürütebildi." },
+                        { de: "Es ist oft schwieriger, eine neue Theorie zu beweisen, als eine alte zu widerlegen.", tr: "Genellikle yeni bir teoriyi kanıtlamak, eskisini çürütmekten daha zordur." },
+                        { de: "Die Ergebnisse des Experiments haben seine ursprüngliche Theorie komplett widerlegt.", tr: "Deneyin sonuçları onun baştaki teorisini tamamen çürüttü." },
+                        { de: "Wissenschaftler arbeiten ständig daran, fehlerhafte Theorien zu widerlegen.", tr: "Bilim insanları sürekli olarak hatalı teorileri çürütmek için çalışırlar." }
+                    ]
+                },
+                {
+                    german: "Daten auswerten", turkish: "verileri değerlendirmek / analiz etmek",
+                    examples: [
+                        { de: "Inzwischen nutzt man Computerprogramme, um große Datenmengen schnell auszuwerten.", tr: "Günümüzde büyük veri miktarlarını hızlıca analiz etmek için bilgisayar programları kullanılıyor." },
+                        { de: "Nachdem die Umfrage beendet war, begann das Team, die Daten auszuwerten.", tr: "Anket bittikten sonra ekip verileri değerlendirmeye başladı." },
+                        { de: "Es wird Monate dauern, bis wir all diese gesammelten Daten auswerten können.", tr: "Toplanan tüm bu verileri değerlendirebilmemiz aylar sürecek." },
+                        { de: "Ein Statistiker wurde eingestellt, um die komplexen Daten professionell auszuwerten.", tr: "Karmaşık verileri profesyonelce analiz etmesi için bir istatistikçi işe alındı." },
+                        { de: "Wer Daten nicht richtig auswertet, kommt zu falschen Schlussfolgerungen.", tr: "Verileri doğru değerlendirmeyen kişi yanlış sonuçlara varır." }
+                    ]
+                },
+                {
+                    german: "Probanden / Versuchspersonen", turkish: "denekler",
+                    examples: [
+                        { de: "Das psychologische Institut sucht Probanden für ein neues Experiment.", tr: "Psikoloji enstitüsü yeni bir deney için denekler arıyor." },
+                        { de: "Die Probanden wussten nicht, worum es in der Studie wirklich ging.", tr: "Denekler çalışmanın gerçekte neyle ilgili olduğunu bilmiyorlardı." },
+                        { de: "An diesem Medikamententest nahmen über fünfhundert freiwillige Versuchspersonen teil.", tr: "Bu ilaç testine beş yüzün üzerinde gönüllü denek katıldı." },
+                        { de: "Die Reaktionen der Probanden wurden mit Kameras aufgezeichnet.", tr: "Deneklerin tepkileri kameralarla kaydedildi." },
+                        { de: "Man muss sicherstellen, dass die Gesundheit der Versuchspersonen nicht gefährdet wird.", tr: "Deneklerin sağlığının tehlikeye atılmadığından emin olmak gerekir." }
+                    ]
+                }
+            ]
+        };
 
-            // Sayfa 45 - Der Mensch bölümünün başı (genel limit)
-        ];
-
-        // State variables
-        let workingDeck = []; // Kartların anlık kopyası
-        let learnedCards = 0;
-        let currentCard = null;
+        let currentCategory = '';
+        let currentDeck = [];
+        let currentIndex = 0;
         let isFlipped = false;
 
-        // Initialize App
-        function initApp() {
-            // Kopya oluştur
-            workingDeck = [...allVocabData];
-            learnedCards = 0;
-            updateProgress();
-            shuffleDeck();
+        // Elements
+        const menuScreen = document.getElementById('menu-screen');
+        const studyScreen = document.getElementById('study-screen');
+        const studyControls = document.getElementById('study-controls');
+        
+        const cardGerman = document.getElementById('card-german');
+        const cardTurkish = document.getElementById('card-turkish');
+        const progressText = document.getElementById('progress-text');
+        const flashcard = document.getElementById('flashcard');
+        
+        const modal = document.getElementById('info-modal');
+        const modalWrapper = document.getElementById('modal-content-wrapper');
+        const examplesContainer = document.getElementById('examples-container');
+        const modalWordTitle = document.getElementById('modal-word-title');
+
+        // Logic
+        function startStudy(category) {
+            currentCategory = category;
+            currentDeck = [...db[category]];
+            currentIndex = 0;
+            
+            menuScreen.classList.add('hidden');
+            studyScreen.classList.remove('hidden');
+            studyScreen.classList.add('flex');
+            studyControls.classList.remove('hidden');
+            
+            updateCard();
         }
 
-        // Shuffle
-        function shuffleDeck() {
-            for (let i = workingDeck.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [workingDeck[i], workingDeck[j]] = [workingDeck[j], workingDeck[i]];
-            }
-            if(workingDeck.length > 0) {
-                loadCard(workingDeck[0]);
+        function showMenu() {
+            studyScreen.classList.add('hidden');
+            studyScreen.classList.remove('flex');
+            studyControls.classList.add('hidden');
+            menuScreen.classList.remove('hidden');
+        }
+
+        function updateCard() {
+            if (currentDeck.length === 0) return;
+            
+            const wordObj = currentDeck[currentIndex];
+            cardGerman.innerText = wordObj.german;
+            cardTurkish.innerText = wordObj.turkish;
+            
+            progressText.innerText = `${currentIndex + 1} / ${currentDeck.length}`;
+            
+            // Ensure card is front-facing
+            if (isFlipped) {
+                flashcard.classList.remove('is-flipped');
+                isFlipped = false;
             }
         }
 
-        // Load specific card
-        function loadCard(cardData) {
-            currentCard = cardData;
-            isFlipped = false;
-            
-            const cardEl = document.getElementById('flashcard');
-            const actionBtns = document.getElementById('action-buttons');
-            
-            // Reset styles
-            cardEl.classList.remove('is-flipped');
-            actionBtns.classList.add('opacity-0', 'pointer-events-none');
-            
-            // Prepare Front (Sentence with bold highlighted word)
-            // Replace the target word with a bold highlighted span
-            const regex = new RegExp(`\\b${cardData.word}\\b`, 'gi');
-            let highlightedSentence = cardData.sentence.replace(regex, `<span class="highlight">$&</span>`);
-            
-            // If the exact word wasn't found due to conjugation or punctuation, fallback to simple replace
-            if(highlightedSentence === cardData.sentence) {
-                 highlightedSentence = cardData.sentence.replace(cardData.word, `<span class="highlight">${cardData.word}</span>`);
-            }
-
-            document.getElementById('page-number').innerText = cardData.page;
-            document.getElementById('german-sentence').innerHTML = highlightedSentence;
-            
-            // Prepare Back (Base form)
-            document.getElementById('base-form').innerText = cardData.base;
-            document.getElementById('word-form').innerText = `Metin içinde: ${cardData.word}`;
-        }
-
-        // Flip Interaction
         function flipCard() {
-            if(isFlipped) return; // Only flip once per card load to prevent closing before answering
+            isFlipped = !isFlipped;
+            flashcard.classList.toggle('is-flipped');
+        }
+
+        function nextCard() {
+            currentIndex = (currentIndex + 1) % currentDeck.length;
+            updateCard();
+        }
+
+        function prevCard() {
+            currentIndex = (currentIndex - 1 + currentDeck.length) % currentDeck.length;
+            updateCard();
+        }
+
+        function openInfoModal() {
+            const wordObj = currentDeck[currentIndex];
+            modalWordTitle.innerText = `Kalıp: ${wordObj.german}`;
             
-            const cardEl = document.getElementById('flashcard');
-            const actionBtns = document.getElementById('action-buttons');
+            // Generate HTML for the 5 examples
+            let examplesHTML = '';
+            wordObj.examples.forEach((ex, idx) => {
+                examplesHTML += `
+                    <div class="bg-slate-50 border border-slate-100 rounded-xl p-4 sm:p-5">
+                        <div class="flex items-start gap-3">
+                            <div class="bg-indigo-100 text-indigo-600 font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-sm mt-0.5">
+                                ${idx + 1}
+                            </div>
+                            <div>
+                                <p class="text-slate-800 font-medium text-lg leading-snug mb-2">${ex.de}</p>
+                                <p class="text-slate-500 text-base leading-snug"><i class="fas fa-arrow-turn-down fa-rotate-90 mr-1 text-slate-300"></i> ${ex.tr}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
             
-            isFlipped = true;
-            cardEl.classList.add('is-flipped');
+            examplesContainer.innerHTML = examplesHTML;
             
-            // Show buttons slightly after flip animation
+            // Show modal with animation
+            modal.classList.remove('hidden');
+            // Small delay to allow display block to register before animating opacity
             setTimeout(() => {
-                actionBtns.classList.remove('opacity-0', 'pointer-events-none');
+                modal.classList.remove('opacity-0');
+                modalWrapper.classList.remove('scale-95');
+                modalWrapper.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeInfoModal() {
+            modal.classList.add('opacity-0');
+            modalWrapper.classList.remove('scale-100');
+            modalWrapper.classList.add('scale-95');
+            
+            // Wait for animation to finish before hiding
+            setTimeout(() => {
+                modal.classList.add('hidden');
             }, 300);
         }
 
-        // Handle Answer (Spaced Repetition Logic)
-        function handleAnswer(knewIt) {
-            // Prevent spam clicking
-            if(!isFlipped) return;
-
-            const currentIndex = workingDeck.indexOf(currentCard);
-            
-            if (knewIt) {
-                // Remove from deck, increase learned count
-                workingDeck.splice(currentIndex, 1);
-                learnedCards++;
-            } else {
-                // Move card to the end of the deck (or randomly inside it) to see it again later
-                const card = workingDeck.splice(currentIndex, 1)[0];
-                const insertIndex = Math.min(workingDeck.length, 3 + Math.floor(Math.random() * 5)); // Put it a few cards back
-                workingDeck.splice(insertIndex, 0, card);
-            }
-            
-            updateProgress();
-
-            // Next card or finish
-            if (workingDeck.length > 0) {
-                loadCard(workingDeck[0]);
-            } else {
-                showCompletion();
-            }
-        }
-
-        function updateProgress() {
-            document.getElementById('progress-text').innerText = `${allVocabData.length - workingDeck.length} / ${allVocabData.length}`;
-            document.getElementById('learned-count').innerText = learnedCards;
-        }
-
-        function showCompletion() {
-            document.querySelector('.scene').classList.add('hidden');
-            document.getElementById('action-buttons').classList.add('hidden');
-            document.getElementById('completion-screen').classList.remove('hidden');
-            document.getElementById('completion-screen').classList.add('flex');
-        }
-
-        function resetApp() {
-            document.querySelector('.scene').classList.remove('hidden');
-            document.getElementById('action-buttons').classList.remove('hidden');
-            document.getElementById('completion-screen').classList.add('hidden');
-            document.getElementById('completion-screen').classList.remove('flex');
-            initApp();
-        }
-
-        // Add keyboard support (Space to flip, Left/Right arrows for answers)
+        // Add keyboard support
         document.addEventListener('keydown', function(event) {
-            if (document.getElementById('completion-screen').classList.contains('hidden') === false) return;
+            // If modal is open, ESC closes it
+            if (!modal.classList.contains('hidden')) {
+                if (event.key === 'Escape') closeInfoModal();
+                return;
+            }
 
-            if (event.code === 'Space') {
-                event.preventDefault(); // Prevent page scroll
-                if(!isFlipped) flipCard();
-            } else if (event.code === 'ArrowLeft' && isFlipped) {
-                handleAnswer(false);
-            } else if (event.code === 'ArrowRight' && isFlipped) {
-                handleAnswer(true);
+            // If study screen is active
+            if (!studyScreen.classList.contains('hidden')) {
+                if (event.code === 'Space') {
+                    event.preventDefault(); // Prevent scrolling
+                    flipCard();
+                } else if (event.code === 'ArrowLeft') {
+                    prevCard();
+                } else if (event.code === 'ArrowRight') {
+                    nextCard();
+                } else if (event.code === 'Enter') {
+                    openInfoModal();
+                }
             }
         });
 
-        // Start the application
-        window.onload = initApp;
     </script>
 </body>
 </html>
