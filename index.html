@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Almanca Kelime Ustası</title>
+    <title>Almanca Kelime Ustası - Tam Sürüm</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -52,10 +52,6 @@
             border: 1px solid #e2e8f0;
         }
         
-        .card__face--front {
-            /* Front face styling */
-        }
-        
         .card__face--back {
             transform: rotateY(180deg);
             background: #f8fafc;
@@ -96,10 +92,9 @@
         <div class="max-w-5xl mx-auto flex justify-between items-center">
             <div>
                 <h1 class="text-xl sm:text-2xl font-bold tracking-tight"><i class="fas fa-layer-group mr-2 text-indigo-400"></i>Uni? Sicher! Deutsch 3</h1>
-                <p class="text-xs sm:text-sm text-slate-400 mt-1">Bildung und Forschung (Syf. 7-45)</p>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1">Bildung und Forschung (Syf. 7-45) Tam Sürüm</p>
             </div>
             
-            <!-- Controls shown only in study mode -->
             <div id="study-controls" class="hidden flex items-center gap-4">
                 <div class="text-sm font-semibold bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
                     <span id="progress-text" class="text-indigo-400">1 / 10</span>
@@ -115,44 +110,41 @@
         <div class="w-full max-w-5xl mt-4 sm:mt-10">
             <div class="text-center mb-10">
                 <h2 class="text-3xl font-bold text-slate-800 mb-3">Çalışmak İstediğiniz Bölümü Seçin</h2>
-                <p class="text-slate-500">Kitaptaki temalara göre ayrılmış kelime setleri.</p>
+                <p class="text-slate-500">Kitaptaki temalara göre ayrılmış EKSİKSİZ kelime setleri.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Category 1 -->
                 <button onclick="startStudy('schule')" class="category-card bg-white rounded-2xl p-8 text-left border border-slate-200 shadow-sm relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
                     <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm">
                         <i class="fas fa-school"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-800 mb-2">1. Schule und Bildung</h3>
-                    <p class="text-slate-500 text-sm mb-4">Okul, eğitim sistemi, notlar ve derslerle ilgili kalıplar. (Syf. 9-12 eksiksiz)</p>
+                    <p class="text-slate-500 text-sm mb-4">Okul, eğitim sistemi, notlar ve dersler. Tüm kalıplar eksiksiz eklendi.</p>
                     <div class="text-indigo-600 font-semibold text-sm flex items-center">
                         Çalışmaya Başla <i class="fas fa-arrow-right ml-2 text-xs"></i>
                     </div>
                 </button>
 
-                <!-- Category 2 -->
                 <button onclick="startStudy('studium')" class="category-card bg-white rounded-2xl p-8 text-left border border-slate-200 shadow-sm relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
                     <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm">
                         <i class="fas fa-university"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-800 mb-2">2. Studium</h3>
-                    <p class="text-slate-500 text-sm mb-4">Üniversite, bölümler, akademisyenler ve kampüs hayatı.</p>
+                    <p class="text-slate-500 text-sm mb-4">Üniversite, bölümler, akademisyenler ve kampüs hayatı. Hiçbir kelime atlanmadı.</p>
                     <div class="text-emerald-600 font-semibold text-sm flex items-center">
                         Çalışmaya Başla <i class="fas fa-arrow-right ml-2 text-xs"></i>
                     </div>
                 </button>
 
-                <!-- Category 3 -->
                 <button onclick="startStudy('wissenschaft')" class="category-card bg-white rounded-2xl p-8 text-left border border-slate-200 shadow-sm relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-sky-50 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
                     <div class="w-14 h-14 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm">
                         <i class="fas fa-microscope"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-800 mb-2">3. Wissenschaft</h3>
-                    <p class="text-slate-500 text-sm mb-4">Bilimsel araştırmalar, deneyler, teoriler ve kanıtlar.</p>
+                    <p class="text-slate-500 text-sm mb-4">Bilimsel araştırmalar, deneyler, teoriler ve kanıtlar. Tüm liste yer alıyor.</p>
                     <div class="text-sky-600 font-semibold text-sm flex items-center">
                         Çalışmaya Başla <i class="fas fa-arrow-right ml-2 text-xs"></i>
                     </div>
@@ -162,47 +154,30 @@
     </main>
 
     <main id="study-screen" class="hidden flex-1 overflow-hidden p-4 sm:p-6 flex flex-col items-center justify-center w-full">
-        
         <div class="w-full max-w-2xl flex flex-col items-center h-full max-h-[700px] justify-center relative">
-            
-            <!-- The Flashcard -->
             <div class="scene w-full mb-8">
                 <div class="card" id="flashcard" onclick="flipCard()">
-                    
-                    <!-- Front (German Phrase) -->
                     <div class="card__face card__face--front">
                         <div class="absolute top-5 flex justify-between w-full px-6">
                             <span class="text-xs font-bold text-slate-300 uppercase tracking-wider"><i class="fas fa-language mr-1"></i> Almanca</span>
                             <span class="text-xs font-medium text-slate-400"><i class="fas fa-sync-alt mr-1"></i> Çevir</span>
                         </div>
-                        <h2 id="card-german" class="text-3xl sm:text-4xl font-bold text-slate-800 leading-tight">
-                            <!-- German injected here -->
-                        </h2>
+                        <h2 id="card-german" class="text-3xl sm:text-4xl font-bold text-slate-800 leading-tight"></h2>
                     </div>
-                    
-                    <!-- Back (Turkish Meaning) -->
                     <div class="card__face card__face--back">
                         <div class="absolute top-5 flex justify-between w-full px-6">
                             <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider"><i class="fas fa-language mr-1"></i> Türkçe Anlamı</span>
                         </div>
-                        <h2 id="card-turkish" class="text-2xl sm:text-3xl font-medium text-slate-700 leading-tight">
-                            <!-- Turkish injected here -->
-                        </h2>
+                        <h2 id="card-turkish" class="text-2xl sm:text-3xl font-medium text-slate-700 leading-tight"></h2>
                     </div>
-
                 </div>
             </div>
 
-            <!-- Navigation & Info Controls -->
             <div class="flex flex-col w-full gap-4">
-                
-                <!-- Info Button (Primary Request) -->
                 <button onclick="openInfoModal()" class="w-full bg-slate-800 text-white font-bold py-4 px-6 rounded-xl hover:bg-slate-900 transition shadow-lg flex items-center justify-center gap-3 text-lg border-b-4 border-slate-950 active:border-b-0 active:translate-y-1">
                     <i class="fas fa-book-open text-indigo-400"></i>
-                    <span>Bu Kelimeyle İlgili 5 Örnek Cümle Gör</span>
+                    <span>Bu Kalıpla İlgili 5 Örnek Cümle Gör</span>
                 </button>
-
-                <!-- Next/Prev Controls -->
                 <div class="flex justify-between gap-4 mt-2">
                     <button onclick="prevCard()" class="flex-1 bg-white border border-slate-200 text-slate-600 font-semibold py-3 px-4 rounded-xl hover:bg-slate-50 transition shadow-sm flex items-center justify-center gap-2">
                         <i class="fas fa-arrow-left"></i> Önceki
@@ -212,19 +187,15 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </main>
 
-    <!-- Info Modal (5 Examples) -->
     <div id="info-modal" class="fixed inset-0 z-50 hidden modal-overlay flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col transform scale-95 transition-transform duration-300" id="modal-content-wrapper">
-            
-            <!-- Modal Header -->
             <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center shrink-0 bg-slate-50 rounded-t-2xl">
                 <div>
                     <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-                        <i class="fas fa-lightbulb text-amber-500"></i> Örnek Cümleler
+                        <i class="fas fa-lightbulb text-amber-500"></i> Örnek Cümleler (1. Cümle Kitaptan Orijinal)
                     </h3>
                     <p id="modal-word-title" class="text-sm text-indigo-600 font-semibold mt-1"></p>
                 </div>
@@ -232,659 +203,544 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-
-            <!-- Modal Body (Scrollable) -->
             <div class="p-6 overflow-y-auto custom-scrollbar flex-1 bg-white rounded-b-2xl">
-                <div id="examples-container" class="space-y-6">
-                    <!-- Examples injected here -->
-                </div>
+                <div id="examples-container" class="space-y-6"></div>
             </div>
-
         </div>
     </div>
 
     <script>
-        // --- VERİTABANI ---
-        // Kitabın "Schule und Bildung" bölümü (Sayfa 9-12) EKSİKSİZ olarak güncellendi.
-        // Her kalıbın ilk cümlesi kitaptaki orijinal cümledir.
+        // JSON yapısını optimize etmek için e dizisinde her cümle "Almanca|Türkçe" şeklinde kaydedilmiştir.
         const db = {
             "schule": [
-                {
-                    german: "eingeschult werden", turkish: "okula başlatılmak",
-                    examples: [
-                        { de: "Die meisten Kinder werden im Alter von sechs Jahren eingeschult.", tr: "Çocukların çoğu altı yaşında okula başlatılır. (Orijinal Cümle)" },
-                        { de: "Mein kleiner Bruder wird nächstes Jahr im September eingeschult.", tr: "Küçük erkek kardeşim gelecek yıl Eylül ayında okula başlayacak." },
-                        { de: "Die Einschulung ist ein wichtiges Ereignis für die ganze Familie.", tr: "Okula başlama, tüm aile için önemli bir olaydır." },
-                        { de: "Wegen seiner Krankheit wurde er ein Jahr später eingeschult.", tr: "Hastalığı nedeniyle bir yıl geç okula başlatıldı." },
-                        { de: "Zur Einschulung bekommen die Kinder in Deutschland eine Schultüte.", tr: "Okula başlarken Almanya'da çocuklara bir okul külahı verilir." }
-                    ]
-                },
-                {
-                    german: "zur Schule gehen", turkish: "okula gitmek",
-                    examples: [
-                        { de: "Wenn man Abitur machen will, muss man 12 oder 13 Jahre zur Schule gehen.", tr: "Eğer lise bitirme sınavı (Abitur) yapmak isteniyorsa, 12 veya 13 yıl okula gidilmelidir. (Orijinal Cümle)" },
-                        { de: "Meine Tochter geht jeden Morgen um halb acht zur Schule.", tr: "Kızım her sabah yedi buçukta okula gider." },
-                        { de: "In vielen Ländern müssen Kinder mindestens neun Jahre zur Schule gehen.", tr: "Birçok ülkede çocuklar en az dokuz yıl okula gitmek zorundadır." },
-                        { de: "Gehst du lieber zu Fuß zur Schule oder nimmst du den Bus?", tr: "Okula yürüyerek gitmeyi mi yoksa otobüse binmeyi mi tercih edersin?" },
-                        { de: "Er ist heute nicht zur Schule gegangen, weil er stark erkältet ist.", tr: "Ağır soğuk algınlığı olduğu için bugün okula gitmedi." }
-                    ]
-                },
-                {
-                    german: "eine Schule besuchen", turkish: "bir okula gitmek / okul okumak",
-                    examples: [
-                        { de: "Die Eltern legen großen Wert darauf, dass ihr Kind eine gute Schule besucht.", tr: "Ebeveynler, çocuklarının iyi bir okula gitmesine büyük önem verirler. (Orijinal Cümle)" },
-                        { de: "Welche Schule hast du besucht, als du ein Kind warst?", tr: "Çocukken hangi okula gittin?" },
-                        { de: "In der Schweiz besuchen viele Jugendliche eine internationale Schule.", tr: "İsviçre'de birçok genç uluslararası bir okula gider." },
-                        { de: "Um diesen Beruf zu ergreifen, muss man eine spezielle Fachschule besuchen.", tr: "Bu mesleği edinmek için özel bir meslek okuluna gitmek gerekir." },
-                        { de: "Er besucht zurzeit eine Schule für begabte Musiker.", tr: "Şu anda yetenekli müzisyenler için bir okula gidiyor." }
-                    ]
-                },
-                {
-                    german: "die Schulpflicht", turkish: "zorunlu eğitim",
-                    examples: [
-                        { de: "Die Dauer der allgemeinen Schulpflicht beträgt in Deutschland mindestens neun Schuljahre.", tr: "Genel zorunlu eğitimin süresi Almanya'da en az dokuz okul yılıdır. (Orijinal Cümle)" },
-                        { de: "Die Schulpflicht beginnt normalerweise im Alter von sechs Jahren.", tr: "Zorunlu eğitim genellikle altı yaşında başlar." },
-                        { de: "Eltern können bestraft werden, wenn sie die Schulpflicht ihrer Kinder ignorieren.", tr: "Çocuklarının zorunlu eğitimini görmezden gelirlerse ebeveynler cezalandırılabilir." },
-                        { de: "Die Einführung der Schulpflicht war ein wichtiger historischer Meilenstein.", tr: "Zorunlu eğitimin getirilmesi önemli bir tarihi dönüm noktasıydı." },
-                        { de: "Nach dem Ende der Schulpflicht kann man eine Ausbildung beginnen.", tr: "Zorunlu eğitimin bitiminden sonra bir meslek eğitimine başlanabilir." }
-                    ]
-                },
-                {
-                    german: "schulpflichtig", turkish: "okula gitmek zorunda olan (zorunlu eğitim çağında)",
-                    examples: [
-                        { de: "Schulpflichtige Kinder dürfen der Schule nur aus wichtigen Gründen fernbleiben, z. B. wenn sie krank sind.", tr: "Zorunlu eğitim çağındaki çocuklar okula sadece önemli nedenlerle, örneğin hastaysalar gelmeyebilirler. (Orijinal Cümle)" },
-                        { de: "Ab wann ist ein Kind in diesem Land schulpflichtig?", tr: "Bu ülkede bir çocuk ne zamandan itibaren zorunlu eğitim çağındadır?" },
-                        { de: "Die Eltern von schulpflichtigen Kindern müssen dafür sorgen, dass diese regelmäßig am Unterricht teilnehmen.", tr: "Zorunlu eğitim çağındaki çocukların ebeveynleri, onların düzenli olarak derse katılmalarını sağlamak zorundadır." },
-                        { de: "Während der Ferienzeit sieht man viele schulpflichtige Jugendliche in der Stadt.", tr: "Tatil döneminde şehirde birçok zorunlu eğitim çağında genç görülür." },
-                        { de: "Das Gesetz regelt genau, wer schulpflichtig ist und wer nicht.", tr: "Yasa, kimin zorunlu eğitim çağında olup olmadığını kesin olarak düzenler." }
-                    ]
-                },
-                {
-                    german: "die Schule schwänzen", turkish: "okulu asmak",
-                    examples: [
-                        { de: "Eigentlich müsste sie jetzt im Unterricht sein, aber sie schwänzt die Schule und trifft sich mit ihren Freunden im Park.", tr: "Aslında şu an derste olması gerekirdi ama o okulu asıyor ve parkta arkadaşlarıyla buluşuyor. (Orijinal Cümle)" },
-                        { de: "Wer regelmäßig die Schule schwänzt, bekommt große Probleme.", tr: "Düzenli olarak okulu asan kişi büyük sorunlar yaşar." },
-                        { de: "Er hat die Schule geschwänzt, um mit seinen Freunden ins Kino zu gehen.", tr: "Arkadaşlarıyla sinemaya gitmek için okulu astı." },
-                        { de: "Die Lehrer haben sofort gemerkt, dass einige Schüler die Schule schwänzen.", tr: "Öğretmenler, bazı öğrencilerin okulu astığını hemen fark etti." },
-                        { de: "Das Schwänzen der Schule führt oft zu sehr schlechten Noten im Zeugnis.", tr: "Okulu asmak genellikle karnede çok kötü notlara yol açar." }
-                    ]
-                },
-                {
-                    german: "die öffentliche Schule / die staatliche Schule", turkish: "devlet okulu",
-                    examples: [
-                        { de: "Die meisten Schülerinnen und Schüler in Deutschland besuchen öffentliche Schulen.", tr: "Almanya'daki öğrencilerin çoğu devlet okullarına gider. (Orijinal Cümle)" },
-                        { de: "Öffentliche Schulen werden durch Steuern finanziert und sind kostenlos.", tr: "Devlet okulları vergilerle finanse edilir ve ücretsizdir." },
-                        { de: "Die Qualität der Bildung an staatlichen Schulen ist im Allgemeinen sehr hoch.", tr: "Devlet okullarındaki eğitimin kalitesi genel olarak çok yüksektir." },
-                        { de: "Es gibt oft Diskussionen über die Ausstattung von öffentlichen Schulen.", tr: "Devlet okullarının donanımı hakkında sık sık tartışmalar olur." },
-                        { de: "Staatliche Schulen müssen sich an die offiziellen Lehrpläne halten.", tr: "Devlet okulları resmi müfredatlara uymak zorundadır." }
-                    ]
-                },
-                {
-                    german: "die Privatschule", turkish: "özel okul",
-                    examples: [
-                        { de: "Die Zahl der Schüler, die Privatschulen besuchen, steigt kontinuierlich.", tr: "Özel okullara giden öğrencilerin sayısı sürekli artıyor. (Orijinal Cümle)" },
-                        { de: "Eine Privatschule verlangt oft hohe monatliche Gebühren von den Eltern.", tr: "Özel bir okul genellikle ebeveynlerden yüksek aylık ücretler talep eder." },
-                        { de: "Viele Privatschulen bieten kleinere Klassen und eine individuelle Betreuung.", tr: "Birçok özel okul, daha küçük sınıflar ve bireysel danışmanlık sunar." },
-                        { de: "Sie hat ein Stipendium bekommen, um diese exklusive Privatschule zu besuchen.", tr: "Bu seçkin özel okula gitmek için bir burs aldı." },
-                        { de: "An manchen Privatschulen gibt es einen besonderen pädagogischen Schwerpunkt.", tr: "Bazı özel okullarda özel bir pedagojik odak noktası vardır." }
-                    ]
-                },
-                {
-                    german: "die Ganztagsschule", turkish: "tam gün okul",
-                    examples: [
-                        { de: "In Deutschland werden immer mehr Ganztagsschulen eingerichtet, in denen Schüler auch am Nachmittag unterrichtet und betreut werden.", tr: "Almanya'da öğrencilerin öğleden sonra da ders gördüğü ve bakıldığı tam gün okullar giderek daha fazla kuruluyor. (Orijinal Cümle)" },
-                        { de: "In einer Ganztagsschule haben die Kinder auch nachmittags Unterricht oder AGs.", tr: "Tam gün okulda çocukların öğleden sonraları da dersleri veya kulüpleri olur." },
-                        { de: "Ganztagsschulen sind besonders für berufstätige Eltern eine große Erleichterung.", tr: "Tam gün okullar, özellikle çalışan ebeveynler için büyük bir kolaylıktır." },
-                        { de: "Das gemeinsame Mittagessen ist ein wichtiger Bestandteil der Ganztagsschule.", tr: "Birlikte yenilen öğle yemeği, tam gün okulun önemli bir parçasıdır." },
-                        { de: "Viele Experten fordern den Ausbau des Ganztagsschulsystems.", tr: "Birçok uzman tam gün okul sisteminin genişletilmesini talep ediyor." }
-                    ]
-                },
-                {
-                    german: "das Internat", turkish: "yatılı okul",
-                    examples: [
-                        { de: "Im Internat teilen sich meistens zwei Schüler ein Zimmer.", tr: "Yatılı okulda genellikle iki öğrenci bir odayı paylaşır. (Orijinal Cümle)" },
-                        { de: "Harry Potter besuchte ein berühmtes magisches Internat.", tr: "Harry Potter ünlü ve büyülü bir yatılı okula gitti." },
-                        { de: "Die Eltern haben ihn auf ein Internat in England geschickt, um sein Englisch zu verbessern.", tr: "İngilizcesini geliştirmesi için onu İngiltere'de bir yatılı okula gönderdiler." },
-                        { de: "In einem Internat müssen sich die Schüler an strenge Regeln halten.", tr: "Yatılı okulda öğrenciler katı kurallara uymak zorundadır." },
-                        { de: "Ein gutes Internat bietet nicht nur Unterricht, sondern auch viele Freizeitaktivitäten.", tr: "İyi bir yatılı okul sadece ders değil, aynı zamanda birçok boş zaman aktivitesi sunar." }
-                    ]
-                },
-                {
-                    german: "die Klasse", turkish: "sınıf",
-                    examples: [
-                        { de: "Die Grundschulzeit dauert in Bayern von der 1. bis zur 4. Klasse.", tr: "İlkokul dönemi Bavyera'da 1. sınıftan 4. sınıfa kadar sürer. (Orijinal Cümle)" },
-                        { de: "Meine Tochter geht in die fünfte Klasse.", tr: "Kızım beşinci sınıfa gidiyor." },
-                        { de: "In seiner Klasse sind zwanzig Schüler und fünfzehn Schülerinnen.", tr: "Onun sınıfında yirmi erkek ve on beş kız öğrenci var." },
-                        { de: "Die ganze Klasse hat den Test bestanden.", tr: "Bütün sınıf testi geçti." },
-                        { de: "Sie ist die Klassenbeste in Mathematik.", tr: "O, matematikte sınıfın en iyisidir." }
-                    ]
-                },
-                {
-                    german: "die ... Klasse besuchen", turkish: "... sınıfa gitmek / okumak",
-                    examples: [
-                        { de: "Wenn man die erste Klasse besucht, lernt man lesen und schreiben.", tr: "Birinci sınıfa gidildiğinde (okunduğunda), okumayı ve yazmayı öğrenirsin. (Orijinal Cümle)" },
-                        { de: "Er besucht zurzeit die neunte Klasse eines Gymnasiums.", tr: "Şu anda bir lisenin dokuzuncu sınıfına gidiyor." },
-                        { de: "Um diesen Kurs zu belegen, muss man mindestens die zehnte Klasse besuchen.", tr: "Bu kursu almak için en az onuncu sınıfa gidiyor olmak gerekir." },
-                        { de: "Welche Klasse besucht dein jüngerer Bruder?", tr: "Küçük erkek kardeşin hangi sınıfa gidiyor?" },
-                        { de: "Schüler, die die Abschlussklasse besuchen, stehen oft unter großem Stress.", tr: "Son sınıfa giden öğrenciler genellikle büyük stres altındadırlar." }
-                    ]
-                },
-                {
-                    german: "in die ... Klasse gehen", turkish: "... sınıfa gitmek",
-                    examples: [
-                        { de: "Wer in die 12. Klasse geht, muss sich auf das Abitur vorbereiten.", tr: "12. sınıfa giden kişi, lise bitirme sınavına (Abitur) hazırlanmalıdır. (Orijinal Cümle)" },
-                        { de: "Ab September geht sie in die dritte Klasse.", tr: "Eylülden itibaren üçüncü sınıfa gidecek." },
-                        { de: "Ich bin mit ihm zusammen in die Grundschule gegangen.", tr: "Onunla birlikte aynı ilkokula gittik." },
-                        { de: "Kinder gehen normalerweise mit sechs Jahren in die erste Klasse.", tr: "Çocuklar normalde altı yaşında birinci sınıfa giderler." },
-                        { de: "Obwohl er erst fünf ist, möchte er schon in die Schule gehen.", tr: "Henüz beş yaşında olmasına rağmen şimdiden okula gitmek istiyor." }
-                    ]
-                },
-                {
-                    german: "auf die Hauptschule / Realschule / aufs Gymnasium gehen", turkish: "Hauptschule'ye / Realschule'ye / Lise'ye (Gymnasium) gitmek",
-                    examples: [
-                        { de: "Am Ende der Grundschulzeit wird entschieden, ob man auf die Hauptschule, die Realschule oder aufs Gymnasium geht.", tr: "İlkokulun sonunda Hauptschule'ye mi, Realschule'ye mi yoksa Gymnasium'a (lise) mı gidileceğine karar verilir. (Orijinal Cümle)" },
-                        { de: "Wer später Medizin studieren möchte, sollte unbedingt aufs Gymnasium gehen.", tr: "Daha sonra tıp okumak isteyen kişi mutlaka liseye (Gymnasium) gitmelidir." },
-                        { de: "Die Anforderungen sind sehr hoch, wenn man aufs Gymnasium geht.", tr: "Liseye gidildiğinde beklentiler (zorluk derecesi) çok yüksektir." },
-                        { de: "Ihre älteste Tochter geht bereits auf die Realschule.", tr: "En büyük kızı halihazırda Realschule'ye gidiyor." },
-                        { de: "Viele Eltern üben Druck auf ihre Kinder aus, damit sie aufs Gymnasium gehen.", tr: "Birçok ebeveyn, liseye gitmeleri için çocuklarına baskı yapar." }
-                    ]
-                },
-                {
-                    german: "die Schule abschließen", turkish: "okulu bitirmek / mezun olmak",
-                    examples: [
-                        { de: "Wenn man die Schule mit guten Noten abgeschlossen hat, hat man bessere Chancen, einen Ausbildungsplatz zu finden.", tr: "Okulu iyi notlarla bitirildiğinde, bir mesleki eğitim yeri bulmak için daha iyi şanslara sahip olunur. (Orijinal Cümle)" },
-                        { de: "Er hat die Schule im letzten Jahr erfolgreich abgeschlossen.", tr: "Geçen yıl okulu başarıyla bitirdi." },
-                        { de: "Es ist das Ziel jedes Schülers, die Schule gut abzuschließen.", tr: "Okulu iyi bitirmek her öğrencinin hedefidir." },
-                        { de: "Nachdem sie die Schule abgeschlossen hatte, reiste sie durch Australien.", tr: "Okulu bitirdikten sonra Avustralya'yı gezdi." },
-                        { de: "Die Schule vorzeitig abzuschließen, ist nur in Ausnahmefällen möglich.", tr: "Okulu erken bitirmek sadece istisnai durumlarda mümkündür." }
-                    ]
-                },
-                {
-                    german: "der Schulabschluss", turkish: "okul mezuniyeti / diploma",
-                    examples: [
-                        { de: "Nach ihrem Schulabschluss hat sie ein Jahr lang als Au-pair-Mädchen im Ausland gearbeitet.", tr: "Okul mezuniyetinden sonra bir yıl boyunca yurt dışında Au-pair (bakıcı kız) olarak çalıştı. (Orijinal Cümle)" },
-                        { de: "Ein guter Schulabschluss öffnet viele Türen.", tr: "İyi bir okul diploması birçok kapıyı açar." },
-                        { de: "Er bewarb sich mit seinem Zeugnis über den Realschulabschluss.", tr: "Realschule mezuniyet belgesiyle başvuru yaptı." },
-                        { de: "Ohne einen anerkannten Schulabschluss ist es schwierig, eine feste Anstellung zu finden.", tr: "Tanınmış bir okul diploması olmadan kalıcı bir iş bulmak zordur." },
-                        { de: "Sie feierten ihren Schulabschluss mit einer großen Party.", tr: "Okul mezuniyetlerini büyük bir partiyle kutladılar." }
-                    ]
-                },
-                {
-                    german: "einen Schulabschluss machen", turkish: "okuldan mezun olmak / diploma almak",
-                    examples: [
-                        { de: "Viele Schüler, die nächstes Jahr ihren Schulabschluss machen, sind schon auf der Suche nach einem Ausbildungsplatz.", tr: "Gelecek yıl okuldan mezun olacak birçok öğrenci şimdiden bir mesleki eğitim yeri arayışında. (Orijinal Cümle)" },
-                        { de: "Nachdem sie ihren Schulabschluss gemacht hat, will sie ein Jahr im Ausland verbringen.", tr: "Okuldan mezun olduktan sonra, bir yılını yurtdışında geçirmek istiyor." },
-                        { de: "Es ist heute sehr wichtig, einen guten Schulabschluss zu machen.", tr: "Bugün iyi bir okul diploması almak çok önemlidir." },
-                        { de: "Er hat seinen Schulabschluss mit Auszeichnung gemacht.", tr: "Okuldan üstün başarıyla mezun oldu." },
-                        { de: "Wer keinen Schulabschluss macht, hat es schwer auf dem Arbeitsmarkt.", tr: "Okuldan mezun olmayan kişi (diploması olmayan), iş pazarında zorlanır." }
-                    ]
-                },
-                {
-                    german: "einen Schulabschluss haben", turkish: "okul diplomasına sahip olmak",
-                    examples: [
-                        { de: "Heutzutage ist es sehr wichtig, einen guten Schulabschluss zu haben.", tr: "Günümüzde iyi bir okul diplomasına sahip olmak çok önemlidir. (Orijinal Cümle)" },
-                        { de: "Bewerber müssen mindestens einen Hauptschulabschluss haben.", tr: "Adayların en azından bir Hauptschule diplomasına sahip olması gerekir." },
-                        { de: "Auch wenn man keinen guten Schulabschluss hat, kann man durch harte Arbeit erfolgreich sein.", tr: "İyi bir okul diplomasına sahip olunmasa bile, çok çalışarak başarılı olunabilir." },
-                        { de: "Es ist von Vorteil, einen international anerkannten Schulabschluss zu haben.", tr: "Uluslararası alanda tanınan bir okul diplomasına sahip olmak avantajlıdır." },
-                        { de: "Sie ärgert sich darüber, keinen höheren Schulabschluss zu haben.", tr: "Daha yüksek bir okul diplomasına sahip olmadığı için kızgın." }
-                    ]
-                },
-                {
-                    german: "die Schule abbrechen", turkish: "okulu bırakmak / terk etmek",
-                    examples: [
-                        { de: "Wer die Schule abgebrochen hat, hat keinen Schulabschluss und findet deshalb nur schwer einen guten Arbeitsplatz.", tr: "Okulu bırakan kişinin okul diploması yoktur ve bu nedenle iyi bir iş bulması zordur. (Orijinal Cümle)" },
-                        { de: "Aus familiären Gründen musste sie damals leider die Schule abbrechen.", tr: "O zamanlar ailevi nedenlerden dolayı maalesef okulu bırakmak zorunda kaldı." },
-                        { de: "Einige berühmte Unternehmer haben in ihrer Jugend die Schule abgebrochen.", tr: "Bazı ünlü girişimciler gençliklerinde okulu bırakmıştır." },
-                        { de: "Es gibt Beratungsprogramme für Jugendliche, die die Schule abbrechen wollen.", tr: "Okulu bırakmak isteyen gençler için danışmanlık programları vardır." },
-                        { de: "Die Schule abzubrechen ist meistens keine gute Entscheidung für die Zukunft.", tr: "Okulu bırakmak çoğunlukla gelecek için iyi bir karar değildir." }
-                    ]
-                },
-                {
-                    german: "einen Schulabschluss nachholen", turkish: "okul diplomasını sonradan almak",
-                    examples: [
-                        { de: "Wer keinen Schulabschluss gemacht hat, kann eine Abendschule besuchen und den Schulabschluss nachholen.", tr: "Okul diploması almamış kişi, bir akşam okuluna giderek diplomasını sonradan alabilir. (Orijinal Cümle)" },
-                        { de: "Es ist nie zu spät, das Abitur nachzuholen.", tr: "Lise diplomasını (Abitur) sonradan almak için asla çok geç değildir." },
-                        { de: "Sie arbeitet hart, um ihren Realschulabschluss nachzuholen.", tr: "Realschule diplomasını sonradan almak için çok çalışıyor." },
-                        { de: "Das Nachholen eines Schulabschlusses erfordert viel Disziplin.", tr: "Bir okul diplomasını sonradan almak çok fazla disiplin gerektirir." },
-                        { de: "Die Volkshochschule bietet Kurse an, um den Hauptschulabschluss nachzuholen.", tr: "Halk eğitim merkezi, Hauptschule diplomasını sonradan almak için kurslar sunar." }
-                    ]
-                },
-                {
-                    german: "(das) Abitur machen", turkish: "Abitur (Lise bitirme sınavı) yapmak",
-                    examples: [
-                        { de: "Wenn man (das) Abitur gemacht hat, kann man sich um einen Studienplatz bewerben.", tr: "Abitur yapıldığında (lise bitirildiğinde), bir üniversite kontenjanı için başvurulabilir. (Orijinal Cümle)" },
-                        { de: "Sie plant, nächstes Jahr ihr Abitur zu machen.", tr: "Gelecek yıl Abitur yapmayı planlıyor." },
-                        { de: "Er hat das Abitur mit einem Notendurchschnitt von 1,2 gemacht.", tr: "Abitur'u 1,2 not ortalamasıyla yaptı." },
-                        { de: "Viele Schüler haben Angst davor, das Abitur nicht zu schaffen.", tr: "Birçok öğrenci Abitur'u geçememekten korkar." },
-                        { de: "Nachdem er das Abitur gemacht hatte, ging er auf eine Weltreise.", tr: "Abitur yaptıktan sonra dünya turuna çıktı." }
-                    ]
-                },
-                {
-                    german: "(das) Abitur haben", turkish: "Abitur'a (Lise diplomasına) sahip olmak",
-                    examples: [
-                        { de: "Wenn du (das) Abitur hast, stehen dir alle Türen offen.", tr: "Eğer Abitur'un varsa, bütün kapılar sana açıktır. (Orijinal Cümle)" },
-                        { de: "Für dieses Studium muss man das Abitur haben.", tr: "Bu üniversite eğitimi için Abitur'a sahip olmak gerekir." },
-                        { de: "Er ist stolz darauf, das Abitur zu haben.", tr: "Abitur'a sahip olmakla gurur duyuyor." },
-                        { de: "Auch ohne Abitur zu haben, kann man eine erfolgreiche Karriere aufbauen.", tr: "Abitur'a sahip olmadan da başarılı bir kariyer inşa edilebilir." },
-                        { de: "Glaubst du, es ist heute zwingend notwendig, das Abitur zu haben?", tr: "Sence günümüzde Abitur'a sahip olmak zorunlu mu?" }
-                    ]
-                },
-                {
-                    german: "das Fach", turkish: "ders / branş",
-                    examples: [
-                        { de: "Die Schüler haben Unterricht in verschiedenen naturwissenschaftlichen Fächern.", tr: "Öğrencilerin çeşitli doğa bilimleri derslerinde eğitimi vardır. (Orijinal Cümle)" },
-                        { de: "Mathematik ist nicht mein liebstes Fach.", tr: "Matematik benim en sevdiğim ders değil." },
-                        { de: "In welchem Fach hast du die besten Noten?", tr: "Hangi derste en iyi notlara sahipsin?" },
-                        { de: "Die Schule bietet auch ungewöhnliche Fächer wie Philosophie an.", tr: "Okul, felsefe gibi alışılmadık dersler de sunuyor." },
-                        { de: "Er unterrichtet drei verschiedene Fächer.", tr: "Üç farklı ders (branş) öğretiyor." }
-                    ]
-                },
-                {
-                    german: "das Hauptfach", turkish: "ana ders",
-                    examples: [
-                        { de: "Der Unterricht in den Hauptfächern Deutsch, Englisch und Mathematik wird als besonders wichtig angesehen.", tr: "Almanca, İngilizce ve Matematik gibi ana derslerdeki eğitim özellikle önemli kabul edilir. (Orijinal Cümle)" },
-                        { de: "In den Hauptfächern werden regelmäßig Klassenarbeiten geschrieben.", tr: "Ana derslerde düzenli olarak yazılı sınavlar yapılır." },
-                        { de: "Die Noten in den Hauptfächern sind entscheidend für die Versetzung.", tr: "Ana derslerdeki notlar sınıf geçme için belirleyicidir." },
-                        { de: "Sie konzentriert sich beim Lernen vor allem auf ihre Hauptfächer.", tr: "Çalışırken özellikle ana derslerine odaklanıyor." },
-                        { de: "Welche Fächer zählen in diesem Land als Hauptfächer?", tr: "Bu ülkede hangi dersler ana ders sayılıyor?" }
-                    ]
-                },
-                {
-                    german: "das Nebenfach", turkish: "seçmeli / yan ders",
-                    examples: [
-                        { de: "In den Nebenfächern haben die Schüler weniger Unterricht als in den Hauptfächern.", tr: "Öğrencilerin yan derslerde ana derslere göre daha az eğitimi vardır. (Orijinal Cümle)" },
-                        { de: "Kunst und Musik sind typische Nebenfächer.", tr: "Sanat ve Müzik tipik yan derslerdir." },
-                        { de: "Auch in den Nebenfächern sollte man sich Mühe geben.", tr: "Yan derslerde de çaba gösterilmelidir." },
-                        { de: "Die Note im Nebenfach Geschichte hat sich verbessert.", tr: "Tarih yan dersindeki notu iyileşti." },
-                        { de: "Manche Schüler vernachlässigen leider ihre Nebenfächer.", tr: "Bazı öğrenciler maalesef yan derslerini ihmal ediyorlar." }
-                    ]
-                },
-                {
-                    german: "etw. unterrichten", turkish: "bir dersi öğretmek",
-                    examples: [
-                        { de: "Der Lehrer unterrichtet seit 15 Jahren Englisch und Sport an einer Hauptschule.", tr: "Öğretmen 15 yıldır bir Hauptschule'de İngilizce ve Spor öğretiyor (dersi veriyor). (Orijinal Cümle)" },
-                        { de: "Welche Fächer unterrichten Sie an dieser Schule?", tr: "Bu okulda hangi dersleri öğretiyorsunuz?" },
-                        { de: "Sie unterrichtet Mathematik mit großer Leidenschaft.", tr: "Matematiği büyük bir tutkuyla öğretiyor." },
-                        { de: "Er wurde eingestellt, um Physik und Chemie zu unterrichten.", tr: "Fizik ve kimya öğretmek üzere işe alındı." },
-                        { de: "Es ist nicht einfach, eine Fremdsprache zu unterrichten.", tr: "Bir yabancı dili öğretmek kolay değildir." }
-                    ]
-                },
-                {
-                    german: "jdn. unterrichten", turkish: "birine ders vermek",
-                    examples: [
-                        { de: "Wer sich für den Lehrerberuf entscheidet, sollte Freude daran haben, junge Menschen zu unterrichten.", tr: "Öğretmenlik mesleğini seçen kişi, gençlere ders vermekten zevk almalıdır. (Orijinal Cümle)" },
-                        { de: "Es macht ihr großen Spaß, Kinder in Fremdsprachen zu unterrichten.", tr: "Çocuklara yabancı dil dersi vermek ona çok zevk veriyor." },
-                        { de: "Der Professor unterrichtet die Studenten im ersten Semester.", tr: "Profesör ilk dönem öğrencilerine ders veriyor." },
-                        { de: "Er unterrichtet eine sehr unruhige Klasse.", tr: "Çok yaramaz bir sınıfa ders veriyor." },
-                        { de: "Die Aufgabe eines Lehrers ist es, seine Schüler gut zu unterrichten.", tr: "Bir öğretmenin görevi, öğrencilerine iyi ders vermektir." }
-                    ]
-                },
-                {
-                    german: "der Unterricht", turkish: "ders",
-                    examples: [
-                        { de: "Die Lehrer versuchen, ihren Unterricht abwechslungsreich zu gestalten, um das Interesse der Schüler zu wecken.", tr: "Öğretmenler, öğrencilerin ilgisini çekmek için derslerini çeşitli (sıkıcı olmayan) hale getirmeye çalışırlar. (Orijinal Cümle)" },
-                        { de: "Der Unterricht beginnt jeden Morgen pünktlich um acht Uhr.", tr: "Ders her sabah tam sekizde başlar." },
-                        { de: "Während des Unterrichts ist die Nutzung von Handys verboten.", tr: "Ders sırasında cep telefonu kullanımı yasaktır." },
-                        { de: "Der praktische Unterricht findet im Labor statt.", tr: "Uygulamalı ders laboratuvarda yapılır." },
-                        { de: "Sie nimmt aktiv am Unterricht teil und stellt viele Fragen.", tr: "Derse aktif olarak katılır ve çok soru sorar." }
-                    ]
-                },
-                {
-                    german: "Unterricht geben / erteilen", turkish: "ders vermek",
-                    examples: [
-                        { de: "Die Hauptaufgabe von Lehrern ist es, (den Schülern) Unterricht zu geben / zu erteilen, aber auch die Durchführung von Prüfungen gehört zu ihren Aufgaben.", tr: "Öğretmenlerin temel görevi (öğrencilere) ders vermektir, ancak sınavların uygulanması da görevleri arasındadır. (Orijinal Cümle)" },
-                        { de: "Am Nachmittag gibt er Nachhilfeunterricht.", tr: "Öğleden sonraları özel ders veriyor." },
-                        { de: "Der Dozent erteilt hervorragenden Unterricht in Philosophie.", tr: "Öğretim görevlisi felsefe alanında mükemmel ders veriyor." },
-                        { de: "Es erfordert viel Geduld, Anfängern Unterricht zu geben.", tr: "Yeni başlayanlara ders vermek çok sabır gerektirir." },
-                        { de: "Sie gibt ehrenamtlich Deutschunterricht für Flüchtlinge.", tr: "Mültecilere gönüllü olarak Almanca dersi veriyor." }
-                    ]
-                },
-                {
-                    german: "die Unterrichtsstunde", turkish: "ders saati",
-                    examples: [
-                        { de: "In den Unterrichtsstunden am Mittag können sich die Schüler nicht mehr so gut konzentrieren.", tr: "Öğle vaktindeki ders saatlerinde öğrenciler artık o kadar iyi konsantre olamazlar. (Orijinal Cümle)" },
-                        { de: "Eine normale Unterrichtsstunde dauert 45 Minuten.", tr: "Normal bir ders saati 45 dakika sürer." },
-                        { de: "Wir haben heute sechs Unterrichtsstunden.", tr: "Bugün altı ders saatimiz var." },
-                        { de: "Die letzte Unterrichtsstunde vor den Ferien ist meistens sehr entspannt.", tr: "Tatilden önceki son ders saati genellikle çok rahattır." },
-                        { de: "In dieser Unterrichtsstunde behandeln wir ein neues Thema.", tr: "Bu ders saatinde yeni bir konu işliyoruz." }
-                    ]
-                },
-                {
-                    german: "der Lernstoff", turkish: "müfredat / öğrenilecek konu",
-                    examples: [
-                        { de: "Genetik gehört zum Lernstoff der 9. Klasse.", tr: "Genetik, 9. sınıfın müfredatına (öğrenilecek konularına) dahildir. (Orijinal Cümle)" },
-                        { de: "Vor der Prüfung muss der gesamte Lernstoff wiederholt werden.", tr: "Sınavdan önce tüm öğrenilecek konular tekrarlanmalıdır." },
-                        { de: "Der Lernstoff in Mathematik ist dieses Jahr besonders schwer.", tr: "Matematikteki öğrenilecek konular bu yıl özellikle zor." },
-                        { de: "Der Lehrer hat den Lernstoff gut strukturiert.", tr: "Öğretmen müfredatı iyi yapılandırdı." },
-                        { de: "Viele Schüler fühlen sich von der Menge des Lernstoffs überfordert.", tr: "Birçok öğrenci öğrenilecek konuların miktarından dolayı bunalmış hissediyor." }
-                    ]
-                },
-                {
-                    german: "jdm. etw. vermitteln", turkish: "birine bir şeyi aktarmak / öğretmek",
-                    examples: [
-                        { de: "Der Lehrer soll den Schülern den Lernstoff auf verständliche und lebendige Weise vermitteln.", tr: "Öğretmen, öğrencilere öğrenilecek konuyu anlaşılır ve canlı bir şekilde aktarmalıdır. (Orijinal Cümle)" },
-                        { de: "Es ist schwer, komplexe Theorien einfach zu vermitteln.", tr: "Karmaşık teorileri basitçe aktarmak zordur." },
-                        { de: "Sie kann ihr Wissen sehr gut an andere vermitteln.", tr: "Bilgisini başkalarına çok iyi aktarabiliyor." },
-                        { de: "Medien vermitteln uns ein bestimmtes Bild der Welt.", tr: "Medya bize belirli bir dünya imajı aktarır." },
-                        { de: "Gute Literatur vermittelt wichtige Werte und Ideen.", tr: "İyi edebiyat, önemli değerleri ve fikirleri aktarır." }
-                    ]
-                },
-                {
-                    german: "die Vermittlung von Wissen / Kenntnissen", turkish: "bilgi / beceri aktarımı",
-                    examples: [
-                        { de: "Die Aufgabe der Schulen ist die Vermittlung von Wissen / Kenntnissen in verschiedenen Bereichen.", tr: "Okulların görevi, çeşitli alanlarda bilgi / beceri aktarımıdır. (Orijinal Cümle)" },
-                        { de: "Die Vermittlung von Wissen steht im Zentrum der universitären Lehre.", tr: "Bilgi aktarımı üniversite eğitiminin merkezinde yer alır." },
-                        { de: "Moderne Medien spielen eine wichtige Rolle bei der Vermittlung von Kenntnissen.", tr: "Modern medya, bilgi aktarımında önemli bir rol oynar." },
-                        { de: "Die Didaktik beschäftigt sich mit der Vermittlung von Wissen.", tr: "Didaktik (öğretim bilimi), bilgi aktarımı ile ilgilenir." },
-                        { de: "Eine erfolgreiche Vermittlung von Kenntnissen erfordert gute Methoden.", tr: "Başarılı bir beceri aktarımı iyi yöntemler gerektirir." }
-                    ]
-                },
-                {
-                    german: "die Didaktik", turkish: "didaktik / öğretim bilimi",
-                    examples: [
-                        { de: "Zukünftige Lehrer müssen sich nicht nur mit ihren Unterrichtsfächern, sondern auch mit Didaktik beschäftigen, damit sie den Lernstoff gut vermitteln können.", tr: "Geleceğin öğretmenleri, sadece kendi ders branşlarıyla değil, konuyu iyi aktarabilmek için didaktikle de ilgilenmek zorundadırlar. (Orijinal Cümle)" },
-                        { de: "Die Didaktik der Mathematik hat sich in den letzten Jahren stark verändert.", tr: "Matematik didaktiği son yıllarda çok değişti." },
-                        { de: "Er ist Professor für die Didaktik der englischen Sprache.", tr: "İngiliz Dili Didaktiği profesörüdür." },
-                        { de: "Gute Didaktik hilft Schülern, komplexe Themen leichter zu verstehen.", tr: "İyi didaktik, öğrencilerin karmaşık konuları daha kolay anlamasına yardımcı olur." },
-                        { de: "Das Seminar behandelt aktuelle Fragen der allgemeinen Didaktik.", tr: "Seminer, genel didaktiğin güncel sorularını ele alıyor." }
-                    ]
-                },
-                {
-                    german: "didaktisch", turkish: "didaktik olarak",
-                    examples: [
-                        { de: "Wenn komplexe Themen didaktisch gut aufbereitet werden, können die Schüler sie leichter verstehen.", tr: "Karmaşık konular didaktik olarak iyi hazırlanırsa, öğrenciler onları daha kolay anlayabilir. (Orijinal Cümle)" },
-                        { de: "Das Schulbuch ist didaktisch sehr klug aufgebaut.", tr: "Ders kitabı didaktik olarak çok akıllıca kurgulanmış." },
-                        { de: "Der Vortrag war fachlich hervorragend, aber didaktisch eine Katastrophe.", tr: "Sunum mesleki açıdan mükemmeldi ama didaktik olarak bir felaketti." },
-                        { de: "Sie suchen nach neuem didaktischen Material für den Sprachunterricht.", tr: "Dil dersi için yeni didaktik materyal arıyorlar." },
-                        { de: "Diese Lernsoftware bietet einen wertvollen didaktischen Ansatz.", tr: "Bu eğitim yazılımı değerli bir didaktik yaklaşım sunuyor." }
-                    ]
-                },
-                {
-                    german: "der Lehrplan", turkish: "müfredat",
-                    examples: [
-                        { de: "Die Schul- oder Kultusministerien erstellen Lehrpläne, in denen die Unterrichtsinhalte festgelegt sind.", tr: "Okul veya Kültür Bakanlıkları, ders içeriklerinin belirlendiği müfredatlar oluşturur. (Orijinal Cümle)" },
-                        { de: "Der neue Lehrplan für Informatik beinhaltet jetzt auch Programmieren in Python.", tr: "Bilişim için yeni müfredat artık Python'da programlamayı da içeriyor." },
-                        { de: "Lehrer müssen sicherstellen, dass sie alle Themen aus dem Lehrplan behandeln.", tr: "Öğretmenler müfredattaki tüm konuları işlediklerinden emin olmalıdır." },
-                        { de: "Der Lehrplan wurde reformiert, um moderneren Anforderungen gerecht zu werden.", tr: "Daha modern gereksinimleri karşılamak için müfredat reforme edildi." },
-                        { de: "Im Lehrplan steht genau, welche Bücher gelesen werden sollen.", tr: "Müfredatta tam olarak hangi kitapların okunması gerektiği yazılıdır." }
-                    ]
-                },
-                {
-                    german: "die Klassenarbeit", turkish: "yazılı sınav",
-                    examples: [
-                        { de: "Auf Klassenarbeiten müssen sich die Schüler gründlich vorbereiten.", tr: "Öğrenciler yazılı sınavlara temelden (iyice) hazırlanmak zorundadırlar. (Orijinal Cümle)" },
-                        { de: "Die Klassenarbeit in Physik ist leider sehr schlecht ausgefallen.", tr: "Fizik yazılı sınavının sonucu maalesef çok kötüydü." },
-                        { de: "Wir schreiben morgen eine wichtige Klassenarbeit.", tr: "Yarın önemli bir yazılı sınava gireceğiz (yazacağız)." },
-                        { de: "Der Lehrer korrigiert gerade die Klassenarbeiten der siebten Klasse.", tr: "Öğretmen şu an yedinci sınıfın yazılı sınavlarını okuyor (düzeltiyor)." },
-                        { de: "Wegen Krankheit hat er die letzte Klassenarbeit verpasst.", tr: "Hastalık nedeniyle son yazılı sınavı kaçırdı." }
-                    ]
-                },
-                {
-                    german: "eine Klassenarbeit schreiben", turkish: "yazılı sınav olmak / yazılı sınava girmek",
-                    examples: [
-                        { de: "In den Hauptfächern werden regelmäßig Klassenarbeiten geschrieben.", tr: "Ana derslerde düzenli olarak yazılı sınavlar yapılır (yazılır). (Orijinal Cümle)" },
-                        { de: "Die Schüler waren sehr nervös, bevor sie die Klassenarbeit in Mathematik schrieben.", tr: "Öğrenciler, matematikteki yazılı sınava girmeden önce çok gergindi." },
-                        { de: "Wie oft schreibt ihr im Halbjahr eine Klassenarbeit in Deutsch?", tr: "Yarıyılda Almancadan kaç kez yazılı sınav oluyorsunuz?" },
-                        { de: "Sie konnte die Klassenarbeit nicht schreiben, weil sie krank im Bett lag.", tr: "Hasta yataktaydı, bu yüzden yazılı sınava giremedi." },
-                        { de: "Morgen schreiben wir die erste Klassenarbeit des neuen Schuljahres.", tr: "Yarın yeni okul yılının ilk yazılı sınavını olacağız." }
-                    ]
-                },
-                {
-                    german: "die Note", turkish: "not (okul notu)",
-                    examples: [
-                        { de: "Kinder sind enttäuscht, wenn sie bei einer Prüfung keine gute Note bekommen.", tr: "Çocuklar bir sınavda iyi bir not almadıklarında hayal kırıklığına uğrarlar. (Orijinal Cümle)" },
-                        { de: "Eine Eins ist die beste Note, die man in Deutschland bekommen kann.", tr: "Almanya'da alınabilecek en iyi not bir'dir (1)." },
-                        { de: "Ihre Noten haben sich in diesem Schuljahr deutlich verbessert.", tr: "Notları bu okul yılında belirgin şekilde iyileşti." },
-                        { de: "Er macht sich Sorgen um seine Note in Englisch.", tr: "İngilizce notu için endişeleniyor." },
-                        { de: "Die Note im Zeugnis setzt sich aus mündlichen und schriftlichen Leistungen zusammen.", tr: "Karnedeki not, sözlü ve yazılı başarıların birleşiminden oluşur." }
-                    ]
-                },
-                {
-                    german: "den Schülern Noten geben", turkish: "öğrencilere not vermek",
-                    examples: [
-                        { de: "Ist es sinnvoll, Schülern schon im ersten Schuljahr Noten zu geben?", tr: "Öğrencilere daha ilk okul yılında not vermek mantıklı mı? (Orijinal Cümle)" },
-                        { de: "Manche Pädagogen lehnen es ab, Schülern Ziffernnoten zu geben.", tr: "Bazı pedagoglar, öğrencilere rakamla not vermeyi reddederler." },
-                        { de: "Der Lehrer gibt Schülern Noten für ihre Mitarbeit im Unterricht.", tr: "Öğretmen, derse katılımları için öğrencilere not verir." },
-                        { de: "Es ist oft schwierig, Schülern gerechte Noten zu geben.", tr: "Öğrencilere adil notlar vermek genellikle zordur." },
-                        { de: "Nach dem Test wird der Lehrer den Schülern ihre Noten geben.", tr: "Testten sonra öğretmen öğrencilere notlarını verecek." }
-                    ]
-                },
-                {
-                    german: "etw. benoten", turkish: "notlandırmak",
-                    examples: [
-                        { de: "Wenn Schüler wissen, dass eine Hausaufgabe benotet wird, arbeiten sie meist konzentrierter daran.", tr: "Öğrenciler bir ödevin notlandırılacağını bildiklerinde, ona çoğunlukla daha konsantre bir şekilde çalışırlar. (Orijinal Cümle)" },
-                        { de: "Der Lehrer wird die Aufsätze bis nächste Woche benoten.", tr: "Öğretmen kompozisyonları haftaya kadar notlandıracak." },
-                        { de: "Mündliche Beteiligung ist schwer objektiv zu benoten.", tr: "Sözlü katılımı objektif olarak notlandırmak zordur." },
-                        { de: "Dieses Projekt wird am Ende des Semesters benotet.", tr: "Bu proje dönemin sonunda notlandırılacak." },
-                        { de: "Nicht jede Leistung in der Schule muss streng benotet werden.", tr: "Okuldaki her performans sıkı bir şekilde notlandırılmak zorunda değildir." }
-                    ]
-                },
-                {
-                    german: "die Benotung", turkish: "notlandırma",
-                    examples: [
-                        { de: "Die Schüler empfinden die Benotung ihrer Prüfungen nicht immer als gerecht.", tr: "Öğrenciler sınavlarının notlandırılmasını her zaman adil bulmazlar. (Orijinal Cümle)" },
-                        { de: "Es gibt verschiedene Systeme für die Benotung von Schülerleistungen.", tr: "Öğrenci başarılarının notlandırılması için farklı sistemler vardır." },
-                        { de: "Die Kriterien für die Benotung sollten den Schülern vorher mitgeteilt werden.", tr: "Notlandırma kriterleri öğrencilere önceden bildirilmelidir." },
-                        { de: "Die Benotung in Kunst und Musik ist oft subjektiv.", tr: "Sanat ve Müzik derslerinde notlandırma genellikle sübjektiftir." },
-                        { de: "Sie hat Widerspruch gegen die Benotung ihrer Klausur eingelegt.", tr: "Sınavının notlandırılmasına itiraz etti." }
-                    ]
-                },
-                {
-                    german: "die Kopfnote", turkish: "davranış notu (okulda)",
-                    examples: [
-                        { de: "In manchen Ländern bekommen die Schüler Kopfnoten, z. B. für ihr soziales Verhalten und ihre Mitarbeit im Unterricht.", tr: "Bazı eyaletlerde (ülkelerde) öğrenciler, örneğin sosyal davranışları ve derse katılımları için davranış notları (Kopfnote) alırlar. (Orijinal Cümle)" },
-                        { de: "Die Kopfnoten stehen meistens ganz oben auf dem Zeugnis.", tr: "Davranış notları karnede çoğunlukla en üstte yer alır." },
-                        { de: "Über den Sinn von Kopfnoten wird in der Bildungspolitik viel diskutiert.", tr: "Eğitim politikasında davranış notlarının anlamı üzerine çok tartışılır." },
-                        { de: "Arbeitgeber achten manchmal auch auf die Kopfnoten im Zeugnis.", tr: "İşverenler bazen karnedeki davranış notlarına da dikkat ederler." },
-                        { de: "Für Pünktlichkeit und Ordnungsliebe gab es eine gute Kopfnote.", tr: "Dakiklik ve düzenlilik için iyi bir davranış notu verildi." }
-                    ]
-                },
-                {
-                    german: "die Leistung", turkish: "performans / başarı",
-                    examples: [
-                        { de: "Früher war sie eine gute Schülerin, aber im letzten Schuljahr haben ihre Leistungen nachgelassen.", tr: "Öskiden iyi bir öğrenciydi, ancak son okul yılında performansları (başarıları) düştü. (Orijinal Cümle)" },
-                        { de: "Die sportlichen Leistungen der Schüler werden beim Sportfest bewertet.", tr: "Öğrencilerin sportif başarıları spor şenliğinde değerlendirilir." },
-                        { de: "Für seine herausragenden Leistungen erhielt er einen Preis.", tr: "Üstün başarıları için bir ödül aldı." },
-                        { de: "Die Erwartungen an die Leistung der Schüler sind sehr hoch.", tr: "Öğrencilerin performansına yönelik beklentiler çok yüksektir." },
-                        { de: "Mündliche Leistungen sind genauso wichtig wie schriftliche.", tr: "Sözlü performanslar da yazılı olanlar kadar önemlidir." }
-                    ]
-                },
-                {
-                    german: "eine Leistung erbringen", turkish: "bir başarı/performans sergilemek",
-                    examples: [
-                        { de: "Wenn ein Schüler gute Leistungen erbringt, bekommt er gute Noten.", tr: "Bir öğrenci iyi performanslar sergilerse, iyi notlar alır. (Orijinal Cümle)" },
-                        { de: "Die Athleten haben bei den Olympischen Spielen eine unglaubliche Leistung erbracht.", tr: "Atletler Olimpiyat Oyunları'nda inanılmaz bir performans sergilediler." },
-                        { de: "Von den Mitarbeitern wird erwartet, dass sie hohe Leistungen erbringen.", tr: "Çalışanlardan yüksek performans sergilemeleri beklenir." },
-                        { de: "Er hat in der Prüfung eine schwache Leistung erbracht.", tr: "Sınavda zayıf bir performans sergiledi." },
-                        { de: "Jeder Schüler muss im Laufe des Semesters eine bestimmte Leistung erbringen.", tr: "Her öğrenci dönem boyunca belirli bir başarı sergilemek zorundadır." }
-                    ]
-                },
-                {
-                    german: "das Zeugnis", turkish: "karne / sertifika",
-                    examples: [
-                        { de: "Schüler bekommen am Ende jedes Schulhalbjahres Zeugnisse mit Noten in den einzelnen Fächern.", tr: "Öğrenciler her okul yarıyılının sonunda ayrı derslerdeki notları içeren karneler alırlar. (Orijinal Cümle)" },
-                        { de: "Er war sehr stolz auf sein hervorragendes Zeugnis.", tr: "Mükemmel karnesiyle çok gurur duyuyordu." },
-                        { de: "Für die Bewerbung musst du eine Kopie deines letzten Zeugnisses einreichen.", tr: "Başvuru için son karnenin bir kopyasını sunmalısın." },
-                        { de: "Ein schlechtes Zeugnis kann zu Konflikten mit den Eltern führen.", tr: "Kötü bir karne, ebeveynlerle çatışmalara yol açabilir." },
-                        { de: "Das Abiturzeugnis ist die Voraussetzung für ein Universitätsstudium.", tr: "Abitur karnesi (Lise diploması), üniversite eğitimi için ön koşuldur." }
-                    ]
-                },
-                {
-                    german: "nicht versetzt werden / sitzen bleiben", turkish: "sınıfta kalmak / sınıfı geçememek",
-                    examples: [
-                        { de: "Schlechte Schüler werden nicht versetzt / bleiben sitzen und müssen das Schuljahr wiederholen.", tr: "Kötü öğrenciler sınıfı geçemezler / sınıfta kalırlar ve okul yılını tekrarlamak zorunda kalırlar. (Orijinal Cümle)" },
-                        { de: "Er hatte in drei Fächern eine Fünf, deshalb ist er sitzen geblieben.", tr: "Üç derste beşi (kötü not) vardı, bu yüzden sınıfta kaldı." },
-                        { de: "Viele Experten fordern, das Sitzenbleiben in den Schulen abzuschaffen.", tr: "Birçok uzman okullarda sınıfta kalmanın kaldırılmasını talep ediyor." },
-                        { de: "Sie hatte große Angst, am Ende des Schuljahres nicht versetzt zu werden.", tr: "Okul yılının sonunda sınıfı geçememekten çok korkuyordu." },
-                        { de: "Wer sitzen bleibt, lernt im nächsten Jahr den gleichen Stoff noch einmal.", tr: "Sınıfta kalan kişi, gelecek yıl aynı müfredatı bir kez daha öğrenir." }
-                    ]
-                },
-                {
-                    german: "die Versetzung", turkish: "sınıf atlama / sınıfı geçme",
-                    examples: [
-                        { de: "Die Lehrer informieren die Eltern darüber, wenn die Versetzung ihres Kindes gefährdet ist.", tr: "Öğretmenler, çocuklarının sınıfı geçmesi tehlikedeyse, ebeveynleri bu konuda bilgilendirirler. (Orijinal Cümle)" },
-                        { de: "Ihre Noten reichten knapp für die Versetzung in die nächste Klasse.", tr: "Notları bir sonraki sınıfa atlaması için ucu ucuna yetti." },
-                        { de: "Die Entscheidung über die Versetzung fällt in der Zeugniskonferenz.", tr: "Sınıfı geçme kararı karne toplantısında alınır." },
-                        { de: "Eine erfolgreiche Versetzung wird oft mit einem kleinen Geschenk belohnt.", tr: "Başarılı bir sınıf atlama genellikle küçük bir hediye ile ödüllendirilir." },
-                        { de: "Trotz seiner Schwierigkeiten in Mathe steht seiner Versetzung nichts im Wege.", tr: "Matematikteki zorluklarına rağmen sınıfı geçmesinin önünde hiçbir engel yok." }
-                    ]
-                },
-                {
-                    german: "die Nachhilfe / der Nachhilfeunterricht", turkish: "özel ders",
-                    examples: [
-                        { de: "Spezielle Institute bieten Nachhilfe in einzelnen Fächern an, um Schüler beim Lernen zu unterstützen.", tr: "Özel enstitüler, öğrencileri öğrenirken desteklemek için belirli derslerde özel ders sunarlar. (Orijinal Cümle)" },
-                        { de: "Er nimmt einmal in der Woche Nachhilfe in Mathematik.", tr: "Haftada bir kez matematikten özel ders alıyor." },
-                        { de: "Nachhilfeunterricht kann sehr teuer sein.", tr: "Özel ders çok pahalı olabilir." },
-                        { de: "Dank der Nachhilfe hat sie ihre Note in Französisch verbessert.", tr: "Özel ders sayesinde Fransızca notunu iyileştirdi." },
-                        { de: "Meine Tochter gibt Nachhilfe für Grundschüler.", tr: "Kızım ilkokul öğrencilerine özel ders veriyor." }
-                    ]
-                },
-                {
-                    german: "Nachhilfeunterricht nehmen", turkish: "özel ders almak",
-                    examples: [
-                        { de: "Wenn man in einem Fach Schwierigkeiten hat, sollte man Nachhilfeunterricht nehmen.", tr: "Eğer bir derste zorluk yaşanıyorsa, özel ders alınmalıdır. (Orijinal Cümle)" },
-                        { de: "Viele Schüler nehmen vor den Abschlussprüfungen intensiven Nachhilfeunterricht.", tr: "Birçok öğrenci bitirme sınavlarından önce yoğun özel ders alır." },
-                        { de: "Er muss Nachhilfeunterricht nehmen, um nicht sitzen zu bleiben.", tr: "Sınıfta kalmamak için özel ders almak zorunda." },
-                        { de: "Sie weigert sich, Nachhilfeunterricht zu nehmen, weil ihr das peinlich ist.", tr: "Utandığı için özel ders almayı reddediyor." },
-                        { de: "Seit er Nachhilfeunterricht nimmt, versteht er die Grammatik viel besser.", tr: "Özel ders almaya başladığından beri grameri çok daha iyi anlıyor." }
-                    ]
-                },
-                {
-                    german: "Nachhilfeunterricht geben / erteilen", turkish: "özel ders vermek",
-                    examples: [
-                        { de: "Manche Studenten verdienen Geld, indem sie Schülern Nachhilfeunterricht geben / erteilen.", tr: "Bazı öğrenciler (üniversiteli), öğrencilere (okul çocuklarına) özel ders vererek para kazanırlar. (Orijinal Cümle)" },
-                        { de: "Sie gibt Nachhilfeunterricht in Chemie und Biologie.", tr: "Kimya ve biyoloji alanlarında özel ders veriyor." },
-                        { de: "Um sein Taschengeld aufzubessern, erteilt er Nachhilfeunterricht.", tr: "Cep harçlığını artırmak için özel ders veriyor." },
-                        { de: "Als Lehrerin im Ruhestand gibt sie ehrenamtlich Nachhilfeunterricht.", tr: "Emekli bir öğretmen olarak gönüllü özel ders veriyor." },
-                        { de: "Es macht ihm Spaß, schwächeren Schülern Nachhilfeunterricht zu erteilen.", tr: "Daha zayıf öğrencilere özel ders vermek ona zevk veriyor." }
-                    ]
-                },
-                {
-                    german: "der Mitschüler / die Mitschülerin", turkish: "okul/sınıf arkadaşı",
-                    examples: [
-                        { de: "Kinder sollen in der Schule auch lernen, mit ihren Mitschülern zusammenzuarbeiten.", tr: "Çocuklar okulda sınıf arkadaşlarıyla birlikte çalışmayı da öğrenmelidir. (Orijinal Cümle)" },
-                        { de: "Er hat sich gestern mit einem Mitschüler auf dem Schulhof gestritten.", tr: "Dün okul bahçesinde bir sınıf arkadaşıyla tartıştı." },
-                        { de: "Viele Mitschüler kamen zu ihrer Geburtstagsparty.", tr: "Birçok sınıf arkadaşı onun doğum günü partisine geldi." },
-                        { de: "Sie ist bei ihren Mitschülerinnen sehr beliebt.", tr: "O, kız sınıf arkadaşları arasında çok sevilir." },
-                        { de: "Ein guter Mitschüler hilft, wenn man den Lernstoff nicht versteht.", tr: "İyi bir sınıf arkadaşı, dersi anlamadığında yardım eder." }
-                    ]
-                },
-                {
-                    german: "die Schuluniform", turkish: "okul üniforması",
-                    examples: [
-                        { de: "Da es an deutschen Schulen normalerweise keine Schuluniformen gibt, können die Schüler selbst entscheiden, was sie anziehen.", tr: "Alman okullarında normalde okul üniforması olmadığı için, öğrenciler ne giyeceklerine kendileri karar verebilirler. (Orijinal Cümle)" },
-                        { de: "In Japan und England ist die Schuluniform sehr stark in der Kultur verankert.", tr: "Japonya ve İngiltere'de okul üniforması kültüre çok güçlü bir şekilde yerleşmiştir." },
-                        { de: "Eine Schuluniform verhindert oft, dass Kinder Markenkleidung als Statussymbol nutzen.", tr: "Okul üniforması genellikle çocukların marka kıyafetleri statü sembolü olarak kullanmasını engeller." },
-                        { de: "Die neue Schuluniform besteht aus einem dunkelblauen Pullover und einer grauen Hose.", tr: "Yeni okul üniforması lacivert bir kazak ve gri bir pantolondan oluşuyor." },
-                        { de: "Viele Schüler finden, dass Schuluniformen ihre individuelle Persönlichkeit unterdrücken.", tr: "Birçok öğrenci, okul üniformalarının bireysel kişiliklerini bastırdığını düşünüyor." }
-                    ]
-                }
+                {d:"eingeschult werden", t:"okula başlatılmak", e:[
+                    "Die meisten Kinder werden im Alter von sechs Jahren eingeschult.|Çocukların çoğu altı yaşında okula başlatılır. (Orijinal)",
+                    "Mein Sohn wird nächstes Jahr eingeschult.|Oğlum gelecek yıl okula başlatılacak.",
+                    "Wann wurdest du eingeschult?|Sen ne zaman okula başlatıldın?",
+                    "Die Einschulung ist ein wichtiges Ereignis.|Okula başlama önemli bir olaydır.",
+                    "Sie wurde früher als normal eingeschult.|O normalden daha erken okula başlatıldı."]},
+                {d:"zur Schule gehen", t:"okula gitmek", e:[
+                    "Wenn man Abitur machen will, muss man 12 oder 13 Jahre zur Schule gehen.|Eğer lise bitirme sınavı (Abitur) yapılmak isteniyorsa, 12 veya 13 yıl okula gidilmelidir. (Orijinal)",
+                    "Ich gehe jeden Tag zur Schule.|Ben her gün okula giderim.",
+                    "Gehst du gerne zur Schule?|Okula gitmeyi seviyor musun?",
+                    "Er geht heute nicht zur Schule.|O bugün okula gitmiyor.",
+                    "Wir sind zusammen zur Schule gegangen.|Biz birlikte okula gittik."]},
+                {d:"eine Schule besuchen", t:"bir okula gitmek", e:[
+                    "Die Eltern legen großen Wert darauf, dass ihr Kind eine gute Schule besucht.|Ebeveynler, çocuklarının iyi bir okula gitmesine büyük önem verirler. (Orijinal)",
+                    "Welche Schule hast du besucht?|Hangi okula gittin?",
+                    "Er besucht eine internationale Schule.|O uluslararası bir okula gidiyor.",
+                    "Sie besucht eine Schule für begabte Kinder.|O yetenekli çocuklar için bir okula gidiyor.",
+                    "Der Besuch einer guten Schule ist wichtig.|İyi bir okula gitmek önemlidir."]},
+                {d:"die Schulpflicht", t:"zorunlu eğitim", e:[
+                    "Die Dauer der allgemeinen Schulpflicht beträgt in Deutschland mindestens neun Schuljahre.|Genel zorunlu eğitimin süresi Almanya'da en az dokuz okul yılıdır. (Orijinal)",
+                    "Die Schulpflicht beginnt mit sechs Jahren.|Zorunlu eğitim altı yaşında başlar.",
+                    "Es gibt eine gesetzliche Schulpflicht.|Yasal bir zorunlu eğitim vardır.",
+                    "Wann endet die Schulpflicht in der Türkei?|Türkiye'de zorunlu eğitim ne zaman biter?",
+                    "Eltern müssen die Schulpflicht beachten.|Ebeveynler zorunlu eğitime uymak zorundadır."]},
+                {d:"schulpflichtig", t:"okula gitmek zorunda olan (zorunlu eğitim çağında)", e:[
+                    "Schulpflichtige Kinder dürfen der Schule nur aus wichtigen Gründen fernbleiben.|Zorunlu eğitim çağındaki çocuklar okula sadece önemli nedenlerle gelmeyebilirler. (Orijinal)",
+                    "Das Kind ist noch nicht schulpflichtig.|Çocuk henüz zorunlu eğitim çağında değil.",
+                    "Alle schulpflichtigen Kinder müssen lernen.|Zorunlu eğitim çağındaki tüm çocuklar öğrenmek zorundadır.",
+                    "Ab wann ist man schulpflichtig?|Ne zamandan itibaren zorunlu eğitim çağında olunur?",
+                    "Es gibt viele schulpflichtige Kinder im Dorf.|Köyde zorunlu eğitim çağında birçok çocuk var."]},
+                {d:"die Schule schwänzen", t:"okulu asmak", e:[
+                    "Eigentlich müsste sie jetzt im Unterricht sein, aber sie schwänzt die Schule.|Aslında şu an derste olması gerekirdi ama o okulu asıyor. (Orijinal)",
+                    "Er hat gestern die Schule geschwänzt.|O dün okulu astı.",
+                    "Warum schwänzt du die Schule?|Okulu neden asıyorsun?",
+                    "Das Schwänzen der Schule ist nicht gut.|Okulu asmak iyi bir şey değildir.",
+                    "Wer die Schule schwänzt, bekommt Ärger.|Okulu asan kişi başını belaya sokar."]},
+                {d:"die öffentliche/staatliche Schule", t:"devlet okulu", e:[
+                    "Die meisten Schülerinnen und Schüler in Deutschland besuchen öffentliche Schulen.|Almanya'daki öğrencilerin çoğu devlet okullarına gider. (Orijinal)",
+                    "Er unterrichtet an einer staatlichen Schule.|O bir devlet okulunda ders veriyor.",
+                    "Öffentliche Schulen sind kostenlos.|Devlet okulları ücretsizdir.",
+                    "Sie wechselt von der Privatschule auf eine staatliche Schule.|O özel okuldan bir devlet okuluna geçiyor.",
+                    "Das Niveau an öffentlichen Schulen ist gut.|Devlet okullarındaki seviye iyidir."]},
+                {d:"die Privatschule, -schulen", t:"özel okul", e:[
+                    "Die Zahl der Schüler, die Privatschulen besuchen, steigt kontinuierlich.|Özel okullara giden öğrencilerin sayısı sürekli artıyor. (Orijinal)",
+                    "Er besucht eine teure Privatschule.|O pahalı bir özel okula gidiyor.",
+                    "Privatschulen haben oft kleinere Klassen.|Özel okulların genellikle daha küçük sınıfları vardır.",
+                    "Meine Tochter lernt an einer Privatschule.|Kızım bir özel okulda öğrenim görüyor.",
+                    "Sie unterrichtet Englisch an einer Privatschule.|O bir özel okulda İngilizce öğretiyor."]},
+                {d:"die Ganztagsschule, -schulen", t:"tam gün okul", e:[
+                    "In Deutschland werden immer mehr Ganztagsschulen eingerichtet.|Almanya'da giderek daha fazla tam gün okul kuruluyor. (Orijinal)",
+                    "Die Ganztagsschule bietet auch Nachmittagsunterricht.|Tam gün okul öğleden sonra dersi de sunar.",
+                    "Mein Sohn besucht eine Ganztagsschule.|Oğlum bir tam gün okula gidiyor.",
+                    "In der Ganztagsschule isst man gemeinsam zu Mittag.|Tam gün okulda birlikte öğle yemeği yenir.",
+                    "Ganztagsschulen entlasten berufstätige Eltern.|Tam gün okullar çalışan ebeveynlerin yükünü hafifletir."]},
+                {d:"das Internat, Internate", t:"yatılı okul", e:[
+                    "Im Internat teilen sich meistens zwei Schüler ein Zimmer.|Yatılı okulda genellikle iki öğrenci bir odayı paylaşır. (Orijinal)",
+                    "Er ging auf ein Internat in England.|O İngiltere'de bir yatılı okula gitti.",
+                    "Das Internat ist sehr streng.|Yatılı okul çok katıdır.",
+                    "Sie möchte nicht im Internat leben.|O yatılı okulda yaşamak istemiyor.",
+                    "Viele Internate sind sehr teuer.|Birçok yatılı okul çok pahalıdır."]},
+                {d:"die Klasse, Klassen", t:"sınıf", e:[
+                    "Die Grundschulzeit dauert in Bayern von der 1. bis zur 4. Klasse.|İlkokul dönemi Bavyera'da 1. sınıftan 4. sınıfa kadar sürer. (Orijinal)",
+                    "In meiner Klasse sind 20 Schüler.|Benim sınıfımda 20 öğrenci var.",
+                    "Welche Klasse besuchst du?|Hangi sınıfa gidiyorsun?",
+                    "Die ganze Klasse hat den Test bestanden.|Bütün sınıf testi geçti.",
+                    "Sie ist die beste Schülerin der Klasse.|O sınıfın en iyi öğrencisidir."]},
+                {d:"die ... Klasse besuchen", t:"... sınıfa gitmek / okumak", e:[
+                    "Wenn man die erste Klasse besucht, lernt man lesen und schreiben.|Birinci sınıfa gidildiğinde, okumayı ve yazmayı öğrenirsin. (Orijinal)",
+                    "Mein Bruder besucht die zehnte Klasse.|Erkek kardeşim onuncu sınıfa gidiyor.",
+                    "Schüler, die diese Klasse besuchen, sind sehr fleißig.|Bu sınıfa giden öğrenciler çok çalışkandır.",
+                    "Ich habe diese Klasse letztes Jahr besucht.|Ben geçen yıl bu sınıfa gittim.",
+                    "Welche Klasse besuchen Sie zurzeit?|Şu anda hangi sınıfa gidiyorsunuz?"]},
+                {d:"in die ... Klasse gehen", t:"... sınıfa gitmek", e:[
+                    "Wer in die 12. Klasse geht, muss sich auf das Abitur vorbereiten.|12. sınıfa giden kişi, lise bitirme sınavına hazırlanmalıdır. (Orijinal)",
+                    "Meine Tochter geht in die fünfte Klasse.|Kızım beşinci sınıfa gidiyor.",
+                    "Gehst du schon in die erste Klasse?|Birinci sınıfa mı gidiyorsun?",
+                    "Wir gehen in dieselbe Klasse.|Biz aynı sınıfa gidiyoruz.",
+                    "Nächstes Jahr geht er in die achte Klasse.|Gelecek yıl o sekizinci sınıfa gidecek."]},
+                {d:"auf die Hauptschule / Realschule / aufs Gymnasium gehen", t:"Hauptschule'ye / Realschule'ye / Lise'ye gitmek", e:[
+                    "Am Ende der Grundschulzeit wird entschieden, ob man aufs Gymnasium geht.|İlkokulun sonunda liseye (Gymnasium) gidilip gidilmeyeceğine karar verilir. (Orijinal)",
+                    "Meine Tochter geht auf die Realschule.|Kızım Realschule'ye gidiyor.",
+                    "Er möchte unbedingt aufs Gymnasium gehen.|O mutlaka liseye gitmek istiyor.",
+                    "Viele Freunde von mir gehen auf die Hauptschule.|Benim birçok arkadaşım Hauptschule'ye gidiyor.",
+                    "Wer aufs Gymnasium geht, muss viel lernen.|Liseye giden kişi çok çalışmalıdır."]},
+                {d:"die Schule abschließen / der Schulabschluss", t:"okulu bitirmek / okul mezuniyeti", e:[
+                    "Wenn man die Schule mit guten Noten abgeschlossen hat, hat man bessere Chancen.|Okulu iyi notlarla bitirildiğinde, daha iyi şanslara sahip olunur. (Orijinal)",
+                    "Er hat die Schule erfolgreich abgeschlossen.|O okulu başarıyla bitirdi.",
+                    "Ihr Schulabschluss ist sehr gut.|Onun okul mezuniyeti çok iyi.",
+                    "Nach dem Schulabschluss reiste er um die Welt.|Okul mezuniyetinden sonra dünyayı gezdi.",
+                    "Wann wirst du die Schule abschließen?|Okulu ne zaman bitireceksin?"]},
+                {d:"einen Schulabschluss machen / haben", t:"okuldan mezun olmak / okul diplomasına sahip olmak", e:[
+                    "Heutzutage ist es sehr wichtig, einen guten Schulabschluss zu haben.|Günümüzde iyi bir okul diplomasına sahip olmak çok önemlidir. (Orijinal)",
+                    "Viele Schüler machen nächstes Jahr ihren Schulabschluss.|Birçok öğrenci gelecek yıl okuldan mezun olacak.",
+                    "Hast du einen Schulabschluss?|Bir okul diploman var mı?",
+                    "Er möchte einen guten Schulabschluss machen.|O iyi bir okul diploması almak istiyor.",
+                    "Wer keinen Schulabschluss hat, findet schwer Arbeit.|Okul diploması olmayan kişi zor iş bulur."]},
+                {d:"die Schule abbrechen", t:"okulu bırakmak", e:[
+                    "Wer die Schule abgebrochen hat, findet deshalb nur schwer einen guten Arbeitsplatz.|Okulu bırakan kişinin iyi bir iş bulması zordur. (Orijinal)",
+                    "Warum hast du die Schule abgebrochen?|Okulu neden bıraktın?",
+                    "Er hat die Schule im zweiten Jahr abgebrochen.|O ikinci yılda okulu bıraktı.",
+                    "Die Schule abzubrechen ist keine gute Idee.|Okulu bırakmak iyi bir fikir değil.",
+                    "Einige berühmte Leute haben die Schule abgebrochen.|Bazı ünlü kişiler okulu bırakmıştır."]},
+                {d:"einen Schulabschluss nachholen", t:"okul diplomasını sonradan almak", e:[
+                    "Wer keinen Schulabschluss gemacht hat, kann diesen nachholen.|Okul diploması almamış kişi, bunu sonradan alabilir. (Orijinal)",
+                    "Er besucht eine Abendschule, um das Abitur nachzuholen.|O lise diplomasını sonradan almak için akşam okuluna gidiyor.",
+                    "Es ist nie zu spät, den Schulabschluss nachzuholen.|Okul diplomasını sonradan almak için asla geç değildir.",
+                    "Sie arbeitet hart, um ihren Abschluss nachzuholen.|O diplomasını sonradan almak için çok çalışıyor.",
+                    "Kann ich den Schulabschluss online nachholen?|Okul diplomasını online olarak sonradan alabilir miyim?"]},
+                {d:"Abitur machen / haben", t:"Lise bitirme sınavı yapmak / Lise diplomasına sahip olmak", e:[
+                    "Wenn man (das) Abitur gemacht hat, kann man sich um einen Studienplatz bewerben.|Abitur yapıldığında, bir üniversite kontenjanı için başvurulabilir. (Orijinal)",
+                    "Wenn du das Abitur hast, stehen dir alle Türen offen.|Eğer Abitur'un varsa bütün kapılar sana açıktır.",
+                    "Wann wirst du Abitur machen?|Ne zaman Abitur yapacaksın?",
+                    "Er hat ein sehr gutes Abitur gemacht.|O çok iyi bir Abitur yaptı.",
+                    "Für dieses Studium musst du Abitur haben.|Bu üniversite eğitimi için Abitur'a sahip olmalısın."]},
+                {d:"das Fach / Hauptfach / Nebenfach", t:"ders(branş) / ana ders / seçmeli ders", e:[
+                    "Der Unterricht in den Hauptfächern Deutsch, Englisch und Mathematik wird als besonders wichtig angesehen.|Ana derslerdeki eğitim özellikle önemli kabul edilir. (Orijinal)",
+                    "Was ist dein liebstes Fach?|En sevdiğin ders nedir?",
+                    "In den Nebenfächern haben die Schüler weniger Unterricht.|Yan derslerde öğrencilerin daha az dersi vardır.",
+                    "Mathematik ist ein schwieriges Fach.|Matematik zor bir derstir.",
+                    "Ich habe gute Noten in allen Hauptfächern.|Tüm ana derslerde iyi notlarım var."]},
+                {d:"etw. unterrichten / jdn. unterrichten", t:"bir dersi öğretmek / birine ders vermek", e:[
+                    "Der Lehrer unterrichtet seit 15 Jahren Englisch und Sport.|Öğretmen 15 yıldır İngilizce ve Spor öğretiyor. (Orijinal)",
+                    "Sie unterrichtet die Kinder in Mathematik.|O çocuklara matematik öğretiyor.",
+                    "Es macht Spaß, junge Menschen zu unterrichten.|Gençlere ders vermek zevklidir.",
+                    "Welches Fach unterrichten Sie?|Hangi dersi öğretiyorsunuz?",
+                    "Er unterrichtet eine sehr laute Klasse.|O çok gürültülü bir sınıfa ders veriyor."]},
+                {d:"Unterricht geben / erteilen", t:"ders vermek", e:[
+                    "Die Hauptaufgabe von Lehrern ist es, Unterricht zu geben / zu erteilen.|Öğretmenlerin temel görevi ders vermektir. (Orijinal)",
+                    "Er gibt Nachhilfeunterricht am Nachmittag.|O öğleden sonraları özel ders veriyor.",
+                    "Die Professorin erteilt hervorragenden Unterricht.|Profesör mükemmel ders veriyor.",
+                    "Geben Sie auch privater Unterricht?|Özel ders de veriyor musunuz?",
+                    "Es erfordert viel Geduld, Anfängern Unterricht zu erteilen.|Yeni başlayanlara ders vermek çok sabır gerektirir."]},
+                {d:"die Unterrichtsstunde", t:"ders saati", e:[
+                    "In den Unterrichtsstunden am Mittag können sich die Schüler nicht mehr so gut konzentrieren.|Öğle vaktindeki ders saatlerinde öğrenciler iyi konsantre olamazlar. (Orijinal)",
+                    "Eine Unterrichtsstunde dauert 45 Minuten.|Bir ders saati 45 dakika sürer.",
+                    "Wir haben heute sechs Unterrichtsstunden.|Bugün altı ders saatimiz var.",
+                    "Die letzte Unterrichtsstunde ist immer entspannt.|Son ders saati her zaman rahattır.",
+                    "Wie viele Unterrichtsstunden hast du in der Woche?|Haftada kaç ders saatin var?"]},
+                {d:"der Lernstoff", t:"müfredat / öğrenilecek konu", e:[
+                    "Genetik gehört zum Lernstoff der 9. Klasse.|Genetik, 9. sınıfın müfredatına dahildir. (Orijinal)",
+                    "Der Lernstoff ist dieses Jahr sehr umfangreich.|Öğrenilecek konular bu yıl çok kapsamlı.",
+                    "Der Lehrer hat den Lernstoff gut erklärt.|Öğretmen müfredatı iyi açıkladı.",
+                    "Wir müssen den ganzen Lernstoff wiederholen.|Tüm müfredatı tekrar etmeliyiz.",
+                    "Ist das auch Lernstoff für die Prüfung?|Bu da sınav için öğrenilecek konu mu?"]},
+                {d:"vermitteln (Wissen/Kenntnisse)", t:"aktarmak / öğretmek (bilgi/beceri)", e:[
+                    "Der Lehrer soll den Schülern den Lernstoff auf verständliche Weise vermitteln.|Öğretmen, öğrencilere öğrenilecek konuyu anlaşılır bir şekilde aktarmalıdır. (Orijinal)",
+                    "Die Aufgabe der Schulen ist die Vermittlung von Wissen.|Okulların görevi bilgi aktarımıdır.",
+                    "Sie kann ihr Wissen sehr gut vermitteln.|O bilgisini çok iyi aktarabiliyor.",
+                    "Es ist schwer, komplexe Theorien zu vermitteln.|Karmaşık teorileri aktarmak zordur.",
+                    "Der Kurs vermittelt wichtige Kenntnisse.|Kurs önemli beceriler aktarıyor."]},
+                {d:"die Didaktik / didaktisch", t:"öğretim bilimi / didaktik olarak", e:[
+                    "Zukünftige Lehrer müssen sich mit Didaktik beschäftigen.|Geleceğin öğretmenleri didaktikle ilgilenmek zorundadır. (Orijinal)",
+                    "Wenn Themen didaktisch gut aufbereitet werden, verstehen Schüler sie leichter.|Konular didaktik olarak iyi hazırlanırsa, öğrenciler daha kolay anlar.",
+                    "Die Didaktik der Mathematik hat sich verändert.|Matematik didaktiği değişti.",
+                    "Das Buch ist didaktisch sehr gut gemacht.|Kitap didaktik olarak çok iyi yapılmış.",
+                    "Er ist Professor für allgemeine Didaktik.|O genel didaktik profesörüdür."]},
+                {d:"der Lehrplan", t:"müfredat", e:[
+                    "Die Ministerien erstellen Lehrpläne, in denen die Unterrichtsinhalte festgelegt sind.|Bakanlıklar, ders içeriklerinin belirlendiği müfredatlar oluşturur. (Orijinal)",
+                    "Der neue Lehrplan ist sehr anspruchsvoll.|Yeni müfredat çok iddialı.",
+                    "Lehrer müssen sich an den Lehrplan halten.|Öğretmenler müfredata uymak zorundadır.",
+                    "Im Lehrplan steht genau, was gelernt werden muss.|Müfredatta ne öğrenilmesi gerektiği kesin olarak yazar.",
+                    "Der Lehrplan für Geschichte wurde geändert.|Tarih müfredatı değiştirildi."]},
+                {d:"die Klassenarbeit / Klassenarbeit schreiben", t:"yazılı sınav / yazılı sınav olmak", e:[
+                    "In den Hauptfächern werden regelmäßig Klassenarbeiten geschrieben.|Ana derslerde düzenli olarak yazılı sınavlar yapılır. (Orijinal)",
+                    "Auf Klassenarbeiten müssen sich die Schüler gründlich vorbereiten.|Öğrenciler yazılı sınavlara temelden hazırlanmalıdır.",
+                    "Morgen schreiben wir eine Klassenarbeit in Mathe.|Yarın matematikten yazılı sınav olacağız.",
+                    "Die Klassenarbeit war sehr schwer.|Yazılı sınav çok zordu.",
+                    "Hast du eine gute Note in der Klassenarbeit?|Yazılı sınavda iyi bir not aldın mı?"]},
+                {d:"die Note / benoten / Benotung / Kopfnote", t:"not / notlandırmak / notlandırma / davranış notu", e:[
+                    "Kinder sind enttäuscht, wenn sie bei einer Prüfung keine gute Note bekommen.|Çocuklar sınavda iyi bir not almadıklarında hayal kırıklığına uğrarlar. (Orijinal)",
+                    "Wenn Schüler wissen, dass etwas benotet wird, arbeiten sie konzentrierter.|Öğrenciler bir şeyin notlandırılacağını bildiklerinde daha konsantre çalışırlar.",
+                    "Die Benotung war ungerecht.|Notlandırma adil değildi.",
+                    "In manchen Ländern bekommen Schüler Kopfnoten für ihr soziales Verhalten.|Bazı ülkelerde öğrenciler sosyal davranışları için davranış notları alırlar.",
+                    "Der Lehrer gibt den Schülern Noten.|Öğretmen öğrencilere not verir."]},
+                {d:"die Leistung / Leistung erbringen", t:"performans (başarı) / başarı sergilemek", e:[
+                    "Wenn ein Schüler gute Leistungen erbringt, bekommt er gute Noten.|Bir öğrenci iyi performanslar sergilerse, iyi notlar alır. (Orijinal)",
+                    "Im letzten Schuljahr haben ihre Leistungen nachgelassen.|Son okul yılında başarıları düştü.",
+                    "Wir erwarten eine hohe Leistung von dir.|Senden yüksek bir performans bekliyoruz.",
+                    "Er hat eine hervorragende Leistung erbracht.|O mükemmel bir başarı sergiledi.",
+                    "Sportliche Leistungen sind auch wichtig.|Sportif başarılar da önemlidir."]},
+                {d:"das Zeugnis", t:"karne / sertifika", e:[
+                    "Schüler bekommen am Ende jedes Schulhalbjahres Zeugnisse mit Noten.|Öğrenciler her okul yarıyılının sonunda notları içeren karneler alırlar. (Orijinal)",
+                    "Er war stolz auf sein gutes Zeugnis.|O iyi karnesiyle gurur duyuyordu.",
+                    "Du musst eine Kopie deines Zeugnisses einreichen.|Karnenin bir kopyasını sunmalısın.",
+                    "Ein schlechtes Zeugnis kann zu Konflikten führen.|Kötü bir karne çatışmalara yol açabilir.",
+                    "Wann gibt es die Zeugnisse?|Karneler ne zaman veriliyor?"]},
+                {d:"nicht versetzt werden / sitzen bleiben / Versetzung", t:"sınıfta kalmak / sınıfı geçme", e:[
+                    "Schlechte Schüler werden nicht versetzt / bleiben sitzen und müssen das Schuljahr wiederholen.|Kötü öğrenciler sınıfı geçemezler / sınıfta kalırlar ve yılı tekrarlamak zorundadırlar. (Orijinal)",
+                    "Die Lehrer informieren die Eltern, wenn die Versetzung gefährdet ist.|Öğretmenler, sınıfı geçme tehlikedeyse ebeveynleri bilgilendirir.",
+                    "Er ist wegen Mathematik sitzen geblieben.|O matematik yüzünden sınıfta kaldı.",
+                    "Die Versetzung in die nächste Klasse ist sicher.|Bir sonraki sınıfa geçme kesin.",
+                    "Wer sitzen bleibt, verliert ein Jahr.|Sınıfta kalan kişi bir yıl kaybeder."]},
+                {d:"Nachhilfe / Nachhilfeunterricht nehmen / geben", t:"özel ders / özel ders almak / özel ders vermek", e:[
+                    "Wenn man in einem Fach Schwierigkeiten hat, sollte man Nachhilfeunterricht nehmen.|Eğer bir derste zorluk yaşanıyorsa, özel ders alınmalıdır. (Orijinal)",
+                    "Manche Studenten verdienen Geld, indem sie Schülern Nachhilfeunterricht geben.|Bazı öğrenciler özel ders vererek para kazanırlar.",
+                    "Spezielle Institute bieten Nachhilfe an.|Özel enstitüler özel ders sunarlar.",
+                    "Er nimmt Nachhilfe in Englisch.|O İngilizceden özel ders alıyor.",
+                    "Nachhilfe ist oft sehr teuer.|Özel ders genellikle çok pahalıdır."]},
+                {d:"der Mitschüler / die Mitschülerin", t:"okul arkadaşı / sınıf arkadaşı", e:[
+                    "Kinder sollen lernen, mit ihren Mitschülern zusammenzuarbeiten.|Çocuklar sınıf arkadaşlarıyla birlikte çalışmayı öğrenmelidir. (Orijinal)",
+                    "Er versteht sich gut mit seinen Mitschülern.|O sınıf arkadaşlarıyla iyi anlaşıyor.",
+                    "Meine Mitschülerin hat mir bei den Hausaufgaben geholfen.|Sınıf arkadaşım(kız) ödevlerde bana yardım etti.",
+                    "Wir laden alle Mitschüler zur Party ein.|Tüm sınıf arkadaşlarımızı partiye davet ediyoruz.",
+                    "Ein Mitschüler von mir ist umgezogen.|Benim bir sınıf arkadaşım taşındı."]},
+                {d:"die Schuluniform", t:"okul üniforması", e:[
+                    "Da es an deutschen Schulen keine Schuluniformen gibt, entscheiden die Schüler selbst, was sie anziehen.|Alman okullarında okul üniforması olmadığı için, öğrenciler ne giyeceklerine kendileri karar verirler. (Orijinal)",
+                    "In England ist die Schuluniform Pflicht.|İngiltere'de okul üniforması zorunludur.",
+                    "Magst du deine Schuluniform?|Okul üniformalarını seviyor musun?",
+                    "Die Schuluniform verhindert soziale Unterschiede.|Okul üniforması sosyal farklılıkları engeller.",
+                    "Die neue Schuluniform ist blau.|Yeni okul üniforması mavidir."]},
+                {d:"begabt sein / Begabung", t:"yetenekli olmak / yetenek", e:[
+                    "Die Schülerin ist mathematisch und naturwissenschaftlich begabt.|Kız öğrenci matematik ve doğa bilimleri alanında yeteneklidir. (Orijinal)",
+                    "Das Kind verfügt über eine große musische Begabung.|Çocuk büyük bir müzik yeteneğine sahip.",
+                    "Er ist sehr sprachlich begabt.|O dil konusunda çok yetenekli.",
+                    "Man sollte begabte Kinder fördern.|Yetenekli çocuklar desteklenmelidir.",
+                    "Ihre Begabung fürs Malen ist offensichtlich.|Onun resim yapma yeteneği aşikardır."]},
+                {d:"fördern / Förderung", t:"desteklemek (teşvik etmek) / destek", e:[
+                    "Die Eltern fördern ihr Kind durch zusätzlichen Musikunterricht.|Ebeveynler çocuklarını ek müzik dersiyle destekliyor. (Orijinal)",
+                    "Der Lehrer fördert seine Schüler individuell.|Öğretmen öğrencilerini bireysel olarak destekler.",
+                    "Dieses Programm dient der Förderung von Talenten.|Bu program yeteneklerin desteklenmesine hizmet eder.",
+                    "Wir müssen die schwachen Schüler fördern.|Zayıf öğrencileri teşvik etmeliyiz.",
+                    "Die finanzielle Förderung ist wichtig.|Finansal destek önemlidir."]},
+                {d:"die Fähigkeit / Fähigkeiten erwerben", t:"beceri (yetenek) / beceriler edinmek", e:[
+                    "Schüler sollen auch praktische Fähigkeiten erwerben.|Öğrenciler pratik beceriler de edinmelidir. (Orijinal)",
+                    "Es ist wichtig, besondere Fähigkeiten zu erkennen.|Özel becerileri tanımak önemlidir.",
+                    "Er hat die Fähigkeit, Probleme schnell zu lösen.|Onun problemleri hızlı çözme becerisi var.",
+                    "Im Studium erwerben Sie wichtige Fähigkeiten.|Üniversite eğitiminde önemli beceriler edinirsiniz.",
+                    "Kommunikative Fähigkeiten sind gefragt.|İletişim becerileri talep ediliyor."]},
+                {d:"Kenntnisse erwerben / aneignen / erweitern / anwenden", t:"bilgi (beceri) edinmek / kendine katmak / genişletmek / uygulamak", e:[
+                    "In der Schule erwerben die Schüler Grundkenntnisse in verschiedenen Fächern.|Okulda öğrenciler çeşitli derslerde temel bilgiler edinirler. (Orijinal)",
+                    "Er hat sich seine Kenntnisse mithilfe von Büchern angeeignet.|O bilgilerini kitaplar yardımıyla kendine kattı.",
+                    "Sie besucht einen Kurs, um ihre Kenntnisse zu erweitern.|O bilgilerini genişletmek için bir kursa gidiyor.",
+                    "Man kann seine Sprachkenntnisse im Ausland praktisch anwenden.|Dil becerileri yurt dışında pratik olarak uygulanabilir.",
+                    "Die Vermittlung von Kenntnissen ist wichtig.|Bilgi aktarımı önemlidir."]},
+                {d:"auswendig lernen / einprägen", t:"ezberlemek / hafızaya kazımak", e:[
+                    "Früher mussten die Schüler viel auswendig lernen.|Eskiden öğrenciler çok fazla ezberlemek zorundaydı. (Orijinal)",
+                    "Vor einer Prüfung sollte man sich wichtige Daten gut einprägen.|Sınavdan önce önemli veriler hafızaya iyi kazınmalıdır.",
+                    "Auswendiglernen ist ein gutes Gedächtnistraining.|Ezberlemek iyi bir hafıza antrenmanıdır.",
+                    "Lerne das Gedicht auswendig!|Şiiri ezberle!",
+                    "Ich kann mir diesen Namen nicht einprägen.|Bu ismi hafızama kazıyamıyorum."]},
+                {d:"Prüfung ablegen / bestehen / durchfallen", t:"sınava girmek / sınavı geçmek / sınavdan kalmak", e:[
+                    "Die meisten Menschen sind nervös, wenn sie eine Prüfung ablegen müssen.|Çoğu insan bir sınava girmek zorunda olduğunda gergindir. (Orijinal)",
+                    "Er hat die Prüfung bestanden, obwohl die Aufgaben schwierig waren.|Görevler zor olmasına rağmen o sınavı geçti.",
+                    "Geben Sie nicht auf, wenn Sie bei einer Prüfung durchfallen!|Bir sınavdan kaldığınızda pes etmeyin!",
+                    "Wann wirst du die Prüfung ablegen?|Sınava ne zaman gireceksin?",
+                    "Sie ist leider in Mathematik durchgefallen.|O maalesef matematikten kaldı."]},
+                {d:"verfügen über", t:"sahip olmak", e:[
+                    "Aufgrund jahrelanger Berufserfahrung verfügt sie über umfangreiche Fachkenntnisse.|Yıllarca süren mesleki tecrübesi nedeniyle kapsamlı uzmanlık bilgilerine sahiptir. (Orijinal)",
+                    "Er verfügt über viel Geld.|O çok fazla paraya sahip.",
+                    "Das Hotel verfügt über ein Schwimmbad.|Otel bir yüzme havuzuna sahip.",
+                    "Wir verfügen nicht über genug Informationen.|Yeterli bilgiye sahip değiliz.",
+                    "Sie verfügt über große Fähigkeiten.|O büyük becerilere sahip."]},
+                {d:"Allgemeinbildung / gebildet sein / Bildungsniveau", t:"genel kültür / kültürlü olmak / eğitim seviyesi", e:[
+                    "Es gehört zur Allgemeinbildung, die wichtigsten internationalen Organisationen zu kennen.|En önemli uluslararası organizasyonları bilmek genel kültüre dahildir. (Orijinal)",
+                    "Da er sehr gebildet ist, kann er sich über fast jedes Thema unterhalten.|Çok kültürlü olduğu için neredeyse her konu hakkında konuşabilir.",
+                    "Ein hohes Bildungsniveau verbessert die Berufsaussichten.|Yüksek bir eğitim seviyesi meslek fırsatlarını iyileştirir.",
+                    "Sie eignete sich eine umfangreiche Allgemeinbildung an.|O kapsamlı bir genel kültür edindi.",
+                    "Das Land hat ein niedriges Bildungsniveau.|Ülkenin düşük bir eğitim seviyesi var."]},
+                {d:"Analphabet / Analphabetismus", t:"okuma yazma bilmeyen (cahil) / okuma yazma bilmeme durumu", e:[
+                    "Etwa 4% der Deutschen sind Analphabeten, weil sie nie richtig schreiben und lesen gelernt haben.|Almanların yaklaşık %4'ü okuma yazma bilmiyor, çünkü hiç doğru dürüst yazmayı ve okumayı öğrenmediler. (Orijinal)",
+                    "Mit verschiedenen Bildungsprogrammen soll der Analphabetismus bekämpft werden.|Çeşitli eğitim programlarıyla okuma yazma bilmeme durumu ile mücadele edilmesi amaçlanıyor.",
+                    "Es ist schwer für Analphabeten, Arbeit zu finden.|Okuma yazma bilmeyenler için iş bulmak zordur.",
+                    "Der Analphabetismus ist ein globales Problem.|Okuma yazma bilmeme durumu küresel bir problemdir.",
+                    "Viele erwachsene Analphabeten schämen sich.|Okuma yazma bilmeyen birçok yetişkin utanıyor."]},
+                {d:"fortbilden / weiterbilden / Kurs belegen / teilnehmen", t:"kendini geliştirmek / kurs almak / katılmak", e:[
+                    "Man muss sich regelmäßig fortbilden, um auf dem neuesten Stand zu bleiben.|En güncel durumda kalmak için düzenli olarak kendini geliştirmek gerekir. (Orijinal)",
+                    "Er hat einen Abendkurs belegt, um seine Englischkenntnisse aufzufrischen.|İngilizce bilgisini tazelemek için bir akşam kursu aldı.",
+                    "Wer regelmäßig an diesem Kurs teilnimmt, erhält eine Bescheinigung.|Bu kursa düzenli katılan kişi bir belge alır.",
+                    "Die Firma bietet Weiterbildungen an.|Şirket kendini geliştirme (ileri eğitim) fırsatları sunuyor.",
+                    "Ich möchte mich in Informatik weiterbilden.|Bilişim alanında kendimi geliştirmek istiyorum."]}
             ],
 
             "studium": [
-                {
-                    german: "die Zulassungsbeschränkung (Numerus Clausus)", turkish: "kontenjan kısıtlaması (taban puan şartı)",
-                    examples: [
-                        { de: "Für das Studium bestimmter Fächer gelten Zulassungsbeschränkungen, z. B. wenn es mehr Bewerber als Studienplätze gibt.", tr: "Örneğin kontenjan sayısından fazla başvuran varsa, belirli bölümlerin eğitimi için kontenjan kısıtlamaları geçerlidir." },
-                        { de: "Für das Medizinstudium gibt es in Deutschland eine strenge Zulassungsbeschränkung.", tr: "Tıp eğitimi için Almanya'da katı bir kontenjan kısıtlaması vardır." },
-                        { de: "Wegen des Numerus Clausus (NC) konnte er sein Wunschfach nicht sofort studieren.", tr: "Taban puan şartı (NC) nedeniyle istediği bölümü hemen okuyamadı." },
-                        { de: "Ohne ein sehr gutes Abitur scheitert man oft an der Zulassungsbeschränkung.", tr: "Çok iyi bir lise diploması olmadan genellikle kontenjan kısıtlamasına takılınır." },
-                        { de: "Die Zulassungsbeschränkungen variieren von Universität zu Universität.", tr: "Kontenjan kısıtlamaları üniversiteden üniversiteye değişiklik gösterir." }
-                    ]
-                },
-                {
-                    german: "sich immatrikulieren", turkish: "üniversiteye kaydolmak",
-                    examples: [
-                        { de: "Bevor man mit dem Studium beginnen kann, muss man sich an der Hochschule immatrikulieren.", tr: "Üniversite eğitimine başlamadan önce yüksekokula kaydolmak gerekir." },
-                        { de: "Ich habe mich gestern online für das Wintersemester immatrikuliert.", tr: "Dün kış dönemi için online olarak kayıt oldum." },
-                        { de: "Für die Immatrikulation brauchen Sie Ihren Ausweis und das Abiturzeugnis.", tr: "Kayıt için kimliğinize ve lise diplomanıza ihtiyacınız var." },
-                        { de: "Erst nachdem du dich immatrikulierst, bekommst du deinen Studentenausweis.", tr: "Ancak kayıt olduktan sonra öğrenci kimliğini alırsın." },
-                        { de: "Vergessen Sie nicht, sich rechtzeitig zu immatrikulieren, sonst verlieren Sie den Studienplatz.", tr: "Zamanında kaydolmayı unutmayın, aksi takdirde okuma hakkınızı kaybedersiniz." }
-                    ]
-                },
-                {
-                    german: "eine Vorlesung halten", turkish: "üniversitede ders vermek (amfide konferans)",
-                    examples: [
-                        { de: "Professor Steinberg hält jedes Semester die Vorlesung 'Einführung in die Pädagogische Psychologie'.", tr: "Profesör Steinberg her dönem 'Pedagojik Psikolojiye Giriş' dersini verir." },
-                        { de: "Es ist nicht einfach, vor dreihundert Studenten eine spannende Vorlesung zu halten.", tr: "Üç yüz öğrencinin önünde heyecan verici bir amfi dersi vermek kolay değildir." },
-                        { de: "Die Gastdozentin hielt eine faszinierende Vorlesung über künstliche Intelligenz.", tr: "Misafir öğretim üyesi yapay zeka üzerine büyüleyici bir konferans dersi verdi." },
-                        { de: "Da der Professor krank ist, wird heute der Assistent die Vorlesung halten.", tr: "Profesör hasta olduğu için amfi dersini bugün asistan verecek." },
-                        { de: "Um gute Vorlesungen zu halten, muss ein Dozent rhetorisch begabt sein.", tr: "İyi amfi dersleri vermek için bir öğretim görevlisinin hitabet yeteneğine sahip olması gerekir." }
-                    ]
-                },
-                {
-                    german: "die Klausur schreiben", turkish: "vize/final sınavına girmek (yazılı)",
-                    examples: [
-                        { de: "Viele Studierende sind bei mündlichen Prüfungen sehr nervös und ziehen es deshalb vor, eine Klausur zu schreiben.", tr: "Birçok öğrenci sözlü sınavlarda çok gergindir ve bu nedenle yazılı bir sınava (Klausur) girmeyi tercih ederler." },
-                        { de: "Am Ende des Semesters müssen die Studierenden drei wichtige Klausuren schreiben.", tr: "Dönem sonunda öğrenciler üç önemli yazılı sınava girmek zorundadır." },
-                        { de: "Ich bin sehr nervös, weil ich morgen eine schwere Klausur in Physik schreibe.", tr: "Çok gerginim çünkü yarın fizikten zor bir sınava gireceğim." },
-                        { de: "Viele Studierende lernen Tag und Nacht, bevor sie eine Klausur schreiben.", tr: "Birçok öğrenci bir sınava girmeden önce gece gündüz çalışır." },
-                        { de: "Wenn man beim Spicken erwischt wird, fällt man in der Klausur durch.", tr: "Eğer kopya çekerken yakalanırsan sınavdan kalırsın." }
-                    ]
-                },
-                {
-                    german: "die Dissertation verfassen", turkish: "doktora tezi yazmak",
-                    examples: [
-                        { de: "Man braucht in der Regel mehrere Jahre, um eine Dissertation zu verfassen.", tr: "Bir doktora tezi yazmak genellikle birkaç yıl alır." },
-                        { de: "Sie verfasst ihre Dissertation am Max-Planck-Institut für Biologie.", tr: "Doktora tezini Max Planck Biyoloji Enstitüsü'nde yazıyor." },
-                        { de: "Bevor man eine Dissertation verfasst, muss man umfangreiche Literatur recherchieren.", tr: "Bir doktora tezi yazmadan önce kapsamlı literatür araştırması yapmak gerekir." },
-                        { de: "Sein Professor, der Doktorvater, betreut ihn, während er die Dissertation verfasst.", tr: "Doktora tezini yazarken profesörü (tez danışmanı) ona danışmanlık yapıyor." },
-                        { de: "Das Verfassen einer Dissertation erfordert sehr viel Disziplin und Motivation.", tr: "Bir doktora tezi yazmak çok fazla disiplin ve motivasyon gerektirir." }
-                    ]
-                }
+                {d:"die Hochschule / Fachhochschule / Berufsakademie / Elite-Uni", t:"yüksekokul / uygulamalı bilimler üni / meslek akademisi / elit üniversite", e:[
+                    "Das Studium an einer Fachhochschule gilt als besonders praxisorientiert.|Bir uygulamalı bilimler üniversitesinde eğitim özellikle uygulama odaklı kabul edilir. (Orijinal)",
+                    "Universitäten und Fachhochschulen bezeichnet man als Hochschulen.|Üniversiteler ve uygulamalı bilimler üniversiteleri yüksekokullar olarak adlandırılır.",
+                    "An einer Berufsakademie kann man auch ohne Abitur studieren.|Bir meslek akademisinde lise diploması olmadan da okunabilir.",
+                    "Diese Elite-Universität erhält finanzielle Förderung.|Bu elit üniversite finansal destek alıyor.",
+                    "Welche Hochschule besuchst du?|Hangi yüksekokula gidiyorsun?"]},
+                {d:"das Hochschulranking", t:"üniversite sıralaması", e:[
+                    "Bei Hochschulrankings werden die Hochschulen nach verschiedenen Kriterien bewertet.|Üniversite sıralamalarında yüksekokullar farklı kriterlere göre değerlendirilir. (Orijinal)",
+                    "Unsere Universität führt das Hochschulranking an.|Üniversitemiz üniversite sıralamasında önde gidiyor.",
+                    "Das Hochschulranking ist wichtig für viele Bewerber.|Üniversite sıralaması birçok başvuru sahibi için önemlidir.",
+                    "Man sollte sich nicht nur auf Hochschulrankings verlassen.|Sadece üniversite sıralamalarına güvenilmemelidir.",
+                    "Gibt es ein neues Hochschulranking?|Yeni bir üniversite sıralaması var mı?"]},
+                {d:"berufsbegleitend / Fernstudium / Präsenzphase", t:"çalışırken okuma / uzaktan eğitim / yüz yüze aşama", e:[
+                    "Ein berufsbegleitendes Studium bietet Berufstätigen die Möglichkeit, neben ihrer Arbeit ein Studium zu absolvieren.|Çalışırken okuma, çalışanlara işlerinin yanında bir eğitim tamamlama imkanı sunar. (Orijinal)",
+                    "Man kann heute einen Hochschulabschluss per Fernstudium erwerben.|Bugün bir üniversite diploması uzaktan eğitimle edinilebilir.",
+                    "Bei einem Fernstudium muss man auch an Präsenzphasen teilnehmen.|Bir uzaktan eğitimde yüz yüze aşamalara da katılmak zorundasınız.",
+                    "Ich studiere berufsbegleitend.|Ben çalışırken okuyorum.",
+                    "Das Fernstudium erfordert viel Disziplin.|Uzaktan eğitim çok disiplin gerektirir."]},
+                {d:"Studiengang / Aufbaustudium / Lehramtsstudium", t:"üniversite bölümü / lisansüstü eğitim / öğretmenlik eğitimi", e:[
+                    "Nach dem Abschluss eines Bachelorstudiums kann man sich für einen Masterstudiengang einschreiben.|Lisans eğitimini tamamladıktan sonra bir yüksek lisans bölümüne kayıt olunabilir. (Orijinal)",
+                    "In einem Aufbaustudium kann man das Wissen erweitern.|Lisansüstü bir eğitimde bilgi genişletilebilir.",
+                    "Nach dem Lehramtsstudium muss man ein Referendariat absolvieren.|Öğretmenlik eğitiminden sonra stajyerlik yapmak gerekir.",
+                    "Welchen Studiengang hast du gewählt?|Hangi üniversite bölümünü seçtin?",
+                    "Dieser Studiengang ist sehr beliebt.|Bu üniversite bölümü çok popüler."]},
+                {d:"Studienabschluss erwerben / akademischer Grad", t:"üniversite diploması almak / akademik derece", e:[
+                    "Einen Studienabschluss kann man sowohl an einer Universität als auch an einer Fachhochschule erwerben.|Üniversite diploması hem üniversitede hem de uygulamalı bilimler üni'sinde alınabilir. (Orijinal)",
+                    "Heute ist der Bachelor der häufigste Studienabschluss.|Bugün lisans en yaygın üniversite mezuniyetidir.",
+                    "Wenn man ein Studium abschließt, erwirbt man einen akademischen Grad.|Üniversiteyi bitirdiğinizde akademik bir derece alırsınız.",
+                    "Der Mastergrad ist ein akademischer Grad.|Yüksek lisans derecesi akademik bir derecedir.",
+                    "Sie hat ihren Studienabschluss mit Auszeichnung erworben.|O üniversite diplomasını üstün başarıyla aldı."]},
+                {d:"Studienfach wählen / Studienwahl", t:"üniversite bölümü seçmek / üniversite seçimi", e:[
+                    "Bei Informationsveranstaltungen kann man sich informieren, um leichter das richtige Fach wählen zu können.|Bilgilendirme etkinliklerinde, doğru bölümü daha kolay seçmek için bilgi alınabilir. (Orijinal)",
+                    "Man sollte seine Interessen berücksichtigen, wenn man sich für ein Studienfach entscheidet.|Bölüme karar verirken ilgiler dikkate alınmalıdır.",
+                    "Ratgeber helfen Abiturienten bei der Studienwahl.|Rehberler lise mezunlarına bölüm seçiminde yardımcı olur.",
+                    "Welches Studienfach möchtest du wählen?|Hangi üniversite bölümünü seçmek istiyorsun?",
+                    "Die Studienwahl ist eine wichtige Entscheidung.|Bölüm seçimi önemli bir karardır."]},
+                {d:"sich beraten lassen / Studienberatung", t:"danışmanlık almak / öğrenci danışmanlığı", e:[
+                    "Abiturienten können sich bei der Studienwahl beraten lassen.|Lise mezunları bölüm seçiminde danışmanlık alabilirler. (Orijinal)",
+                    "Wenn Studierende Schwierigkeiten haben, können sie sich an die Studienberatung wenden.|Öğrencilerin zorlukları varsa öğrenci danışmanlığına başvurabilirler.",
+                    "Lassen Sie sich vor dem Studium gut beraten.|Eğitimden önce iyi bir danışmanlık alın.",
+                    "Die Studienberatung hat mir sehr geholfen.|Öğrenci danışmanlığı bana çok yardımcı oldu.",
+                    "Wo finde ich die Studienberatung?|Öğrenci danışmanlığını nerede bulabilirim?"]},
+                {d:"Studienbewerber / zugelassen werden / Zulassung", t:"üniversite başvuru sahibi / kabul edilmek / kabul", e:[
+                    "Um zum Studium zugelassen zu werden, muss ein Studienbewerber Voraussetzungen erfüllen.|Üniversiteye kabul edilmek için başvuru sahibi şartları yerine getirmelidir. (Orijinal)",
+                    "Die Zahl der ausländischen Studienbewerber ist gestiegen.|Yabancı üniversite başvuru sahiplerinin sayısı arttı.",
+                    "Einige Zeit vor Beginn erhalten die Bewerber ihre Zulassung.|Başlamadan bir süre önce başvuranlar kabullerini alırlar.",
+                    "Wurdest du an der Universität zugelassen?|Üniversiteye kabul edildin mi?",
+                    "Ich warte noch auf meine Zulassung.|Hâlâ kabulümü bekliyorum."]},
+                {d:"Zulassungsbeschränkung / Numerus clausus (N.C.)", t:"kontenjan kısıtlaması / taban puan", e:[
+                    "Für das Studium bestimmter Fächer gelten Zulassungsbeschränkungen.|Belirli bölümlerin eğitimi için kontenjan kısıtlamaları geçerlidir. (Orijinal)",
+                    "Der Numerus clausus gibt eine Abiturnote vor, die Bewerber erreichen müssen.|Taban puan, başvuranların ulaşması gereken bir lise notunu belirler.",
+                    "Medizin hat eine strenge Zulassungsbeschränkung.|Tıbbın katı bir kontenjan kısıtlaması var.",
+                    "Wegen des Numerus clausus konnte er nicht studieren.|Taban puan yüzünden okuyamadı.",
+                    "Die Zulassungsbeschränkungen variieren je nach Universität.|Kontenjan kısıtlamaları üniversiteye göre değişir."]},
+                {d:"immatrikulieren / exmatrikulieren (Einschreibung/Exmatrikulation)", t:"üniversiteye kaydolmak / üniversiteden kaydını sildirmek", e:[
+                    "Bevor man mit dem Studium beginnen kann, muss man sich an der Hochschule immatrikulieren.|Üniversite eğitimine başlamadan önce yüksekokula kaydolmak gerekir. (Orijinal)",
+                    "Es wird empfohlen, sich nach dem Ende des Studiums zu exmatrikulieren.|Eğitim bittikten sonra kaydı sildirmek tavsiye edilir.",
+                    "Die Immatrikulation ist die offizielle Anmeldung.|İmmatrikülasyon resmi kayıttır.",
+                    "Ohne Leistungen kann man exmatrikuliert werden.|Başarı olmadan okuldan atılabilirsiniz.",
+                    "Hast du dich schon immatrikuliert?|Çoktan kaydoldun mu?"]},
+                {d:"Erstsemester / Studienanfänger", t:"ilk dönem öğrencileri / üniversiteye yeni başlayanlar", e:[
+                    "Orientierungsveranstaltungen sind eine gute Gelegenheit, andere Studienanfänger kennen zu lernen.|Oryantasyon etkinlikleri, yeni başlayanları tanımak için iyi bir fırsattır. (Orijinal)",
+                    "Die Erstsemester waren am Anfang sehr verwirrt.|İlk dönem öğrencileri başlangıçta çok kafaları karışıktı.",
+                    "Für Erstsemester gibt es spezielle Tutorien.|Yeni başlayanlar için özel eğitimler var.",
+                    "Er ist noch ein Erstsemester.|O henüz ilk dönem öğrencisi.",
+                    "Willkommen an alle Studienanfänger!|Tüm yeni başlayan öğrencilere hoş geldiniz!"]},
+                {d:"Studium aufnehmen / absolvieren / unterbrechen", t:"üniversite eğitimine başlamak / bitirmek / ara vermek", e:[
+                    "Nicht alle Abiturienten nehmen gleich nach dem Schulabschluss ein Studium auf.|Tüm lise mezunları okul bitiminden hemen sonra eğitime başlamazlar. (Orijinal)",
+                    "Melanie absolviert zurzeit ein Studium der Agrarökonomie.|Melanie şu an tarım ekonomisi eğitimi alıyor.",
+                    "Wegen ihrer Schwangerschaft hat sie das Studium unterbrochen.|Hamileliği nedeniyle eğitimine ara verdi.",
+                    "Er will sein Studium in Berlin aufnehmen.|O eğitimine Berlin'de başlamak istiyor.",
+                    "Es ist schwer, ein Studium erfolgreich zu absolvieren.|Bir eğitimi başarıyla bitirmek zordur."]},
+                {d:"Studium abbrechen / Studienabbrecher", t:"üniversiteyi bırakmak / üniversiteyi bırakan kişi", e:[
+                    "Es wird diskutiert, warum manche Studierende ihr Studium kurz vor dem Examen abbrechen.|Bazı öğrencilerin sınavdan hemen önce eğitimi neden bıraktıkları tartışılıyor. (Orijinal)",
+                    "Die Zahl der Studienabbrecher soll gesenkt werden.|Üniversiteyi bırakanların sayısı düşürülmeli.",
+                    "Er hat das Studium nach zwei Semestern abgebrochen.|O ikinci dönemden sonra üniversiteyi bıraktı.",
+                    "Ein Studienabbruch ist keine Schande.|Üniversiteyi bırakmak bir utanç değildir.",
+                    "Viele Studienabbrecher finden später einen guten Job.|Birçok üniversiteyi bırakan kişi sonra iyi bir iş bulur."]},
+                {d:"Studium abschließen / Regelstudienzeit überschreiten", t:"üniversiteyi bitirmek / normal öğrenim süresini aşmak", e:[
+                    "Wer sich voll konzentriert, sollte das Studium innerhalb der Regelstudienzeit abschließen.|Tamamen konsantre olan kişi, eğitimi normal öğrenim süresinde bitirmelidir. (Orijinal)",
+                    "Studierende, die jobben, überschreiten häufig die Regelstudienzeit.|Çalışan öğrenciler genellikle normal öğrenim süresini aşarlar.",
+                    "Je schneller man das Studium abschließt, desto früher findet man Arbeit.|Eğitim ne kadar çabuk bitirilirse, o kadar erken iş bulunur.",
+                    "Die Überschreitung der Regelstudienzeit kostet Geld.|Normal öğrenim süresinin aşılması paraya mal olur.",
+                    "Wann wirst du das Studium abschließen?|Üniversiteyi ne zaman bitireceksin?"]},
+                {d:"Prüfung ablegen / Zwischenprüfung / Abschlussprüfung", t:"sınava girmek / vize / final", e:[
+                    "Studierende klagen darüber, dass sie zu viele Prüfungen ablegen müssen.|Öğrenciler çok fazla sınava girmek zorunda olduklarından şikayetçiler. (Orijinal)",
+                    "In bestimmten Studiengängen müssen Studierende eine Zwischenprüfung ablegen.|Belirli bölümlerde öğrenciler bir vize sınavına girmek zorundadır.",
+                    "Die Abschlussprüfung besteht aus einer Hausarbeit und einer mündlichen Prüfung.|Final sınavı bir ödev ve sözlü sınavdan oluşur.",
+                    "Hast du die Zwischenprüfung bestanden?|Vizeyi geçtin mi?",
+                    "Die Abschlussprüfung war extrem schwer.|Final sınavı aşırı zordu."]},
+                {d:"Staatsexamen / Hochschulabsolvent", t:"devlet sınavı / üniversite mezunu", e:[
+                    "Lehrer und Juristen legen nach dem Referendariat das Zweite Staatsexamen ab.|Öğretmenler ve hukukçular stajdan sonra ikinci devlet sınavına girerler. (Orijinal)",
+                    "Hochschulabsolventen sind seltener arbeitslos als junge Leute ohne Abschluss.|Üniversite mezunları, diploması olmayan gençlere göre daha az işsiz kalırlar.",
+                    "Das Erste Staatsexamen ist sehr anspruchsvoll.|İlk devlet sınavı çok iddialıdır.",
+                    "Sie ist eine erfolgreiche Hochschulabsolventin.|O başarılı bir üniversite mezunudur.",
+                    "Nach dem Staatsexamen beginnt das Arbeitsleben.|Devlet sınavından sonra iş hayatı başlar."]},
+                {d:"promovieren / Dissertation (Doktorarbeit) / Doktorand", t:"doktora yapmak / doktora tezi / doktora öğrencisi", e:[
+                    "Die meisten Mediziner promovieren nach dem Studium, damit sie sich „Dr.“ nennen dürfen.|Çoğu tıpçı 'Dr.' unvanını alabilmek için eğitimden sonra doktora yapar. (Orijinal)",
+                    "Doktoranden sind verpflichtet, ihre Dissertationen zu veröffentlichen.|Doktora öğrencileri doktora tezlerini yayınlamakla yükümlüdür.",
+                    "Man braucht Jahre, um eine Dissertation zu verfassen.|Bir doktora tezi yazmak yıllar alır.",
+                    "Der Doktorand forscht im Labor.|Doktora öğrencisi laboratuvarda araştırma yapıyor.",
+                    "Sie möchte in Biologie promovieren.|Biyolojide doktora yapmak istiyor."]},
+                {d:"Doktorvater / Doktormutter / betreuen", t:"doktora danışmanı (erkek/kadın) / danışmanlık yapmak", e:[
+                    "Die Doktormutter betreut die Doktorarbeit, indem sie den Studierenden berät.|Doktora danışmanı (kadın), öğrenciye tavsiyede bulunarak tezine danışmanlık yapar. (Orijinal)",
+                    "Man kann seinen Doktorvater an der Universität finden.|Doktora danışmanınızı (erkek) üniversitede bulabilirsiniz.",
+                    "Die Betreuung der Doktorarbeit ist sehr wichtig.|Doktora tezinin danışmanlığı çok önemlidir.",
+                    "Wer betreut deine Dissertation?|Doktora tezine kim danışmanlık yapıyor?",
+                    "Mein Doktorvater ist ein berühmter Professor.|Doktora danışmanım ünlü bir profesördür."]},
+                {d:"Habilitationsschrift / habilitiert werden", t:"doçentlik tezi / doçent olmak", e:[
+                    "Für die wissenschaftliche Laufbahn ist die Habilitationsschrift der nächste Schritt nach der Promotion.|Bilimsel kariyer için doçentlik tezi doktoradan sonraki adımdır. (Orijinal)",
+                    "Man muss recherchieren, bevor man eine Habilitationsschrift verfassen kann.|Doçentlik tezi yazmadan önce araştırma yapmak gerekir.",
+                    "Um Juniorprofessor zu werden, muss man nicht habilitiert sein.|Genç profesör olmak için doçent olmak gerekmez.",
+                    "Er wurde letztes Jahr habilitiert.|O geçen yıl doçent oldu.",
+                    "Die Habilitation erfordert viel Arbeit.|Doçentlik çok çalışma gerektirir."]},
+                {d:"Dozent / Sprechstunde / HiWi", t:"öğretim görevlisi / görüşme saati / asistan öğrenci (HiWi)", e:[
+                    "Es ist die Aufgabe der Dozenten, Vorlesungen zu halten und Studierende zu betreuen.|Ders (konferans) vermek ve öğrencilere danışmanlık yapmak öğretim görevlilerinin görevidir. (Orijinal)",
+                    "Wenn ein Student etwas besprechen möchte, sollte er zur Sprechstunde gehen.|Bir öğrenci bir şey konuşmak isterse görüşme saatine gitmelidir.",
+                    "Studierende arbeiten gerne als wissenschaftliche Hilfskräfte (HiWis).|Öğrenciler asistan öğrenci (HiWi) olarak çalışmayı severler.",
+                    "Der Dozent hat heute keine Sprechstunde.|Öğretim görevlisinin bugün görüşme saati yok.",
+                    "Als HiWi verdient man etwas Geld dazu.|Asistan öğrenci olarak biraz para kazanılır."]},
+                {d:"Kommilitone / Lehrveranstaltung / anbieten / besuchen", t:"üniversite arkadaşı / ders (etkinlik) / sunmak / gitmek", e:[
+                    "Es ist sinnvoll, sich gemeinsam mit Kommilitonen auf eine Prüfung vorzubereiten.|Sınava üniversite arkadaşlarıyla birlikte hazırlanmak mantıklıdır. (Orijinal)",
+                    "In den Lehrveranstaltungen vermitteln Dozenten ihre Kenntnisse.|Ders etkinliklerinde öğretim görevlileri bilgilerini aktarırlar.",
+                    "Professoren bieten Seminare an.|Profesörler seminerler sunarlar.",
+                    "Manche Lehrveranstaltungen müssen alle Studierenden besuchen.|Bazı ders etkinliklerine tüm öğrenciler gitmek zorundadır.",
+                    "Meine Kommilitonin hat mir ihre Notizen geliehen.|Üniversite arkadaşım (kız) bana notlarını ödünç verdi."]},
+                {d:"Vorlesungsverzeichnis / Propädeutikum", t:"ders kataloğu / hazırlık kursu", e:[
+                    "Im Vorlesungsverzeichnis sind alle Lehrveranstaltungen aufgeführt.|Ders kataloğunda tüm ders etkinlikleri listelenmiştir. (Orijinal)",
+                    "Im Rahmen eines Propädeutikums werden wissenschaftliche Arbeitstechniken vermittelt.|Bir hazırlık kursu kapsamında bilimsel çalışma teknikleri aktarılır.",
+                    "Hast du das neue Vorlesungsverzeichnis gesehen?|Yeni ders kataloğuğunu gördün mü?",
+                    "Das Propädeutikum ist für Erstsemester sehr nützlich.|Hazırlık kursu ilk dönem öğrencileri için çok faydalıdır.",
+                    "Du musst dich im Vorlesungsverzeichnis informieren.|Ders kataloğundan bilgi almalısın."]},
+                {d:"Vorlesung halten / hören / Seminar teilnehmen", t:"amfi dersi (konferans) vermek / dinlemek / seminere katılmak", e:[
+                    "Professor Steinberg hält jedes Semester eine Vorlesung.|Profesör Steinberg her dönem bir amfi dersi (konferans) verir. (Orijinal)",
+                    "Viele Studierende wollen die Vorlesung hören.|Birçok öğrenci bu dersi dinlemek istiyor.",
+                    "In Seminaren sind die Studierenden deutlich aktiver als in Vorlesungen.|Seminerlerde öğrenciler amfi derslerine göre belirgin şekilde daha aktiftir.",
+                    "Es wird Wert darauf gelegt, dass Studierende am Seminar teilnehmen.|Öğrencilerin seminere katılmasına önem verilir.",
+                    "Ich habe heute drei Vorlesungen gehört.|Bugün üç amfi dersi dinledim."]},
+                {d:"Exkursion / Tutorium (Tutor) / Kolloquium / Modul", t:"öğrenci gezisi / özel çalışma grubu / akademik toplantı / modül", e:[
+                    "Im Rahmen des Seminars unternehmen die Studenten eine Exkursion.|Seminer kapsamında öğrenciler bir gezi yaparlar. (Orijinal)",
+                    "Tutorien sind eine Hilfe bei der Vertiefung des Lernstoffes.|Özel çalışma grupları müfredatın derinleştirilmesinde bir yardımdır.",
+                    "Im Kolloquium halten Wissenschaftler Vorträge.|Akademik toplantıda bilim insanları sunumlar yaparlar.",
+                    "Die Studieninhalte sind in Module unterteilt.|Eğitim içerikleri modüllere ayrılmıştır.",
+                    "Der Tutor hat das Thema sehr gut erklärt.|Çalışma grubu hocası konuyu çok iyi açıkladı."]},
+                {d:"Kreditpunkt sammeln / Studienleistung erbringen", t:"kredi puanı toplamak / akademik başarı (ödev vs.) sağlamak", e:[
+                    "Bevor man sich anmelden kann, muss man Kreditpunkte sammeln.|Kayıt olmadan önce kredi puanları toplamak gerekir. (Orijinal)",
+                    "Für die Teilnahme erhalten die Studierenden Kreditpunkte.|Katılım için öğrenciler kredi puanı alırlar.",
+                    "Studierende müssen Studienleistungen erbringen.|Öğrenciler akademik başarılar sağlamak zorundadır.",
+                    "Wie viele Kreditpunkte brauchst du noch?|Kaç kredi puanına daha ihtiyacın var?",
+                    "Diese Studienleistung war nicht ausreichend.|Bu akademik başarı yeterli değildi."]},
+                {d:"Hausarbeit schreiben / Klausur schreiben / Referat halten / Stundenprotokoll", t:"dönem ödevi yazmak / yazılı sınava girmek / sunum yapmak / ders tutanağı", e:[
+                    "Viele Studierende ziehen es vor, eine Klausur zu schreiben.|Birçok öğrenci yazılı sınava girmeyi tercih eder. (Orijinal)",
+                    "Studierende nutzen die Ferien, um Hausarbeiten zu schreiben.|Öğrenciler dönem ödevleri yazmak için tatilleri kullanırlar.",
+                    "In Seminaren wird erwartet, dass jeder ein Referat hält.|Seminerlerde herkesin bir sunum yapması beklenir.",
+                    "Ein Student muss ein Stundenprotokoll anfertigen.|Bir öğrenci bir ders tutanağı hazırlamalıdır.",
+                    "Die Klausur war dieses Mal machbar.|Yazılı sınav bu sefer yapılabilirdi."]},
+                {d:"Lernplattform / Campus / Mensa / Studentenwohnheim", t:"eğitim platformu / kampüs / yemekhane / öğrenci yurdu", e:[
+                    "Auf Lernplattformen können sich Studierende online austauschen.|Eğitim platformlarında öğrenciler online olarak fikir alışverişi yapabilir. (Orijinal)",
+                    "Die Wohnheime befinden sich oft nicht auf dem Campus.|Öğrenci yurtları genellikle kampüste bulunmaz.",
+                    "In der Mensa bekommen Studierende ein warmes Essen.|Yemekhanede öğrenciler sıcak bir yemek alırlar.",
+                    "Nicht alle Zimmer im Studentenwohnheim haben eine Küche.|Öğrenci yurdundaki her odanın mutfağı yoktur.",
+                    "Der Campus ist im Sommer sehr belebt.|Kampüs yazın çok hareketlidir."]},
+                {d:"AStA / Fakultät / Fachschaft / Prüfungsamt", t:"öğrenci birliği (AStA) / fakülte / bölüm öğrenci temsilciliği / sınav işleri", e:[
+                    "Der AStA wird von den Studierenden gewählt und vertritt ihre Interessen.|AStA öğrenciler tarafından seçilir ve onların çıkarlarını temsil eder. (Orijinal)",
+                    "Die philosophische Fakultät veranstaltet eine Vorlesung.|Felsefe fakültesi bir amfi dersi düzenliyor.",
+                    "Die Fachschaft berät ihre Kommilitonen bei Fragen.|Bölüm öğrenci temsilciliği arkadaşlarına sorularda danışmanlık yapar.",
+                    "Das Prüfungsamt ist für die Prüfungsordnung zuständig.|Sınav işleri bürosu sınav yönetmeliğinden sorumludur.",
+                    "Wende dich mit diesem Problem an die Fachschaft.|Bu sorunla bölüm öğrenci temsilciliğine başvur."]}
             ],
 
             "wissenschaft": [
-                {
-                    german: "Erkenntnisse gewinnen", turkish: "bulgu/bilgi elde etmek",
-                    examples: [
-                        { de: "Auch aus einem misslungenen Experiment lassen sich wichtige Erkenntnisse gewinnen.", tr: "Başarısız bir deneyden bile önemli bulgular elde edilebilir." },
-                        { de: "Die Forscher hoffen, durch diese Studie neue Erkenntnisse über das Gehirn zu gewinnen.", tr: "Araştırmacılar bu çalışma ile beyin hakkında yeni bulgular elde etmeyi umuyorlar." },
-                        { de: "Wir haben viele wertvolle Erkenntnisse aus der Datenanalyse gewonnen.", tr: "Veri analizinden birçok değerli bilgi elde ettik." },
-                        { de: "Wissenschaftlicher Fortschritt bedeutet immer, neue Erkenntnisse zu gewinnen.", tr: "Bilimsel ilerleme her zaman yeni bulgular elde etmek demektir." },
-                        { de: "Es dauerte Jahre, bis sie diese revolutionären Erkenntnisse gewinnen konnten.", tr: "Bu devrim niteliğindeki bulguları elde edebilmeleri yıllar aldı." }
-                    ]
-                },
-                {
-                    german: "eine Hypothese aufstellen", turkish: "hipotez kurmak / varsayımda bulunmak",
-                    examples: [
-                        { de: "Es ist sinnvoll, eine Hypothese aufzustellen, auch wenn diese sich später als falsch erweist.", tr: "Daha sonra yanlış olduğu kanıtlansa bile bir hipotez kurmak mantıklıdır." },
-                        { de: "Der Biologe stellte die Hypothese auf, dass das Virus durch Insekten übertragen wird.", tr: "Biyolog, virüsün böcekler yoluyla bulaştığı hipotezini kurdu." },
-                        { de: "Bevor man ein Experiment beginnt, sollte man eine klare Hypothese aufstellen.", tr: "Bir deneye başlamadan önce net bir hipotez kurulmalıdır." },
-                        { de: "Sie haben eine mutige Hypothese aufgestellt, die viele Kollegen überrascht hat.", tr: "Birçok meslektaşlarını şaşırtan cesur bir hipotez kurdular." },
-                        { de: "Die Hypothese, die er aufgestellt hat, basiert auf jahrelanger Beobachtung.", tr: "Kurduğu hipotez, yıllar süren gözlemlere dayanıyor." }
-                    ]
-                },
-                {
-                    german: "eine Theorie widerlegen", turkish: "bir teoriyi çürütmek",
-                    examples: [
-                        { de: "Die Evolutionstheorie von Jean-Baptiste Lamarck wurde durch weitere Forschungen widerlegt.", tr: "Jean-Baptiste Lamarck'ın evrim teorisi sonraki araştırmalarla çürütüldü." },
-                        { de: "Galileo konnte alte astronomische Theorien mit seinem Teleskop widerlegen.", tr: "Galileo eski astronomik teorileri teleskobuyla çürütebildi." },
-                        { de: "Es ist oft schwieriger, eine neue Theorie zu beweisen, als eine alte zu widerlegen.", tr: "Genellikle yeni bir teoriyi kanıtlamak, eskisini çürütmekten daha zordur." },
-                        { de: "Die Ergebnisse des Experiments haben seine ursprüngliche Theorie komplett widerlegt.", tr: "Deneyin sonuçları onun baştaki teorisini tamamen çürüttü." },
-                        { de: "Wissenschaftler arbeiten ständig daran, fehlerhafte Theorien zu widerlegen.", tr: "Bilim insanları sürekli olarak hatalı teorileri çürütmek için çalışırlar." }
-                    ]
-                },
-                {
-                    german: "Daten auswerten", turkish: "verileri değerlendirmek / analiz etmek",
-                    examples: [
-                        { de: "Inzwischen nutzt man auch Computerprogramme, um Daten auszuwerten und übersichtlich zusammenzufassen.", tr: "Bu arada, verileri değerlendirmek ve net bir şekilde özetlemek için bilgisayar programları da kullanılıyor." },
-                        { de: "Nachdem die Umfrage beendet war, begann das Team, die Daten auszuwerten.", tr: "Anket bittikten sonra ekip verileri değerlendirmeye başladı." },
-                        { de: "Es wird Monate dauern, bis wir all diese gesammelten Daten auswerten können.", tr: "Toplanan tüm bu verileri değerlendirebilmemiz aylar sürecek." },
-                        { de: "Ein Statistiker wurde eingestellt, um die komplexen Daten professionell auszuwerten.", tr: "Karmaşık verileri profesyonelce analiz etmesi için bir istatistikçi işe alındı." },
-                        { de: "Wer Daten nicht richtig auswertet, kommt zu falschen Schlussfolgerungen.", tr: "Verileri doğru değerlendirmeyen kişi yanlış sonuçlara varır." }
-                    ]
-                },
-                {
-                    german: "Probanden / Versuchspersonen", turkish: "denekler",
-                    examples: [
-                        { de: "Das Institut für Angewandte Psychologie sucht Probanden für ein lernpsychologisches Experiment.", tr: "Uygulamalı Psikoloji Enstitüsü, bir öğrenme psikolojisi deneyi için denekler arıyor." },
-                        { de: "Die Probanden wussten nicht, worum es in der Studie wirklich ging.", tr: "Denekler çalışmanın gerçekte neyle ilgili olduğunu bilmiyorlardı." },
-                        { de: "An diesem Medikamententest nahmen über fünfhundert freiwillige Versuchspersonen teil.", tr: "Bu ilaç testine beş yüzün üzerinde gönüllü denek katıldı." },
-                        { de: "Die Reaktionen der Probanden wurden mit Kameras aufgezeichnet.", tr: "Deneklerin tepkileri kameralarla kaydedildi." },
-                        { de: "Man muss sicherstellen, dass die Gesundheit der Versuchspersonen nicht gefährdet wird.", tr: "Deneklerin sağlığının tehlikeye atılmadığından emin olmak gerekir." }
-                    ]
-                }
+                {d:"Fachgebiet / Disziplin / interdisziplinär", t:"uzmanlık alanı / branş / disiplinlerarası", e:[
+                    "Wissenschaftler aus verschiedenen Fachgebieten arbeiten gemeinsam an einem Projekt.|Farklı uzmanlık alanlarından bilim insanları bir proje üzerinde birlikte çalışırlar. (Orijinal)",
+                    "Jura und Medizin sind alte wissenschaftliche Disziplinen.|Hukuk ve tıp eski bilimsel branşlardır.",
+                    "Interdisziplinäre Projekte berühren verschiedene Fachbereiche.|Disiplinlerarası projeler farklı uzmanlık alanlarına dokunur.",
+                    "Er ist ein Experte auf seinem Fachgebiet.|O uzmanlık alanında bir uzmandır.",
+                    "Die Disziplin erfordert viel Vorwissen.|Bu branş çok ön bilgi gerektirir."]},
+                {d:"Naturwissenschaft / Geisteswissenschaft", t:"doğa bilimi / sosyal (beşeri) bilim", e:[
+                    "Biologie, Chemie und Physik zählen zu den Naturwissenschaften.|Biyoloji, kimya ve fizik doğa bilimlerinden sayılır. (Orijinal)",
+                    "Erkenntnisse der Geisteswissenschaften lassen sich nicht in Formeln ausdrücken.|Sosyal bilimlerin bulguları formüllerle ifade edilemez.",
+                    "Geisteswissenschaftliche Arbeit besteht in der Lektüre von Texten.|Sosyal bilimsel çalışma metinleri okumaktan ibarettir.",
+                    "Er studiert eine Naturwissenschaft.|O bir doğa bilimi okuyor.",
+                    "Beide Wissenschaftsrichtungen sind wichtig.|Her iki bilim dalı da önemlidir."]},
+                {d:"Forscher / Nachwuchswissenschaftler / Nachwuchsförderung", t:"araştırmacı / genç bilim insanı / gençlerin desteklenmesi", e:[
+                    "In den Naturwissenschaften arbeiten viele Forscher in einem Team.|Doğa bilimlerinde birçok araştırmacı takım halinde çalışır. (Orijinal)",
+                    "Nachwuchswissenschaftlern soll der Einstieg erleichtert werden.|Genç bilim insanlarına başlangıç kolaylaştırılmalıdır.",
+                    "Die Nachwuchsförderung wird durch Stipendien unterstützt.|Gençlerin desteklenmesi burslarla desteklenir.",
+                    "Sie ist eine sehr bekannte Forscherin.|O çok ünlü bir araştırmacıdır.",
+                    "Wir brauchen mehr talentierten Nachwuchs.|Daha fazla yetenekli gence ihtiyacımız var."]},
+                {d:"forschen / Forschung betreiben / erforschen", t:"araştırmak / araştırma yürütmek / detaylı incelemek", e:[
+                    "In einem Forschungssemester können Professoren intensiv an einem Thema forschen.|Bir araştırma döneminde profesörler bir konu üzerinde yoğun şekilde araştırma yapabilir. (Orijinal)",
+                    "Wissenschaftler betreiben Forschungen in der Antarktis.|Bilim insanları Antarktika'da araştırmalar yürütüyor.",
+                    "Geologen erforschen ein Höhlensystem.|Jeologlar bir mağara sistemini detaylı inceliyor.",
+                    "Sie forschen nach einem Heilmittel.|Onlar bir tedavi (ilaç) araştırıyorlar.",
+                    "Dieses Gebiet ist noch nicht vollständig erforscht.|Bu bölge henüz tamamen incelenmedi."]},
+                {d:"Fachliteratur / Archiv / Datenbank / Recherche", t:"mesleki literatür / arşiv / veritabanı / araştırma (literatür)", e:[
+                    "Wissenschaftler müssen Fachliteratur lesen, um auf dem neuesten Stand zu sein.|Bilim insanları güncel kalmak için mesleki literatür okumalıdır. (Orijinal)",
+                    "Historiker finden in Archiven interessante Dokumente.|Tarihçiler arşivlerde ilginç belgeler bulurlar.",
+                    "In Datenbanken lassen sich Informationen speichern.|Veritabanlarında bilgiler saklanabilir.",
+                    "Von einem Wissenschaftler wird erwartet, dass er gründlich recherchiert.|Bir bilim insanından temelden araştırma yapması beklenir.",
+                    "Die Recherche dauerte mehrere Monate.|Literatür araştırması aylar sürdü."]},
+                {d:"Studie durchführen / dokumentieren / Erkenntnis", t:"çalışma yürütmek / belgelemek / bulgu (bilgi)", e:[
+                    "Um klimatische Veränderungen zu untersuchen, müssen Langzeit-Studien durchgeführt werden.|İklimsel değişiklikleri incelemek için uzun vadeli çalışmalar yürütülmelidir. (Orijinal)",
+                    "Es ist wichtig, die Arbeitsschritte zu dokumentieren.|Çalışma adımlarını belgelemek önemlidir.",
+                    "Auch aus einem misslungenen Experiment lassen sich Erkenntnisse gewinnen.|Başarısız bir deneyden de bulgular elde edilebilir.",
+                    "Die Studie hat neue Erkenntnisse gebracht.|Çalışma yeni bulgular getirdi.",
+                    "Alles muss genau dokumentiert werden.|Her şey kesin olarak belgelenmelidir."]},
+                {d:"entdecken / entwickeln / Durchbruch", t:"keşfetmek / geliştirmek / çığır açan başarı", e:[
+                    "Durch neue Teleskope werden immer wieder neue Planeten entdeckt.|Yeni teleskoplarla sürekli yeni gezegenler keşfediliyor. (Orijinal)",
+                    "Lebensmitteltechniker haben eine Methode entwickelt.|Gıda teknikerleri bir yöntem geliştirdiler.",
+                    "Die Relativitätstheorie gilt als Einsteins Durchbruch.|Görelilik teorisi Einstein'ın çığır açan başarısı (dönüm noktası) kabul edilir.",
+                    "Sie hat ein neues Medikament entwickelt.|O yeni bir ilaç geliştirdi.",
+                    "Das war ein wissenschaftlicher Durchbruch.|Bu bilimsel bir çığır açan başarıydı."]},
+                {d:"Hypothese / These / Theorie (aufstellen/vertreten/überprüfen)", t:"hipotez / tez / teori (kurmak/savunmak/denetlemek)", e:[
+                    "Es ist sinnvoll, eine Hypothese aufzustellen, auch wenn diese sich als falsch erweist.|Daha sonra yanlış çıksa bile bir hipotez kurmak mantıklıdır. (Orijinal)",
+                    "Einige Politiker vertreten die These, dass Computerspiele schuld sind.|Bazı politikacılar bilgisayar oyunlarının suçlu olduğu tezini savunuyor.",
+                    "Experimente werden durchgeführt, um die Hypothese zu überprüfen.|Deneyler hipotezi denetlemek için yapılır.",
+                    "Galileo vertrat die Theorie, dass die Erde sich dreht.|Galileo dünyanın döndüğü teorisini savundu.",
+                    "Er hat eine neue Theorie aufgestellt.|O yeni bir teori kurdu."]},
+                {d:"widerlegen / umstritten", t:"çürütmek / tartışmalı", e:[
+                    "Die Evolutionstheorie von Lamarck wurde durch weitere Forschungen widerlegt.|Lamarck'ın evrim teorisi sonraki araştırmalarla çürütüldü. (Orijinal)",
+                    "Die These über das Leseverhalten ist umstritten.|Okuma alışkanlığı hakkındaki tez tartışmalıdır.",
+                    "Es ist schwer, diese Theorie zu widerlegen.|Bu teoriyi çürütmek zordur.",
+                    "Sein neues Buch ist sehr umstritten.|Onun yeni kitabı çok tartışmalı.",
+                    "Wissenschaftler versuchen, den Fehler zu widerlegen.|Bilim insanları hatayı çürütmeye çalışıyor."]},
+                {d:"schließen aus / folgern aus / Schluss ziehen / Beweis / belegen", t:"sonucunu çıkarmak / sonuç çıkarmak / kanıt / kanıtlamak", e:[
+                    "Oft kann man aus der Mimik einer Person auf ihre Gefühle schließen.|Sıklıkla bir kişinin mimiğinden duygularının sonucu çıkarılabilir. (Orijinal)",
+                    "Aus den Ergebnissen lassen sich unterschiedliche Schlüsse ziehen.|Sonuçlardan farklı sonuçlar çıkarılabilir.",
+                    "Die Wissenschaftlerin kann stichhaltige Beweise vorlegen.|Bilim insanı (kadın) sağlam kanıtlar sunabiliyor.",
+                    "Können Sie Ihre These belegen?|Tezinizi kanıtlayabilir misiniz?",
+                    "Wir müssen aus diesen Daten schlussfolgern.|Bu verilerden sonuç çıkarmalıyız."]},
+                {d:"veröffentlichen / publizieren / zitieren / Plagiat", t:"yayınlamak / alıntı yapmak / intihal (eser hırsızlığı)", e:[
+                    "Er hat seine Forschungsergebnisse in einer renommierten Fachzeitschrift veröffentlicht.|O araştırma sonuçlarını saygın bir meslek dergisinde yayınladı. (Orijinal)",
+                    "Zitate müssen mit einer Quellenangabe versehen werden.|Alıntılar bir kaynakça ile donatılmalıdır.",
+                    "Heute ist es leicht, Plagiate anzufertigen.|Bugün intihal (eser hırsızlığı) yapmak kolaydır.",
+                    "Sie hat das Buch letztes Jahr publiziert.|O kitabı geçen yıl yayınladı.",
+                    "Man darf nicht ohne Quellenangabe zitieren.|Kaynak göstermeden alıntı yapılamaz."]},
+                {d:"analysieren / beobachten / Daten auswerten", t:"analiz etmek / gözlemlemek / verileri değerlendirmek", e:[
+                    "Sprachwissenschaftler analysieren die Reden berühmter Politiker.|Dilbilimciler ünlü politikacıların konuşmalarını analiz ederler. (Orijinal)",
+                    "Biologen beobachten Tiere über einen langen Zeitraum.|Biyologlar hayvanları uzun bir süre boyunca gözlemlerler.",
+                    "Man nutzt Computerprogramme, um Daten auszuwerten.|Verileri değerlendirmek için bilgisayar programları kullanılır.",
+                    "Wir müssen das Problem genau analysieren.|Problemi tam olarak analiz etmeliyiz.",
+                    "Die gesammelten Daten werden jetzt ausgewertet.|Toplanan veriler şimdi değerlendiriliyor."]},
+                {d:"experimentieren / Experiment durchführen / Proband", t:"deney yapmak / deney yürütmek / denek", e:[
+                    "Marie Curie hat mit verschiedenen radioaktiven Substanzen experimentiert.|Marie Curie çeşitli radyoaktif maddelerle deney yapmıştır. (Orijinal)",
+                    "Tragen Sie Schutzkleidung, wenn Sie Experimente durchführen!|Deneyler yürütürken koruyucu giysi giyin!",
+                    "Das Institut sucht Probanden für ein Experiment.|Enstitü bir deney için denekler arıyor.",
+                    "Die Versuchsperson wusste nicht, worum es ging.|Denek (test kişisi) konunun ne olduğunu bilmiyordu.",
+                    "Es ist gefährlich, damit zu experimentieren.|Bununla deney yapmak tehlikelidir."]},
+                {d:"Labor / Umfrage / Stichprobe / Expedition / Ausrüstung", t:"laboratuvar / anket / rastgele örneklem / keşif gezisi / donanım", e:[
+                    "Gefährliche Viren werden in einem Hochsicherheitslabor untersucht.|Tehlikeli virüsler yüksek güvenlikli bir laboratuvarda incelenir. (Orijinal)",
+                    "Institute führen regelmäßig Umfragen zu aktuellen Themen durch.|Enstitüler güncel konularda düzenli olarak anketler yürütür.",
+                    "Um die Qualität zu prüfen, führt man Stichproben durch.|Kaliteyi kontrol etmek için rastgele örneklemler yapılır.",
+                    "Biologen unternehmen eine Expedition auf eine Insel.|Biyologlar bir adaya keşif gezisi yapıyorlar.",
+                    "Für die Berge braucht man die richtige Ausrüstung.|Dağlar için doğru donanıma (ekipmana) ihtiyaç vardır."]}
             ]
         };
 
@@ -893,22 +749,18 @@
         let currentIndex = 0;
         let isFlipped = false;
 
-        // Elements
         const menuScreen = document.getElementById('menu-screen');
         const studyScreen = document.getElementById('study-screen');
         const studyControls = document.getElementById('study-controls');
-        
         const cardGerman = document.getElementById('card-german');
         const cardTurkish = document.getElementById('card-turkish');
         const progressText = document.getElementById('progress-text');
         const flashcard = document.getElementById('flashcard');
-        
         const modal = document.getElementById('info-modal');
         const modalWrapper = document.getElementById('modal-content-wrapper');
         const examplesContainer = document.getElementById('examples-container');
         const modalWordTitle = document.getElementById('modal-word-title');
 
-        // Logic
         function startStudy(category) {
             currentCategory = category;
             currentDeck = [...db[category]];
@@ -933,12 +785,11 @@
             if (currentDeck.length === 0) return;
             
             const wordObj = currentDeck[currentIndex];
-            cardGerman.innerText = wordObj.german;
-            cardTurkish.innerText = wordObj.turkish;
+            cardGerman.innerText = wordObj.d;
+            cardTurkish.innerText = wordObj.t;
             
             progressText.innerText = `${currentIndex + 1} / ${currentDeck.length}`;
             
-            // Ensure card is front-facing
             if (isFlipped) {
                 flashcard.classList.remove('is-flipped');
                 isFlipped = false;
@@ -962,20 +813,24 @@
 
         function openInfoModal() {
             const wordObj = currentDeck[currentIndex];
-            modalWordTitle.innerText = `Kalıp: ${wordObj.german}`;
+            modalWordTitle.innerText = `Kalıp: ${wordObj.d}`;
             
-            // Generate HTML for the 5 examples
             let examplesHTML = '';
-            wordObj.examples.forEach((ex, idx) => {
+            wordObj.e.forEach((exStr, idx) => {
+                const parts = exStr.split('|');
+                // İlk cümle Orijinal kitap cümlesi olduğu için rengini hafif farklı yapıyoruz.
+                const isOriginal = idx === 0;
+                const badgeColor = isOriginal ? 'bg-amber-100 text-amber-700' : 'bg-indigo-100 text-indigo-600';
+                
                 examplesHTML += `
-                    <div class="bg-slate-50 border border-slate-100 rounded-xl p-4 sm:p-5">
+                    <div class="${isOriginal ? 'bg-amber-50 border-amber-200' : 'bg-slate-50 border-slate-100'} border rounded-xl p-4 sm:p-5 mb-4">
                         <div class="flex items-start gap-3">
-                            <div class="bg-indigo-100 text-indigo-600 font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-sm mt-0.5">
+                            <div class="${badgeColor} font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-sm mt-0.5">
                                 ${idx + 1}
                             </div>
                             <div>
-                                <p class="text-slate-800 font-medium text-lg leading-snug mb-2">${ex.de}</p>
-                                <p class="text-slate-500 text-base leading-snug"><i class="fas fa-arrow-turn-down fa-rotate-90 mr-1 text-slate-300"></i> ${ex.tr}</p>
+                                <p class="text-slate-800 font-medium text-lg leading-snug mb-2">${parts[0]}</p>
+                                <p class="text-slate-500 text-base leading-snug"><i class="fas fa-arrow-turn-down fa-rotate-90 mr-1 text-slate-300"></i> ${parts[1]}</p>
                             </div>
                         </div>
                     </div>
@@ -984,9 +839,7 @@
             
             examplesContainer.innerHTML = examplesHTML;
             
-            // Show modal with animation
             modal.classList.remove('hidden');
-            // Small delay to allow display block to register before animating opacity
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
                 modalWrapper.classList.remove('scale-95');
@@ -998,25 +851,20 @@
             modal.classList.add('opacity-0');
             modalWrapper.classList.remove('scale-100');
             modalWrapper.classList.add('scale-95');
-            
-            // Wait for animation to finish before hiding
             setTimeout(() => {
                 modal.classList.add('hidden');
             }, 300);
         }
 
-        // Add keyboard support
         document.addEventListener('keydown', function(event) {
-            // If modal is open, ESC closes it
             if (!modal.classList.contains('hidden')) {
                 if (event.key === 'Escape') closeInfoModal();
                 return;
             }
 
-            // If study screen is active
             if (!studyScreen.classList.contains('hidden')) {
                 if (event.code === 'Space') {
-                    event.preventDefault(); // Prevent scrolling
+                    event.preventDefault();
                     flipCard();
                 } else if (event.code === 'ArrowLeft') {
                     prevCard();
@@ -1027,7 +875,6 @@
                 }
             }
         });
-
     </script>
 </body>
 </html>
