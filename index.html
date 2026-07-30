@@ -3,1722 +3,383 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windows 98 - Ece Edition</title>
+    <title>Almanca Kelime Kartları (Bildung und Forschung)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* --- GENEL TEMA VE HAREKETLİ RENKLER --- */
-        body { 
-            background-color: #000080; 
-            font-family: 'MS Sans Serif', Tahoma, sans-serif; 
-            margin: 0; 
-            overflow: hidden; 
-            user-select: none; 
-            width: 100vw; 
-            height: 100vh; 
-            position: relative; 
-            transition: background-color 0.3s ease;
-        }
-
-        @keyframes shake-screen {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            10% { transform: translate(-10px, -10px) rotate(-1deg); }
-            20% { transform: translate(10px, -10px) rotate(1deg); }
-            30% { transform: translate(-10px, 10px) rotate(0deg); }
-            40% { transform: translate(10px, 10px) rotate(1deg); }
-            50% { transform: translate(-10px, -10px) rotate(-1deg); }
-            60% { transform: translate(10px, -10px) rotate(0deg); }
-            70% { transform: translate(-10px, 10px) rotate(-1deg); }
-            80% { transform: translate(10px, 10px) rotate(1deg); }
-            90% { transform: translate(-10px, -10px) rotate(0deg); }
-            100% { transform: translate(0, 0) rotate(0deg); }
-        }
-        .shake-active { animation: shake-screen 0.5s cubic-bezier(.36,.07,.19,.97) both infinite; }
-
-        .bg-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center; gap: 4vw; z-index: 0; pointer-events: none; width: 100%; }
-        .bg-text { font-size: 20vw; font-weight: bold; color: rgba(255, 255, 255, 0.15); margin: 0; line-height: 1; font-family: 'Segoe UI', Arial, sans-serif; letter-spacing: 5px; }
-        .win8-logo { width: 18vw; height: auto; fill: rgba(255, 255, 255, 0.15); }
-
-        /* WINDOWS 98 GELENEKSEL ÇERÇEVELERİ */
-        .win98-window { 
-            background-color: #c0c0c0; 
-            border: 2px solid; 
-            border-top-color: #dfdfdf; 
-            border-left-color: #dfdfdf; 
-            border-right-color: #000; 
-            border-bottom-color: #000; 
-            box-shadow: 1px 1px 0 #000; 
-            position: absolute; 
-            display: flex; 
-            flex-direction: column; 
-            z-index: 10; 
-        }
-        .title-bar { background: linear-gradient(90deg, #000080, #1084d0); color: white; padding: 3px 5px; font-weight: bold; font-size: 14px; display: flex; justify-content: space-between; align-items: center; cursor: default; }
-        .title-bar-text { display: flex; align-items: center; gap: 5px; }
-        .close-btn { background-color: #c0c0c0; border: 1px solid; border-top-color: #dfdfdf; border-left-color: #dfdfdf; border-right-color: #000; border-bottom-color: #000; width: 16px; height: 14px; font-size: 10px; font-weight: bold; display: flex; justify-content: center; align-items: center; color: black; cursor: pointer; }
-        .close-btn:active { border-top-color: #000; border-left-color: #000; border-right-color: #dfdfdf; border-bottom-color: #dfdfdf; }
-        .window-content { padding: 15px; font-size: 13px; overflow: auto; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f0fdf4; } /* Açık yeşil arka plan */
         
-        .win-btn { background-color: #c0c0c0; border: 2px solid; border-top-color: #dfdfdf; border-left-color: #dfdfdf; border-right-color: #000; border-bottom-color: #000; padding: 5px 15px; font-family: inherit; cursor: pointer; margin: 5px; touch-action: manipulation; font-size: 12px;}
-        .win-btn:active:not(:disabled) { border-top-color: #000; border-left-color: #000; border-right-color: #dfdfdf; border-bottom-color: #dfdfdf; padding: 6px 14px 4px 16px; }
-        .win-btn:disabled { color: #888; text-shadow: 1px 1px 0 #fff; cursor: not-allowed; }
-        
-        .center-popup { width: 340px; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100;}
-        .error-inner { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-        .error-icon { font-size: 30px; color: #d00; font-weight: bold; background: white; border-radius: 50%; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; border: 2px solid #d00; flex-shrink: 0; }
-        .buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .win-input { width: 100%; box-sizing: border-box; border: 2px solid; border-color: #000 #fff #fff #000; padding: 4px; margin-bottom: 15px; font-family: inherit; }
-        .terms-box { height: 120px; overflow-y: scroll; background: #fff; border: 2px solid; border-color: #000 #fff #fff #000; padding: 5px; font-size: 12px; margin-bottom: 10px; }
-
-        .progress-container { width: 100%; height: 20px; background-color: white; border: 2px solid #888; border-right-color: #fff; border-bottom-color: #fff; margin: 10px 0; position: relative; }
-        .progress-bar { height: 100%; background-color: #008080; width: 0%; transition: width 0.5s linear; }
-        .progress-text { text-align: center; margin-bottom: 5px; }
-
-        #ms-dos { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #000; color: #0f0; font-family: 'Courier New', Courier, monospace; padding: 20px; box-sizing: border-box; z-index: 200; font-size: 14px; overflow-y: auto;}
-        #bsod { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #0000aa; color: #fff; font-family: 'Courier New', Courier, monospace; padding: 40px 20px; box-sizing: border-box; z-index: 300; cursor: pointer; }
-        .bsod-title { background: #fff; color: #0000aa; display: inline-block; padding: 2px 5px; font-weight: bold; margin-bottom: 20px; }
-
-        #screensaver { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #000; z-index: 9999; overflow: hidden; cursor: none;}
-        #screensaver-text { position: absolute; color: yellow; font-family: 'Courier New', monospace; font-size: 20px; font-weight: bold; text-align: center; white-space: nowrap; border: 2px solid yellow; padding: 10px; }
-
-        /* MASAÜSTÜNDE GEZEN ECE */
-        #walking-lady { 
-            position: absolute; 
-            bottom: 35px; 
-            left: -50px; 
-            z-index: 500; 
-            cursor: pointer; 
-            animation: walk-around 40s linear infinite; 
-            display: none; 
-            transition: animation-duration 0.5s ease-in-out;
+        .scene {
+            width: 100%;
+            height: 350px;
+            perspective: 1000px;
         }
         
-        /* Sadece emojinin yönünü yürüme yönüne göre değiştireceğiz, böylece yazılar asla ters dönmeyecek */
-        #ece-emoji-container {
-            display: inline-block;
-            font-size: 35px;
-            animation: flip-emoji 40s linear infinite;
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            border-radius: 1rem;
         }
         
-        #lady-bubble { 
-            display: none; 
-            position: absolute; 
-            bottom: 110%; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            background: #ffffe1; 
-            border: 1px solid #000; 
-            padding: 8px; 
-            font-size: 12px; 
-            white-space: nowrap; 
-            border-radius: 5px; 
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.3); 
-            font-family: 'MS Sans Serif', sans-serif; 
-            text-align: center; 
-            color: black;
-            z-index: 510;
+        .card.is-flipped {
+            transform: rotateY(180deg);
         }
         
-        /* Karakterin genel hareketi */
-        @keyframes walk-around { 
-            0% { left: -50px; } 
-            50% { left: 100vw; } 
-            100% { left: -50px; } 
+        .card__face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            background: white;
         }
         
-        /* Sadece emojinin yönünü döndürür */
-        @keyframes flip-emoji { 
-            0% { transform: scaleX(1); } 
-            49.9% { transform: scaleX(1); } 
-            50% { transform: scaleX(-1); } 
-            99.9% { transform: scaleX(-1); } 
-            100% { transform: scaleX(1); } 
+        .card__face--front {
+            border-bottom: 6px solid #22c55e; /* Yeşil alt kenarlık */
         }
-
-        /* Görev Çubuğu */
-        #taskbar { position: absolute; bottom: 0; left: 0; width: 100%; height: 30px; background-color: #c0c0c0; border-top: 2px solid #dfdfdf; display: none; align-items: center; padding: 0 5px; box-sizing: border-box; z-index: 1000; box-shadow: 0 -1px 2px rgba(0,0,0,0.2); justify-content: space-between; }
-        .taskbar-left { display: flex; align-items: center; gap: 5px; }
-        .taskbar-right { display: flex; align-items: center; border: 2px solid; border-top-color: #888; border-left-color: #888; border-right-color: #fff; border-bottom-color: #fff; padding: 2px 10px; font-size: 11px; gap: 10px; cursor: default; background-color: #c0c0c0; color: #000; }
-        .volume-icon { font-size: 14px; cursor: pointer; }
         
-        #start-btn { font-weight: bold; font-family: inherit; font-size: 12px; padding: 2px 8px; display: flex; align-items: center; gap: 5px; border: 2px solid; border-top-color: #dfdfdf; border-left-color: #dfdfdf; border-right-color: #000; border-bottom-color: #000; background: #c0c0c0; cursor: pointer; height: 24px; color: black;}
-        #start-btn:active { border-top-color: #000; border-left-color: #000; border-right-color: #dfdfdf; border-bottom-color: #dfdfdf; padding: 3px 7px 1px 9px;}
-        #start-menu { position: absolute; bottom: 30px; left: 0; width: 220px; background-color: #c0c0c0; border: 2px solid; border-top-color: #dfdfdf; border-left-color: #dfdfdf; border-right-color: #000; border-bottom-color: #000; display: none; flex-direction: column; z-index: 1001; }
-        .start-menu-sidebar { background: linear-gradient(180deg, #000080, #1084d0); color: white; width: 35px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 10px; }
-        .start-menu-sidebar span { transform: rotate(-90deg); font-weight: bold; font-size: 14px; letter-spacing: 2px; white-space: nowrap;}
-        .start-menu-items { flex-grow: 1; padding: 2px; background-color: #c0c0c0; }
-        .start-item { padding: 8px 10px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 12px; color: black; }
-        .start-item:hover { background-color: #000080; color: white; }
-        .start-item.disabled { color: #888; cursor: not-allowed; }
-        .start-item.disabled:hover { background-color: transparent; color: #888; }
-        .start-divider { border-top: 1px solid #888; border-bottom: 1px solid #fff; margin: 2px 0; }
-
-        /* Masaüstü İkonları */
-        #desktop-area { position: absolute; top: 10px; left: 10px; bottom: 40px; display: none; flex-direction: column; gap: 15px; z-index: 20; flex-wrap: wrap; align-content: flex-start;}
-        .desktop-icon { width: 85px; text-align: center; color: white; font-size: 11px; cursor: pointer; display: flex; flex-direction: column; align-items: center; margin-bottom: 5px;}
-        .desktop-icon svg, .desktop-icon img { width: 32px; height: 32px; margin-bottom: 5px; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5)); }
-        .desktop-icon div { padding: 2px 4px; word-wrap: break-word; text-shadow: 1px 1px 2px #000; }
-        .desktop-icon:hover div { background-color: #000080; border: 1px dotted white; padding: 1px 3px; text-shadow: none; }
-
-        #context-menu { position: absolute; display: none; background: #c0c0c0; border: 2px solid; border-top-color: #dfdfdf; border-left-color: #dfdfdf; border-right-color: #000; border-bottom-color: #000; padding: 2px; z-index: 2000; width: 220px; box-shadow: 2px 2px 5px rgba(0,0,0,0.5); color: black;}
-        .context-item { padding: 5px 15px; font-size: 12px; cursor: pointer; }
-        .context-item:hover { background: #000080; color: white; }
-        .context-divider { border-top: 1px solid #888; border-bottom: 1px solid #fff; margin: 2px 0; }
-
-        #post-it { position: absolute; top: 20px; right: 20px; width: 180px; background-color: #ffff88; box-shadow: 2px 2px 5px rgba(0,0,0,0.5); padding: 15px; font-family: 'Comic Sans MS', cursive, sans-serif; font-size: 13px; color: #000; display: none; z-index: 15; transform: rotate(3deg); pointer-events: auto;}
-
-        .app-window { display: none; width: 350px; z-index: 50; }
-        #app-notepad { width: 380px; height: 280px; top: 10%; left: 10%; }
-        #app-trash { top: 20%; left: 15%; width: 320px;}
-        #app-mycomputer { top: 15%; left: 20%; width: 380px;}
-        #app-gallery { top: 8%; left: 15%; width: 520px;}
-        #app-msn { top: 12%; right: 10%; width: 340px; left: auto;}
-        #app-calc { top: 25%; left: 35%; width: 240px;}
-        #app-fortune { top: 10%; left: 20%; width: 320px; }
-        #app-gift { top: 25%; left: 40%; width: 300px; text-align:center;}
-        #app-tau { top: 25%; left: 20%; width: 340px;}
-        #app-agecalc { top: 30%; left: 35%; width: 280px;}
-        #app-mood { top: 15%; left: 25%; width: 380px; }
-        #app-clippy { bottom: 45px; right: 20px; width: 280px; z-index: 10002; }
+        .card__face--back {
+            transform: rotateY(180deg);
+            background: #f8fafc;
+            border-bottom: 6px solid #3b82f6; /* Mavi alt kenarlık */
+        }
         
-        /* Uygulama Pencereleri */
-        #app-paint { width: 450px; height: 380px; top: 5%; left: 30%; }
-        #app-mines { width: 320px; height: auto; top: 15%; left: 25%; }
-        #app-browser { width: 500px; height: 420px; top: 10%; left: 20%; }
-        #app-display { width: 340px; top: 25%; left: 30%; }
-        #app-pet { width: 320px; top: 20%; left: 35%; }
-        #app-dos-window { width: 480px; height: 320px; top: 15%; left: 15%; }
-
-        .disk-drive { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; color: black; }
-        .disk-info { flex-grow: 1; font-size: 11px; }
-        .disk-bar-bg { width: 100%; height: 12px; background: #fff; border: 1px solid #888; margin-top: 3px; }
-        
-        .chat-area { background: #fff; border: 2px solid; border-color: #888 #fff #fff #888; height: 180px; margin-bottom: 10px; overflow-y: scroll; padding: 10px; font-size: 12px; color: black; }
-        .chat-msg { margin-bottom: 8px; line-height: 1.4; text-align: left; }
-        .chat-sys { color: #888; font-style: italic; font-size: 11px; text-align: center; margin: 8px 0; }
-        .msn-avatar { width: 40px; height: 40px; border: 1px solid #ccc; float: right; margin-left: 10px; background:#eef;}
-
-        .list-items { background: white; border: 2px solid; border-color: #888 #fff #fff #888; height: 150px; padding: 5px; overflow-y: scroll;}
-        .list-item { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; font-size: 12px; cursor:pointer; color: black;}
-        .list-item:hover { background: #000080; color: white;}
-        .list-item svg { width: 16px; height: 16px; fill: #555;}
-        .list-item:hover svg { fill: white;}
-
-        #winamp { position: absolute; bottom: 45px; right: 20px; width: 260px; background: #111; border: 2px solid #333; color: #0f0; font-family: 'Courier New', Courier, monospace; padding: 10px; border-radius: 5px; box-shadow: inset 0 0 10px #000; display: none; z-index: 50; }
-        .winamp-title { color: #aaa; font-size: 10px; margin-bottom: 5px; border-bottom: 1px solid #333; padding-bottom: 3px; }
-        .winamp-screen { background: #000; padding: 5px; border: 1px solid #333; margin-bottom: 10px; text-align: center; font-size: 11px; }
-        .winamp-controls { display: flex; justify-content: space-between; gap: 5px; }
-        .winamp-btn { background: #333; color: #aaa; border: 1px solid #555; padding: 3px 6px; cursor: pointer; font-size: 10px; flex-grow: 1; }
-        .winamp-btn:active { background: #222; }
-
-        .concert-frame { display: none; width: 100%; height: auto; border: 1px solid #ccc; background: #f8f0ff; }
-        .concert-frame.active { display: block; }
-
-        /* Parti Modu */
-        #party-overlay { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999; color: yellow; font-size: 80px; font-weight: bold; font-family: 'Comic Sans MS', cursive; text-shadow: 4px 4px 0 #ff00ff, -4px -4px 0 #00ffff; text-align: center; width: 100%; pointer-events: none; animation: flash-text 0.3s infinite alternate; }
-        @keyframes flash-text { 0% { color: yellow; transform: translate(-50%, -50%) scale(1); } 100% { color: lime; transform: translate(-50%, -50%) scale(1.1); } }
-        #confetti-container { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9998; pointer-events: none; overflow: hidden; }
-        .confetti { position: absolute; width: 10px; height: 10px; background-color: #f00; animation: fall linear forwards; }
-        @keyframes fall { to { transform: translateY(100vh) rotate(720deg); } }
-
-        /* SINAVSAVAR (MAYIN TARLASI) */
-        .mines-grid { display: grid; grid-template-columns: repeat(8, 25px); grid-template-rows: repeat(8, 25px); gap: 1px; background-color: #888; border: 2px solid; border-color: #000 #fff #fff #000; width: fit-content; margin: 10px auto; }
-        .mines-cell { width: 25px; height: 25px; background-color: #c0c0c0; border: 2px solid; border-top-color: #dfdfdf; border-left-color: #dfdfdf; border-right-color: #808080; border-bottom-color: #808080; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; cursor: pointer; color: black; }
-        .mines-cell.revealed { border: 1px solid #888; background-color: #e0e0e0; cursor: default; }
-        .mines-cell.mine { background-color: #ff8888; }
-
-        /* PAINT 98 */
-        #paint-canvas { background: white; border: 2px solid; border-color: #000 #fff #fff #000; cursor: crosshair; touch-action: none; width: 100%; height: 220px; }
-        .paint-toolbar { display: flex; justify-content: space-between; margin-top: 10px; align-items: center; }
-        .paint-colors { display: flex; gap: 4px; }
-        .paint-color { width: 18px; height: 18px; border: 1px solid #000; cursor: pointer; }
-
-        /* BROWSER */
-        .browser-navbar { display: flex; gap: 5px; padding: 5px; background: #c0c0c0; border-bottom: 2px solid #888; align-items: center; }
-        .browser-content { background: white; border: 2px solid; border-color: #888 #fff #fff #888; height: 290px; padding: 10px; overflow-y: auto; color: black; font-size: 12px; }
-        .browser-tab { background: #dfdfdf; padding: 4px 10px; border: 1px solid #888; border-bottom: none; cursor: pointer; font-size: 11px; }
-        .browser-tab.active { background: white; font-weight: bold; border-top: 2px solid #000080; }
-
-        /* PET STATS */
-        .pet-stat-row { margin: 10px 0; color: black; }
-        .pet-bar-bg { width: 100%; height: 15px; background: white; border: 1px solid #888; margin-top: 4px; position: relative; }
-        .pet-bar-fill { height: 100%; background: #008000; width: 50%; transition: width 0.3s ease; }
-
-        /* DOS EKRANI YAZI GİRİŞİ */
-        .dos-input-line { display: flex; align-items: center; gap: 5px; margin-top: 10px; }
-        .dos-cmd-input { background: transparent; border: none; color: #0f0; font-family: inherit; font-size: inherit; width: 100%; outline: none; }
-
-        /* Mobil Cihaz Düzeltmeleri */
-        @media (max-width: 480px) {
-            .center-popup { width: 90% !important; }
-            .app-window { width: 95% !important; left: 2.5% !important; top: 2% !important; }
-            #desktop-area { gap: 10px !important; }
-            .desktop-icon { width: 75px !important; font-size: 10px !important; }
-            #party-overlay { font-size: 45px !important; }
-            #paint-canvas { height: 150px; }
-            .browser-content { height: 200px; }
+        /* Highlighted text in sentence */
+        .highlight {
+            color: #166534;
+            font-weight: 700;
+            background-color: #dcfce7;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.25rem;
         }
     </style>
 </head>
-<body oncontextmenu="return showContextMenu(event);" onmousemove="resetTimer(event)" onclick="resetTimer(event)" onkeydown="resetTimer(event)">
+<body class="text-gray-800 h-screen flex flex-col overflow-hidden">
 
-    <!-- ARKA PLAN -->
-    <div class="bg-container">
-        <svg class="win8-logo" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg"><path d="M0,12.4 L35.6,7.5 L35.6,41.5 L0,41.5 Z"/><path d="M40,6.8 L88,0 L88,41.5 L40,41.5 Z"/><path d="M0,45.5 L35.6,45.5 L35.6,80.5 L0,75.6 Z"/><path d="M40,45.5 L88,45.5 L88,88 L40,81.2 Z"/></svg>
-        <h1 class="bg-text">ECE</h1>
-    </div>
-
-    <!-- PARTİ MODU EFEKTLERİ -->
-    <div id="party-overlay">İYİ Kİ DOĞDUN<br>ECE!</div>
-    <div id="confetti-container"></div>
-
-    <!-- POST-IT -->
-    <div id="post-it" onmousedown="dragWindowStart(event, 'post-it')">
-        📌 <strong>UNUTMA:</strong><br><br>
-        - Alarmı arka arkaya 5 kere kur.<br>
-        - Su içmeyi unutma.<br>
-        - Faruk'a kupon kodunu dayat! (<span style="font-size:10px; font-weight:bold; color:red;">ECE_YASLANDI_2026</span>)
-    </div>
-
-    <!-- MASAÜSTÜ HAYVANI -->
-    <div id="walking-lady" onclick="ecePetClick(event)">
-        <div id="lady-bubble"></div>
-        <div id="ece-emoji-container"><span id="ece-emoji">👧</span></div>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- GİRİŞ ŞAKALARI ZİNCİRİ (DOĞUM GÜNÜ TEMASI) -->
-    <!-- ========================================== -->
-
-    <div id="step-aging" class="win98-window center-popup" style="display: flex;">
-        <div class="title-bar"><div class="title-bar-text">Sistem Uyarısı</div><div class="close-btn" onclick="showCustomAlert('Gerçeklerden kaçamazsın!', null)">X</div></div>
-        <div class="window-content" style="color: black;">
-            <div class="error-inner">
-                <div class="error-icon">X</div>
-                <div><strong>UYARI:</strong> Sisteminizde yeni bir YAŞ tespit edildi! <br><br>Artık çocuk değilsin. Devam edilsin mi?</div>
+    <header class="bg-green-600 text-white shadow-md p-4 shrink-0">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold"><i class="fas fa-graduation-cap mr-2"></i>Almanca Ezber Kartları</h1>
+                <p class="text-sm text-green-100">Bildung und Forschung (Sayfa 7-45)</p>
             </div>
-            <div class="buttons">
-                <button class="win-btn" onclick="handleAging()">Tamam</button>
-                <button class="win-btn" id="btn-aging-cancel">İptal</button>
+            <div class="text-right">
+                <div class="text-sm font-medium bg-green-700 px-3 py-1 rounded-full inline-block">
+                    İlerleme: <span id="progress-text">0/0</span>
+                </div>
             </div>
         </div>
-    </div>
+    </header>
 
-    <div id="step-camera" class="win98-window center-popup" style="display: none;">
-        <div class="title-bar"><div class="title-bar-text">Güvenlik Uyarısı</div></div>
-        <div class="window-content" style="color: black;">
-            <div class="error-inner">
-                <div class="error-icon" style="color: blue; border-color: blue;">?</div>
-                <div><strong>Sistem İsteği:</strong><br><br>Sistem, yaşlanmadan kaynaklanan yeni kırışıklıkları analiz etmek için kameranıza erişmek istiyor. İzin veriyor musunuz?</div>
-            </div>
-            <div class="buttons"><button class="win-btn" onclick="handleCamera('izin')">İzin Ver</button><button class="win-btn" onclick="handleCamera('asla')">Asla!</button></div>
-        </div>
-    </div>
-
-    <div id="step-security" class="win98-window center-popup" style="display: none;">
-        <div class="title-bar"><div class="title-bar-text">Kimlik Doğrulama</div></div>
-        <div class="window-content" style="color: black;">
-            <div style="margin-bottom: 10px;">Şifrenizi unuttuğunuz görülüyor. Sisteme girmek için lütfen yanıtlayın: <br><br><strong>Soru:</strong> 11 Haziran'da doğan kraliçenin/solistin adı nedir?</div>
-            <input type="text" class="win-input" id="dino-input" placeholder="Adını yaz...">
-            <div class="buttons"><button class="win-btn" onclick="handleSecurity()">Doğrula</button></div>
-        </div>
-    </div>
-
-    <div id="step-terms" class="win98-window center-popup" style="display: none; width: 350px;">
-        <div class="title-bar"><div class="title-bar-text">Yeni Yaş Sözleşmesi</div></div>
-        <div class="window-content" style="color: black;">
-            <p style="margin-top: 0;">Aşağıdaki maddeleri okuyup kabul etmelisiniz:</p>
-            <div class="terms-box" id="terms-box" onscroll="checkScroll()">
-                <strong>MADDE 1:</strong> Bundan sonra odaya girdiğimde "Ben buraya ne almaya gelmiştim?" demeyi kabul ederim.<br><br>
-                <strong>MADDE 2:</strong> 20'li yaşlara yaklaşmanın verdiği varoluşsal krizi taahhüt ederim.<br><br>
-                <strong>MADDE 3:</strong> Sınav çalışırken masada uyuyakalma ihtimalimin arttığını kabul ederim.<br><br>
-                <strong>MADDE 4:</strong> Hala çocuk gibi hissetsem de bugün yeni bir yaş aldığımı ve sorumluluklarımı onaylarım. (Kabul etmek için en alta kaydırın).
-            </div>
-            <div class="buttons">
-                <button class="win-btn" id="btn-accept-terms" disabled onclick="handleTerms()">Kabul Ediyorum</button>
-                <button class="win-btn" id="btn-decline-terms">Kabul Etmiyorum</button>
+    <main class="flex-1 overflow-auto p-4 sm:p-6 w-full max-w-4xl mx-auto flex flex-col items-center justify-center">
+        
+        <!-- Controls & Stats -->
+        <div class="w-full flex justify-between items-center mb-6 px-2">
+            <button onclick="shuffleDeck()" class="text-gray-500 hover:text-green-600 transition flex items-center gap-2">
+                <i class="fas fa-random"></i> Kartları Karıştır
+            </button>
+            <div class="text-sm text-gray-500">
+                Öğrenilen: <span id="learned-count" class="font-bold text-green-600">0</span>
             </div>
         </div>
-    </div>
 
-    <div id="step-progress" class="win98-window center-popup" style="display: none;">
-        <div class="title-bar"><div class="title-bar-text">Sistem Güncelleniyor...</div></div>
-        <div class="window-content" style="color: black;">
-            <div class="progress-text" id="prog-text">Yeni yaş verileri yükleniyor...</div>
-            <div class="progress-container"><div class="progress-bar" id="prog-bar"></div></div>
-        </div>
-    </div>
-    <div id="random-errors-container"></div>
-
-    <!-- DOS INTRO -->
-    <div id="ms-dos">
-        Microsoft(R) MS-DOS(R) Sürüm 6.22<br>(C) Copyright Microsoft Corp 1981-1998.<br><br>
-        <div id="dos-text"></div>
-    </div>
-
-    <div id="bsod" onclick="startDesktop()">
-        <div style="text-align: center;"><div class="bsod-title">Windows</div></div>
-        A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36.<br><br>
-        <span style="color: yellow; font-weight: bold;">CRITICAL_ERROR: TOO_MANY_CANDLES</span><br><br>
-        Sistem pastadaki mum sayısını kaldıramadı, donanım alev alma tehlikesiyle karşı karşıya. Büyümek çok zormuş.<br><br>
-        Asıl masaüstüne gitmek için ekrana dokunun veya tıklayın_
-    </div>
-
-    <!-- SAĞ TIK MENÜSÜ & EKRAN KORUYUCU -->
-    <div id="context-menu">
-        <div class="context-item" onclick="showCustomAlert('Yenileme başarısız. Yeni yaşınız donduruldu.', null)">Yenile</div>
-        <div class="context-divider"></div>
-        <div class="context-item" onclick="openApp('app-display')">Ekran Özellikleri...</div>
-        <div class="context-item" onclick="showCustomAlert('HATA: Klasör oluşturulamıyor. Anı kapasitesi maksimumda!', null)">Yeni Klasör (Anılar)</div>
-        <div class="context-item" onclick="openApp('app-pet')">Sanal Ece'yi Besle ☕</div>
-    </div>
-
-    <div id="screensaver" onclick="hideScreensaver()">
-        <div id="screensaver-text">Sistem boşta kaldı... Kurtarmak için fareyi oynat veya dokun!</div>
-    </div>
-
-    <!-- GÖREV ÇUBUĞU -->
-    <div id="start-menu">
-        <div style="display:flex; height:100%;">
-            <div class="start-menu-sidebar"><span>Windows 98</span></div>
-            <div class="start-menu-items">
-                <div class="start-item" onclick="openApp('app-display')"><span style="font-size:16px;">🎨</span> Masaüstü Teması</div>
-                <div class="start-item" onclick="openApp('app-pet')"><span style="font-size:16px;">👾</span> Sanal Ece (Pet)</div>
-                <div class="start-item" onclick="openApp('app-mines')"><span style="font-size:16px;">💣</span> SınavSavar Oyunu</div>
-                <div class="start-item" onclick="showCustomAlert('Doğum günü pastası kalorisi: Limit aşılıyor.', null); toggleStartMenu();"><span style="font-size:16px;">🎂</span> Diyet Ayarları</div>
-                <div class="start-divider"></div>
-                <div class="start-item disabled"><span style="font-size:16px;">🔄</span> Çocukluğa Geri Dön</div>
-                <div class="start-item" onclick="showCustomAlert('Hayat devam ediyor... Büyümekten kaçamazsın!', null); toggleStartMenu();"><span style="font-size:16px;">🛑</span> Sistemi Kapat...</div>
+        <!-- The Flashcard -->
+        <div class="scene w-full max-w-2xl mb-8">
+            <div class="card" id="flashcard" onclick="flipCard()">
+                <!-- Front (German Sentence) -->
+                <div class="card__face card__face--front">
+                    <span class="absolute top-4 left-4 text-xs font-bold text-gray-400 uppercase tracking-widest"><i class="fas fa-book-open mr-1"></i> Sayfa <span id="page-number"></span></span>
+                    <span class="absolute top-4 right-4 text-xs font-bold text-gray-400"><i class="fas fa-sync-alt mr-1"></i> Çevirmek için tıkla</span>
+                    
+                    <p id="german-sentence" class="text-2xl sm:text-3xl font-medium text-gray-800 leading-snug mt-4">
+                        <!-- Sentence injected here -->
+                    </p>
+                </div>
+                
+                <!-- Back (Meaning/Base Form) -->
+                <div class="card__face card__face--back">
+                    <span class="text-sm font-semibold text-blue-500 mb-2 uppercase tracking-wide">Kalıp / Kök Hali</span>
+                    <h2 id="base-form" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+                        <!-- Base form injected here -->
+                    </h2>
+                    
+                    <div class="w-full h-px bg-gray-200 mb-6"></div>
+                    
+                    <span class="text-xs text-gray-500 mb-1">Cümledeki Hali:</span>
+                    <p id="word-form" class="text-lg font-medium text-gray-700 italic">
+                        <!-- Word form injected here -->
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="taskbar">
-        <div class="taskbar-left">
-            <button id="start-btn" onclick="toggleStartMenu()">
-                <svg viewBox="0 0 88 88" style="width:14px; height:14px; fill:currentColor; margin-right:3px;"><path d="M0,12.4 L35.6,7.5 L35.6,41.5 L0,41.5 Z"/><path d="M40,6.8 L88,0 L88,41.5 L40,41.5 Z"/><path d="M0,45.5 L35.6,45.5 L35.6,80.5 L0,75.6 Z"/><path d="M40,45.5 L88,45.5 L88,88 L40,81.2 Z"/></svg>
-                Başlat
+        <!-- Action Buttons (Hidden until card is flipped) -->
+        <div id="action-buttons" class="flex gap-4 w-full max-w-2xl opacity-0 transition-opacity duration-300 pointer-events-none">
+            <button onclick="handleAnswer(false)" class="flex-1 bg-white border-2 border-red-200 text-red-600 font-bold py-4 px-6 rounded-xl hover:bg-red-50 hover:border-red-300 transition shadow-sm flex items-center justify-center gap-2 text-lg">
+                <i class="fas fa-times-circle"></i> Bilemedim
+            </button>
+            <button onclick="handleAnswer(true)" class="flex-1 bg-green-500 text-white font-bold py-4 px-6 rounded-xl hover:bg-green-600 transition shadow-md flex items-center justify-center gap-2 text-lg">
+                <i class="fas fa-check-circle"></i> Bildim
             </button>
         </div>
-        <div class="taskbar-right">
-            <span class="volume-icon" onclick="showCustomAlert('HATA: Konserde o kadar bağırdınız ki hoparlörler patladı!', null)">🔊</span>
-            <div id="time-display">00:00</div>
-        </div>
-    </div>
 
-    <!-- MASAÜSTÜ İKONLARI -->
-    <div id="desktop-area" onclick="closeContextMenu()">
-        
-        <div class="desktop-icon" ondblclick="openApp('app-mycomputer')" onclick="openApp('app-mycomputer')">
-            <svg viewBox="0 0 24 24" fill="#ffffff"><path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"/></svg>
-            <div>Bilgisayarım</div>
+        <!-- Completion Screen -->
+        <div id="completion-screen" class="hidden flex-col items-center justify-center text-center p-8 bg-white rounded-2xl shadow-lg w-full max-w-2xl">
+            <div class="text-6xl text-green-500 mb-4"><i class="fas fa-trophy"></i></div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">Harika İş!</h2>
+            <p class="text-gray-600 mb-8 text-lg">Tüm kelimeleri en az bir kere doğru bildin.</p>
+            <button onclick="resetApp()" class="bg-green-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-700 transition">
+                Tekrar Başla
+            </button>
         </div>
 
-        <div class="desktop-icon" ondblclick="openApp('app-notepad')" onclick="openApp('app-notepad')">
-            <svg viewBox="0 0 24 24" fill="#ffffff"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-            <div>Beni_Oku.txt</div>
-        </div>
-
-        <div class="desktop-icon" ondblclick="openApp('app-gallery')" onclick="openApp('app-gallery')">
-            <svg viewBox="0 0 24 24" fill="#ffd700"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4 2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
-            <div>Anılar.jpg</div>
-        </div>
-
-        <div class="desktop-icon" ondblclick="openMSN()" onclick="openMSN()">
-            <svg viewBox="0 0 24 24" fill="#00aaff"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-            <div>MSN Messenger</div>
-        </div>
-
-        <!-- PAINT 98 -->
-        <div class="desktop-icon" ondblclick="openApp('app-paint')" onclick="openApp('app-paint')">
-            <div style="font-size:32px; margin-bottom:5px;">🎨</div>
-            <div>Paint 98</div>
-        </div>
-
-        <!-- SINAVSAVAR OYUNU -->
-        <div class="desktop-icon" ondblclick="openApp('app-mines')" onclick="openApp('app-mines')">
-            <div style="font-size:32px; margin-bottom:5px;">💣</div>
-            <div>SınavSavar.exe</div>
-        </div>
-
-        <!-- BROWSER -->
-        <div class="desktop-icon" ondblclick="openApp('app-browser')" onclick="openApp('app-browser')">
-            <div style="font-size:32px; margin-bottom:5px;">🌐</div>
-            <div>Ece-Net Explorer</div>
-        </div>
-
-        <!-- SANAL PET -->
-        <div class="desktop-icon" ondblclick="openApp('app-pet')" onclick="openApp('app-pet')">
-            <div style="font-size:32px; margin-bottom:5px;">👾</div>
-            <div>Sanal Ece.pet</div>
-        </div>
-
-        <div class="desktop-icon" ondblclick="openApp('app-mood')" onclick="openApp('app-mood')">
-            <svg viewBox="0 0 24 24" fill="#ffcc00"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-            <div>Mod_Analizi.exe</div>
-        </div>
-
-        <div class="desktop-icon" ondblclick="startPartyMode()" onclick="startPartyMode()">
-            <div style="font-size:32px; margin-bottom:5px;">🎉</div>
-            <div>Parti_Modu.bat</div>
-        </div>
-
-        <div class="desktop-icon" ondblclick="openApp('app-calc')" onclick="openApp('app-calc')">
-            <svg viewBox="0 0 24 24" fill="#ffffff"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
-            <div>Hesap Makinesi</div>
-        </div>
-
-        <div class="desktop-icon" ondblclick="openApp('app-fortune')" onclick="openApp('app-fortune')">
-            <div style="font-size:32px; margin-bottom:5px;">🔮</div>
-            <div>Geleceği Gör</div>
-        </div>
-
-        <div class="desktop-icon" ondblclick="openApp('app-gift')" onclick="openApp('app-gift')">
-            <svg viewBox="0 0 24 24" fill="#ff69b4"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1h-4v-2h4zM9 4c.55 0 1 .45 1 1v2H6c0-.55.45-1 1-1s.45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
-            <div>Hediye.exe</div>
-        </div>
-
-        <div class="desktop-icon" ondblclick="openApp('app-tau')" onclick="openApp('app-tau')">
-            <svg viewBox="0 0 24 24" fill="#ffffff"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
-            <div>TAÜ OBS</div>
-        </div>
-
-        <div class="desktop-icon" ondblclick="openApp('app-agecalc')" onclick="openApp('app-agecalc')">
-            <svg viewBox="0 0 24 24" fill="#ffffff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-            <div>Gerçek_Yaş_Kaç</div>
-        </div>
-
-        <!-- REPLAYABLE MS-DOS -->
-        <div class="desktop-icon" ondblclick="openApp('app-dos-window')" onclick="openApp('app-dos-window')">
-            <div style="font-size:32px; margin-bottom:5px;">💻</div>
-            <div>MS-DOS İstemi</div>
-        </div>
-        
-        <div class="desktop-icon" ondblclick="openApp('app-trash')" onclick="openApp('app-trash')">
-            <svg viewBox="0 0 24 24" fill="#ffffff"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-            <div>Çöp Kutusu</div>
-        </div>
-    </div>
-
-
-    <!-- ========================================== -->
-    <!-- UYGULAMA PENCERELERİ                       -->
-    <!-- ========================================== -->
-
-    <!-- MSN MESSENGER -->
-    <div id="app-msn" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-msn')">
-        <div class="title-bar"><div class="title-bar-text">Faruk - Konuşma Penceresi</div><div class="close-btn" onclick="closeApp('app-msn')">X</div></div>
-        <div class="window-content" style="background:#f0f0f0; display:flex; flex-direction:column; height:340px; padding: 5px;">
-            <div style="background:#e1e1e1; padding:3px; border-bottom:1px solid #888; font-size:11px; display:flex; justify-content:space-between; align-items:center; color: black;">
-                <div><strong>Faruk</strong> (Çevrimiçi)</div>
-                <div class="msn-avatar" style="width:20px; height:20px; margin:0;"><svg viewBox="0 0 24 24" fill="#555"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
-            </div>
-            
-            <div class="chat-area" id="msn-chat-box" style="flex-grow:1;">
-                <div class="chat-sys">Konuşma oturumu başladı - 11 Haziran</div>
-            </div>
-            
-            <div style="background:#dfdfdf; padding:5px; border-top:1px solid #888; display:flex; gap:5px; align-items:center;">
-                <input type="text" class="win-input" id="msn-input-fake" style="margin-bottom:0; flex-grow:1; background:#e1e1e1;" placeholder="Mesaj yazmak için yetkiniz yok..." readonly>
-                <button class="win-btn" id="block-faruk-btn" disabled style="color:red; font-weight:bold; min-width:110px; font-size:11px;" onclick="triggerMsnBlock()">Faruk'u Engelle 🚫</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MOD ANALİZİ -->
-    <div id="app-mood" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-mood')">
-        <div class="title-bar"><div class="title-bar-text">Mod_Analizi.exe</div><div class="close-btn" onclick="closeApp('app-mood')">X</div></div>
-        <div class="window-content" style="text-align:center; background:#fff;">
-            <p style="margin-top:0; font-weight:bold; color:#000080;">11 Haziran Günlük Zihin Durumu Analiz Grafiği</p>
-            
-            <div style="display:flex; justify-content:center; align-items:center; gap:15px; margin: 15px 0;">
-                <svg viewBox="0 0 100 100" style="width:120px; height:120px; transform: rotate(-90deg); border-radius: 50%;">
-                    <circle cx="50" cy="50" r="25" fill="transparent" stroke="#ffb6c1" stroke-width="50" stroke-dasharray="45 100" stroke-dashoffset="0"/>
-                    <circle cx="50" cy="50" r="25" fill="transparent" stroke="#ffeb3b" stroke-width="50" stroke-dasharray="30 100" stroke-dashoffset="-45"/>
-                    <circle cx="50" cy="50" r="25" fill="transparent" stroke="#2196f3" stroke-width="50" stroke-dasharray="20 100" stroke-dashoffset="-75"/>
-                    <circle cx="50" cy="50" r="25" fill="transparent" stroke="#f44336" stroke-width="50" stroke-dasharray="5 100" stroke-dashoffset="-95"/>
-                </svg>
-
-                <div style="text-align:left; font-size:11px; color: black;">
-                    <div style="display:flex; align-items:center; gap:5px; margin-bottom:4px;"><span style="display:inline-block; width:12px; height:12px; background:#ffb6c1; border:1px solid #000;"></span> %45 Kahve İhtiyacı</div>
-                    <div style="display:flex; align-items:center; gap:5px; margin-bottom:4px;"><span style="display:inline-block; width:12px; height:12px; background:#ffeb3b; border:1px solid #000;"></span> %30 Ders Suçluluğu</div>
-                    <div style="display:flex; align-items:center; gap:5px; margin-bottom:4px;"><span style="display:inline-block; width:12px; height:12px; background:#2196f3; border:1px solid #000;"></span> %20 Varoluşsal Kriz</div>
-                    <div style="display:flex; align-items:center; gap:5px; margin-bottom:4px;"><span style="display:inline-block; width:12px; height:12px; background:#f44336; border:1px solid #000;"></span> %5 Faruk'un Fıkraları</div>
-                </div>
-            </div>
-            <p style="font-size:10px; color:#666; font-style:italic; border-top:1px dashed #ccc; padding-top:5px; margin-bottom:0;">Sistem doğruluğu %100 bilimsel olarak kanıtlanmıştır.</p>
-        </div>
-    </div>
-
-    <!-- PAINT 98 -->
-    <div id="app-paint" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-paint')">
-        <div class="title-bar"><div class="title-bar-text">Paint 98</div><div class="close-btn" onclick="closeApp('app-paint')">X</div></div>
-        <div class="window-content" style="background:#c0c0c0; color: black;">
-            <p style="margin-top:0; font-size:11px;">Kuzgun Band konser afişini buraya tasarla:</p>
-            <canvas id="paint-canvas"></canvas>
-            <div class="paint-toolbar">
-                <div class="paint-colors" id="paint-colors-container"></div>
-                <div>
-                    <button class="win-btn" style="padding: 2px 5px; font-size:11px;" onclick="clearPaintCanvas()">Temizle</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SINAVSAVAR OYUNU (MAYIN TARLASI) -->
-    <div id="app-mines" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-mines')">
-        <div class="title-bar"><div class="title-bar-text">SınavSavar.exe - Mayın Tarlası</div><div class="close-btn" onclick="closeApp('app-mines')">X</div></div>
-        <div class="window-content" style="text-align:center; color: black;">
-            <p style="margin:0 0 5px 0; font-size:11px;">Sınavlardan (💣) kaç, kahveleri (☕) topla!</p>
-            <div class="mines-grid" id="mines-grid"></div>
-            <div id="mines-status" style="font-weight:bold; margin-top:5px; font-size:12px;">Yeni oyun için başlatın.</div>
-            <button class="win-btn" onclick="initMinesweeper()">Oyunu Yeniden Başlat</button>
-        </div>
-    </div>
-
-    <!-- ECE-NET EXPLORER -->
-    <div id="app-browser" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-browser')">
-        <div class="title-bar"><div class="title-bar-text">Ece-Net Explorer v4.0</div><div class="close-btn" onclick="closeApp('app-browser')">X</div></div>
-        <div class="browser-navbar">
-            <span style="font-weight:bold; font-size:12px; color: black;">Adres:</span>
-            <input type="text" id="browser-url" class="win-input" style="margin-bottom:0; font-size:11px; padding:2px; flex-grow:1;" value="http://tau-giybet.com" readonly>
-        </div>
-        <div style="display:flex; padding-left: 5px; background:#c0c0c0;">
-            <div class="browser-tab active" id="tab-giybet" onclick="switchBrowserTab('giybet')">tau-giybet.com</div>
-            <div class="browser-tab" id="tab-kuzgun" onclick="switchBrowserTab('kuzgun')">kuzgunband.com</div>
-            <div class="browser-tab" id="tab-kahve" onclick="switchBrowserTab('kahve')">faruk-kahve.net</div>
-        </div>
-        <div class="browser-content" id="browser-inner-content">
-            <!-- Dinamik yüklenecek -->
-        </div>
-    </div>
-
-    <!-- SANAL ECE PET KONTROLÜ -->
-    <div id="app-pet" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-pet')">
-        <div class="title-bar"><div class="title-bar-text">Sanal Ece v1.0</div><div class="close-btn" onclick="closeApp('app-pet')">X</div></div>
-        <div class="window-content" style="color: black;">
-            <div style="text-align:center; font-size:40px; margin-bottom:10px;" id="pet-mood-emoji">👧</div>
-            <p style="text-align:center; font-weight:bold; margin-top:0;" id="pet-mood-text">Ece şu an normal modda.</p>
-            
-            <div class="pet-stat-row">
-                <span>☕ Kahve Seviyesi:</span>
-                <div class="pet-bar-bg"><div class="pet-bar-fill" id="stat-coffee" style="width: 50%;"></div></div>
-            </div>
-            <div class="pet-stat-row">
-                <span>🎤 Vokal Gücü (Kuzgun):</span>
-                <div class="pet-bar-bg"><div class="pet-bar-fill" id="stat-vocal" style="width: 40%; background: blue;"></div></div>
-            </div>
-            <div class="pet-stat-row">
-                <span>🤯 Sınav Stresi:</span>
-                <div class="pet-bar-bg"><div class="pet-bar-fill" id="stat-stress" style="width: 30%; background: red;"></div></div>
-            </div>
-
-            <div class="buttons" style="margin-top:15px;">
-                <button class="win-btn" style="font-size:11px;" onclick="feedPet('coffee')">☕ Kahve Ver</button>
-                <button class="win-btn" style="font-size:11px;" onclick="feedPet('vocal')">🎤 Pratik Yap</button>
-                <button class="win-btn" style="font-size:11px;" onclick="feedPet('study')">📚 Ders Çalış</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- EKRAN ÖZELLİKLERİ / TEMA DEĞİŞTİRME -->
-    <div id="app-display" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-display')">
-        <div class="title-bar"><div class="title-bar-text">Ekran Özellikleri</div><div class="close-btn" onclick="closeApp('app-display')">X</div></div>
-        <div class="window-content" style="color: black;">
-            <p style="margin-top:0; font-weight:bold;">Masaüstü Duvar Kağıdı Rengi:</p>
-            <div style="display:flex; flex-direction:column; gap:5px;">
-                <button class="win-btn" onclick="changeTheme('#000080')">🔵 Klasik Lacivert (Ece Edition)</button>
-                <button class="win-btn" onclick="changeTheme('#008080')">🟢 Retro Teal (Gerçek Windows 98)</button>
-                <button class="win-btn" onclick="changeTheme('#ff69b4')">🌸 Hot Pink Velvet (Parti Havası)</button>
-                <button class="win-btn" onclick="changeTheme('#031c02')">📟 Matrix Green (Hacker Ece)</button>
-                <button class="win-btn" onclick="changeTheme('#1084d0')">🎓 TAÜ Mavisi</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- REPLAYABLE MS-DOS PENCERESİ -->
-    <div id="app-dos-window" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-dos-window')">
-        <div class="title-bar"><div class="title-bar-text">MS-DOS Prompt</div><div class="close-btn" onclick="closeApp('app-dos-window')">X</div></div>
-        <div class="window-content" style="background:#000; color:#0f0; font-family:'Courier New', monospace; height:240px; padding:10px;">
-            <div>Microsoft(R) Windows 98 MS-DOS Prompt<br>(C)Copyright Microsoft Corp 1981-1998.<br><br>Komut listesi için 'help' yazın.</div>
-            <div id="dos-interactive-history" style="margin-top:10px;"></div>
-            <div class="dos-input-line">
-                <span>C:\WINDOWS></span>
-                <input type="text" id="dos-cmd-input" class="dos-cmd-input" onkeydown="handleInteractiveDOS(event)">
-            </div>
-        </div>
-    </div>
-
-    <!-- CLIPPY -->
-    <div id="app-clippy" class="win98-window" style="position:absolute; display:none; background:#ffffe1; border:1px solid #000; padding:10px; box-shadow: 3px 3px 10px rgba(0,0,0,0.3); border-radius:5px;">
-        <div style="display:flex; gap:10px; align-items:flex-start;">
-            <svg viewBox="0 0 50 60" style="width:40px; height:50px; flex-shrink:0;">
-                <path d="M 25 5 C 15 5 10 15 10 25 L 10 45 C 10 50 15 55 20 55 C 25 55 30 50 30 45 L 30 25 C 30 20 25 15 20 15 C 15 15 15 25 15 25 L 15 45" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="18" cy="22" r="3" fill="black"/>
-                <circle cx="28" cy="22" r="3" fill="black"/>
-                <path d="M 18 32 Q 23 37 28 32" fill="none" stroke="black" stroke-width="2"/>
-            </svg>
-            <div style="font-size:12px; color:#000;">
-                <strong style="display:block; margin-bottom:5px; color:#000080;">Sanal Asistan</strong>
-                Bugün 11 Haziran ve yaşlanıyorsun. Sorumluluklardan kaçmana yardımcı olayım mı?
-                <div style="margin-top:10px; display:flex; gap:10px; justify-content:flex-end;">
-                    <button class="win-btn" style="padding:2px 8px; font-size:11px;" onclick="clippyReaction(true)">Evet</button>
-                    <button class="win-btn" style="padding:2px 8px; font-size:11px;" onclick="clippyReaction(false)">Tabii ki Evet</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- BİLGİSAYARIM -->
-    <div id="app-mycomputer" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-mycomputer')">
-        <div class="title-bar"><div class="title-bar-text">Bilgisayarım</div><div class="close-btn" onclick="closeApp('app-mycomputer')">X</div></div>
-        <div class="window-content" style="background:#fff;">
-            <div class="disk-drive"><svg viewBox="0 0 24 24" style="width:30px; fill:#555;"><path d="M2 6v12h20V6H2zm18 10H4v-2h16v2zm0-4H4V8h16v4z"/></svg><div class="disk-info"><strong>Yerel Disk (C:) - Çocukluk Enerjisi</strong><br>Boş Alan: %0 (Tükendi)<div class="disk-bar-bg"><div class="disk-bar-fill" style="width:100%; background:red;"></div></div></div></div>
-            <div class="disk-drive"><svg viewBox="0 0 24 24" style="width:30px; fill:#555;"><path d="M2 6v12h20V6H2zm18 10H4v-2h16v2zm0-4H4V8h16v4z"/></svg><div class="disk-info"><strong>Yerel Disk (D:) - Sorumluluklar & Sınavlar</strong><br>Dolu Alan: 99.9 GB (Zorlanıyor)<div class="disk-bar-bg"><div class="disk-bar-fill" style="width:95%; background:blue;"></div></div></div></div>
-        </div>
-    </div>
-
-    <!-- NOT DEFTERİ -->
-    <div id="app-notepad" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-notepad')">
-        <div class="title-bar"><div class="title-bar-text">Beni_Oku.txt</div><div class="close-btn" onclick="closeApp('app-notepad')">X</div></div>
-        <div class="window-content" style="padding: 0; flex-grow: 1;">
-            <textarea readonly style="width: 100%; height: 100%; box-sizing: border-box; resize: none; font-family: 'Courier New'; padding: 10px; border: none; font-size:14px; outline: none; background: #fff; color: #000; line-height: 1.5;">Yeni yaşın, geçmişin keşkelerinden ve geleceğin kaygılarından uzak, sadece 'şu anın' tadını çıkarabildiğin bir yıl olsun. Hayatın varmaya çalışılan bir menzil değil, yürünen yolun ta kendisi olduğunu unutmadığın; attığın her adımda, aldığın her nefeste burada ve canlı olduğunu hissettiğin harika bir yaş diliyorum. İyi ki doğdun, iyi ki varsın. Yeni yaşında hayat kendi ritmiyle sana en güzel sürprizleri getirsin.</textarea>
-        </div>
-    </div>
-
-    <!-- GELECEĞİ GÖR -->
-    <div id="app-fortune" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-fortune')">
-        <div class="title-bar"><div class="title-bar-text">Geleceği Gör.exe</div><div class="close-btn" onclick="closeApp('app-fortune')">X</div></div>
-        <div class="window-content" style="text-align:center; color: black;">
-            <div style="font-size:50px; margin-bottom:5px;">🔮</div>
-            <p>Yeni yaşında seni nelerin beklediğini görmek için tıkla.</p>
-            <div class="progress-container"><div class="progress-bar" id="fortune-bar"></div></div>
-            <button class="win-btn" onclick="startFortune()" id="fortune-btn">Geleceğimi Göster</button>
-        </div>
-    </div>
-
-    <!-- GALERİ (NASREDDİN HOCA + KUZGUN KONSER VİDEOSU) -->
-    <div id="app-gallery" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-gallery')">
-        <div class="title-bar"><div class="title-bar-text">Anılar.jpg</div><div class="close-btn" onclick="closeApp('app-gallery')">X</div></div>
-        <div class="window-content" style="text-align:center; color: black;">
-            <div style="display: flex; gap: 10px; justify-content: center; align-items: flex-start; flex-wrap: wrap;">
-                
-                <!-- Nasreddin Hoca -->
-                <div style="flex: 1; min-width: 180px; max-width: 220px; background:#fff; border: 2px solid #888; border-right-color:#fff; border-bottom-color:#fff; padding:5px;">
-                    <svg viewBox="0 0 200 150" style="width:100%; height:auto; border:1px solid #ccc; background:#e0f7fa;">
-                        <ellipse cx="100" cy="100" rx="40" ry="20" fill="gray" stroke="black" stroke-width="2"/>
-                        <line x1="75" y1="115" x2="75" y2="140" stroke="black" stroke-width="3"/><line x1="85" y1="115" x2="85" y2="140" stroke="black" stroke-width="3"/>
-                        <line x1="115" y1="115" x2="115" y2="140" stroke="black" stroke-width="3"/><line x1="125" y1="115" x2="125" y2="140" stroke="black" stroke-width="3"/>
-                        <circle cx="60" cy="85" r="12" fill="gray" stroke="black" stroke-width="2"/>
-                        <path d="M 50 80 Q 40 60 55 75" fill="none" stroke="black" stroke-width="2"/><path d="M 60 75 Q 65 55 65 75" fill="none" stroke="black" stroke-width="2"/>
-                        <circle cx="110" cy="60" r="10" fill="#ffcc99" stroke="black" stroke-width="2"/>
-                        <path d="M 100 55 C 100 35, 120 35, 120 55 Z" fill="white" stroke="black" stroke-width="2"/>
-                        <line x1="110" y1="70" x2="110" y2="95" stroke="black" stroke-width="3"/>
-                        <line x1="110" y1="75" x2="130" y2="85" stroke="black" stroke-width="3"/>
-                        <line x1="110" y1="95" x2="130" y2="110" stroke="black" stroke-width="3"/>
-                        <ellipse cx="160" cy="130" rx="30" ry="10" fill="blue" stroke="black"/>
-                        <line x1="130" y1="85" x2="150" y2="125" stroke="brown" stroke-width="2"/>
-                    </svg>
-                    <p style="font-weight:bold; margin-bottom:0; font-size:11px;">Faruk'un Fıkraları 👵</p>
-                </div>
-
-                <!-- KUZGUN Ece -->
-                <div style="flex: 1; min-width: 180px; max-width: 220px; background:#fff; border: 2px solid #888; border-right-color:#fff; border-bottom-color:#fff; padding:5px;">
-                    <svg class="concert-frame active" id="frame-1" viewBox="0 0 200 150">
-                        <circle cx="30" cy="20" r="15" fill="yellow" opacity="0.5"/><circle cx="170" cy="20" r="15" fill="pink" opacity="0.5"/>
-                        <circle cx="100" cy="50" r="15" fill="#ffcc99" stroke="black" stroke-width="2"/>
-                        <path d="M 85 35 Q 100 20 115 35" fill="none" stroke="black" stroke-width="3"/>
-                        <line x1="100" y1="65" x2="100" y2="100" stroke="black" stroke-width="3"/>
-                        <line x1="100" y1="75" x2="80" y2="90" stroke="black" stroke-width="3"/> 
-                        <line x1="100" y1="75" x2="120" y2="65" stroke="black" stroke-width="3"/> 
-                        <rect x="90" y="100" width="20" height="15" fill="black" stroke="black" stroke-width="2"/>
-                        <line x1="95" y1="115" x2="95" y2="140" stroke="red" stroke-width="4"/>
-                        <line x1="105" y1="115" x2="105" y2="140" stroke="red" stroke-width="4"/>
-                        <line x1="120" y1="65" x2="125" y2="60" stroke="black" stroke-width="2"/> <circle cx="127" cy="58" r="5" fill="black"/> <line x1="125" y1="60" x2="125" y2="145" stroke="black" stroke-width="2"/> <line x1="115" y1="145" x2="135" y2="145" stroke="black" stroke-width="2"/>
-                    </svg>
-                    <svg class="concert-frame" id="frame-2" viewBox="0 0 200 150">
-                        <circle cx="30" cy="20" r="15" fill="red" opacity="0.5"/><circle cx="170" cy="20" r="15" fill="blue" opacity="0.5"/>
-                        <circle cx="90" cy="45" r="15" fill="#ffcc99" stroke="black" stroke-width="2"/>
-                        <path d="M 75 30 Q 90 15 105 30" fill="none" stroke="black" stroke-width="3"/>
-                        <line x1="90" y1="60" x2="100" y2="100" stroke="black" stroke-width="3"/> 
-                        <line x1="95" y1="75" x2="70" y2="60" stroke="black" stroke-width="3"/> 
-                        <line x1="95" y1="75" x2="120" y2="65" stroke="black" stroke-width="3"/> 
-                        <rect x="90" y="100" width="20" height="15" fill="black" stroke="black" stroke-width="2" transform="rotate(-10 100 100)"/>
-                        <line x1="90" y1="115" x2="85" y2="140" stroke="red" stroke-width="4"/>
-                        <line x1="110" y1="115" x2="115" y2="140" stroke="red" stroke-width="4"/>
-                        <line x1="120" y1="65" x2="125" y2="60" stroke="black" stroke-width="2"/> <circle cx="127" cy="58" r="5" fill="black"/> <line x1="125" y1="60" x2="125" y2="145" stroke="black" stroke-width="2"/> <line x1="115" y1="145" x2="135" y2="145" stroke="black" stroke-width="2"/>
-                    </svg>
-                    <svg class="concert-frame" id="frame-3" viewBox="0 0 200 150">
-                        <circle cx="30" cy="20" r="15" fill="green" opacity="0.5"/><circle cx="170" cy="20" r="15" fill="yellow" opacity="0.5"/>
-                        <circle cx="100" cy="30" r="15" fill="#ffcc99" stroke="black" stroke-width="2"/>
-                        <path d="M 85 15 Q 100 0 115 15" fill="none" stroke="black" stroke-width="3"/>
-                        <line x1="100" y1="45" x2="100" y2="80" stroke="black" stroke-width="3"/>
-                        <line x1="100" y1="55" x2="70" y2="40" stroke="black" stroke-width="3"/> 
-                        <line x1="100" y1="55" x2="130" y2="40" stroke="black" stroke-width="3"/>
-                        <rect x="90" y="80" width="20" height="15" fill="black" stroke="black" stroke-width="2"/>
-                        <line x1="95" y1="95" x2="80" y2="110" stroke="red" stroke-width="4"/> 
-                        <line x1="105" y1="95" x2="120" y2="110" stroke="red" stroke-width="4"/>
-                        <line x1="130" y1="40" x2="135" y2="35" stroke="black" stroke-width="2"/> <circle cx="137" cy="33" r="5" fill="black"/> <line x1="135" y1="35" x2="125" y2="145" stroke="black" stroke-width="2"/> <line x1="115" y1="145" x2="135" y2="145" stroke="black" stroke-width="2"/>
-                    </svg>
-
-                    <p style="font-weight:bold; margin-bottom:0; font-size:11px;">KUZGUN Solisti Ece 🎸</p>
-                    <button class="win-btn" id="play-video-btn" onclick="playConcertVideo()" style="margin-top:5px; font-size:10px;">▶ Videoyu Oynat</button>
-                </div>
-
-            </div>
-            <p style="font-size:10px; color:#555; margin-top:5px;">Paint 1998 ile çizildi.</p>
-        </div>
-    </div>
-
-    <!-- HEDİYE KUTUSU (KUPON) -->
-    <div id="app-gift" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-gift')">
-        <div class="title-bar"><div class="title-bar-text">Hediye.exe</div><div class="close-btn" onclick="closeApp('app-gift')">X</div></div>
-        <div class="window-content" style="display:flex; flex-direction:column; align-items:center; color: black;">
-            <p id="gift-msg" style="font-weight:bold;">Sana harika bir hediyem var, aç bakalım!</p>
-            <div id="gift-box" style="transition: transform 0.3s; margin: 20px 0;">
-                <svg viewBox="0 0 24 24" fill="#ff69b4" style="width:100px; height:100px;"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1h-4v-2h4zM9 4c.55 0 1 .45 1 1v2H6c0-.55.45-1 1-1s.45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
-            </div>
-            <button class="win-btn" id="gift-open-btn" onclick="openGift()">Paketi Aç</button>
-        </div>
-    </div>
-
-    <!-- TAÜ OBS -->
-    <div id="app-tau" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-tau')">
-        <div class="title-bar"><div class="title-bar-text">TAÜ OBS</div><div class="close-btn" onclick="closeApp('app-tau')">X</div></div>
-        <div class="window-content" style="text-align:center; color: black;">
-            <div style="font-size:40px; margin-bottom:10px;">🎓</div>
-            <p>Öğrenci Bilgi Sistemine Bağlanılıyor...</p>
-            <div class="progress-container"><div class="progress-bar" id="tau-prog-bar"></div></div>
-            <button class="win-btn" onclick="startTauOBS()" id="tau-btn">Giriş Yap</button>
-        </div>
-    </div>
-
-    <!-- YAŞ HESAPLAYICI -->
-    <div id="app-agecalc" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-agecalc')">
-        <div class="title-bar"><div class="title-bar-text">Gerçek_Yaş_Kaç.exe</div><div class="close-btn" onclick="closeApp('app-agecalc')">X</div></div>
-        <div class="window-content" style="text-align:center; color: black;">
-            <p>Lütfen doğum yılınızı giriniz:</p>
-            <input type="number" class="win-input" id="birth-year" placeholder="Örn: 2006" style="text-align:center; width:100px;">
-            <br>
-            <button class="win-btn" onclick="calcRealAge()">Hesapla</button>
-        </div>
-    </div>
-
-    <!-- ÇÖP KUTUSU -->
-    <div id="app-trash" class="win98-window app-window" onmousedown="dragWindowStart(event, 'app-trash')">
-        <div class="title-bar"><div class="title-bar-text">Geri Dönüşüm Kutusu</div><div class="close-btn" onclick="closeApp('app-trash')">X</div></div>
-        <div class="window-content">
-            <div style="margin-bottom:5px; color: black;">Silinen Öğeler:</div>
-            <div class="list-items">
-                <div class="list-item"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>cocukluk_anilari.exe</div>
-                <div class="list-item"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>eski_yasim.log</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ÖZEL MESAJ KUTUSU -->
-    <div id="custom-alert" class="win98-window" style="display: none; width: 280px; top: 40%; left: 50%; transform: translate(-50%, -50%); z-index: 10000;">
-        <div class="title-bar"><div class="title-bar-text">Sistem Mesajı</div><div class="close-btn" onclick="closeCustomAlert()">X</div></div>
-        <div class="window-content" style="text-align: center; color: black;">
-            <p id="custom-alert-text">Mesaj</p>
-            <button class="win-btn" onclick="closeCustomAlert()">Tamam</button>
-        </div>
-    </div>
-
-    <!-- WINAMP -->
-    <div id="winamp">
-        <div class="winamp-title">Winamp - Ece Rock Edition</div>
-        <div class="winamp-screen">
-            <div id="scrolling-text" style="font-weight:bold;">8-Bit_Iyi_Ki_Dogdun.wav</div>
-            <div style="font-size: 16px; margin-top: 5px; color:#0f0;" id="timer">READY</div>
-        </div>
-        <div class="winamp-controls">
-            <button class="winamp-btn" onclick="playTrack(1)" id="playBtn1">🎂 DOĞUM GÜNÜ</button>
-            <button class="winamp-btn" onclick="playTrack(2)" id="playBtn2">🎸 KUZGUN ROCK</button>
-            <button class="winamp-btn" onclick="stopAudio()">■ DUR</button>
-        </div>
-    </div>
+    </main>
 
     <script>
-        let audioCtxError = null, alertCallback = null, isDesktopActive = false, idleTime = 0, idleInterval = null;
-        let dragElement = null, dragOffsetX = 0, dragOffsetY = 0;
-
-        // Sürükleme fonksiyonu
-        function dragWindowStart(e, id) {
-            const el = document.getElementById(id);
-            if (!el) return;
-            dragElement = el;
+        // Veritabanı: Sayfa 7'den 45'e kadar belirtilen Bildung und Forschung bölümü.
+        // Özellikle 9, 10, 11 ve 12. sayfalardaki (12. sayfa başındaki Schuluniform dahil) kelimeler özenle seçildi.
+        const allVocabData = [
+            // Sayfa 9
+            { page: 9, word: "eingeschult", base: "eingeschult werden", sentence: "Die meisten Kinder werden im Alter von sechs Jahren eingeschult." },
+            { page: 9, word: "zur Schule", base: "zur Schule gehen", sentence: "Wenn man Abitur machen will, muss man 12 oder 13 Jahre zur Schule gehen." },
+            { page: 9, word: "eine Schule", base: "eine Schule besuchen", sentence: "Die Eltern legen großen Wert darauf, dass ihr Kind eine gute Schule besucht." },
+            { page: 9, word: "Schulpflicht", base: "die Schulpflicht", sentence: "Die Dauer der allgemeinen Schulpflicht beträgt in Deutschland mindestens neun Schuljahre." },
+            { page: 9, word: "schwänzt", base: "die Schule schwänzen", sentence: "Eigentlich müsste sie jetzt im Unterricht sein, aber sie schwänzt die Schule." },
+            { page: 9, word: "öffentliche Schulen", base: "die öffentliche Schule", sentence: "Die meisten Schülerinnen und Schüler in Deutschland besuchen öffentliche Schulen." },
+            { page: 9, word: "Privatschulen", base: "die Privatschule", sentence: "Die Zahl der Schüler, die Privatschulen besuchen, steigt kontinuierlich." },
+            { page: 9, word: "Ganztagsschulen", base: "die Ganztagsschule", sentence: "In Deutschland werden immer mehr Ganztagsschulen eingerichtet." },
+            { page: 9, word: "Internat", base: "das Internat", sentence: "Im Internat teilen sich meistens zwei Schüler ein Zimmer." },
+            { page: 9, word: "Klasse", base: "die Klasse", sentence: "Die Grundschulzeit dauert in Bayern von der 1. bis zur 4. Klasse." },
+            { page: 9, word: "aufs Gymnasium", base: "aufs Gymnasium gehen", sentence: "Am Ende der Grundschulzeit wird entschieden, ob man aufs Gymnasium geht." },
+            { page: 9, word: "Schulabschluss", base: "den Schulabschluss machen", sentence: "Viele Schüler, die nächstes Jahr ihren Schulabschluss machen, suchen einen Ausbildungsplatz." },
+            { page: 9, word: "abgebrochen", base: "die Schule abbrechen", sentence: "Wer die Schule abgebrochen hat, hat keinen Schulabschluss." },
             
-            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            // Sayfa 10
+            { page: 10, word: "nachholen", base: "einen Schulabschluss nachholen", sentence: "Wer keinen Schulabschluss gemacht hat, kann diesen nachholen." },
+            { page: 10, word: "Abitur gemacht", base: "(das) Abitur machen", sentence: "Wenn man Abitur gemacht hat, kann man sich um einen Studienplatz bewerben." },
+            { page: 10, word: "Hauptfächern", base: "das Hauptfach", sentence: "Der Unterricht in den Hauptfächern Deutsch, Englisch und Mathematik ist wichtig." },
+            { page: 10, word: "Nebenfächern", base: "das Nebenfach", sentence: "In den Nebenfächern haben die Schüler weniger Unterricht." },
+            { page: 10, word: "unterrichtet", base: "etw. unterrichten", sentence: "Der Lehrer unterrichtet seit 15 Jahren Englisch und Sport." },
+            { page: 10, word: "Unterricht geben", base: "Unterricht geben / erteilen", sentence: "Die Hauptaufgabe von Lehrern ist es, Unterricht zu geben." },
+            { page: 10, word: "Lernstoff", base: "der Lernstoff", sentence: "Genetik gehört zum Lernstoff der 9. Klasse." },
+            { page: 10, word: "vermitteln", base: "jdm. etw. vermitteln", sentence: "Der Lehrer soll den Schülern den Lernstoff vermitteln." },
             
-            const rect = el.getBoundingClientRect();
-            dragOffsetX = clientX - rect.left;
-            dragOffsetY = clientY - rect.top;
+            // Sayfa 11
+            { page: 11, word: "Didaktik", base: "die Didaktik", sentence: "Zukünftige Lehrer müssen sich mit Didaktik beschäftigen." },
+            { page: 11, word: "Lehrpläne", base: "der Lehrplan", sentence: "Die Ministerien erstellen Lehrpläne, in denen Unterrichtsinhalte festgelegt sind." },
+            { page: 11, word: "Klassenarbeiten", base: "die Klassenarbeit", sentence: "In den Hauptfächern werden regelmäßig Klassenarbeiten geschrieben." },
+            { page: 11, word: "Noten", base: "die Note", sentence: "Kinder sind enttäuscht, wenn sie keine gute Note bekommen." },
+            { page: 11, word: "benotet", base: "etw. benoten", sentence: "Wenn Schüler wissen, dass eine Hausaufgabe benotet wird, arbeiten sie konzentrierter." },
+            { page: 11, word: "Leistungen", base: "die Leistung", sentence: "Früher war sie eine gute Schülerin, aber ihre Leistungen haben nachgelassen." },
+            { page: 11, word: "Zeugnisse", base: "das Zeugnis", sentence: "Schüler bekommen am Ende jedes Schulhalbjahres Zeugnisse." },
+            { page: 11, word: "sitzen bleiben", base: "nicht versetzt werden / sitzen bleiben", sentence: "Schlechte Schüler bleiben sitzen und müssen das Schuljahr wiederholen." },
+            { page: 11, word: "Nachhilfe", base: "die Nachhilfe", sentence: "Spezielle Institute bieten Nachhilfe in einzelnen Fächern an." },
+            { page: 11, word: "Mitschülern", base: "der Mitschüler", sentence: "Kinder sollen lernen, mit ihren Mitschülern zusammenzuarbeiten." },
 
-            document.querySelectorAll('.win98-window').forEach(w => w.style.zIndex = 10);
-            el.style.zIndex = 100;
-
-            document.addEventListener('mousemove', dragWindowMove);
-            document.addEventListener('mouseup', dragWindowEnd);
-            document.addEventListener('touchmove', dragWindowMove, { passive: false });
-            document.addEventListener('touchend', dragWindowEnd);
-        }
-
-        function dragWindowMove(e) {
-            if (!dragElement) return;
-            if (e.cancelable) e.preventDefault();
-
-            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
-
-            let left = clientX - dragOffsetX;
-            let top = clientY - dragOffsetY;
-
-            dragElement.style.left = left + 'px';
-            dragElement.style.top = top + 'px';
-            dragElement.style.transform = 'none'; 
-        }
-
-        function dragWindowEnd() {
-            dragElement = null;
-            document.removeEventListener('mousemove', dragWindowMove);
-            document.removeEventListener('mouseup', dragWindowEnd);
-            document.removeEventListener('touchmove', dragWindowMove);
-            document.removeEventListener('touchend', dragWindowEnd);
-        }
-
-        function playErrorSound() {
-            try {
-                if (!audioCtxError) audioCtxError = new (window.AudioContext || window.webkitAudioContext)();
-                if(audioCtxError && audioCtxError.state === 'suspended') audioCtxError.resume();
-                let osc = audioCtxError.createOscillator(), gain = audioCtxError.createGain();
-                osc.type = 'sawtooth'; osc.frequency.value = 120;
-                osc.connect(gain); gain.connect(audioCtxError.destination);
-                gain.gain.setValueAtTime(0.08, audioCtxError.currentTime);
-                osc.start(); osc.stop(audioCtxError.currentTime + 0.15);
-            } catch(e) {
-                console.warn("Ses engeli bypass:", e);
-            }
-        }
-
-        function playPartySound() {
-            try {
-                if (!audioCtxError) audioCtxError = new (window.AudioContext || window.webkitAudioContext)();
-                if(audioCtxError && audioCtxError.state === 'suspended') audioCtxError.resume();
-                let osc = audioCtxError.createOscillator(), gain = audioCtxError.createGain();
-                osc.type = 'square'; osc.frequency.setValueAtTime(440, audioCtxError.currentTime);
-                osc.frequency.setValueAtTime(880, audioCtxError.currentTime + 0.2);
-                osc.frequency.setValueAtTime(1200, audioCtxError.currentTime + 0.4);
-                osc.connect(gain); gain.connect(audioCtxError.destination);
-                gain.gain.setValueAtTime(0.08, audioCtxError.currentTime);
-                osc.start(); osc.stop(audioCtxError.currentTime + 0.6);
-            } catch(e) {
-                console.warn("Ses engeli bypass:", e);
-            }
-        }
-
-        function showCustomAlert(msg, callback) {
-            playErrorSound();
-            document.getElementById('custom-alert-text').innerText = msg;
-            document.getElementById('custom-alert').style.display = 'block';
-            alertCallback = callback;
-        }
-        function closeCustomAlert() {
-            document.getElementById('custom-alert').style.display = 'none';
-            if(alertCallback) alertCallback();
-        }
-
-        function makeButtonRunaway(btnId, limitMsg) {
-            const btn = document.getElementById(btnId);
-            if(!btn) return;
-            let count = 0;
-            const moveBtn = (e) => {
-                count++; 
-                if(e && e.cancelable) e.preventDefault();
-                btn.style.position = 'fixed';
-                btn.style.zIndex = '9999';
-                
-                const maxX = window.innerWidth - btn.offsetWidth - 20;
-                const maxY = window.innerHeight - btn.offsetHeight - 20;
-                
-                btn.style.left = Math.max(10, Math.min(maxX, Math.floor(Math.random() * maxX))) + 'px';
-                btn.style.top = Math.max(10, Math.min(maxY, Math.floor(Math.random() * maxY))) + 'px';
-                if(count > 2 && limitMsg) btn.innerText = limitMsg;
-            };
-            btn.addEventListener('mouseover', moveBtn); 
-            btn.addEventListener('touchstart', moveBtn, { passive: false });
-        }
-
-        makeButtonRunaway('btn-aging-cancel', 'Büyüdün bir kere!');
-        makeButtonRunaway('btn-decline-terms', 'Kabul etmelisin!');
-
-        // --- GİRİŞ ZİNCİRLEME ŞAKA AKIŞI ---
-        function handleAging() {
-            playErrorSound(); document.getElementById('step-aging').style.display = 'none'; document.getElementById('step-camera').style.display = 'flex';
-        }
-        function handleCamera(choice) {
-            showCustomAlert(choice==='izin' ? "Hata: Yaşlanmaya bağlı kırışıklıklar kamerayı bozdu." : "Anlaşıldı. Yaşlılık belirtilerini gizlemeyi tercih ediyorsunuz.", () => {
-                document.getElementById('step-camera').style.display = 'none'; document.getElementById('step-security').style.display = 'flex';
-            });
-        }
-        function handleSecurity() {
-            const val = document.getElementById('dino-input').value.toLowerCase();
-            if(!val) { showCustomAlert("Boş bırakamazsın!", null); return; }
-            showCustomAlert("Doğrulama başarılı! 'Kraliçe Ece' yeni sözleşmeye aktarılıyor...", () => {
-                document.getElementById('step-security').style.display = 'none'; document.getElementById('step-terms').style.display = 'flex';
-            });
-        }
-        function checkScroll() {
-            const box = document.getElementById('terms-box');
-            if (box.scrollHeight - box.scrollTop <= box.clientHeight + 5) { document.getElementById('btn-accept-terms').disabled = false; }
-        }
-        function handleTerms() {
-            document.getElementById('step-terms').style.display = 'none'; document.getElementById('step-progress').style.display = 'flex'; startProgress();
-        }
-        function startProgress() {
-            const bar = document.getElementById('prog-bar'), text = document.getElementById('prog-text');
-            let w = 0, intv = setInterval(() => {
-                if(w >= 99) { clearInterval(intv); text.innerText = "Hata! (%99)"; setTimeout(throwRandomErrors, 1000); } 
-                else { w += 11; if(w>99) w=99; bar.style.width = w+'%'; text.innerText = "%" + w; }
-            }, 300);
-        }
-        function throwRandomErrors() {
-            let count = 0, intv = setInterval(() => {
-                if(count >= 3) { clearInterval(intv); document.getElementById('step-progress').style.display = 'none'; document.getElementById('random-errors-container').innerHTML=''; runMSDOS(); return; }
-                playErrorSound();
-                let div = document.createElement('div'); div.className = 'win98-window center-popup';
-                div.style.left = Math.floor(Math.random()*(window.innerWidth-300))+'px'; div.style.top = Math.floor(Math.random()*(window.innerHeight-200))+'px';
-                div.innerHTML = `<div class="title-bar"><div class="title-bar-text">HATA</div></div><div class="window-content" style="display:flex; align-items:center; gap:10px; color: black;"><span style="color:red; font-size:20px; font-weight:bold;">X</span><span>Sistem Hatası: Yeni yaş kaygısı tespit edildi.</span></div>`;
-                document.getElementById('random-errors-container').appendChild(div); count++;
-            }, 500);
-        }
-
-        function runMSDOS() {
-            document.getElementById('ms-dos').style.display = 'block';
-            let lines = [
-                "C:\\> Baslatiliyor: Dogum_Gunu_Protokolu.exe",
-                "Sistem taraniyor...",
-                "C:\\> DIR Genclik_Verileri",
-                "Tum gereksiz cocukluk anilari siliniyor...",
-                "C:\\> YUKLENIYOR: Yeni_Yas_Sorumluluklari.pak",
-                "Yukleniyor: Olgunluk.exe ... %20",
-                "Yukleniyor: Olgunluk.exe ... %60",
-                "Yukleniyor: Olgunluk.exe ... %100",
-                "Sistem guncellemesi tamamlaniyor...",
-                "Tum veriler uzerine yazildi. Geri donus YOK.",
-                "C:\\> FATAL ERROR: Genclik.sys bulunamadi.",
-                "Sistem cokuyor..."
-            ];
-            let i = 0;
-            let intv = setInterval(() => {
-                if(i >= lines.length) { 
-                    clearInterval(intv); 
-                    setTimeout(()=> { 
-                        document.getElementById('ms-dos').style.display='none'; 
-                        document.getElementById('bsod').style.display='block'; 
-                        playErrorSound();
-                    }, 1500); 
-                    return; 
-                }
-                document.getElementById('dos-text').innerHTML += lines[i] + "<br>"; 
-                document.getElementById('ms-dos').scrollTop = document.getElementById('ms-dos').scrollHeight;
-                i++;
-            }, 250);
-        }
-
-        // --- MASAÜSTÜ BAŞLATMA ---
-        function startDesktop() {
-            document.getElementById('bsod').style.display = 'none';
-            document.getElementById('desktop-area').style.display = 'flex'; 
-            document.getElementById('taskbar').style.display = 'flex'; 
-            document.getElementById('post-it').style.display = 'block'; 
-            document.getElementById('winamp').style.display = 'block';
-            document.getElementById('walking-lady').style.display = 'block'; 
-            isDesktopActive = true;
-            updateTime(); setInterval(updateTime, 1000);
-            idleInterval = setInterval(timerIncrement, 1000);
+            // Sayfa 12
+            { page: 12, word: "Schuluniformen", base: "die Schuluniform", sentence: "Da es an deutschen Schulen keine Schuluniformen gibt, entscheiden die Schüler selbst, was sie anziehen." },
+            { page: 12, word: "begabt", base: "begabt sein", sentence: "Die Schülerin ist mathematisch und naturwissenschaftlich begabt." },
+            { page: 12, word: "fördern", base: "jdn./etw. fördern", sentence: "Die Eltern fördern ihr Kind durch zusätzlichen Musikunterricht." },
             
-            initPaint();
-            initMinesweeper();
-            switchBrowserTab('giybet');
-            updatePetUI();
+            // Sayfa 13
+            { page: 13, word: "Fähigkeiten", base: "Fähigkeiten erwerben", sentence: "Schüler sollen auch praktische Fähigkeiten erwerben." },
+            { page: 13, word: "Kenntnisse", base: "sich Kenntnisse aneignen", sentence: "Er hat sich seine Kenntnisse mithilfe von Büchern angeeignet." },
+            { page: 13, word: "auswendig", base: "auswendig lernen", sentence: "Früher mussten die Schüler viel auswendig lernen." },
+            { page: 13, word: "einprägen", base: "sich etw. einprägen", sentence: "Vor einer Prüfung sollte man sich wichtige Daten gut einprägen." },
+            { page: 13, word: "Prüfung ablegen", base: "eine Prüfung ablegen", sentence: "Die meisten Menschen sind nervös, wenn sie eine Prüfung ablegen müssen." },
+            { page: 13, word: "bestanden", base: "eine Prüfung bestehen", sentence: "Er hat die Prüfung bestanden, obwohl die Aufgaben schwierig waren." },
+            { page: 13, word: "durchfallen", base: "bei einer Prüfung durchfallen", sentence: "Geben Sie nicht auf, wenn Sie bei einer Prüfung durchfallen!" },
+            { page: 13, word: "Allgemeinbildung", base: "die Allgemeinbildung", sentence: "Es gehört zur Allgemeinbildung, internationale Organisationen zu kennen." },
+            
+            // Sayfa 14
+            { page: 14, word: "Bildungsniveau", base: "das Bildungsniveau", sentence: "Ein hohes Bildungsniveau verbessert die Berufsaussichten." },
+            { page: 14, word: "Analphabeten", base: "der Analphabet", sentence: "Etwa 4% der Deutschen sind Analphabeten." },
+            { page: 14, word: "fortbilden", base: "sich fortbilden / weiterbilden", sentence: "Man muss sich regelmäßig fortbilden, um auf dem neuesten Stand zu bleiben." },
+            
+            // Sayfa 20-21 (Studium)
+            { page: 20, word: "Fachhochschule", base: "die Fachhochschule", sentence: "Das Studium an einer Fachhochschule gilt als besonders praxisorientiert." },
+            { page: 21, word: "berufsbegleitend", base: "berufsbegleitend", sentence: "Ein berufsbegleitendes Studium bietet Berufstätigen die Möglichkeit, ein Studium zu absolvieren." },
+            { page: 21, word: "Fernstudium", base: "das Fernstudium", sentence: "Man kann heute einen Hochschulabschluss auch per Fernstudium erwerben." },
+            
+            // Sayfa 22
+            { page: 22, word: "Studienfach", base: "das Studienfach", sentence: "Wirtschaftswissenschaften sind beliebte Studienfächer." },
+            { page: 22, word: "Zulassung", base: "die Zulassung", sentence: "Einige Zeit vor Beginn des Semesters erhalten die Bewerber ihre Zulassung." },
+            { page: 22, word: "Numerus clausus", base: "der Numerus clausus", sentence: "Der Numerus clausus gibt eine Abiturnote vor, die man erreichen muss." },
+            { page: 22, word: "immatrikulieren", base: "sich immatrikulieren / einschreiben", sentence: "Bevor man studieren kann, muss man sich an der Hochschule immatrikulieren." },
+            { page: 22, word: "exmatrikulieren", base: "sich exmatrikulieren", sentence: "Es wird empfohlen, sich nach dem Studium exmatrikulieren zu lassen." },
+            
+            // Sayfa 23
+            { page: 23, word: "Erstsemester", base: "die Erstsemester", sentence: "Orientierungsveranstaltungen sind eine gute Gelegenheit für Erstsemester." },
+            { page: 23, word: "Regelstudienzeit", base: "die Regelstudienzeit", sentence: "Man sollte das Studium innerhalb der Regelstudienzeit abschließen können." },
+            { page: 23, word: "Hochschulabsolventen", base: "der Hochschulabsolvent", sentence: "Untersuchungen belegen, dass Hochschulabsolventen seltener arbeitslos sind." },
+            { page: 23, word: "promovieren", base: "promovieren / die Promotion", sentence: "Die meisten Mediziner promovieren, damit sie sich 'Dr.' nennen dürfen." },
+            { page: 23, word: "Dissertation", base: "die Dissertation / Doktorarbeit", sentence: "Doktoranden sind verpflichtet, ihre Dissertationen zu veröffentlichen." },
 
-            setTimeout(() => { document.getElementById('app-clippy').style.display = 'block'; playErrorSound(); }, 4000);
-        }
+            // Sayfa 34 (Wissenschaft)
+            { page: 34, word: "Fachgebiet", base: "das Fachgebiet", sentence: "Wissenschaftler aus verschiedenen Fachgebieten arbeiten gemeinsam an einem Projekt." },
+            { page: 34, word: "interdisziplinär", base: "interdisziplinär", sentence: "Interdisziplinäre Projekte beschäftigen sich mit Themen, die verschiedene Bereiche berühren." },
+            
+            // Sayfa 35
+            { page: 35, word: "recherchiert", base: "recherchieren", sentence: "Von einem Wissenschaftler wird erwartet, dass er gründlich recherchiert." },
+            { page: 35, word: "Erkenntnisse", base: "Erkenntnisse gewinnen", sentence: "Auch aus einem misslungenen Experiment lassen sich wichtige Erkenntnisse gewinnen." },
+            
+            // Sayfa 36
+            { page: 36, word: "Hypothese", base: "eine Hypothese aufstellen", sentence: "Eine Hypothese ist eine Vermutung, auf der die Forschung basiert." },
+            { page: 36, word: "Theorie", base: "eine Theorie widerlegen", sentence: "Die Evolutionstheorie von Lamarck wurde durch Forschungen widerlegt." },
+            
+            // Sayfa 37
+            { page: 37, word: "Beweise", base: "Beweise vorlegen", sentence: "Die Wissenschaftlerin kann stichhaltige Beweise für ihre Theorie vorlegen." },
 
-        // --- EKRAN KORUYUCU ---
-        function resetTimer(e) {
-            idleTime = 0; if(document.getElementById('screensaver').style.display === 'block') hideScreensaver();
-        }
-        function timerIncrement() {
-            if(!isDesktopActive) return;
-            idleTime++; if (idleTime > 30) { document.getElementById('screensaver').style.display = 'block'; animateScreensaverLogo(); }
-        }
-        function hideScreensaver() { document.getElementById('screensaver').style.display = 'none'; idleTime = 0; }
-        function animateScreensaverLogo() {
-            const text = document.getElementById('screensaver-text');
-            if(document.getElementById('screensaver').style.display !== 'block') return;
-            text.style.left = Math.random() * (window.innerWidth - 300) + 'px';
-            text.style.top = Math.random() * (window.innerHeight - 50) + 'px';
-            setTimeout(animateScreensaverLogo, 2000);
-        }
-
-        // --- SANAL ECE (MASAÜSTÜ PET) ---
-        let ecePetState = 0;
-        let petStats = { coffee: 50, vocal: 40, stress: 30 };
-        let ecePetClickCount = 0;
-        
-        const ecePetPhrases = [
-            { text: "Dokunma bana!", emoji: "😒" },
-            { text: "Lan gitseneee olmm!", emoji: "😡" },
-            { text: "La bırak!", emoji: "🤯" },
-            { text: "Neyse ders çalışmam lazım offffff...", emoji: "📚" },
-            { text: "Hadi bb!", emoji: "🏃‍♀️" }
+            // Sayfa 45 - Der Mensch bölümünün başı (genel limit)
         ];
 
-        function ecePetClick(e) {
-            e.stopPropagation();
-            const bubble = document.getElementById('lady-bubble');
-            const emojiSpan = document.getElementById('ece-emoji');
-            const petDiv = document.getElementById('walking-lady');
+        // State variables
+        let workingDeck = []; // Kartların anlık kopyası
+        let learnedCards = 0;
+        let currentCard = null;
+        let isFlipped = false;
 
-            if (ecePetClickCount < ecePetPhrases.length) {
-                const currentPhase = ecePetPhrases[ecePetClickCount];
-                bubble.innerHTML = currentPhase.text;
-                bubble.style.display = 'block';
-                emojiSpan.innerText = currentPhase.emoji;
-                playErrorSound();
+        // Initialize App
+        function initApp() {
+            // Kopya oluştur
+            workingDeck = [...allVocabData];
+            learnedCards = 0;
+            updateProgress();
+            shuffleDeck();
+        }
 
-                if (ecePetClickCount === ecePetPhrases.length - 1) {
-                    petDiv.style.animationDuration = "2s"; 
-                    setTimeout(() => {
-                        petDiv.style.display = 'none';
-                    }, 2000);
-                }
-
-                ecePetClickCount++;
+        // Shuffle
+        function shuffleDeck() {
+            for (let i = workingDeck.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [workingDeck[i], workingDeck[j]] = [workingDeck[j], workingDeck[i]];
+            }
+            if(workingDeck.length > 0) {
+                loadCard(workingDeck[0]);
             }
         }
 
-        function updatePetUI() {
-            document.getElementById('stat-coffee').style.width = petStats.coffee + '%';
-            document.getElementById('stat-vocal').style.width = petStats.vocal + '%';
-            document.getElementById('stat-stress').style.width = petStats.stress + '%';
+        // Load specific card
+        function loadCard(cardData) {
+            currentCard = cardData;
+            isFlipped = false;
+            
+            const cardEl = document.getElementById('flashcard');
+            const actionBtns = document.getElementById('action-buttons');
+            
+            // Reset styles
+            cardEl.classList.remove('is-flipped');
+            actionBtns.classList.add('opacity-0', 'pointer-events-none');
+            
+            // Prepare Front (Sentence with bold highlighted word)
+            // Replace the target word with a bold highlighted span
+            const regex = new RegExp(`\\b${cardData.word}\\b`, 'gi');
+            let highlightedSentence = cardData.sentence.replace(regex, `<span class="highlight">$&</span>`);
+            
+            // If the exact word wasn't found due to conjugation or punctuation, fallback to simple replace
+            if(highlightedSentence === cardData.sentence) {
+                 highlightedSentence = cardData.sentence.replace(cardData.word, `<span class="highlight">${cardData.word}</span>`);
+            }
 
-            const emoji = document.getElementById('pet-mood-emoji');
-            const txt = document.getElementById('pet-mood-text');
-            const walkingEmoji = document.getElementById('ece-emoji');
+            document.getElementById('page-number').innerText = cardData.page;
+            document.getElementById('german-sentence').innerHTML = highlightedSentence;
+            
+            // Prepare Back (Base form)
+            document.getElementById('base-form').innerText = cardData.base;
+            document.getElementById('word-form').innerText = `Metin içinde: ${cardData.word}`;
+        }
 
-            if (petStats.stress > 70) {
-                emoji.innerText = "🤯"; if(ecePetClickCount === 0) walkingEmoji.innerText = "🤯"; txt.innerText = "Ece vizeler/finaller yüzünden delirmek üzere!";
-            } else if (petStats.coffee > 80) {
-                emoji.innerText = "🥰"; if(ecePetClickCount === 0) walkingEmoji.innerText = "🥰"; txt.innerText = "Yeterli kafein alındı, Ece çok mutlu!";
-            } else if (petStats.vocal > 70) {
-                emoji.innerText = "🎤"; if(ecePetClickCount === 0) walkingEmoji.innerText = "🎤"; txt.innerText = "Kuzgun konserine bomba gibi hazır!";
-            } else if (petStats.coffee < 20) {
-                emoji.innerText = "😴"; if(ecePetClickCount === 0) walkingEmoji.innerText = "😴"; txt.innerText = "Sistem uykulu modda, acil kahve lazım!";
+        // Flip Interaction
+        function flipCard() {
+            if(isFlipped) return; // Only flip once per card load to prevent closing before answering
+            
+            const cardEl = document.getElementById('flashcard');
+            const actionBtns = document.getElementById('action-buttons');
+            
+            isFlipped = true;
+            cardEl.classList.add('is-flipped');
+            
+            // Show buttons slightly after flip animation
+            setTimeout(() => {
+                actionBtns.classList.remove('opacity-0', 'pointer-events-none');
+            }, 300);
+        }
+
+        // Handle Answer (Spaced Repetition Logic)
+        function handleAnswer(knewIt) {
+            // Prevent spam clicking
+            if(!isFlipped) return;
+
+            const currentIndex = workingDeck.indexOf(currentCard);
+            
+            if (knewIt) {
+                // Remove from deck, increase learned count
+                workingDeck.splice(currentIndex, 1);
+                learnedCards++;
             } else {
-                emoji.innerText = "👧"; if(ecePetClickCount === 0) walkingEmoji.innerText = "👧"; txt.innerText = "Ece şu an normal modda, hayat fena gitmiyor.";
+                // Move card to the end of the deck (or randomly inside it) to see it again later
+                const card = workingDeck.splice(currentIndex, 1)[0];
+                const insertIndex = Math.min(workingDeck.length, 3 + Math.floor(Math.random() * 5)); // Put it a few cards back
+                workingDeck.splice(insertIndex, 0, card);
             }
-        }
+            
+            updateProgress();
 
-        function feedPet(action) {
-            if (action === 'coffee') {
-                petStats.coffee = Math.min(100, petStats.coffee + 25);
-                petStats.stress = Math.max(0, petStats.stress - 10);
-                showCustomAlert("Ece'ye Starbucks'tan filtre kahve aldın! Enerji arttı, stres azaldı. ☕", null);
-            } else if (action === 'vocal') {
-                petStats.vocal = Math.min(100, petStats.vocal + 20);
-                petStats.coffee = Math.max(0, petStats.coffee - 15);
-                petStats.stress = Math.min(100, petStats.stress + 5);
-                showCustomAlert("Kuzgun için vokal antrenmanı yapıldı! Boğazlar açıldı fakat uykusu geldi. 🎤", null);
-            } else if (action === 'study') {
-                petStats.stress = Math.min(100, petStats.stress + 30);
-                petStats.vocal = Math.max(0, petStats.vocal - 10);
-                showCustomAlert("Almanca hazırlık/sınav derslerine çalışıldı. Stres tavan yaptı! 📚", null);
-            }
-            updatePetUI();
-        }
-
-        // --- TEMA DEĞİŞTİRME ---
-        function changeTheme(color) {
-            document.body.style.backgroundColor = color;
-            showCustomAlert("Arka plan başarıyla güncellendi!", null);
-        }
-
-        // --- INTERACTIVE MS-DOS PROMPT ---
-        function handleInteractiveDOS(e) {
-            if (e.key === 'Enter') {
-                const input = document.getElementById('dos-cmd-input');
-                const history = document.getElementById('dos-interactive-history');
-                const cmd = input.value.trim().toLowerCase();
-                let output = "";
-
-                if (cmd === 'help') {
-                    output = "Kullanılabilir komutlar:<br>- <b>kuzgun</b>: Kuzgun grubu konser detayları.<br>- <b>kahve</b>: Kahve rezervi kontrolü.<br>- <b>faruk</b>: Faruk hakkında sistem raporu.<br>- <b>clear</b>: Ekranı temizler.";
-                } else if (cmd === 'kuzgun') {
-                    output = "KUZGUN GRUBU AKTİF SOLİST: Ece<br>Durum: Harika şarkı söylüyor.<br>Sıradaki Konser: TAÜ Kampüsü (Yakında)";
-                } else if (cmd === 'kahve') {
-                    output = "Faruk'un kahve borcu bakiyesi: -150 TL.<br>Acil kahve siparişi vermeniz önerilir.";
-                } else if (cmd === 'faruk') {
-                    output = "Faruk Sürümü: v1998-Beta<br>Hata Raporu: Kötü fıkralarla belleği dolduruyor.<br>Öneri: Engellemeyi deneyin.";
-                } else if (cmd === 'clear') {
-                    history.innerHTML = "";
-                    input.value = "";
-                    return;
-                } else if (cmd === "") {
-                    output = "";
-                } else {
-                    output = "Bilinmeyen komut. Yardım almak için 'help' yazın.";
-                }
-
-                history.innerHTML += `C:\\WINDOWS>${input.value}<br>${output}<br><br>`;
-                input.value = "";
-                const win = document.getElementById('app-dos-window').querySelector('.window-content');
-                win.scrollTop = win.scrollHeight;
-            }
-        }
-
-        // --- CLIPPY ASİSTANI REAKSİYONLARI ---
-        function clippyReaction(isYes) {
-            const clippy = document.getElementById('app-clippy');
-            if (isYes) {
-                showCustomAlert("Seçiminiz reddedildi. Gerçeklerle yüzleşip Faruk'un hediyesini (Hediye.exe) açmalısın.", () => {
-                    clippy.style.display = 'none';
-                });
+            // Next card or finish
+            if (workingDeck.length > 0) {
+                loadCard(workingDeck[0]);
             } else {
-                showCustomAlert("Güzel deneme ama sistem zamanı geri saramıyor. Git bir kahve iç.", () => {
-                    clippy.style.display = 'none';
-                });
+                showCompletion();
             }
         }
 
-        // --- UYGULAMALARI AÇ / KAPAT ---
-        function openApp(id) {
-            document.querySelectorAll('.app-window').forEach(w => w.style.zIndex = 10);
-            const app = document.getElementById(id); 
-            app.style.zIndex = 100; 
-            app.style.display = 'flex';
-            if (window.innerWidth < 480) {
-                app.style.left = '2.5%';
-                app.style.top = '5%';
-                app.style.transform = 'none';
-            }
+        function updateProgress() {
+            document.getElementById('progress-text').innerText = `${allVocabData.length - workingDeck.length} / ${allVocabData.length}`;
+            document.getElementById('learned-count').innerText = learnedCards;
         }
-        function closeApp(id) { document.getElementById(id).style.display = 'none'; }
-        document.querySelectorAll('.app-window').forEach(win => {
-            win.addEventListener('mousedown', function() { document.querySelectorAll('.app-window').forEach(w => w.style.zIndex = 10); this.style.zIndex = 100; });
+
+        function showCompletion() {
+            document.querySelector('.scene').classList.add('hidden');
+            document.getElementById('action-buttons').classList.add('hidden');
+            document.getElementById('completion-screen').classList.remove('hidden');
+            document.getElementById('completion-screen').classList.add('flex');
+        }
+
+        function resetApp() {
+            document.querySelector('.scene').classList.remove('hidden');
+            document.getElementById('action-buttons').classList.remove('hidden');
+            document.getElementById('completion-screen').classList.add('hidden');
+            document.getElementById('completion-screen').classList.remove('flex');
+            initApp();
+        }
+
+        // Add keyboard support (Space to flip, Left/Right arrows for answers)
+        document.addEventListener('keydown', function(event) {
+            if (document.getElementById('completion-screen').classList.contains('hidden') === false) return;
+
+            if (event.code === 'Space') {
+                event.preventDefault(); // Prevent page scroll
+                if(!isFlipped) flipCard();
+            } else if (event.code === 'ArrowLeft' && isFlipped) {
+                handleAnswer(false);
+            } else if (event.code === 'ArrowRight' && isFlipped) {
+                handleAnswer(true);
+            }
         });
 
-        function showContextMenu(e) {
-            if(!isDesktopActive) return true;
-            e.preventDefault();
-            const menu = document.getElementById('context-menu');
-            menu.style.display = 'block'; menu.style.left = e.pageX + 'px'; menu.style.top = e.pageY + 'px';
-            return false;
-        }
-        function closeContextMenu() { document.getElementById('context-menu').style.display = 'none'; }
-
-        // --- TAÜ OBS ---
-        function startTauOBS() {
-            document.getElementById('tau-btn').disabled = true;
-            let w = 0;
-            let bar = document.getElementById('tau-prog-bar');
-            let intv = setInterval(() => {
-                w += 10; bar.style.width = w + '%';
-                if(w >= 100) {
-                    clearInterval(intv);
-                    showCustomAlert("HATA: Daha fazla ders çalışmalısın yoksa OBS çöker.", () => {
-                        bar.style.width = '0%';
-                        document.getElementById('tau-btn').disabled = false;
-                    });
-                }
-            }, 300);
-        }
-
-        // --- GERÇEK YAŞ HESAPLAYICI ---
-        function calcRealAge() {
-            const input = document.getElementById('birth-year').value;
-            if(!input) { showCustomAlert("Yılını yaz önce!", null); return; }
-            showCustomAlert("HATA: Faruk senin 19 mu yoksa 20 mi olduğuna karar veremediği için sistem hata verdi. Biyolojik yaş: 20 civarı bir kraliçesiniz.", null);
-        }
-
-        // --- MSN MESSENGER ---
-        let msnOpened = false;
-        const fıkraMessages = [
-            { sender: 'Faruk', text: "Fıkrayı oku ama yargılama." },
-            { sender: 'Faruk', text: "Nereden geldi aklıma bilmiyorum." },
-            { sender: 'Faruk', text: "Nasreddin Hoca pazardan kuş almış, kaz da olabilir hatırlamıyorum." },
-            { sender: 'Faruk', text: "Eve götüreyim, benim Frau pişirsin demiş." },
-            { sender: 'Faruk', text: "Güzel olur." },
-            { sender: 'Faruk', text: "Neyse." },
-            { sender: 'Faruk', text: "Akşam olmuş, Frau yapmış kazı kuşu." },
-            { sender: 'Faruk', text: "Sofraya getirmiş." },
-            { sender: 'Faruk', text: "Hoca 'Bu ne?' demiş, 'Benim aldığım kuş kaz heybetliydi bayağı güzeldi.'" },
-            { sender: 'Faruk', text: "Frau da demiş ki: 'Senin getirdiğin kuş uçuyordu...'" },
-            { sender: 'Faruk', text: "Bu yerde tabakta.'" }
-        ];
-
-        function openMSN() {
-            openApp('app-msn');
-            if(msnOpened) return; msnOpened = true;
-            
-            const chatBox = document.getElementById('msn-chat-box');
-            let i = 0;
-
-            function sendNextMessage() {
-                if(i < fıkraMessages.length) {
-                    const typingIndicator = document.createElement('div');
-                    typingIndicator.id = 'msn-typing';
-                    typingIndicator.className = 'chat-sys';
-                    typingIndicator.innerText = "Faruk yazıyor...";
-                    chatBox.appendChild(typingIndicator);
-                    chatBox.scrollTop = chatBox.scrollHeight;
-
-                    setTimeout(() => {
-                        const typing = document.getElementById('msn-typing');
-                        if (typing) typing.remove();
-
-                        const msgDiv = document.createElement('div');
-                        msgDiv.className = 'chat-msg';
-                        msgDiv.innerHTML = `<strong style="color:blue;">Faruk:</strong> ${fıkraMessages[i].text}`;
-                        chatBox.appendChild(msgDiv);
-                        chatBox.scrollTop = chatBox.scrollHeight;
-                        playErrorSound();
-
-                        i++;
-                        setTimeout(sendNextMessage, 1500);
-                    }, 1200);
-                } else {
-                    setTimeout(() => {
-                        const nudgeDiv = document.createElement('div');
-                        nudgeDiv.className = 'chat-sys';
-                        nudgeDiv.style.color = 'red';
-                        nudgeDiv.style.fontWeight = 'bold';
-                        nudgeDiv.innerText = "Faruk size bir TİTREŞİM gönderdi!";
-                        chatBox.appendChild(nudgeDiv);
-                        chatBox.scrollTop = chatBox.scrollHeight;
-
-                        document.body.classList.add('shake-active');
-                        playErrorSound();
-                        setTimeout(() => { 
-                            document.body.classList.remove('shake-active'); 
-                            const blockBtn = document.getElementById('block-faruk-btn');
-                            blockBtn.disabled = false;
-                        }, 1000);
-                    }, 1000);
-                }
-            }
-
-            setTimeout(sendNextMessage, 1000);
-        }
-
-        function triggerMsnBlock() {
-            const chatBox = document.getElementById('msn-chat-box');
-            const blockBtn = document.getElementById('block-faruk-btn');
-            blockBtn.disabled = true;
-
-            const blockSys = document.createElement('div');
-            blockSys.className = 'chat-sys';
-            blockSys.style.color = 'darkred';
-            blockSys.style.fontWeight = 'bold';
-            blockSys.innerText = "Faruk engellendi. (Zaten fıkraları da kötüydü)";
-            chatBox.appendChild(blockSys);
-            chatBox.scrollTop = chatBox.scrollHeight;
-            playErrorSound();
-
-            setTimeout(() => {
-                showCustomAlert("SİSTEM UYARISI: 'Sonsuz Arkadaşlık Protokolü' devrede olduğundan engelleme iptal edilmiştir.", () => {
-                    blockSys.remove();
-                    
-                    const unblockSys = document.createElement('div');
-                    unblockSys.className = 'chat-sys';
-                    unblockSys.style.color = 'green';
-                    unblockSys.innerText = "Sistem engeli otomatik olarak kaldırdı.";
-                    chatBox.appendChild(unblockSys);
-
-                    setTimeout(() => {
-                        const farukResponse = document.createElement('div');
-                        farukResponse.className = 'chat-msg';
-                        farukResponse.innerHTML = `<strong style="color:blue;">Faruk:</strong> Beni engelleyebileceğini mi sandın? 😂`;
-                        chatBox.appendChild(farukResponse);
-                        chatBox.scrollTop = chatBox.scrollHeight;
-                        
-                        document.body.classList.add('shake-active');
-                        playErrorSound();
-                        setTimeout(() => { document.body.classList.remove('shake-active'); }, 1000);
-
-                    }, 1000);
-                });
-            }, 2000);
-        }
-
-        // --- GELECEĞİ GÖR SİSTEMİ ---
-        function startFortune() {
-            document.getElementById('fortune-btn').disabled = true;
-            const bar = document.getElementById('fortune-bar');
-            let w = 0;
-            let intv = setInterval(() => {
-                w += 10; bar.style.width = w + '%';
-                if(w >= 100) {
-                    clearInterval(intv);
-                    const fortuneText = "Geleceği inşa etme telaşı, insanı bugününün yabancısı yapıyor. Sürekli 'sonra ne olacak?' diye sormak, ruhu hiç gelmeyecek bir zamanın esiri etmekten farksız. Oysa özgürlük, geleceğin tüm ihtimallerini bir kenara bırakıp sadece şu anın hafifliğine teslim olabilmektir. Hayat kontrol edilmek için fazla büyük, planlanmak için fazla canlı. Kendini o belirsiz senaryolardan çöz ve tam şu anın ritmine bırak. Gerçek olan tek şey, tam şu an hissettiklerindir.";
-                    showCustomAlert(fortuneText, () => {
-                        bar.style.width = '0%';
-                        document.getElementById('fortune-btn').disabled = false;
-                    });
-                }
-            }, 300);
-        }
-
-        // --- KONSER VİDEOSU ---
-        let videoInterval = null;
-        let isVideoPlaying = false;
-        function playConcertVideo() {
-            const btn = document.getElementById('play-video-btn');
-            const frames = document.querySelectorAll('.concert-frame');
-            let currentFrame = 0;
-            if(isVideoPlaying) {
-                clearInterval(videoInterval); isVideoPlaying = false; btn.innerText = "▶ Videoyu Oynat";
-                frames.forEach(f => f.classList.remove('active')); frames[0].classList.add('active'); 
-            } else {
-                isVideoPlaying = true; btn.innerText = "⏸ Durdur";
-                videoInterval = setInterval(() => {
-                    frames.forEach(f => f.classList.remove('active')); frames[currentFrame].classList.add('active');
-                    currentFrame++; if(currentFrame >= frames.length) currentFrame = 0;
-                }, 200);
-            }
-        }
-
-        // --- HEDİYE KUTUSU ---
-        let boxScale = 1.0, giftClicks = 0;
-        function openGift() {
-            giftClicks++; boxScale -= 0.2;
-            const box = document.getElementById('gift-box'), msg = document.getElementById('gift-msg'), btn = document.getElementById('gift-open-btn');
-            if(giftClicks === 1) msg.innerText = "Bir kat daha açman lazım..."; else if(giftClicks === 2) msg.innerText = "Az kaldı dayan!";
-            if (boxScale > 0.1) { box.style.transform = `scale(${boxScale})`; } 
-            else {
-                box.style.display = 'none'; btn.style.display = 'none';
-                msg.innerHTML = `<div style="background:#ffffe1; border:2px dashed #d00; padding:15px; text-align:center; color: black;"><span style="font-size:24px;">☕</span><br><br><strong>TEBRİKLER!</strong><br>Faruk'tan 1 Adet Bedava Kahve kazandınız.<br><br><strong>Kupon Kodu:</strong><br><span style="font-size:16px; color:#000080; font-family:monospace; background:#fff; padding:5px;">ECE_YASLANDI_2026</span><br><br><em>(Gidip Faruk'tan tahsil et!)</em></div>`;
-            }
-        }
-
-        // --- PARTİ MODU ---
-        function startPartyMode() {
-            if(!isDesktopActive) return;
-            playPartySound();
-            const overlay = document.getElementById('party-overlay');
-            const confettiContainer = document.getElementById('confetti-container');
-            
-            overlay.style.display = 'block';
-            confettiContainer.style.display = 'block';
-            confettiContainer.innerHTML = ''; 
-
-            const colors = ['#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f'];
-            for(let i=0; i<100; i++) {
-                let conf = document.createElement('div');
-                conf.className = 'confetti';
-                conf.style.left = Math.random() * 100 + 'vw';
-                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                conf.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                confettiContainer.appendChild(conf);
-            }
-
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                confettiContainer.style.display = 'none';
-                confettiContainer.innerHTML = '';
-            }, 5000);
-        }
-
-        // --- GÖREV ÇUBUĞU SAATİ VE MENÜ ---
-        function updateTime() { document.getElementById('time-display').innerText = new Date().getHours().toString().padStart(2, '0') + ':' + new Date().getMinutes().toString().padStart(2, '0'); }
-        function toggleStartMenu() { const m = document.getElementById('start-menu'); m.style.display = m.style.display === 'flex' ? 'none' : 'flex'; }
-
-        // --- WINAMP MÜZİK MOTORU ---
-        let audioCtx = null, isPlaying = false, loopTimeout = null;
-
-        function playTrack(trackNumber) {
-            stopAudio();
-            isPlaying = true;
-            try {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-                
-                const titleScreen = document.getElementById('scrolling-text');
-                const timerText = document.getElementById('timer');
-                timerText.innerText = "PLAYING";
-
-                let melody = [];
-                if (trackNumber === 1) {
-                    titleScreen.innerText = "8-Bit_Iyi_Ki_Dogdun.wav";
-                    melody = [[196, 0.3], [196, 0.3], [220, 0.6], [196, 0.6], [261.6, 0.6], [246.9, 1.2], [196, 0.3], [196, 0.3], [220, 0.6], [196, 0.6], [293.6, 0.6], [261.6, 1.2], [196, 0.3], [196, 0.3], [392, 0.6], [329.6, 0.6], [261.6, 0.6], [246.9, 0.6], [220, 1.2], [349.2, 0.3], [349.2, 0.3], [329.6, 0.6], [261.6, 0.6], [293.6, 0.6], [261.6, 1.2]];
-                } else if (trackNumber === 2) {
-                    titleScreen.innerText = "Kuzgun_Rock_Anthem.wav";
-                    melody = [
-                        [220, 0.2], [220, 0.2], [293, 0.4], [220, 0.2], [329, 0.4],
-                        [220, 0.2], [220, 0.2], [392, 0.4], [349, 0.4], [329, 0.4],
-                        [220, 0.2], [220, 0.2], [293, 0.4], [220, 0.2], [440, 0.6],
-                        [392, 0.3], [349, 0.3], [329, 0.6]
-                    ];
-                }
-
-                let startTime = audioCtx.currentTime;
-                melody.forEach((note) => {
-                    let osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
-                    osc.type = (trackNumber === 2) ? 'sawtooth' : 'square';
-                    osc.frequency.value = note[0];
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    gain.gain.setValueAtTime(0, startTime);
-                    gain.gain.linearRampToValueAtTime(0.08, startTime + 0.05);
-                    gain.gain.linearRampToValueAtTime(0, startTime + note[1] - 0.05);
-                    osc.start(startTime);
-                    osc.stop(startTime + note[1]);
-                    startTime += note[1];
-                });
-
-                loopTimeout = setTimeout(() => {
-                    if (isPlaying) {
-                        isPlaying = false;
-                        playTrack(trackNumber);
-                    }
-                }, (startTime - audioCtx.currentTime) * 1000 + 500);
-
-            } catch (e) {
-                console.warn("Winamp çalma hatası:", e);
-                isPlaying = false;
-            }
-        }
-
-        // --- PAINT 98 LOGIC ---
-        let canvas, ctx, isDrawing = false;
-        const colors = ['#000000', '#ffffff', '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
-        let selectedColor = '#000000';
-
-        function initPaint() {
-            canvas = document.getElementById('paint-canvas');
-            ctx = canvas.getContext('2d');
-            
-            canvas.width = canvas.parentElement.clientWidth - 30;
-            canvas.height = 200;
-
-            const colorsContainer = document.getElementById('paint-colors-container');
-            colorsContainer.innerHTML = "";
-            colors.forEach(color => {
-                const div = document.createElement('div');
-                div.className = 'paint-color';
-                div.style.backgroundColor = color;
-                div.onclick = () => {
-                    selectedColor = color;
-                    showCustomAlert(`Renk değiştirildi: ${color}`, null);
-                };
-                colorsContainer.appendChild(div);
-            });
-
-            canvas.addEventListener('mousedown', startPaintDrawing);
-            canvas.addEventListener('mousemove', paintDraw);
-            canvas.addEventListener('mouseup', stopPaintDrawing);
-
-            canvas.addEventListener('touchstart', (e) => {
-                const t = e.touches[0];
-                startPaintDrawing({ clientX: t.clientX, clientY: t.clientY });
-            }, { passive: true });
-            canvas.addEventListener('touchmove', (e) => {
-                const t = e.touches[0];
-                paintDraw({ clientX: t.clientX, clientY: t.clientY });
-            }, { passive: true });
-            canvas.addEventListener('touchend', stopPaintDrawing);
-        }
-
-        function startPaintDrawing(e) {
-            isDrawing = true;
-            ctx.beginPath();
-            const rect = canvas.getBoundingClientRect();
-            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
-        }
-
-        function paintDraw(e) {
-            if (!isDrawing) return;
-            const rect = canvas.getBoundingClientRect();
-            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
-            ctx.strokeStyle = selectedColor;
-            ctx.lineWidth = 3;
-            ctx.lineCap = 'round';
-            ctx.stroke();
-        }
-
-        function stopPaintDrawing() {
-            isDrawing = false;
-        }
-
-        function clearPaintCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-
-        // --- SINAVSAVAR (MAYIN TARLASI) LOGIC ---
-        const minesSize = 8;
-        const mineCount = 10;
-        let minesBoard = [];
-        let revealedCount = 0;
-
-        function initMinesweeper() {
-            const grid = document.getElementById('mines-grid');
-            grid.innerHTML = "";
-            minesBoard = [];
-            revealedCount = 0;
-            document.getElementById('mines-status').innerText = "Oyun devam ediyor...";
-
-            for (let r = 0; r < minesSize; r++) {
-                minesBoard[r] = [];
-                for (let c = 0; c < minesSize; c++) {
-                    minesBoard[r][c] = { mine: false, revealed: false, count: 0, r, c };
-                }
-            }
-
-            let placedMines = 0;
-            while (placedMines < mineCount) {
-                let r = Math.floor(Math.random() * minesSize);
-                let c = Math.floor(Math.random() * minesSize);
-                if (!minesBoard[r][c].mine) {
-                    minesBoard[r][c].mine = true;
-                    placedMines++;
-                }
-            }
-
-            for (let r = 0; r < minesSize; r++) {
-                for (let c = 0; c < minesSize; c++) {
-                    if (!minesBoard[r][c].mine) {
-                        let count = 0;
-                        for (let dr = -1; dr <= 1; dr++) {
-                            for (let dc = -1; dc <= 1; dc++) {
-                                if (r+dr >= 0 && r+dr < minesSize && c+dc >= 0 && c+dc < minesSize) {
-                                    if (minesBoard[r+dr][c+dc].mine) count++;
-                                }
-                            }
-                        }
-                        minesBoard[r][c].count = count;
-                    }
-                }
-            }
-
-            for (let r = 0; r < minesSize; r++) {
-                for (let c = 0; c < minesSize; c++) {
-                    const cell = document.createElement('div');
-                    cell.className = 'mines-cell';
-                    cell.id = `cell-${r}-${c}`;
-                    cell.onclick = () => revealCell(r, c);
-                    grid.appendChild(cell);
-                }
-            }
-        }
-
-        function revealCell(r, c) {
-            const cellData = minesBoard[r][c];
-            if (cellData.revealed) return;
-
-            const el = document.getElementById(`cell-${r}-${c}`);
-            cellData.revealed = true;
-            el.classList.add('revealed');
-
-            if (cellData.mine) {
-                el.classList.add('mine');
-                el.innerText = "💣";
-                document.getElementById('mines-status').innerText = "KAYBETTİNİZ!";
-                revealAllMines();
-                showCustomAlert("EYVAH! Bütünleme Sınavına Kaldınız! Git biraz kahve içip tekrar çalış.", null);
-            } else {
-                revealedCount++;
-                el.innerText = cellData.count > 0 ? cellData.count : "☕";
-                if (cellData.count === 0) {
-                    for (let dr = -1; dr <= 1; dr++) {
-                        for (let dc = -1; dc <= 1; dc++) {
-                            if (r+dr >= 0 && r+dr < minesSize && c+dc >= 0 && c+dc < minesSize) {
-                                revealCell(r+dr, c+dc);
-                            }
-                        }
-                    }
-                }
-
-                if (revealedCount === (minesSize * minesSize) - mineCount) {
-                    document.getElementById('mines-status').innerText = "KAZANDINIZ!";
-                    showCustomAlert("TEBRİKLER! Tüm sınavları savuşturdunuz ve kahveleri topladınız!", null);
-                }
-            }
-        }
-
-        function revealAllMines() {
-            for (let r = 0; r < minesSize; r++) {
-                for (let c = 0; c < minesSize; c++) {
-                    if (minesBoard[r][c].mine) {
-                        const el = document.getElementById(`cell-${r}-${c}`);
-                        el.classList.add('mine');
-                        el.innerText = "💣";
-                    }
-                }
-            }
-        }
-
-        // --- SAHTE TARAYICI (ECE-NET EXPLORER) LOGIC ---
-        // Gıybet sekmesindeki ilgili "kahve_kolik_ece" itirafını "sehnsuchtchen: Umarım 19 yaşımı özlemem." olarak güncelledik.
-        const fakeWebsites = {
-            giybet: `
-                <div style="font-family:sans-serif; line-height:1.4;">
-                    <h2 style="color:#a00000; border-bottom:2px solid #a00000; margin-top:0;">🗣️ TAÜ İtiraf & Gıybet Kutusu</h2>
-                    <p><b>giybet_ci_34:</b> <i>"Almanca hazırlıktaki o meşhur hoca yine sınıfta Almanca konuşmayanları tespit edip eksi verdi, kurtarın bizi!"</i></p>
-                    <p><b>sehnsuchtchen:</b> <i>"Umarım 19 yaşımı özlemem."</i></p>
-                    <p><b>rocker_boy_99:</b> <i>"Kuzgun grubunun solistinin vokal gücü inanılmaz, dün kütüphanede bile şarkı mırıldanıyordu."</i></p>
-                    <p style="font-size:10px; color:#888;">Son güncelleme: 11 Haziran 2026</p>
-                </div>
-            `,
-            kuzgun: `
-                <div style="font-family:sans-serif; line-height:1.4; text-align:center;">
-                    <h2 style="color:#000080; border-bottom:2px solid #000080; margin-top:0;">🎸 KUZGUN Band Resmi Web Sitesi</h2>
-                    <p><b>Mevcut Kadro:</b> Solist Ece, Akustik Gitar Faruk (Kötü Fıkralarla Ritmi Bozuyor)</p>
-                    <hr>
-                    <h3 style="margin-bottom:5px;">📅 Turne Programı 2026</h3>
-                    <ul style="list-style:none; padding:0; font-size:11px;">
-                        <li>🎤 <b>11 Haziran:</b> Ece'nin Yaşlanma Günü Konseri (TAÜ Çimler)</li>
-                        <li>🎸 <b>18 Haziran:</b> Kadıköy Sahne (Faruk'un Kahve sponsorluğunda)</li>
-                        <li>🍺 <b>25 Haziran:</b> Berlin Olimpiyat Stadı (Biletler tükendi!)</li>
-                    </ul>
-                </div>
-            `,
-            kahve: `
-                <div style="font-family:sans-serif; line-height:1.4; text-align:center;">
-                    <h2 style="color:#5c3a21; border-bottom:2px solid #5c3a21; margin-top:0;">☕ Faruk'un Kahve Dağıtım Sistemi</h2>
-                    <p>Bedava kahve kodunu buraya girerek siparişinizi oluşturun:</p>
-                    <input type="text" id="coupon-check-input" class="win-input" placeholder="Kupon Kodunu Yazınız..." style="text-align:center; max-width:200px; margin:10px auto;">
-                    <br>
-                    <button class="win-btn" onclick="checkFakeCoupon()">Siparişi Doğrula</button>
-                    <p id="coupon-result" style="font-weight:bold; margin-top:10px;"></p>
-                </div>
-            `
-        };
-
-        function switchBrowserTab(tabName) {
-            document.querySelectorAll('.browser-tab').forEach(t => t.classList.remove('active'));
-            document.getElementById(`tab-${tabName}`).classList.add('active');
-            
-            const urlInput = document.getElementById('browser-url');
-            urlInput.value = `http://tau-${tabName}.com`;
-            if (tabName === 'kahve') urlInput.value = `http://faruk-kahve.net`;
-
-            document.getElementById('browser-inner-content').innerHTML = fakeWebsites[tabName];
-        }
-
-        function checkFakeCoupon() {
-            const val = document.getElementById('coupon-check-input').value.trim();
-            const res = document.getElementById('coupon-result');
-            if (val === "ECE_YASLANDI_2026") {
-                res.style.color = "green";
-                res.innerText = "✓ SİPARİŞ ONAYLANDI! Faruk'un kredi kartından 1 adet filtre kahve tahsil edildi. Faruk'u darlamaya başlayabilirsiniz.";
-            } else {
-                res.style.color = "red";
-                res.innerText = "✗ GEÇERSİZ KOD. Doğru kod için Post-it notlarına bakın.";
-            }
-        }
+        // Start the application
+        window.onload = initApp;
     </script>
 </body>
 </html>
-
-
