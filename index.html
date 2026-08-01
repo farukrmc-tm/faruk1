@@ -1,834 +1,897 @@
-html_code = '''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StudySet - Flashcard & Quiz</title>
+<title>TestDaF Wortschatzheft — 1.1 Schule und Bildung</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
---primary:#4257B2;--primary-dark:#3445A0;--primary-light:#E8EBF7;
---accent:#FFCD1F;--green:#23B26D;--red:#E93323;--orange:#FF9600;
---bg:#F6F7FB;--card:#fff;--text:#1A1D28;--text2:#585F74;--text3:#939BB4;
---border:#D9DDE8;--shadow:0 2px 8px rgba(0,0,0,.08);
---radius:12px;--font:'Segoe UI',system-ui,-apple-system,sans-serif;
-}
-.dark{
---bg:#1A1D28;--card:#2A2D3A;--text:#E8E9ED;--text2:#939BB4;--text3:#585F74;
---border:#3A3D4A;--shadow:0 2px 8px rgba(0,0,0,.3);--primary-light:#2A2D4A;
-}
-body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s}
-a{color:var(--primary);text-decoration:none}
-button{cursor:pointer;font-family:var(--font);border:none;outline:none}
-input,textarea,select{font-family:var(--font);outline:none}
+  :root{
+    --paper:#f3efe4;
+    --paper-dark:#e8e1cf;
+    --ink:#26241f;
+    --ink-soft:#5c574a;
+    --stamp-green:#1f5c4d;
+    --stamp-red:#a33b2e;
+    --line:#c9bfa2;
+    --gold:#a8823a;
+    --box-bg:#fffdf7;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at top left, rgba(31,92,77,0.05), transparent 50%),
+      var(--paper);
+    color:var(--ink);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    min-height:100vh;
+  }
+  .sheet{
+    max-width:760px;
+    margin:0 auto;
+    padding:28px 22px 80px;
+  }
+  header.form-head{
+    border:2px solid var(--ink);
+    background:var(--box-bg);
+    padding:18px 20px;
+    position:relative;
+    margin-bottom:22px;
+  }
+  header.form-head::before{
+    content:"AZ. 1.1 / SCHULE UND BILDUNG";
+    position:absolute;
+    top:-11px; left:16px;
+    background:var(--paper);
+    padding:0 8px;
+    font-family: 'Courier New', monospace;
+    font-size:11px;
+    letter-spacing:2px;
+    color:var(--ink-soft);
+  }
+  header.form-head h1{
+    margin:6px 0 4px;
+    font-size:1.5rem;
+    letter-spacing:0.5px;
+  }
+  header.form-head .sub{
+    font-family:'Courier New', monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    letter-spacing:0.5px;
+  }
+  .stats-row{
+    display:flex;
+    gap:10px;
+    margin-top:14px;
+    flex-wrap:wrap;
+  }
+  .stat-box{
+    border:1px solid var(--line);
+    background:var(--paper-dark);
+    padding:8px 12px;
+    font-family:'Courier New', monospace;
+    font-size:12px;
+    flex:1;
+    min-width:100px;
+  }
+  .stat-box b{display:block; font-size:1.3rem; font-family:Georgia,serif; color:var(--stamp-green);}
 
-/* HEADER */
-.header{background:var(--primary);color:#fff;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.15)}
-.header .logo{font-size:22px;font-weight:800;letter-spacing:-0.5px;display:flex;align-items:center;gap:8px}
-.header .logo svg{width:28px;height:28px}
-.header-actions{display:flex;align-items:center;gap:12px}
-.btn-icon{background:rgba(255,255,255,.15);border:none;color:#fff;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;transition:background .2s}
-.btn-icon:hover{background:rgba(255,255,255,.3)}
+  nav.tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:18px;
+    flex-wrap:wrap;
+  }
+  nav.tabs button{
+    font-family:'Courier New', monospace;
+    font-size:12px;
+    letter-spacing:0.5px;
+    padding:9px 14px;
+    background:var(--paper-dark);
+    border:1px solid var(--ink);
+    color:var(--ink);
+    cursor:pointer;
+    text-transform:uppercase;
+  }
+  nav.tabs button.active{
+    background:var(--stamp-green);
+    color:var(--paper);
+    border-color:var(--stamp-green);
+  }
+  nav.tabs button:hover:not(.active){ background:#ddd4b8; }
 
-/* NAV TABS */
-.nav-tabs{display:flex;gap:4px;background:var(--card);border-bottom:1px solid var(--border);padding:0 24px;overflow-x:auto}
-.nav-tab{padding:14px 20px;font-size:14px;font-weight:600;color:var(--text2);border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap;background:none}
-.nav-tab:hover{color:var(--primary)}
-.nav-tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+  .panel{
+    display:none;
+    border:1px solid var(--line);
+    background:var(--box-bg);
+    padding:20px;
+    min-height:320px;
+  }
+  .panel.active{display:block;}
 
-/* CONTAINER */
-.container{max-width:900px;margin:0 auto;padding:24px 16px}
+  .card-tag{
+    font-family:'Courier New', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  .word-title{
+    font-size:1.6rem;
+    color:var(--stamp-green);
+    margin:0 0 4px;
+  }
+  .meta-line{
+    font-family:'Courier New', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+  .cloze-sentence{
+    font-size:1.15rem;
+    line-height:1.7;
+    margin:18px 0 6px;
+    padding:14px 16px;
+    background:var(--paper-dark);
+    border-left:3px solid var(--stamp-green);
+  }
+  .cloze-sentence .blank{
+    display:inline-block;
+    min-width:110px;
+    border-bottom:2px dotted var(--ink);
+    text-align:center;
+    color:var(--stamp-red);
+    font-weight:bold;
+  }
+  .translation{
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    font-style:italic;
+    margin-bottom:16px;
+  }
+  input[type=text]{
+    font-family:Georgia, serif;
+    font-size:1.05rem;
+    padding:9px 12px;
+    width:100%;
+    max-width:320px;
+    border:1px solid var(--ink);
+    background:#fff;
+    margin-right:8px;
+  }
+  .btn{
+    font-family:'Courier New', monospace;
+    font-size:12px;
+    letter-spacing:0.5px;
+    padding:10px 16px;
+    background:var(--stamp-green);
+    color:var(--paper);
+    border:1px solid var(--stamp-green);
+    cursor:pointer;
+    text-transform:uppercase;
+  }
+  .btn.secondary{
+    background:transparent;
+    color:var(--ink);
+    border:1px solid var(--ink);
+  }
+  .btn:hover{ opacity:0.85; }
+  .btn:disabled{ opacity:0.4; cursor:default; }
 
-/* BUTTONS */
-.btn{padding:12px 24px;border-radius:8px;font-size:14px;font-weight:700;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
-.btn-primary{background:var(--primary);color:#fff}
-.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
-.btn-outline{background:transparent;border:2px solid var(--primary);color:var(--primary)}
-.btn-outline:hover{background:var(--primary-light)}
-.btn-green{background:var(--green);color:#fff}
-.btn-green:hover{background:#1E9A5E}
-.btn-red{background:var(--red);color:#fff}
-.btn-red:hover{background:#D12B1C}
-.btn-sm{padding:8px 16px;font-size:13px}
-.btn-lg{padding:16px 32px;font-size:16px}
-.btn-block{width:100%;justify-content:center}
-.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+  .row{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:10px;}
 
-/* CARDS */
-.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);padding:24px;margin-bottom:16px}
+  .feedback{
+    margin-top:16px;
+    padding:12px 14px;
+    font-size:0.95rem;
+    display:none;
+    border:1px dashed var(--line);
+  }
+  .feedback.show{display:block;}
+  .feedback.ok{ border-color:var(--stamp-green); }
+  .feedback.bad{ border-color:var(--stamp-red); }
 
-/* HOME - SET LIST */
-.set-item{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:var(--card);border-radius:var(--radius);border:1px solid var(--border);margin-bottom:12px;cursor:pointer;transition:all .2s;box-shadow:var(--shadow)}
-.set-item:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:0 4px 16px rgba(66,87,178,.15)}
-.set-info h3{font-size:17px;font-weight:700;margin-bottom:4px}
-.set-info p{font-size:13px;color:var(--text2)}
-.set-count{background:var(--primary-light);color:var(--primary);padding:6px 14px;border-radius:20px;font-size:13px;font-weight:700}
-.set-actions{display:flex;gap:8px;margin-left:16px}
+  .stamp{
+    display:inline-block;
+    font-family:'Courier New', monospace;
+    font-weight:bold;
+    letter-spacing:2px;
+    padding:6px 14px;
+    border:3px solid;
+    transform:rotate(-4deg);
+    margin-bottom:8px;
+    font-size:0.85rem;
+  }
+  .stamp.ok{ color:var(--stamp-green); border-color:var(--stamp-green); }
+  .stamp.bad{ color:var(--stamp-red); border-color:var(--stamp-red); }
 
-/* CREATE/EDIT SET */
-.form-group{margin-bottom:20px}
-.form-group label{display:block;font-size:14px;font-weight:700;margin-bottom:8px;color:var(--text)}
-.form-input{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:8px;font-size:15px;background:var(--card);color:var(--text);transition:border .2s}
-.form-input:focus{border-color:var(--primary)}
-textarea.form-input{resize:vertical;min-height:80px}
-.term-row{display:grid;grid-template-columns:1fr 1fr 40px;gap:12px;margin-bottom:12px;align-items:start}
-.term-row .form-input{min-height:60px}
-.remove-term{background:var(--red);color:#fff;border:none;width:36px;height:36px;border-radius:8px;font-size:18px;display:flex;align-items:center;justify-content:center;margin-top:12px}
-.remove-term:hover{background:#D12B1C}
+  .word-detail{
+    font-size:0.92rem;
+    line-height:1.6;
+    color:var(--ink-soft);
+    margin-top:6px;
+  }
+  .word-detail b{ color:var(--ink); }
 
-/* FLASHCARD */
-.flashcard-container{perspective:1200px;width:100%;max-width:600px;margin:0 auto;height:340px;cursor:pointer}
-.flashcard{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,.2,.2,1)}
-.flashcard.flipped{transform:rotateY(180deg)}
-.flashcard-face{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;font-size:24px;font-weight:600;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.1);border:2px solid var(--border)}
-.flashcard-front{background:var(--card);color:var(--text)}
-.flashcard-back{background:var(--primary);color:#fff;transform:rotateY(180deg)}
-.flashcard-label{position:absolute;top:16px;left:20px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;opacity:.5}
-.flashcard-hint{position:absolute;bottom:16px;font-size:12px;opacity:.4}
+  .empty-state{
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ink-soft);
+    font-family:'Courier New', monospace;
+    font-size:13px;
+  }
 
-.fc-controls{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:24px}
-.fc-nav{width:48px;height:48px;border-radius:50%;background:var(--card);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--text);transition:all .2s}
-.fc-nav:hover{border-color:var(--primary);color:var(--primary)}
-.fc-nav:disabled{opacity:.3;cursor:not-allowed}
-.fc-counter{font-size:16px;font-weight:700;color:var(--text2);min-width:80px;text-align:center}
-.fc-progress{width:100%;max-width:600px;margin:20px auto 0;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
-.fc-progress-bar{height:100%;background:var(--primary);border-radius:3px;transition:width .3s}
-.fc-bottom-btns{display:flex;justify-content:center;gap:12px;margin-top:20px}
-.fc-star{font-size:22px;background:none;border:none;color:var(--text3);transition:color .2s}
-.fc-star.active{color:var(--accent)}
+  .box-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(90px,1fr));
+    gap:10px;
+    margin-top:10px;
+  }
+  .box-cell{
+    border:1px solid var(--line);
+    background:var(--paper-dark);
+    padding:10px 8px;
+    text-align:center;
+    font-family:'Courier New', monospace;
+    font-size:11px;
+  }
+  .box-cell b{ display:block; font-size:1.4rem; font-family:Georgia,serif; color:var(--stamp-green); }
 
-/* LEARN MODE */
-.learn-card{max-width:600px;margin:0 auto;text-align:center}
-.learn-prompt{font-size:22px;font-weight:700;margin-bottom:8px}
-.learn-sub{font-size:14px;color:var(--text2);margin-bottom:24px}
-.learn-input-wrap{position:relative;margin-bottom:16px}
-.learn-input{width:100%;padding:16px 20px;border:2px solid var(--border);border-radius:12px;font-size:18px;text-align:center;background:var(--card);color:var(--text)}
-.learn-input:focus{border-color:var(--primary)}
-.learn-input.correct{border-color:var(--green);background:#E8F8EF}
-.learn-input.wrong{border-color:var(--red);background:#FDE8E6}
-.learn-result{padding:16px;border-radius:12px;margin-bottom:16px;font-weight:600;font-size:16px;display:none}
-.learn-result.show{display:block}
-.learn-result.correct{background:#E8F8EF;color:var(--green);border:2px solid var(--green)}
-.learn-result.wrong{background:#FDE8E6;color:var(--red);border:2px solid var(--red)}
-.learn-progress-bar{width:100%;height:8px;background:var(--border);border-radius:4px;margin-bottom:24px;overflow:hidden}
-.learn-progress-fill{height:100%;background:var(--green);border-radius:4px;transition:width .4s}
-.learn-stats{display:flex;justify-content:center;gap:32px;margin-top:20px}
-.learn-stat{text-align:center}
-.learn-stat .num{font-size:28px;font-weight:800}
-.learn-stat .lbl{font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:1px}
+  .word-list{
+    display:grid;
+    gap:8px;
+    margin-top:10px;
+  }
+  .word-list-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border:1px solid var(--line);
+    padding:9px 12px;
+    font-size:0.9rem;
+    background:var(--paper-dark);
+  }
+  .badge{
+    font-family:'Courier New', monospace;
+    font-size:10px;
+    padding:2px 7px;
+    border:1px solid;
+  }
+  .badge.b0{ color:var(--stamp-red); border-color:var(--stamp-red); }
+  .badge.b1,.badge.b2{ color:var(--gold); border-color:var(--gold); }
+  .badge.b3,.badge.b4{ color:var(--stamp-green); border-color:var(--stamp-green); }
 
-/* TEST MODE */
-.test-question{margin-bottom:32px}
-.test-q-num{font-size:13px;font-weight:700;color:var(--primary);margin-bottom:8px}
-.test-q-text{font-size:18px;font-weight:700;margin-bottom:16px}
-.test-options{display:flex;flex-direction:column;gap:10px}
-.test-opt{padding:14px 20px;border:2px solid var(--border);border-radius:10px;font-size:15px;text-align:left;background:var(--card);color:var(--text);transition:all .2s;display:flex;align-items:center;gap:12px}
-.test-opt:hover{border-color:var(--primary);background:var(--primary-light)}
-.test-opt.selected{border-color:var(--primary);background:var(--primary-light)}
-.test-opt.correct{border-color:var(--green);background:#E8F8EF}
-.test-opt.wrong{border-color:var(--red);background:#FDE8E6}
-.test-opt .letter{width:28px;height:28px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
-.test-opt.correct .letter{background:var(--green);color:#fff}
-.test-opt.wrong .letter{background:var(--red);color:#fff}
-.test-write-input{width:100%;padding:14px 20px;border:2px solid var(--border);border-radius:10px;font-size:15px;background:var(--card);color:var(--text)}
-.test-write-input:focus{border-color:var(--primary)}
-.test-score{text-align:center;padding:40px}
-.test-score .score-num{font-size:64px;font-weight:800;color:var(--primary)}
-.test-score .score-label{font-size:18px;color:var(--text2);margin-top:8px}
+  .drill-q{
+    font-size:1.1rem;
+    margin-bottom:14px;
+  }
+  .opt-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    max-width:420px;
+  }
+  .opt-btn{
+    font-family:'Courier New', monospace;
+    padding:12px;
+    background:var(--paper-dark);
+    border:1px solid var(--ink);
+    cursor:pointer;
+    font-size:13px;
+  }
+  .opt-btn:hover{ background:#ddd4b8; }
+  .opt-btn.correct{ background:var(--stamp-green); color:var(--paper); border-color:var(--stamp-green); }
+  .opt-btn.wrong{ background:var(--stamp-red); color:var(--paper); border-color:var(--stamp-red); }
 
-/* MATCH MODE */
-.match-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;max-width:700px;margin:0 auto}
-.match-tile{padding:16px;border:2px solid var(--border);border-radius:10px;background:var(--card);font-size:14px;font-weight:600;text-align:center;cursor:pointer;transition:all .2s;min-height:60px;display:flex;align-items:center;justify-content:center;user-select:none}
-.match-tile:hover{border-color:var(--primary);transform:scale(1.03)}
-.match-tile.selected{border-color:var(--primary);background:var(--primary-light);box-shadow:0 0 0 3px rgba(66,87,178,.2)}
-.match-tile.matched{border-color:var(--green);background:#E8F8EF;opacity:.6;pointer-events:none;transform:scale(.95)}
-.match-tile.wrong{border-color:var(--red);background:#FDE8E6;animation:shake .4s}
-.match-timer{text-align:center;font-size:32px;font-weight:800;color:var(--primary);margin-bottom:20px}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+  footer{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 22px 40px;
+    font-family:'Courier New', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    text-align:center;
+  }
 
-/* WRITE MODE */
-.write-card{max-width:600px;margin:0 auto;text-align:center}
-.write-prompt{font-size:22px;font-weight:700;margin-bottom:24px;padding:24px;background:var(--primary-light);border-radius:12px}
-
-/* MODAL */
-.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
-.modal-overlay.show{display:flex}
-.modal{background:var(--card);border-radius:16px;padding:32px;max-width:500px;width:100%;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-.modal h2{font-size:22px;margin-bottom:20px}
-.modal-close{float:right;background:none;border:none;font-size:24px;color:var(--text3);cursor:pointer}
-
-/* IMPORT */
-.import-area{width:100%;min-height:200px;padding:16px;border:2px dashed var(--border);border-radius:12px;font-size:14px;font-family:monospace;background:var(--bg);color:var(--text);resize:vertical}
-.import-area:focus{border-color:var(--primary)}
-
-/* EMPTY STATE */
-.empty-state{text-align:center;padding:60px 20px}
-.empty-state .icon{font-size:64px;margin-bottom:16px}
-.empty-state h3{font-size:20px;margin-bottom:8px}
-.empty-state p{color:var(--text2);margin-bottom:24px}
-
-/* TOAST */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:#333;color:#fff;padding:14px 28px;border-radius:10px;font-size:14px;font-weight:600;z-index:300;transition:transform .3s;box-shadow:0 4px 20px rgba(0,0,0,.3)}
-.toast.show{transform:translateX(-50%) translateY(0)}
-
-/* RESPONSIVE */
-@media(max-width:600px){
-.container{padding:16px 12px}
-.flashcard-container{height:260px}
-.flashcard-face{font-size:18px;padding:24px}
-.term-row{grid-template-columns:1fr;gap:8px}
-.remove-term{margin-top:0}
-.match-grid{grid-template-columns:repeat(2,1fr)}
-.header{padding:0 16px}
-.nav-tabs{padding:0 12px}
-.nav-tab{padding:12px 14px;font-size:13px}
-}
-
-/* SCROLLBAR */
-::-webkit-scrollbar{width:8px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
-::-webkit-scrollbar-thumb:hover{background:var(--text3)}
-
-/* ANIMATIONS */
-.fade-in{animation:fadeIn .3s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.slide-up{animation:slideUp .4s ease}
-@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-
-/* KEYBOARD HINT */
-.kbd-hint{text-align:center;margin-top:12px;font-size:12px;color:var(--text3)}
-.kbd{background:var(--border);padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700}
+  @media (prefers-reduced-motion: reduce){ * { transition:none !important; } }
 </style>
 </head>
 <body>
+<div class="sheet">
 
-<!-- HEADER -->
-<div class="header">
-  <div class="logo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="3"/><path d="M8 7h8M8 12h5"/><circle cx="17" cy="15" r="2"/></svg>
-    StudySet
-  </div>
-  <div class="header-actions">
-    <button class="btn-icon" onclick="toggleDark()" title="Tema">🌙</button>
-    <button class="btn-icon" onclick="showImport()" title="İçe Aktar">📥</button>
-    <button class="btn-icon" onclick="exportAll()" title="Dışa Aktar">📤</button>
-  </div>
+  <header class="form-head">
+    <h1>Wortschatzheft — Schule und Bildung</h1>
+    <div class="sub">TestDaF Vorbereitung · 1.1 · Seite 9 · Wissenschaftssprache</div>
+    <div class="stats-row" id="statsRow"></div>
+  </header>
+
+  <nav class="tabs">
+    <button data-tab="cloze" class="active">Lückentext</button>
+    <button data-tab="recall">TR → DE</button>
+    <button data-tab="grammar">Possessiv-Drill</button>
+    <button data-tab="list">Kartei</button>
+  </nav>
+
+  <section id="panel-cloze" class="panel active"></section>
+  <section id="panel-recall" class="panel"></section>
+  <section id="panel-grammar" class="panel"></section>
+  <section id="panel-list" class="panel"></section>
+
 </div>
 
-<!-- NAV -->
-<div class="nav-tabs" id="navTabs">
-  <button class="nav-tab active" data-view="home" onclick="showView('home')">🏠 Ana Sayfa</button>
-  <button class="nav-tab" data-view="create" onclick="showView('create')">➕ Set Oluştur</button>
-</div>
-
-<!-- MAIN -->
-<div class="container" id="app"></div>
-
-<!-- IMPORT MODAL -->
-<div class="modal-overlay" id="importModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeImport()">✕</button>
-    <h2>📥 Set İçe Aktar</h2>
-    <p style="font-size:13px;color:var(--text2);margin-bottom:16px">
-      Her satıra bir kart: <b>terim | tanım</b> veya <b>terim - tanım</b> veya <b>terim\\ttanım</b> (tab)
-    </p>
-    <textarea class="import-area" id="importText" placeholder="mitochondria | hücrenin enerji santrali&#10;ribosome - protein sentezi&#10;DNA&#9;genetik bilgi taşıyıcı"></textarea>
-    <div style="margin-top:16px;display:flex;gap:12px">
-      <input class="form-input" id="importSetName" placeholder="Set adı" style="flex:1">
-      <button class="btn btn-primary" onclick="doImport()">Aktar</button>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+<footer>Fortschritt bu tarayıcıda (localStorage) saklanır · Yeni kelime eklemek için DATA dizisine ekle</footer>
 
 <script>
-// ===== STATE =====
-let sets = JSON.parse(localStorage.getItem('studysets') || '[]');
-let currentSet = null;
-let currentMode = null;
-let darkMode = localStorage.getItem('dark') === '1';
-
-if(darkMode) document.body.classList.add('dark');
-
-function save(){ localStorage.setItem('studysets', JSON.stringify(sets)); }
-function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500); }
-function toggleDark(){ darkMode=!darkMode; document.body.classList.toggle('dark'); localStorage.setItem('dark',darkMode?'1':'0'); }
-
-// ===== VIEWS =====
-function showView(view, data){
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.toggle('active',t.dataset.view===view));
-  const app = document.getElementById('app');
-  if(view==='home') renderHome(app);
-  else if(view==='create') renderCreate(app, data);
-  else if(view==='study') renderStudy(app, data);
-}
-
-// ===== HOME =====
-function renderHome(app){
-  if(sets.length===0){
-    app.innerHTML = `<div class="empty-state fade-in">
-      <div class="icon">📚</div>
-      <h3>Henüz set yok</h3>
-      <p>İlk çalışma setini oluştur veya içe aktar.</p>
-      <button class="btn btn-primary btn-lg" onclick="showView('create')">➕ Set Oluştur</button>
-      <br><br>
-      <button class="btn btn-outline" onclick="showImport()">📥 İçe Aktar</button>
-    </div>`;
-    return;
+/* ============================================================
+   VERİ SETİ — yeni sayfa/kelime eklemek için buraya obje ekle.
+   id: benzersiz, srsKey olarak kullanılır (localStorage).
+   sentences: [{de, tr, blankWord}] — blankWord cloze'da silinir.
+   ============================================================ */
+const DATA = [
+  {
+    id:"eingeschult_werden",
+    word:"eingeschult werden",
+    type:"Fiil (Passiv)",
+    prep:"—",
+    tr:"okula başlatılmak",
+    syn:"die Einschulung (isim)",
+    ant:"—",
+    register:"Wissenschaftssprache",
+    sentences:[
+      {de:"Die meisten Kinder werden im Alter von sechs Jahren ___.", answer:"eingeschult", tr:"Çocukların çoğu altı yaşında okula başlatılır."},
+      {de:"Sie wurde mit sieben Jahren ___, weil ihr Geburtstag im Dezember liegt.", answer:"eingeschult", tr:"O, yedi yaşında okula başlatıldı, çünkü doğum günü Aralık ayına denk geliyor."},
+      {de:"In manchen Bundesländern werden Kinder schon mit fünf Jahren ___.", answer:"eingeschult", tr:"Bazı eyaletlerde çocuklar daha beş yaşındayken okula başlatılır."}
+    ]
+  },
+  {
+    id:"zur_schule_gehen",
+    word:"zur Schule gehen",
+    type:"Fiil + Präp.",
+    prep:"zu + Dativ",
+    tr:"okula gitmek",
+    syn:"eine Schule besuchen",
+    ant:"die Schule schwänzen",
+    register:"Alltagssprache",
+    sentences:[
+      {de:"Wenn man Abitur machen will, muss man 12 oder 13 Jahre ___ ___.", answer:"zur Schule", tr:"Abitur yapmak isteyen kişi 12-13 yıl okula gitmek zorundadır."},
+      {de:"Früher mussten Kinder oft schon mit fünf Jahren ___ ___, um arbeiten zu können.", answer:"zur Schule", tr:"Eskiden çocuklar çalışabilmek için genellikle beş yaşında okula gitmek zorunda kalırdı."},
+      {de:"Nächstes Jahr wird mein Bruder zum ersten Mal ___ ___ gehen.", answer:"zur Schule", tr:"Gelecek yıl kardeşim ilk kez okula gidecek."}
+    ]
+  },
+  {
+    id:"eine_schule_besuchen",
+    word:"eine Schule besuchen",
+    type:"Fiil (Akk.)",
+    prep:"—",
+    tr:"bir okula gitmek/devam etmek",
+    syn:"zur Schule gehen",
+    ant:"die Schule schwänzen / abbrechen",
+    register:"Wissenschaftssprache",
+    sentences:[
+      {de:"Die Eltern legen großen Wert darauf, dass ihr Kind eine gute Schule ___.", answer:"besucht", tr:"Ebeveynler, çocuklarının iyi bir okula gitmesine büyük önem verir."},
+      {de:"Letztes Jahr ___ sie noch die Grundschule, jetzt ist sie schon auf dem Gymnasium.", answer:"besuchte", tr:"Geçen yıl hâlâ ilkokula gidiyordu, şimdi zaten lisede."},
+      {de:"Immer mehr Schüler ___ heutzutage eine Ganztagsschule.", answer:"besuchen", tr:"Günümüzde giderek daha fazla öğrenci tam gün okula gidiyor."}
+    ]
+  },
+  {
+    id:"die_schulpflicht",
+    word:"die Schulpflicht",
+    type:"İsim (dişi) / schulpflichtig (sıfat)",
+    prep:"—",
+    tr:"zorunlu eğitim",
+    syn:"—",
+    ant:"—",
+    register:"Wissenschaftssprache",
+    sentences:[
+      {de:"Die Dauer der allgemeinen ___ beträgt in Deutschland mindestens neun Schuljahre.", answer:"Schulpflicht", tr:"Genel zorunlu eğitimin süresi Almanya'da en az dokuz okul yılıdır."},
+      {de:"Früher galt die ___ nur für Jungen, nicht für Mädchen.", answer:"Schulpflicht", tr:"Eskiden zorunlu eğitim sadece erkekler için geçerliydi."},
+      {de:"___ Kinder dürfen der Schule nur aus wichtigen Gründen fernbleiben.", answer:"Schulpflichtige", tr:"Zorunlu eğitim çağındaki çocuklar okuldan ancak önemli sebeplerle uzak kalabilir."}
+    ]
+  },
+  {
+    id:"schule_schwaenzen",
+    word:"die Schule schwänzen",
+    type:"Fiil (Akk.)",
+    prep:"—",
+    tr:"okulu asmak",
+    syn:"der Schule fernbleiben",
+    ant:"die Schule besuchen",
+    register:"Alltagssprache",
+    sentences:[
+      {de:"Eigentlich müsste sie jetzt im Unterricht sein, aber sie ___ die Schule.", answer:"schwänzt", tr:"Aslında derste olması gerekirdi ama okulu asıyor."},
+      {de:"Letzte Woche hat er dreimal die Schule ___.", answer:"geschwänzt", tr:"Geçen hafta üç kez okulu astı."},
+      {de:"Schüler, die häufig die Schule ___, riskieren schlechte Noten.", answer:"schwänzen", tr:"Sık sık okulu asan öğrenciler kötü not riski taşır."}
+    ]
+  },
+  {
+    id:"fernbleiben",
+    word:"der Schule fernbleiben",
+    type:"Fiil (ayrılabilir, Dativ)",
+    prep:"Dativ",
+    tr:"okuldan uzak kalmak (resmi)",
+    syn:"die Schule schwänzen (daha argo)",
+    ant:"die Schule besuchen",
+    register:"Wissenschaftssprache",
+    sentences:[
+      {de:"Schulpflichtige Kinder dürfen der Schule nur aus wichtigen Gründen ___.", answer:"fernbleiben", tr:"Zorunlu eğitim çağındaki çocuklar okuldan ancak önemli sebeplerle uzak kalabilir."}
+    ]
+  },
+  {
+    id:"oeffentliche_schule",
+    word:"die öffentliche/staatliche Schule",
+    type:"İsim (dişi) + sıfat",
+    prep:"—",
+    tr:"devlet okulu",
+    syn:"birbirinin eş anlamlısı",
+    ant:"die Privatschule",
+    register:"Wissenschaftssprache",
+    sentences:[
+      {de:"Die meisten Schülerinnen und Schüler in Deutschland besuchen ___ Schulen.", answer:"öffentliche", tr:"Almanya'daki öğrencilerin çoğu devlet okullarına gider."},
+      {de:"Früher galten ___ Schulen oft als qualitativ schlechter als Privatschulen.", answer:"staatliche", tr:"Eskiden devlet okulları özel okullardan daha düşük kaliteli sayılırdı."},
+      {de:"Im Gegensatz zu Privatschulen erheben ___ Schulen in der Regel keine Studiengebühren.", answer:"öffentliche", tr:"Özel okulların aksine devlet okulları genellikle ücret almaz."}
+    ]
+  },
+  {
+    id:"privatschule",
+    word:"die Privatschule, -schulen",
+    type:"İsim (dişi)",
+    prep:"—",
+    tr:"özel okul",
+    syn:"—",
+    ant:"die öffentliche/staatliche Schule",
+    register:"Wissenschaftssprache",
+    sentences:[
+      {de:"Die Zahl der Schüler, die ___ besuchen, steigt kontinuierlich.", answer:"Privatschulen", tr:"Özel okullara giden öğrencilerin sayısı sürekli artıyor."},
+      {de:"Vor zehn Jahren besuchten deutlich weniger Kinder eine ___ als heute.", answer:"Privatschule", tr:"On yıl önce daha az çocuk özel okula giderdi."},
+      {de:"Im Gegensatz zu öffentlichen Schulen verlangen ___ in der Regel Schulgebühren.", answer:"Privatschulen", tr:"Devlet okullarının aksine özel okullar genellikle ücret talep eder."}
+    ]
+  },
+  {
+    id:"ganztagsschule",
+    word:"die Ganztagsschule, -schulen",
+    type:"İsim (dişi)",
+    prep:"—",
+    tr:"tam gün eğitim veren okul",
+    syn:"—",
+    ant:"die Halbtagsschule",
+    register:"Wissenschaftssprache",
+    sentences:[
+      {de:"In Deutschland werden immer mehr ___ eingerichtet.", answer:"Ganztagsschulen", tr:"Almanya'da giderek daha fazla tam gün okul kuruluyor."},
+      {de:"Bevor die erste ___ in unserer Stadt eröffnet wurde, mussten Eltern selbst Betreuung organisieren.", answer:"Ganztagsschule", tr:"Şehrimizde ilk tam gün okul açılmadan önce ebeveynler kendileri bakım organize etmek zorundaydı."},
+      {de:"___ bieten oft mehr Möglichkeiten für außerschulische Aktivitäten.", answer:"Ganztagsschulen", tr:"Tam gün okullar genellikle okul dışı etkinlikler için daha fazla imkân sunar."}
+    ]
+  },
+  {
+    id:"internat",
+    word:"das Internat, Internate",
+    type:"İsim (nötr)",
+    prep:"—",
+    tr:"yatılı okul",
+    syn:"—",
+    ant:"—",
+    register:"Wissenschaftssprache",
+    sentences:[
+      {de:"Im ___ teilen sich meistens zwei Schüler ein Zimmer.", answer:"Internat", tr:"Yatılı okulda genellikle iki öğrenci bir odayı paylaşır."},
+      {de:"Seine Eltern schickten ihn mit zwölf Jahren auf ein ___.", answer:"Internat", tr:"Ailesi onu on iki yaşında yatılı okula gönderdi."},
+      {de:"___e bieten den Vorteil, dass Schüler rund um die Uhr betreut werden.", answer:"Internat", tr:"Yatılı okullar öğrencilerin gün boyu gözetim altında olması avantajını sunar."}
+    ]
+  },
+  {
+    id:"klasse",
+    word:"die Klasse, Klassen",
+    type:"İsim (dişi)",
+    prep:"—",
+    tr:"sınıf",
+    syn:"—",
+    ant:"—",
+    register:"nötr",
+    sentences:[
+      {de:"Die Grundschulzeit dauert in Bayern von der 1. bis zur 4. ___.", answer:"Klasse", tr:"İlkokul süresi Bavyera'da 1. sınıftan 4. sınıfa kadar sürer."},
+      {de:"Als sie in die 5. ___ kam, musste sie sich an eine neue Schule gewöhnen.", answer:"Klasse", tr:"5. sınıfa geçtiğinde yeni bir okula alışmak zorunda kaldı."},
+      {de:"In manchen ___n sitzen über dreißig Schülerinnen und Schüler.", answer:"Klasse", tr:"Bazı sınıflarda otuzdan fazla öğrenci oturuyor."}
+    ]
+  },
+  {
+    id:"klasse_besuchen",
+    word:"die ... Klasse besuchen",
+    type:"Kalıp",
+    prep:"—",
+    tr:"...sınıfına gitmek/devam etmek",
+    syn:"in die ... Klasse gehen",
+    ant:"—",
+    register:"Wissenschaftssprache",
+    sentences:[
+      {de:"Wenn man die erste Klasse ___, lernt man lesen und schreiben.", answer:"besucht", tr:"Kişi birinci sınıfa gittiğinde okumayı ve yazmayı öğrenir."},
+      {de:"Letztes Jahr ___ mein Neffe die achte Klasse und hatte große Schwierigkeiten in Mathematik.", answer:"besuchte", tr:"Geçen yıl yeğenim sekizinci sınıfa gidiyordu ve matematikte zorluk yaşıyordu."},
+      {de:"Schüler, die die neunte Klasse ___, bereiten sich meist schon auf ihren ersten Abschluss vor.", answer:"besuchen", tr:"Dokuzuncu sınıfa giden öğrenciler genellikle şimdiden ilk diplomalarına hazırlanıyor."}
+    ]
+  },
+  {
+    id:"in_die_klasse_gehen",
+    word:"in die ... Klasse gehen",
+    type:"Kalıp",
+    prep:"in + Akkusativ",
+    tr:"...sınıfına gitmek",
+    syn:"die ... Klasse besuchen",
+    ant:"—",
+    register:"Alltagssprache",
+    sentences:[
+      {de:"Wer ___ die 12. Klasse geht, muss sich auf das Abitur vorbereiten.", answer:"in", tr:"12. sınıfa giden kişi Abitur'a hazırlanmak zorundadır."},
+      {de:"Mein Sohn ___ letztes Jahr noch in die dritte Klasse, jetzt ist er schon in der vierten.", answer:"ging", tr:"Oğlum geçen yıl hâlâ üçüncü sınıftaydı."},
+      {de:"Kinder, die in die erste Klasse ___, sind meistens sechs oder sieben Jahre alt.", answer:"gehen", tr:"Birinci sınıfa giden çocuklar genellikle altı ya da yedi yaşındadır."}
+    ]
+  },
+  {
+    id:"hauptschule_gymnasium",
+    word:"auf die Haupt-/Realschule, aufs Gymnasium gehen",
+    type:"Kalıp",
+    prep:"auf + Akkusativ",
+    tr:"ortaokula/liseye gitmek",
+    syn:"—",
+    ant:"—",
+    register:"Wissenschaftssprache",
+    sentences:[
+      {de:"Am Ende der Grundschulzeit wird entschieden, ob man ___ die Hauptschule geht.", answer:"auf", tr:"İlkokul döneminin sonunda hangi okula gideceğine karar verilir."},
+      {de:"Früher gingen viel mehr Kinder ___ die Hauptschule als heute.", answer:"auf", tr:"Eskiden bugüne göre çok daha fazla çocuk Hauptschule'ye giderdi."},
+      {de:"Wer gute Noten hat, geht meistens ___s Gymnasium.", answer:"auf", tr:"İyi notları olan genellikle Gymnasium'a gider."}
+    ]
+  },
+  {
+    id:"schule_abschliessen",
+    word:"die Schule abschließen / der Schulabschluss",
+    type:"Fiil (ayrılabilir) / İsim",
+    prep:"—",
+    tr:"okulu bitirmek / diploma",
+    syn:"—",
+    ant:"die Schule abbrechen",
+    register:"Wissenschaftssprache",
+    sentences:[
+      {de:"Wenn man die Schule mit guten Noten ___ hat, hat man bessere Chancen.", answer:"abgeschlossen", tr:"Kişi okulu iyi notlarla bitirdiyse daha iyi şansa sahip olur."},
+      {de:"Nach ihrem ___ hat sie ein Jahr lang im Ausland gearbeitet.", answer:"Schulabschluss", tr:"Mezuniyetinden sonra bir yıl yurt dışında çalıştı."},
+      {de:"Ein guter ___ ist heutzutage eine wichtige Voraussetzung für den Berufseinstieg.", answer:"Schulabschluss", tr:"İyi bir diploma günümüzde mesleğe başlamak için önemli bir ön koşuldur."}
+    ]
+  },
+  {
+    id:"schulabschluss_machen_haben",
+    word:"einen Schulabschluss machen / haben",
+    type:"Fiil kalıbı",
+    prep:"—",
+    tr:"mezun olmak (machen) / diploması olmak (haben)",
+    syn:"die Schule abschließen",
+    ant:"die Schule abbrechen",
+    register:"Wissenschaftssprache",
+    sentences:[
+      {de:"Viele Schüler, die nächstes Jahr ihren Schulabschluss ___, sind schon auf der Suche nach einem Ausbildungsplatz.", answer:"machen", tr:"Gelecek yıl mezun olacak birçok öğrenci şimdiden staj yeri arıyor."},
+      {de:"Meine Schwester ___ ihren Schulabschluss vor drei Jahren.", answer:"machte", tr:"Kız kardeşim üç yıl önce mezun oldu."},
+      {de:"Heutzutage ist es sehr wichtig, einen guten Schulabschluss zu ___.", answer:"haben", tr:"Günümüzde iyi bir diplomaya sahip olmak çok önemlidir."}
+    ]
+  },
+  {
+    id:"schule_abbrechen",
+    word:"die Schule abbrechen",
+    type:"Fiil (ayrılabilir, Akk.)",
+    prep:"—",
+    tr:"okulu yarım bırakmak",
+    syn:"—",
+    ant:"die Schule abschließen",
+    register:"Wissenschaftssprache",
+    sentences:[
+      {de:"Wer die Schule ___ hat, hat keinen Schulabschluss und findet nur schwer einen Arbeitsplatz.", answer:"abgebrochen", tr:"Okulu terk edenin diploması olmaz, iş bulması zorlaşır."},
+      {de:"Aus finanziellen Gründen musste er die Schule mit sechzehn Jahren ___.", answer:"abbrechen", tr:"Maddi sebeplerden dolayı on altı yaşında okulu bırakmak zorunda kaldı."},
+      {de:"Die Zahl der Jugendlichen, die die Schule ___, ist in den letzten Jahren leicht gesunken.", answer:"abbrechen", tr:"Okulu terk eden gençlerin sayısı son yıllarda hafifçe azaldı."}
+    ]
   }
-  let html = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-    <h2 style="font-size:22px">📚 Setlerim (${sets.length})</h2>
-    <button class="btn btn-primary btn-sm" onclick="showView('create')">➕ Yeni Set</button>
-  </div>`;
-  sets.forEach((s,i)=>{
-    html += `<div class="set-item fade-in" style="animation-delay:${i*50}ms" onclick="openSet(${i})">
-      <div class="set-info">
-        <h3>${esc(s.name)}</h3>
-        <p>${s.cards.length} kart · ${s.created||''}</p>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <span class="set-count">${s.cards.length} kart</span>
-        <div class="set-actions">
-          <button class="btn btn-outline btn-sm" onclick="event.stopPropagation();editSet(${i})">✏️</button>
-          <button class="btn btn-red btn-sm" onclick="event.stopPropagation();deleteSet(${i})">🗑️</button>
-        </div>
-      </div>
-    </div>`;
+];
+
+const GRAMMAR_DRILL = [
+  {sentence:"Der Lehrer hat ___ Buch vergessen.", correct:"sein", options:["sein","ihr","seine","ihre"], tr:"Öğretmen kendi kitabını unuttu."},
+  {sentence:"Die Mutter sucht ___ Tasche.", correct:"ihre", options:["sein","seine","ihr","ihre"], tr:"Anne kendi çantasını arıyor."},
+  {sentence:"Die Kinder lieben ___ Lehrerin.", correct:"ihre", options:["ihre","seine","ihrem","ihren"], tr:"Çocuklar kendi öğretmenlerini seviyor."},
+  {sentence:"Ich helfe ___ Bruder.", correct:"seinem", options:["sein","seinen","seiner","seinem"], tr:"Ona (erkek) kardeşine yardım ediyorum."},
+  {sentence:"Meine Schwester möchte nicht zur Schule gehen, weil ___ Freunde nicht dort sind.", correct:"ihre", options:["seine","ihre","ihr","sein"], tr:"Kız kardeşim okula gitmek istemiyor çünkü arkadaşları orada değil."},
+  {sentence:"Der Schüler zeigt ___ Eltern das Zeugnis.", correct:"seinen", options:["sein","seine","seinen","seinem"], tr:"Öğrenci karnesini ailesine (onun ailesi) gösteriyor."},
+  {sentence:"Die Lehrerin gibt ___ Klasse eine neue Aufgabe.", correct:"ihrer", options:["ihre","ihrer","ihren","ihr"], tr:"Öğretmen (kadın) kendi sınıfına yeni bir görev veriyor."}
+];
+
+/* ============================================================
+   SRS (basit Leitner sistemi) — localStorage'da tutulur
+   box: 0 (hiç bilinmiyor) -> 4 (iyi biliniyor)
+   ============================================================ */
+const SRS_KEY = "testdaf_srs_v1";
+function loadSRS(){
+  try{
+    const raw = localStorage.getItem(SRS_KEY);
+    return raw ? JSON.parse(raw) : {};
+  }catch(e){ return {}; }
+}
+function saveSRS(state){
+  try{ localStorage.setItem(SRS_KEY, JSON.stringify(state)); }catch(e){}
+}
+let srs = loadSRS();
+DATA.forEach(w=>{ if(!srs[w.id]) srs[w.id] = {box:0, seen:0, correct:0}; });
+saveSRS(srs);
+
+function pickWordWeighted(){
+  // box 0-1 kelimeler daha sık gelsin
+  const pool = [];
+  DATA.forEach(w=>{
+    const box = srs[w.id].box;
+    const weight = box===0?5 : box===1?3 : box===2?2 : 1;
+    for(let i=0;i<weight;i++) pool.push(w);
   });
-  app.innerHTML = html;
+  return pool[Math.floor(Math.random()*pool.length)];
 }
 
-function openSet(i){ currentSet=i; showView('study',i); }
-function editSet(i){ showView('create',i); }
-function deleteSet(i){ if(confirm('Bu seti silmek istediğine emin misin?')){ sets.splice(i,1); save(); showView('home'); toast('Set silindi'); } }
+function updateStatsRow(){
+  const boxes=[0,0,0,0,0];
+  DATA.forEach(w=> boxes[srs[w.id].box]++ );
+  const el = document.getElementById("statsRow");
+  el.innerHTML = `
+    <div class="stat-box"><b>${DATA.length}</b>Toplam kelime</div>
+    <div class="stat-box"><b>${boxes[4]}</b>Ustalaşılan (Box 4)</div>
+    <div class="stat-box"><b>${boxes[0]}</b>Zayıf (Box 0)</div>
+  `;
+}
 
-// ===== CREATE / EDIT =====
-function renderCreate(app, editIndex){
-  const isEdit = editIndex !== undefined && editIndex !== null;
-  const s = isEdit ? sets[editIndex] : {name:'',cards:[{term:'',def:''},{term:'',def:''},{term:'',def:''}]};
-  let html = `<div class="fade-in">
-    <h2 style="margin-bottom:20px">${isEdit?'✏️ Seti Düzenle':'➕ Yeni Set Oluştur'}</h2>
-    <div class="card">
-      <div class="form-group">
-        <label>Set Adı</label>
-        <input class="form-input" id="setName" value="${esc(s.name)}" placeholder="Örn: Biyoloji - Hücre Organelleri">
-      </div>
-      <div class="form-group">
-        <label>Kartlar</label>
-        <div id="termRows">`;
-  s.cards.forEach((c,i)=>{
-    html += termRowHTML(i, c.term, c.def);
+/* ============================================================
+   TAB YÖNETİMİ
+   ============================================================ */
+document.querySelectorAll("nav.tabs button").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+    btn.classList.add("active");
+    const tab = btn.dataset.tab;
+    document.getElementById("panel-"+tab).classList.add("active");
+    if(tab==="cloze") renderCloze();
+    if(tab==="recall") renderRecall();
+    if(tab==="grammar") renderGrammar();
+    if(tab==="list") renderList();
   });
-  html += `</div>
-        <button class="btn btn-outline btn-sm" onclick="addTermRow()" style="margin-top:8px">➕ Kart Ekle</button>
-      </div>
-      <div style="display:flex;gap:12px;margin-top:20px">
-        <button class="btn btn-primary btn-lg" onclick="saveSet(${isEdit?editIndex:'null'})">💾 Kaydet</button>
-        <button class="btn btn-outline" onclick="showView('home')">İptal</button>
-      </div>
-    </div>
-  </div>`;
-  app.innerHTML = html;
-}
-
-function termRowHTML(i, term='', def=''){
-  return `<div class="term-row" data-idx="${i}">
-    <textarea class="form-input term-input" placeholder="Terim / Soru">${esc(term)}</textarea>
-    <textarea class="form-input def-input" placeholder="Tanım / Cevap">${esc(def)}</textarea>
-    <button class="remove-term" onclick="this.parentElement.remove()">✕</button>
-  </div>`;
-}
-
-function addTermRow(){
-  const rows = document.getElementById('termRows');
-  const div = document.createElement('div');
-  div.innerHTML = termRowHTML(rows.children.length);
-  rows.appendChild(div.firstElementChild);
-  rows.lastElementChild.querySelector('.term-input').focus();
-}
-
-function saveSet(editIndex){
-  const name = document.getElementById('setName').value.trim();
-  if(!name){ toast('Set adı gerekli!'); return; }
-  const rows = document.querySelectorAll('#termRows .term-row');
-  const cards = [];
-  rows.forEach(r=>{
-    const t = r.querySelector('.term-input').value.trim();
-    const d = r.querySelector('.def-input').value.trim();
-    if(t && d) cards.push({term:t, def:d});
-  });
-  if(cards.length<2){ toast('En az 2 kart gerekli!'); return; }
-  if(editIndex!==null && editIndex!==undefined){
-    sets[editIndex] = {name, cards, created:sets[editIndex].created};
-    toast('Set güncellendi ✅');
-  } else {
-    sets.push({name, cards, created:new Date().toLocaleDateString('tr-TR')});
-    toast('Set oluşturuldu ✅');
-  }
-  save();
-  showView('home');
-}
-
-// ===== STUDY HUB =====
-function renderStudy(app, setIndex){
-  const s = sets[setIndex];
-  currentSet = setIndex;
-  const modes = [
-    {id:'flashcard', icon:'🃏', name:'Flashcard', desc:'Kartları çevirerek çalış'},
-    {id:'learn', icon:'📖', name:'Öğren', desc:'Adaptif öğrenme modu'},
-    {id:'write', icon:'✍️', name:'Yaz', desc:'Cevabı yazarak test et'},
-    {id:'test', icon:'📝', name:'Test', desc:'Çoktan seçmeli sınav'},
-    {id:'match', icon:'🔗', name:'Eşleştir', desc:'Terim-tanım eşleştirme oyunu'},
-  ];
-  let html = `<div class="fade-in">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
-      <button class="btn btn-outline btn-sm" onclick="showView('home')">← Geri</button>
-      <h2 style="font-size:22px">${esc(s.name)}</h2>
-      <span class="set-count">${s.cards.length} kart</span>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px">`;
-  modes.forEach(m=>{
-    html += `<div class="card" style="cursor:pointer;transition:all .2s;text-align:center;padding:32px 24px" 
-      onmouseover="this.style.borderColor='var(--primary)';this.style.transform='translateY(-3px)'" 
-      onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'"
-      onclick="startMode('${m.id}',${setIndex})">
-      <div style="font-size:40px;margin-bottom:12px">${m.icon}</div>
-      <h3 style="font-size:18px;margin-bottom:6px">${m.name}</h3>
-      <p style="font-size:13px;color:var(--text2)">${m.desc}</p>
-    </div>`;
-  });
-  html += `</div></div>`;
-  app.innerHTML = html;
-}
-
-function startMode(mode, setIndex){
-  currentMode = mode;
-  currentSet = setIndex;
-  const app = document.getElementById('app');
-  if(mode==='flashcard') renderFlashcard(app);
-  else if(mode==='learn') renderLearn(app);
-  else if(mode==='write') renderWrite(app);
-  else if(mode==='test') renderTest(app);
-  else if(mode==='match') renderMatch(app);
-}
-
-function backToStudy(){ showView('study', currentSet); }
-function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
-function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function speak(text){ if('speechSynthesis' in window){ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang='tr-TR'; speechSynthesis.speak(u); } }
-
-// ===== FLASHCARD =====
-let fcCards=[], fcIdx=0, fcFlipped=false, fcStars=new Set();
-function renderFlashcard(app){
-  fcCards = shuffle(sets[currentSet].cards);
-  fcIdx=0; fcFlipped=false; fcStars=new Set();
-  drawFlashcard(app);
-}
-function drawFlashcard(app){
-  const c = fcCards[fcIdx];
-  const pct = ((fcIdx+1)/fcCards.length*100);
-  app.innerHTML = `<div class="fade-in" style="text-align:center">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-      <button class="btn btn-outline btn-sm" onclick="backToStudy()">← Geri</button>
-      <h3>🃏 Flashcard</h3>
-      <button class="btn btn-outline btn-sm" onclick="renderFlashcard(document.getElementById('app'))">🔀 Karıştır</button>
-    </div>
-    <div class="fc-progress"><div class="fc-progress-bar" style="width:${pct}%"></div></div>
-    <div style="margin:24px 0">
-      <div class="flashcard-container" onclick="flipCard()">
-        <div class="flashcard ${fcFlipped?'flipped':''}" id="fcCard">
-          <div class="flashcard-face flashcard-front">
-            <span class="flashcard-label">Terim</span>
-            ${esc(c.term)}
-            <span class="flashcard-hint">Çevirmek için tıkla</span>
-          </div>
-          <div class="flashcard-face flashcard-back">
-            <span class="flashcard-label">Tanım</span>
-            ${esc(c.def)}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="fc-controls">
-      <button class="fc-nav" onclick="fcPrev()" ${fcIdx===0?'disabled':''}>◀</button>
-      <span class="fc-counter">${fcIdx+1} / ${fcCards.length}</span>
-      <button class="fc-nav" onclick="fcNext()" ${fcIdx===fcCards.length-1?'disabled':''}>▶</button>
-    </div>
-    <div class="fc-bottom-btns">
-      <button class="fc-star ${fcStars.has(fcIdx)?'active':''}" onclick="toggleStar(${fcIdx})" title="Yıldızla">★</button>
-      <button class="btn btn-outline btn-sm" onclick="speak(fcCards[${fcIdx}].term)">🔊 Ses</button>
-    </div>
-    <div class="kbd-hint"><span class="kbd">←</span> <span class="kbd">→</span> gezin · <span class="kbd">Space</span> çevir</div>
-  </div>`;
-}
-function flipCard(){ fcFlipped=!fcFlipped; document.getElementById('fcCard').classList.toggle('flipped'); }
-function fcNext(){ if(fcIdx<fcCards.length-1){fcIdx++;fcFlipped=false;drawFlashcard(document.getElementById('app'));} }
-function fcPrev(){ if(fcIdx>0){fcIdx--;fcFlipped=false;drawFlashcard(document.getElementById('app'));} }
-function toggleStar(i){ fcStars.has(i)?fcStars.delete(i):fcStars.add(i); drawFlashcard(document.getElementById('app')); }
-
-document.addEventListener('keydown',e=>{
-  if(currentMode!=='flashcard')return;
-  if(e.key==='ArrowRight')fcNext();
-  else if(e.key==='ArrowLeft')fcPrev();
-  else if(e.key===' '){e.preventDefault();flipCard();}
 });
 
-// ===== LEARN =====
-let learnCards=[], learnIdx=0, learnCorrect=0, learnWrong=0, learnRound=[];
-function renderLearn(app){
-  learnCards = shuffle(sets[currentSet].cards);
-  learnIdx=0; learnCorrect=0; learnWrong=0;
-  learnRound = learnCards.map((c,i)=>({...c, idx:i, attempts:0, known:false}));
-  drawLearn(app);
-}
-function drawLearn(app){
-  const remaining = learnRound.filter(c=>!c.known);
-  if(remaining.length===0){
-    app.innerHTML = `<div class="fade-in" style="text-align:center;padding:40px">
-      <div style="font-size:64px;margin-bottom:16px">🎉</div>
-      <h2>Tebrikler! Tüm kartları öğrendin!</h2>
-      <div class="learn-stats" style="margin:24px 0">
-        <div class="learn-stat"><div class="num" style="color:var(--green)">${learnCorrect}</div><div class="lbl">Doğru</div></div>
-        <div class="learn-stat"><div class="num" style="color:var(--red)">${learnWrong}</div><div class="lbl">Yanlış</div></div>
-      </div>
-      <button class="btn btn-primary btn-lg" onclick="renderLearn(document.getElementById('app'))">🔄 Tekrar</button>
-      <button class="btn btn-outline btn-lg" onclick="backToStudy()" style="margin-left:12px">← Geri</button>
-    </div>`;
-    return;
-  }
-  const c = remaining[0];
-  const total = learnRound.length;
-  const done = total - remaining.length;
-  const pct = (done/total*100);
-  const askForTerm = Math.random()>0.5;
-  const prompt = askForTerm ? c.def : c.term;
-  const answer = askForTerm ? c.term : c.def;
-  app.innerHTML = `<div class="fade-in learn-card">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-      <button class="btn btn-outline btn-sm" onclick="backToStudy()">← Geri</button>
-      <h3>📖 Öğren</h3>
-      <span style="font-size:14px;color:var(--text2)">${done}/${total}</span>
-    </div>
-    <div class="learn-progress-bar"><div class="learn-progress-fill" style="width:${pct}%"></div></div>
-    <div class="learn-prompt">${esc(prompt)}</div>
-    <div class="learn-sub">${askForTerm?'Terimi yaz':'Tanımı yaz'}</div>
-    <div class="learn-result" id="learnResult"></div>
-    <div class="learn-input-wrap">
-      <input class="learn-input" id="learnInput" placeholder="Cevabını yaz..." autocomplete="off"
-        onkeydown="if(event.key==='Enter')checkLearn('${esc(answer).replace(/'/g,"\\\\'")}',${c.idx},${askForTerm})">
-    </div>
-    <button class="btn btn-primary btn-block" onclick="checkLearn('${esc(answer).replace(/'/g,"\\\\'")}',${c.idx},${askForTerm})">Kontrol Et</button>
-    <div style="margin-top:12px">
-      <button class="btn btn-outline btn-sm" onclick="skipLearn(${c.idx})">Bilmiyorum, geç →</button>
-    </div>
-  </div>`;
-  setTimeout(()=>document.getElementById('learnInput')?.focus(),100);
-}
-function normalize(s){ return s.toLowerCase().trim().replace(/[.,!?;:]/g,'').replace(/\s+/g,' '); }
-function checkLearn(answer, idx, askForTerm){
-  const input = document.getElementById('learnInput');
-  const result = document.getElementById('learnResult');
-  const userAns = input.value.trim();
-  if(!userAns) return;
-  const card = learnRound.find(c=>c.idx===idx);
-  if(normalize(userAns)===normalize(answer)){
-    input.classList.add('correct');
-    result.className='learn-result show correct';
-    result.innerHTML='✅ Doğru!';
-    card.known=true; learnCorrect++;
-    speak(answer);
-    setTimeout(()=>drawLearn(document.getElementById('app')),1200);
-  } else {
-    input.classList.add('wrong');
-    result.className='learn-result show wrong';
-    result.innerHTML=`❌ Yanlış! Doğru cevap: <b>${esc(answer)}</b>`;
-    learnWrong++;
-    card.attempts++;
-    if(card.attempts>=2) card.known=true;
-    setTimeout(()=>drawLearn(document.getElementById('app')),2500);
-  }
-}
-function skipLearn(idx){
-  const card = learnRound.find(c=>c.idx===idx);
-  const askForTerm = true;
-  card.attempts++;
-  if(card.attempts>=2) card.known=true;
-  learnWrong++;
-  drawLearn(document.getElementById('app'));
-}
+/* ============================================================
+   MOD 1: LÜCKENTEXT (Cloze)
+   ============================================================ */
+let currentClozeWord = null;
+let currentClozeSentence = null;
 
-// ===== WRITE =====
-let writeCards=[], writeIdx=0, writeCorrect=0, writeTotal=0;
-function renderWrite(app){
-  writeCards = shuffle(sets[currentSet].cards);
-  writeIdx=0; writeCorrect=0; writeTotal=writeCards.length;
-  drawWrite(app);
-}
-function drawWrite(app){
-  if(writeIdx>=writeTotal){
-    const pct = Math.round(writeCorrect/writeTotal*100);
-    app.innerHTML = `<div class="fade-in" style="text-align:center;padding:40px">
-      <div style="font-size:64px;margin-bottom:16px">${pct>=70?'🎉':'📖'}</div>
-      <h2>Sonuç: ${writeCorrect}/${writeTotal}</h2>
-      <div class="test-score"><div class="score-num">${pct}%</div></div>
-      <button class="btn btn-primary btn-lg" onclick="renderWrite(document.getElementById('app'))">🔄 Tekrar</button>
-      <button class="btn btn-outline btn-lg" onclick="backToStudy()" style="margin-left:12px">← Geri</button>
-    </div>`;
-    return;
-  }
-  const c = writeCards[writeIdx];
-  const askForTerm = Math.random()>0.5;
-  const prompt = askForTerm ? c.def : c.term;
-  const answer = askForTerm ? c.term : c.def;
-  app.innerHTML = `<div class="fade-in write-card">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-      <button class="btn btn-outline btn-sm" onclick="backToStudy()">← Geri</button>
-      <h3>✍️ Yaz</h3>
-      <span style="font-size:14px;color:var(--text2)">${writeIdx+1}/${writeTotal}</span>
-    </div>
-    <div class="fc-progress" style="margin-bottom:24px"><div class="fc-progress-bar" style="width:${(writeIdx/writeTotal*100)}%"></div></div>
-    <div class="write-prompt">${esc(prompt)}</div>
-    <div class="learn-result" id="writeResult"></div>
-    <input class="learn-input" id="writeInput" placeholder="Cevabını yaz..." autocomplete="off"
-      onkeydown="if(event.key==='Enter')checkWrite('${esc(answer).replace(/'/g,"\\\\'")}')">
-    <button class="btn btn-primary btn-block" style="margin-top:12px" onclick="checkWrite('${esc(answer).replace(/'/g,"\\\\'")}')">Kontrol Et</button>
-  </div>`;
-  setTimeout(()=>document.getElementById('writeInput')?.focus(),100);
-}
-function checkWrite(answer){
-  const input = document.getElementById('writeInput');
-  const result = document.getElementById('writeResult');
-  const userAns = input.value.trim();
-  if(!userAns) return;
-  if(normalize(userAns)===normalize(answer)){
-    input.classList.add('correct');
-    result.className='learn-result show correct';
-    result.innerHTML='✅ Doğru!';
-    writeCorrect++;
-  } else {
-    input.classList.add('wrong');
-    result.className='learn-result show wrong';
-    result.innerHTML=`❌ Doğru cevap: <b>${esc(answer)}</b>`;
-  }
-  writeIdx++;
-  setTimeout(()=>drawWrite(document.getElementById('app')),1800);
-}
+function renderCloze(){
+  currentClozeWord = pickWordWeighted();
+  const sList = currentClozeWord.sentences;
+  currentClozeSentence = sList[Math.floor(Math.random()*sList.length)];
+  const panel = document.getElementById("panel-cloze");
+  const blankLen = currentClozeSentence.answer.length;
+  const displaySentence = currentClozeSentence.de.replace("___", `<span class="blank">?</span>`);
 
-// ===== TEST =====
-let testQuestions=[], testIdx=0, testScore=0, testAnswered=false;
-function renderTest(app){
-  const cards = shuffle(sets[currentSet].cards);
-  testQuestions = cards.map(c=>{
-    const isMC = Math.random()>0.3;
-    if(isMC){
-      const others = shuffle(sets[currentSet].cards.filter(x=>x.term!==c.term)).slice(0,3);
-      const opts = shuffle([c, ...others]);
-      return {type:'mc', prompt:c.term, answer:c.def, options:opts.map(o=>o.def)};
-    } else {
-      return {type:'write', prompt:c.def, answer:c.term};
-    }
+  panel.innerHTML = `
+    <div class="card-tag">Aktenzeichen ${DATA.indexOf(currentClozeWord)+1}/${DATA.length} · Box ${srs[currentClozeWord.id].box}</div>
+    <div class="word-title">${currentClozeWord.word}</div>
+    <div class="meta-line">${currentClozeWord.type} · ${currentClozeWord.register}${currentClozeWord.prep!=="—" ? " · "+currentClozeWord.prep : ""}</div>
+    <div class="cloze-sentence">${displaySentence}</div>
+    <div class="translation">${currentClozeSentence.tr}</div>
+    <div class="row">
+      <input type="text" id="clozeInput" placeholder="eksik kelimeyi yaz..." autocomplete="off">
+      <button class="btn" id="clozeCheck">Kontrol et</button>
+      <button class="btn secondary" id="clozeSkip">Geç</button>
+    </div>
+    <div class="feedback" id="clozeFeedback"></div>
+  `;
+  document.getElementById("clozeInput").focus();
+  document.getElementById("clozeCheck").addEventListener("click", checkCloze);
+  document.getElementById("clozeSkip").addEventListener("click", renderCloze);
+  document.getElementById("clozeInput").addEventListener("keydown", e=>{
+    if(e.key==="Enter") checkCloze();
   });
-  testIdx=0; testScore=0; testAnswered=false;
-  drawTest(app);
 }
-function drawTest(app){
-  if(testIdx>=testQuestions.length){
-    const pct = Math.round(testScore/testQuestions.length*100);
-    app.innerHTML = `<div class="fade-in test-score">
-      <div style="font-size:64px;margin-bottom:16px">${pct>=80?'🏆':pct>=50?'👍':'📖'}</div>
-      <div class="score-num">${pct}%</div>
-      <div class="score-label">${testScore}/${testQuestions.length} doğru</div>
-      <div style="margin-top:24px">
-        <button class="btn btn-primary btn-lg" onclick="renderTest(document.getElementById('app'))">🔄 Tekrar</button>
-        <button class="btn btn-outline btn-lg" onclick="backToStudy()" style="margin-left:12px">← Geri</button>
-      </div>
-    </div>`;
-    return;
+
+function normalize(s){
+  return s.trim().toLowerCase()
+    .replace(/ä/g,"a").replace(/ö/g,"o").replace(/ü/g,"u").replace(/ß/g,"ss");
+}
+
+function checkCloze(){
+  const input = document.getElementById("clozeInput");
+  const val = input.value;
+  const correct = normalize(val) === normalize(currentClozeSentence.answer);
+  const fb = document.getElementById("clozeFeedback");
+  const wid = currentClozeWord.id;
+
+  if(correct){
+    srs[wid].box = Math.min(4, srs[wid].box+1);
+    srs[wid].correct++;
+  }else{
+    srs[wid].box = 0;
   }
-  const q = testQuestions[testIdx];
-  let html = `<div class="fade-in">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-      <button class="btn btn-outline btn-sm" onclick="backToStudy()">← Geri</button>
-      <h3>📝 Test</h3>
-      <span style="font-size:14px;color:var(--text2)">${testIdx+1}/${testQuestions.length}</span>
+  srs[wid].seen++;
+  saveSRS(srs);
+  updateStatsRow();
+
+  fb.className = "feedback show " + (correct ? "ok" : "bad");
+  fb.innerHTML = `
+    <span class="stamp ${correct?'ok':'bad'}">${correct ? 'BESTANDEN' : 'NICHT BESTANDEN'}</span><br>
+    ${correct ? 'Doğru!' : `Doğrusu: <b>${currentClozeSentence.answer}</b>`}
+    <div class="word-detail">
+      <b>Eş anlamlı:</b> ${currentClozeWord.syn} &nbsp;·&nbsp; <b>Zıt anlamlı:</b> ${currentClozeWord.ant}<br>
+      <b>TR:</b> ${currentClozeWord.tr}
     </div>
-    <div class="fc-progress" style="margin-bottom:24px"><div class="fc-progress-bar" style="width:${(testIdx/testQuestions.length*100)}%"></div></div>
-    <div class="card test-question">
-      <div class="test-q-num">Soru ${testIdx+1}</div>
-      <div class="test-q-text">${esc(q.prompt)}</div>`;
-  if(q.type==='mc'){
-    html += `<div class="test-options" id="testOpts">`;
-    const letters='ABCD';
-    q.options.forEach((o,i)=>{
-      html += `<button class="test-opt" onclick="answerMC(${i},'${esc(q.answer).replace(/'/g,"\\\\'")}')">
-        <span class="letter">${letters[i]}</span>${esc(o)}
-      </button>`;
+    <div class="row" style="margin-top:12px;">
+      <button class="btn" id="nextCloze">Sıradaki →</button>
+    </div>
+  `;
+  document.getElementById("nextCloze").addEventListener("click", renderCloze);
+  input.disabled = true;
+  document.getElementById("clozeCheck").disabled = true;
+}
+
+/* ============================================================
+   MOD 2: TR -> DE HIZLI HATIRLAMA
+   ============================================================ */
+let currentRecallWord = null;
+
+function renderRecall(){
+  currentRecallWord = pickWordWeighted();
+  const panel = document.getElementById("panel-recall");
+  panel.innerHTML = `
+    <div class="card-tag">Aktenzeichen ${DATA.indexOf(currentRecallWord)+1}/${DATA.length} · Box ${srs[currentRecallWord.id].box}</div>
+    <div class="drill-q">Türkçesi: <b>${currentRecallWord.tr}</b></div>
+    <div class="meta-line">${currentRecallWord.type}${currentRecallWord.prep!=="—" ? " · "+currentRecallWord.prep : ""}</div>
+    <div class="row">
+      <input type="text" id="recallInput" placeholder="Almancasını yaz..." autocomplete="off">
+      <button class="btn" id="recallCheck">Kontrol et</button>
+      <button class="btn secondary" id="recallSkip">Geç</button>
+    </div>
+    <div class="feedback" id="recallFeedback"></div>
+  `;
+  document.getElementById("recallInput").focus();
+  document.getElementById("recallCheck").addEventListener("click", checkRecall);
+  document.getElementById("recallSkip").addEventListener("click", renderRecall);
+  document.getElementById("recallInput").addEventListener("keydown", e=>{
+    if(e.key==="Enter") checkRecall();
+  });
+}
+
+function checkRecall(){
+  const input = document.getElementById("recallInput");
+  const val = normalize(input.value);
+  // temel kelimeyi (artikel/parantez olmadan) çıkar
+  const baseWord = currentRecallWord.word.split(",")[0].split("/")[0].trim();
+  const strippedBase = normalize(baseWord.replace(/^(die|der|das)\s+/i,""));
+  const correct = normalize(input.value).includes(strippedBase) || strippedBase.includes(normalize(input.value)) && val.length>2;
+
+  const wid = currentRecallWord.id;
+  if(correct){
+    srs[wid].box = Math.min(4, srs[wid].box+1);
+    srs[wid].correct++;
+  }else{
+    srs[wid].box = 0;
+  }
+  srs[wid].seen++;
+  saveSRS(srs);
+  updateStatsRow();
+
+  const fb = document.getElementById("recallFeedback");
+  fb.className = "feedback show " + (correct ? "ok" : "bad");
+  fb.innerHTML = `
+    <span class="stamp ${correct?'ok':'bad'}">${correct ? 'BESTANDEN' : 'NICHT BESTANDEN'}</span><br>
+    Doğrusu: <b>${currentRecallWord.word}</b>
+    <div class="word-detail">
+      <b>Register:</b> ${currentRecallWord.register}<br>
+      <b>Eş/Zıt:</b> ${currentRecallWord.syn} / ${currentRecallWord.ant}
+    </div>
+    <div class="row" style="margin-top:12px;">
+      <button class="btn" id="nextRecall">Sıradaki →</button>
+    </div>
+  `;
+  document.getElementById("nextRecall").addEventListener("click", renderRecall);
+  input.disabled = true;
+  document.getElementById("recallCheck").disabled = true;
+}
+
+/* ============================================================
+   MOD 3: POSSESSIVPRONOMEN DRILL
+   ============================================================ */
+let grammarIdx = 0;
+let grammarOrder = [];
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function renderGrammar(){
+  if(grammarOrder.length===0) grammarOrder = shuffle([...GRAMMAR_DRILL.keys()]);
+  if(grammarIdx >= grammarOrder.length){
+    document.getElementById("panel-grammar").innerHTML = `
+      <div class="empty-state">Bu turu bitirdin! 🎉<br><br>
+      <button class="btn" id="restartGrammar">Baştan başla</button></div>`;
+    document.getElementById("restartGrammar").addEventListener("click", ()=>{
+      grammarIdx=0; grammarOrder=shuffle([...GRAMMAR_DRILL.keys()]); renderGrammar();
     });
-    html += `</div>`;
-  } else {
-    html += `<input class="test-write-input" id="testWriteInput" placeholder="Cevabını yaz..." autocomplete="off"
-      onkeydown="if(event.key==='Enter')answerWrite('${esc(q.answer).replace(/'/g,"\\\\'")}')">
-      <button class="btn btn-primary" style="margin-top:12px" onclick="answerWrite('${esc(q.answer).replace(/'/g,"\\\\'")}')">Kontrol Et</button>`;
+    return;
   }
-  html += `</div></div>`;
-  app.innerHTML = html;
-  if(q.type==='write') setTimeout(()=>document.getElementById('testWriteInput')?.focus(),100);
-}
-function answerMC(selIdx, answer){
-  if(testAnswered) return;
-  testAnswered=true;
-  const opts = document.querySelectorAll('#testOpts .test-opt');
-  const q = testQuestions[testIdx];
-  const correctIdx = q.options.indexOf(answer);
-  opts.forEach((o,i)=>{
-    if(i===correctIdx) o.classList.add('correct');
-    if(i===selIdx && i!==correctIdx) o.classList.add('wrong');
-    o.style.pointerEvents='none';
+  const q = GRAMMAR_DRILL[grammarOrder[grammarIdx]];
+  const panel = document.getElementById("panel-grammar");
+  const opts = shuffle(q.options);
+  panel.innerHTML = `
+    <div class="card-tag">Possessivpronomen · Soru ${grammarIdx+1}/${GRAMMAR_DRILL.length}</div>
+    <div class="drill-q">${q.sentence.replace("___", '<span class="blank">___</span>')}</div>
+    <div class="translation">${q.tr}</div>
+    <div class="opt-grid" id="optGrid"></div>
+    <div class="feedback" id="grammarFeedback"></div>
+  `;
+  const grid = document.getElementById("optGrid");
+  opts.forEach(opt=>{
+    const b = document.createElement("button");
+    b.className = "opt-btn";
+    b.textContent = opt;
+    b.addEventListener("click", ()=> checkGrammar(opt, q, b, grid));
+    grid.appendChild(b);
   });
-  if(selIdx===correctIdx) testScore++;
-  testIdx++;
-  setTimeout(()=>{testAnswered=false;drawTest(document.getElementById('app'));},1500);
-}
-function answerWrite(answer){
-  const input = document.getElementById('testWriteInput');
-  if(!input.value.trim()) return;
-  if(normalize(input.value)===normalize(answer)){
-    input.style.borderColor='var(--green)';
-    testScore++;
-  } else {
-    input.style.borderColor='var(--red)';
-    input.value += `  →  Doğru: ${answer}`;
-  }
-  testIdx++;
-  setTimeout(()=>drawTest(document.getElementById('app')),1800);
 }
 
-// ===== MATCH =====
-let matchTiles=[], matchSelected=null, matchMatched=0, matchTotal=0, matchTimer=null, matchSeconds=0, matchWrong=0;
-function renderMatch(app){
-  const cards = shuffle(sets[currentSet].cards).slice(0, Math.min(8, sets[currentSet].cards.length));
-  matchTotal = cards.length;
-  matchMatched=0; matchSelected=null; matchSeconds=0; matchWrong=0;
-  matchTiles = shuffle([
-    ...cards.map((c,i)=>({id:'t'+i, text:c.term, pair:i, type:'term'})),
-    ...cards.map((c,i)=>({id:'d'+i, text:c.def, pair:i, type:'def'}))
-  ]);
-  clearInterval(matchTimer);
-  matchTimer = setInterval(()=>{matchSeconds++;const el=document.getElementById('matchTime');if(el)el.textContent=matchSeconds+'s';},1000);
-  drawMatch(app);
-}
-function drawMatch(app){
-  let html = `<div class="fade-in" style="text-align:center">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-      <button class="btn btn-outline btn-sm" onclick="clearInterval(matchTimer);backToStudy()">← Geri</button>
-      <h3>🔗 Eşleştir</h3>
-      <div class="match-timer" id="matchTime" style="margin:0;font-size:20px">${matchSeconds}s</div>
+function checkGrammar(chosen, q, btn, grid){
+  const correct = chosen === q.correct;
+  [...grid.children].forEach(b=>{
+    b.disabled = true;
+    if(b.textContent === q.correct) b.classList.add("correct");
+    else if(b===btn && !correct) b.classList.add("wrong");
+  });
+  const fb = document.getElementById("grammarFeedback");
+  fb.className = "feedback show " + (correct?"ok":"bad");
+  fb.innerHTML = `
+    <span class="stamp ${correct?'ok':'bad'}">${correct?'BESTANDEN':'NICHT BESTANDEN'}</span><br>
+    Doğru cevap: <b>${q.correct}</b>
+    <div class="row" style="margin-top:12px;">
+      <button class="btn" id="nextGrammar">Sıradaki →</button>
     </div>
-    <p style="color:var(--text2);margin-bottom:20px;font-size:14px">Terimleri tanımlarıyla eşleştir</p>
-    <div class="match-grid">`;
-  matchTiles.forEach((t,i)=>{
-    const matched = t.matched;
-    html += `<div class="match-tile ${matched?'matched':''}" data-idx="${i}" onclick="clickMatch(${i})">${esc(t.text)}</div>`;
+  `;
+  document.getElementById("nextGrammar").addEventListener("click", ()=>{
+    grammarIdx++; renderGrammar();
   });
-  html += `</div></div>`;
-  app.innerHTML = html;
-}
-function clickMatch(idx){
-  const tile = matchTiles[idx];
-  if(tile.matched) return;
-  const el = document.querySelector(`.match-tile[data-idx="${idx}"]`);
-  if(matchSelected===null){
-    matchSelected=idx;
-    el.classList.add('selected');
-  } else if(matchSelected===idx){
-    el.classList.remove('selected');
-    matchSelected=null;
-  } else {
-    const prev = matchTiles[matchSelected];
-    const prevEl = document.querySelector(`.match-tile[data-idx="${matchSelected}"]`);
-    if(prev.pair===tile.pair && prev.type!==tile.type){
-      prev.matched=true; tile.matched=true;
-      prevEl.classList.remove('selected');
-      prevEl.classList.add('matched');
-      el.classList.add('matched');
-      matchMatched++;
-      if(matchMatched===matchTotal){
-        clearInterval(matchTimer);
-        setTimeout(()=>{
-          document.getElementById('app').innerHTML = `<div class="fade-in" style="text-align:center;padding:40px">
-            <div style="font-size:64px;margin-bottom:16px">🎉</div>
-            <h2>Tüm eşleştirmeler tamamlandı!</h2>
-            <p style="color:var(--text2);margin:12px 0">Süre: ${matchSeconds}s · Hata: ${matchWrong}</p>
-            <button class="btn btn-primary btn-lg" onclick="renderMatch(document.getElementById('app'))">🔄 Tekrar</button>
-            <button class="btn btn-outline btn-lg" onclick="backToStudy()" style="margin-left:12px">← Geri</button>
-          </div>`;
-        },600);
-      }
-    } else {
-      matchWrong++;
-      el.classList.add('wrong');
-      prevEl.classList.add('wrong');
-      prevEl.classList.remove('selected');
-      setTimeout(()=>{
-        el.classList.remove('wrong');
-        prevEl.classList.remove('wrong');
-      },500);
-    }
-    matchSelected=null;
-  }
 }
 
-// ===== IMPORT / EXPORT =====
-function showImport(){ document.getElementById('importModal').classList.add('show'); }
-function closeImport(){ document.getElementById('importModal').classList.remove('show'); }
-function doImport(){
-  const text = document.getElementById('importText').value.trim();
-  const name = document.getElementById('importSetName').value.trim() || 'İçe Aktarılan Set';
-  if(!text){ toast('Metin boş!'); return; }
-  const lines = text.split('\\n').filter(l=>l.trim());
-  const cards = [];
-  lines.forEach(l=>{
-    let parts = null;
-    if(l.includes('|')) parts = l.split('|');
-    else if(l.includes('\\t')) parts = l.split('\\t');
-    else if(l.includes(' - ')) parts = l.split(' - ');
-    else if(l.includes('=')) parts = l.split('=');
-    if(parts && parts.length>=2){
-      cards.push({term:parts[0].trim(), def:parts.slice(1).join(' - ').trim()});
+/* ============================================================
+   MOD 4: KARTEI (tüm liste + ilerleme durumu)
+   ============================================================ */
+function renderList(){
+  const panel = document.getElementById("panel-list");
+  const boxLabel = {0:"zayıf",1:"tekrar gerek",2:"orta",3:"iyi",4:"ustalaşıldı"};
+  let html = `<div class="card-tag">Tüm kelimeler ve ilerleme durumu</div><div class="word-list">`;
+  DATA.forEach(w=>{
+    const box = srs[w.id].box;
+    html += `
+      <div class="word-list-item">
+        <span>${w.word}</span>
+        <span class="badge b${box}">Box ${box} · ${boxLabel[box]}</span>
+      </div>`;
+  });
+  html += `</div>
+    <div class="row" style="margin-top:18px;">
+      <button class="btn secondary" id="resetProgress">Tüm ilerlemeyi sıfırla</button>
+    </div>`;
+  panel.innerHTML = html;
+  document.getElementById("resetProgress").addEventListener("click", ()=>{
+    if(confirm("Tüm ilerleme silinsin mi?")){
+      DATA.forEach(w=> srs[w.id] = {box:0, seen:0, correct:0});
+      saveSRS(srs);
+      updateStatsRow();
+      renderList();
     }
   });
-  if(cards.length<2){ toast('En az 2 geçerli kart bulunamadı! Format: terim | tanım'); return; }
-  sets.push({name, cards, created:new Date().toLocaleDateString('tr-TR')});
-  save();
-  closeImport();
-  document.getElementById('importText').value='';
-  document.getElementById('importSetName').value='';
-  showView('home');
-  toast(`${cards.length} kart içe aktarıldı ✅`);
-}
-function exportAll(){
-  const data = JSON.stringify(sets, null, 2);
-  const blob = new Blob([data], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'studyset-backup.json';
-  a.click();
-  toast('Dışa aktarıldı 📤');
 }
 
-// ===== INIT =====
-showView('home');
+/* ============================================================
+   BAŞLAT
+   ============================================================ */
+updateStatsRow();
+renderCloze();
 </script>
 </body>
-</html>'''
-
-with open('quizlet_clone.html', 'w', encoding='utf-8') as f:
-    f.write(html_code)
-
-print(f"Dosya oluşturuldu: quizlet_clone.html ({len(html_code)} karakter)")
-
-# Result
-Dosya oluşturuldu: quizlet_clone.html (40638 karakter)
+</html>
