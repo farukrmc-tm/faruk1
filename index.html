@@ -1,897 +1,1291 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="h-full bg-slate-900 text-slate-100">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TestDaF Wortschatzheft — 1.1 Schule und Bildung</title>
-<style>
-  :root{
-    --paper:#f3efe4;
-    --paper-dark:#e8e1cf;
-    --ink:#26241f;
-    --ink-soft:#5c574a;
-    --stamp-green:#1f5c4d;
-    --stamp-red:#a33b2e;
-    --line:#c9bfa2;
-    --gold:#a8823a;
-    --box-bg:#fffdf7;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:
-      radial-gradient(ellipse at top left, rgba(31,92,77,0.05), transparent 50%),
-      var(--paper);
-    color:var(--ink);
-    font-family: 'Georgia', 'Times New Roman', serif;
-    min-height:100vh;
-  }
-  .sheet{
-    max-width:760px;
-    margin:0 auto;
-    padding:28px 22px 80px;
-  }
-  header.form-head{
-    border:2px solid var(--ink);
-    background:var(--box-bg);
-    padding:18px 20px;
-    position:relative;
-    margin-bottom:22px;
-  }
-  header.form-head::before{
-    content:"AZ. 1.1 / SCHULE UND BILDUNG";
-    position:absolute;
-    top:-11px; left:16px;
-    background:var(--paper);
-    padding:0 8px;
-    font-family: 'Courier New', monospace;
-    font-size:11px;
-    letter-spacing:2px;
-    color:var(--ink-soft);
-  }
-  header.form-head h1{
-    margin:6px 0 4px;
-    font-size:1.5rem;
-    letter-spacing:0.5px;
-  }
-  header.form-head .sub{
-    font-family:'Courier New', monospace;
-    font-size:12.5px;
-    color:var(--ink-soft);
-    letter-spacing:0.5px;
-  }
-  .stats-row{
-    display:flex;
-    gap:10px;
-    margin-top:14px;
-    flex-wrap:wrap;
-  }
-  .stat-box{
-    border:1px solid var(--line);
-    background:var(--paper-dark);
-    padding:8px 12px;
-    font-family:'Courier New', monospace;
-    font-size:12px;
-    flex:1;
-    min-width:100px;
-  }
-  .stat-box b{display:block; font-size:1.3rem; font-family:Georgia,serif; color:var(--stamp-green);}
-
-  nav.tabs{
-    display:flex;
-    gap:8px;
-    margin-bottom:18px;
-    flex-wrap:wrap;
-  }
-  nav.tabs button{
-    font-family:'Courier New', monospace;
-    font-size:12px;
-    letter-spacing:0.5px;
-    padding:9px 14px;
-    background:var(--paper-dark);
-    border:1px solid var(--ink);
-    color:var(--ink);
-    cursor:pointer;
-    text-transform:uppercase;
-  }
-  nav.tabs button.active{
-    background:var(--stamp-green);
-    color:var(--paper);
-    border-color:var(--stamp-green);
-  }
-  nav.tabs button:hover:not(.active){ background:#ddd4b8; }
-
-  .panel{
-    display:none;
-    border:1px solid var(--line);
-    background:var(--box-bg);
-    padding:20px;
-    min-height:320px;
-  }
-  .panel.active{display:block;}
-
-  .card-tag{
-    font-family:'Courier New', monospace;
-    font-size:11px;
-    color:var(--ink-soft);
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    margin-bottom:6px;
-  }
-  .word-title{
-    font-size:1.6rem;
-    color:var(--stamp-green);
-    margin:0 0 4px;
-  }
-  .meta-line{
-    font-family:'Courier New', monospace;
-    font-size:12px;
-    color:var(--ink-soft);
-    margin-bottom:14px;
-  }
-  .cloze-sentence{
-    font-size:1.15rem;
-    line-height:1.7;
-    margin:18px 0 6px;
-    padding:14px 16px;
-    background:var(--paper-dark);
-    border-left:3px solid var(--stamp-green);
-  }
-  .cloze-sentence .blank{
-    display:inline-block;
-    min-width:110px;
-    border-bottom:2px dotted var(--ink);
-    text-align:center;
-    color:var(--stamp-red);
-    font-weight:bold;
-  }
-  .translation{
-    font-size:0.92rem;
-    color:var(--ink-soft);
-    font-style:italic;
-    margin-bottom:16px;
-  }
-  input[type=text]{
-    font-family:Georgia, serif;
-    font-size:1.05rem;
-    padding:9px 12px;
-    width:100%;
-    max-width:320px;
-    border:1px solid var(--ink);
-    background:#fff;
-    margin-right:8px;
-  }
-  .btn{
-    font-family:'Courier New', monospace;
-    font-size:12px;
-    letter-spacing:0.5px;
-    padding:10px 16px;
-    background:var(--stamp-green);
-    color:var(--paper);
-    border:1px solid var(--stamp-green);
-    cursor:pointer;
-    text-transform:uppercase;
-  }
-  .btn.secondary{
-    background:transparent;
-    color:var(--ink);
-    border:1px solid var(--ink);
-  }
-  .btn:hover{ opacity:0.85; }
-  .btn:disabled{ opacity:0.4; cursor:default; }
-
-  .row{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:10px;}
-
-  .feedback{
-    margin-top:16px;
-    padding:12px 14px;
-    font-size:0.95rem;
-    display:none;
-    border:1px dashed var(--line);
-  }
-  .feedback.show{display:block;}
-  .feedback.ok{ border-color:var(--stamp-green); }
-  .feedback.bad{ border-color:var(--stamp-red); }
-
-  .stamp{
-    display:inline-block;
-    font-family:'Courier New', monospace;
-    font-weight:bold;
-    letter-spacing:2px;
-    padding:6px 14px;
-    border:3px solid;
-    transform:rotate(-4deg);
-    margin-bottom:8px;
-    font-size:0.85rem;
-  }
-  .stamp.ok{ color:var(--stamp-green); border-color:var(--stamp-green); }
-  .stamp.bad{ color:var(--stamp-red); border-color:var(--stamp-red); }
-
-  .word-detail{
-    font-size:0.92rem;
-    line-height:1.6;
-    color:var(--ink-soft);
-    margin-top:6px;
-  }
-  .word-detail b{ color:var(--ink); }
-
-  .empty-state{
-    text-align:center;
-    padding:60px 20px;
-    color:var(--ink-soft);
-    font-family:'Courier New', monospace;
-    font-size:13px;
-  }
-
-  .box-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(90px,1fr));
-    gap:10px;
-    margin-top:10px;
-  }
-  .box-cell{
-    border:1px solid var(--line);
-    background:var(--paper-dark);
-    padding:10px 8px;
-    text-align:center;
-    font-family:'Courier New', monospace;
-    font-size:11px;
-  }
-  .box-cell b{ display:block; font-size:1.4rem; font-family:Georgia,serif; color:var(--stamp-green); }
-
-  .word-list{
-    display:grid;
-    gap:8px;
-    margin-top:10px;
-  }
-  .word-list-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border:1px solid var(--line);
-    padding:9px 12px;
-    font-size:0.9rem;
-    background:var(--paper-dark);
-  }
-  .badge{
-    font-family:'Courier New', monospace;
-    font-size:10px;
-    padding:2px 7px;
-    border:1px solid;
-  }
-  .badge.b0{ color:var(--stamp-red); border-color:var(--stamp-red); }
-  .badge.b1,.badge.b2{ color:var(--gold); border-color:var(--gold); }
-  .badge.b3,.badge.b4{ color:var(--stamp-green); border-color:var(--stamp-green); }
-
-  .drill-q{
-    font-size:1.1rem;
-    margin-bottom:14px;
-  }
-  .opt-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    max-width:420px;
-  }
-  .opt-btn{
-    font-family:'Courier New', monospace;
-    padding:12px;
-    background:var(--paper-dark);
-    border:1px solid var(--ink);
-    cursor:pointer;
-    font-size:13px;
-  }
-  .opt-btn:hover{ background:#ddd4b8; }
-  .opt-btn.correct{ background:var(--stamp-green); color:var(--paper); border-color:var(--stamp-green); }
-  .opt-btn.wrong{ background:var(--stamp-red); color:var(--paper); border-color:var(--stamp-red); }
-
-  footer{
-    max-width:760px;
-    margin:0 auto;
-    padding:0 22px 40px;
-    font-family:'Courier New', monospace;
-    font-size:11px;
-    color:var(--ink-soft);
-    text-align:center;
-  }
-
-  @media (prefers-reduced-motion: reduce){ * { transition:none !important; } }
-</style>
-</head>
-<body>
-<div class="sheet">
-
-  <header class="form-head">
-    <h1>Wortschatzheft — Schule und Bildung</h1>
-    <div class="sub">TestDaF Vorbereitung · 1.1 · Seite 9 · Wissenschaftssprache</div>
-    <div class="stats-row" id="statsRow"></div>
-  </header>
-
-  <nav class="tabs">
-    <button data-tab="cloze" class="active">Lückentext</button>
-    <button data-tab="recall">TR → DE</button>
-    <button data-tab="grammar">Possessiv-Drill</button>
-    <button data-tab="list">Kartei</button>
-  </nav>
-
-  <section id="panel-cloze" class="panel active"></section>
-  <section id="panel-recall" class="panel"></section>
-  <section id="panel-grammar" class="panel"></section>
-  <section id="panel-list" class="panel"></section>
-
-</div>
-
-<footer>Fortschritt bu tarayıcıda (localStorage) saklanır · Yeni kelime eklemek için DATA dizisine ekle</footer>
-
-<script>
-/* ============================================================
-   VERİ SETİ — yeni sayfa/kelime eklemek için buraya obje ekle.
-   id: benzersiz, srsKey olarak kullanılır (localStorage).
-   sentences: [{de, tr, blankWord}] — blankWord cloze'da silinir.
-   ============================================================ */
-const DATA = [
-  {
-    id:"eingeschult_werden",
-    word:"eingeschult werden",
-    type:"Fiil (Passiv)",
-    prep:"—",
-    tr:"okula başlatılmak",
-    syn:"die Einschulung (isim)",
-    ant:"—",
-    register:"Wissenschaftssprache",
-    sentences:[
-      {de:"Die meisten Kinder werden im Alter von sechs Jahren ___.", answer:"eingeschult", tr:"Çocukların çoğu altı yaşında okula başlatılır."},
-      {de:"Sie wurde mit sieben Jahren ___, weil ihr Geburtstag im Dezember liegt.", answer:"eingeschult", tr:"O, yedi yaşında okula başlatıldı, çünkü doğum günü Aralık ayına denk geliyor."},
-      {de:"In manchen Bundesländern werden Kinder schon mit fünf Jahren ___.", answer:"eingeschult", tr:"Bazı eyaletlerde çocuklar daha beş yaşındayken okula başlatılır."}
-    ]
-  },
-  {
-    id:"zur_schule_gehen",
-    word:"zur Schule gehen",
-    type:"Fiil + Präp.",
-    prep:"zu + Dativ",
-    tr:"okula gitmek",
-    syn:"eine Schule besuchen",
-    ant:"die Schule schwänzen",
-    register:"Alltagssprache",
-    sentences:[
-      {de:"Wenn man Abitur machen will, muss man 12 oder 13 Jahre ___ ___.", answer:"zur Schule", tr:"Abitur yapmak isteyen kişi 12-13 yıl okula gitmek zorundadır."},
-      {de:"Früher mussten Kinder oft schon mit fünf Jahren ___ ___, um arbeiten zu können.", answer:"zur Schule", tr:"Eskiden çocuklar çalışabilmek için genellikle beş yaşında okula gitmek zorunda kalırdı."},
-      {de:"Nächstes Jahr wird mein Bruder zum ersten Mal ___ ___ gehen.", answer:"zur Schule", tr:"Gelecek yıl kardeşim ilk kez okula gidecek."}
-    ]
-  },
-  {
-    id:"eine_schule_besuchen",
-    word:"eine Schule besuchen",
-    type:"Fiil (Akk.)",
-    prep:"—",
-    tr:"bir okula gitmek/devam etmek",
-    syn:"zur Schule gehen",
-    ant:"die Schule schwänzen / abbrechen",
-    register:"Wissenschaftssprache",
-    sentences:[
-      {de:"Die Eltern legen großen Wert darauf, dass ihr Kind eine gute Schule ___.", answer:"besucht", tr:"Ebeveynler, çocuklarının iyi bir okula gitmesine büyük önem verir."},
-      {de:"Letztes Jahr ___ sie noch die Grundschule, jetzt ist sie schon auf dem Gymnasium.", answer:"besuchte", tr:"Geçen yıl hâlâ ilkokula gidiyordu, şimdi zaten lisede."},
-      {de:"Immer mehr Schüler ___ heutzutage eine Ganztagsschule.", answer:"besuchen", tr:"Günümüzde giderek daha fazla öğrenci tam gün okula gidiyor."}
-    ]
-  },
-  {
-    id:"die_schulpflicht",
-    word:"die Schulpflicht",
-    type:"İsim (dişi) / schulpflichtig (sıfat)",
-    prep:"—",
-    tr:"zorunlu eğitim",
-    syn:"—",
-    ant:"—",
-    register:"Wissenschaftssprache",
-    sentences:[
-      {de:"Die Dauer der allgemeinen ___ beträgt in Deutschland mindestens neun Schuljahre.", answer:"Schulpflicht", tr:"Genel zorunlu eğitimin süresi Almanya'da en az dokuz okul yılıdır."},
-      {de:"Früher galt die ___ nur für Jungen, nicht für Mädchen.", answer:"Schulpflicht", tr:"Eskiden zorunlu eğitim sadece erkekler için geçerliydi."},
-      {de:"___ Kinder dürfen der Schule nur aus wichtigen Gründen fernbleiben.", answer:"Schulpflichtige", tr:"Zorunlu eğitim çağındaki çocuklar okuldan ancak önemli sebeplerle uzak kalabilir."}
-    ]
-  },
-  {
-    id:"schule_schwaenzen",
-    word:"die Schule schwänzen",
-    type:"Fiil (Akk.)",
-    prep:"—",
-    tr:"okulu asmak",
-    syn:"der Schule fernbleiben",
-    ant:"die Schule besuchen",
-    register:"Alltagssprache",
-    sentences:[
-      {de:"Eigentlich müsste sie jetzt im Unterricht sein, aber sie ___ die Schule.", answer:"schwänzt", tr:"Aslında derste olması gerekirdi ama okulu asıyor."},
-      {de:"Letzte Woche hat er dreimal die Schule ___.", answer:"geschwänzt", tr:"Geçen hafta üç kez okulu astı."},
-      {de:"Schüler, die häufig die Schule ___, riskieren schlechte Noten.", answer:"schwänzen", tr:"Sık sık okulu asan öğrenciler kötü not riski taşır."}
-    ]
-  },
-  {
-    id:"fernbleiben",
-    word:"der Schule fernbleiben",
-    type:"Fiil (ayrılabilir, Dativ)",
-    prep:"Dativ",
-    tr:"okuldan uzak kalmak (resmi)",
-    syn:"die Schule schwänzen (daha argo)",
-    ant:"die Schule besuchen",
-    register:"Wissenschaftssprache",
-    sentences:[
-      {de:"Schulpflichtige Kinder dürfen der Schule nur aus wichtigen Gründen ___.", answer:"fernbleiben", tr:"Zorunlu eğitim çağındaki çocuklar okuldan ancak önemli sebeplerle uzak kalabilir."}
-    ]
-  },
-  {
-    id:"oeffentliche_schule",
-    word:"die öffentliche/staatliche Schule",
-    type:"İsim (dişi) + sıfat",
-    prep:"—",
-    tr:"devlet okulu",
-    syn:"birbirinin eş anlamlısı",
-    ant:"die Privatschule",
-    register:"Wissenschaftssprache",
-    sentences:[
-      {de:"Die meisten Schülerinnen und Schüler in Deutschland besuchen ___ Schulen.", answer:"öffentliche", tr:"Almanya'daki öğrencilerin çoğu devlet okullarına gider."},
-      {de:"Früher galten ___ Schulen oft als qualitativ schlechter als Privatschulen.", answer:"staatliche", tr:"Eskiden devlet okulları özel okullardan daha düşük kaliteli sayılırdı."},
-      {de:"Im Gegensatz zu Privatschulen erheben ___ Schulen in der Regel keine Studiengebühren.", answer:"öffentliche", tr:"Özel okulların aksine devlet okulları genellikle ücret almaz."}
-    ]
-  },
-  {
-    id:"privatschule",
-    word:"die Privatschule, -schulen",
-    type:"İsim (dişi)",
-    prep:"—",
-    tr:"özel okul",
-    syn:"—",
-    ant:"die öffentliche/staatliche Schule",
-    register:"Wissenschaftssprache",
-    sentences:[
-      {de:"Die Zahl der Schüler, die ___ besuchen, steigt kontinuierlich.", answer:"Privatschulen", tr:"Özel okullara giden öğrencilerin sayısı sürekli artıyor."},
-      {de:"Vor zehn Jahren besuchten deutlich weniger Kinder eine ___ als heute.", answer:"Privatschule", tr:"On yıl önce daha az çocuk özel okula giderdi."},
-      {de:"Im Gegensatz zu öffentlichen Schulen verlangen ___ in der Regel Schulgebühren.", answer:"Privatschulen", tr:"Devlet okullarının aksine özel okullar genellikle ücret talep eder."}
-    ]
-  },
-  {
-    id:"ganztagsschule",
-    word:"die Ganztagsschule, -schulen",
-    type:"İsim (dişi)",
-    prep:"—",
-    tr:"tam gün eğitim veren okul",
-    syn:"—",
-    ant:"die Halbtagsschule",
-    register:"Wissenschaftssprache",
-    sentences:[
-      {de:"In Deutschland werden immer mehr ___ eingerichtet.", answer:"Ganztagsschulen", tr:"Almanya'da giderek daha fazla tam gün okul kuruluyor."},
-      {de:"Bevor die erste ___ in unserer Stadt eröffnet wurde, mussten Eltern selbst Betreuung organisieren.", answer:"Ganztagsschule", tr:"Şehrimizde ilk tam gün okul açılmadan önce ebeveynler kendileri bakım organize etmek zorundaydı."},
-      {de:"___ bieten oft mehr Möglichkeiten für außerschulische Aktivitäten.", answer:"Ganztagsschulen", tr:"Tam gün okullar genellikle okul dışı etkinlikler için daha fazla imkân sunar."}
-    ]
-  },
-  {
-    id:"internat",
-    word:"das Internat, Internate",
-    type:"İsim (nötr)",
-    prep:"—",
-    tr:"yatılı okul",
-    syn:"—",
-    ant:"—",
-    register:"Wissenschaftssprache",
-    sentences:[
-      {de:"Im ___ teilen sich meistens zwei Schüler ein Zimmer.", answer:"Internat", tr:"Yatılı okulda genellikle iki öğrenci bir odayı paylaşır."},
-      {de:"Seine Eltern schickten ihn mit zwölf Jahren auf ein ___.", answer:"Internat", tr:"Ailesi onu on iki yaşında yatılı okula gönderdi."},
-      {de:"___e bieten den Vorteil, dass Schüler rund um die Uhr betreut werden.", answer:"Internat", tr:"Yatılı okullar öğrencilerin gün boyu gözetim altında olması avantajını sunar."}
-    ]
-  },
-  {
-    id:"klasse",
-    word:"die Klasse, Klassen",
-    type:"İsim (dişi)",
-    prep:"—",
-    tr:"sınıf",
-    syn:"—",
-    ant:"—",
-    register:"nötr",
-    sentences:[
-      {de:"Die Grundschulzeit dauert in Bayern von der 1. bis zur 4. ___.", answer:"Klasse", tr:"İlkokul süresi Bavyera'da 1. sınıftan 4. sınıfa kadar sürer."},
-      {de:"Als sie in die 5. ___ kam, musste sie sich an eine neue Schule gewöhnen.", answer:"Klasse", tr:"5. sınıfa geçtiğinde yeni bir okula alışmak zorunda kaldı."},
-      {de:"In manchen ___n sitzen über dreißig Schülerinnen und Schüler.", answer:"Klasse", tr:"Bazı sınıflarda otuzdan fazla öğrenci oturuyor."}
-    ]
-  },
-  {
-    id:"klasse_besuchen",
-    word:"die ... Klasse besuchen",
-    type:"Kalıp",
-    prep:"—",
-    tr:"...sınıfına gitmek/devam etmek",
-    syn:"in die ... Klasse gehen",
-    ant:"—",
-    register:"Wissenschaftssprache",
-    sentences:[
-      {de:"Wenn man die erste Klasse ___, lernt man lesen und schreiben.", answer:"besucht", tr:"Kişi birinci sınıfa gittiğinde okumayı ve yazmayı öğrenir."},
-      {de:"Letztes Jahr ___ mein Neffe die achte Klasse und hatte große Schwierigkeiten in Mathematik.", answer:"besuchte", tr:"Geçen yıl yeğenim sekizinci sınıfa gidiyordu ve matematikte zorluk yaşıyordu."},
-      {de:"Schüler, die die neunte Klasse ___, bereiten sich meist schon auf ihren ersten Abschluss vor.", answer:"besuchen", tr:"Dokuzuncu sınıfa giden öğrenciler genellikle şimdiden ilk diplomalarına hazırlanıyor."}
-    ]
-  },
-  {
-    id:"in_die_klasse_gehen",
-    word:"in die ... Klasse gehen",
-    type:"Kalıp",
-    prep:"in + Akkusativ",
-    tr:"...sınıfına gitmek",
-    syn:"die ... Klasse besuchen",
-    ant:"—",
-    register:"Alltagssprache",
-    sentences:[
-      {de:"Wer ___ die 12. Klasse geht, muss sich auf das Abitur vorbereiten.", answer:"in", tr:"12. sınıfa giden kişi Abitur'a hazırlanmak zorundadır."},
-      {de:"Mein Sohn ___ letztes Jahr noch in die dritte Klasse, jetzt ist er schon in der vierten.", answer:"ging", tr:"Oğlum geçen yıl hâlâ üçüncü sınıftaydı."},
-      {de:"Kinder, die in die erste Klasse ___, sind meistens sechs oder sieben Jahre alt.", answer:"gehen", tr:"Birinci sınıfa giden çocuklar genellikle altı ya da yedi yaşındadır."}
-    ]
-  },
-  {
-    id:"hauptschule_gymnasium",
-    word:"auf die Haupt-/Realschule, aufs Gymnasium gehen",
-    type:"Kalıp",
-    prep:"auf + Akkusativ",
-    tr:"ortaokula/liseye gitmek",
-    syn:"—",
-    ant:"—",
-    register:"Wissenschaftssprache",
-    sentences:[
-      {de:"Am Ende der Grundschulzeit wird entschieden, ob man ___ die Hauptschule geht.", answer:"auf", tr:"İlkokul döneminin sonunda hangi okula gideceğine karar verilir."},
-      {de:"Früher gingen viel mehr Kinder ___ die Hauptschule als heute.", answer:"auf", tr:"Eskiden bugüne göre çok daha fazla çocuk Hauptschule'ye giderdi."},
-      {de:"Wer gute Noten hat, geht meistens ___s Gymnasium.", answer:"auf", tr:"İyi notları olan genellikle Gymnasium'a gider."}
-    ]
-  },
-  {
-    id:"schule_abschliessen",
-    word:"die Schule abschließen / der Schulabschluss",
-    type:"Fiil (ayrılabilir) / İsim",
-    prep:"—",
-    tr:"okulu bitirmek / diploma",
-    syn:"—",
-    ant:"die Schule abbrechen",
-    register:"Wissenschaftssprache",
-    sentences:[
-      {de:"Wenn man die Schule mit guten Noten ___ hat, hat man bessere Chancen.", answer:"abgeschlossen", tr:"Kişi okulu iyi notlarla bitirdiyse daha iyi şansa sahip olur."},
-      {de:"Nach ihrem ___ hat sie ein Jahr lang im Ausland gearbeitet.", answer:"Schulabschluss", tr:"Mezuniyetinden sonra bir yıl yurt dışında çalıştı."},
-      {de:"Ein guter ___ ist heutzutage eine wichtige Voraussetzung für den Berufseinstieg.", answer:"Schulabschluss", tr:"İyi bir diploma günümüzde mesleğe başlamak için önemli bir ön koşuldur."}
-    ]
-  },
-  {
-    id:"schulabschluss_machen_haben",
-    word:"einen Schulabschluss machen / haben",
-    type:"Fiil kalıbı",
-    prep:"—",
-    tr:"mezun olmak (machen) / diploması olmak (haben)",
-    syn:"die Schule abschließen",
-    ant:"die Schule abbrechen",
-    register:"Wissenschaftssprache",
-    sentences:[
-      {de:"Viele Schüler, die nächstes Jahr ihren Schulabschluss ___, sind schon auf der Suche nach einem Ausbildungsplatz.", answer:"machen", tr:"Gelecek yıl mezun olacak birçok öğrenci şimdiden staj yeri arıyor."},
-      {de:"Meine Schwester ___ ihren Schulabschluss vor drei Jahren.", answer:"machte", tr:"Kız kardeşim üç yıl önce mezun oldu."},
-      {de:"Heutzutage ist es sehr wichtig, einen guten Schulabschluss zu ___.", answer:"haben", tr:"Günümüzde iyi bir diplomaya sahip olmak çok önemlidir."}
-    ]
-  },
-  {
-    id:"schule_abbrechen",
-    word:"die Schule abbrechen",
-    type:"Fiil (ayrılabilir, Akk.)",
-    prep:"—",
-    tr:"okulu yarım bırakmak",
-    syn:"—",
-    ant:"die Schule abschließen",
-    register:"Wissenschaftssprache",
-    sentences:[
-      {de:"Wer die Schule ___ hat, hat keinen Schulabschluss und findet nur schwer einen Arbeitsplatz.", answer:"abgebrochen", tr:"Okulu terk edenin diploması olmaz, iş bulması zorlaşır."},
-      {de:"Aus finanziellen Gründen musste er die Schule mit sechzehn Jahren ___.", answer:"abbrechen", tr:"Maddi sebeplerden dolayı on altı yaşında okulu bırakmak zorunda kaldı."},
-      {de:"Die Zahl der Jugendlichen, die die Schule ___, ist in den letzten Jahren leicht gesunken.", answer:"abbrechen", tr:"Okulu terk eden gençlerin sayısı son yıllarda hafifçe azaldı."}
-    ]
-  }
-];
-
-const GRAMMAR_DRILL = [
-  {sentence:"Der Lehrer hat ___ Buch vergessen.", correct:"sein", options:["sein","ihr","seine","ihre"], tr:"Öğretmen kendi kitabını unuttu."},
-  {sentence:"Die Mutter sucht ___ Tasche.", correct:"ihre", options:["sein","seine","ihr","ihre"], tr:"Anne kendi çantasını arıyor."},
-  {sentence:"Die Kinder lieben ___ Lehrerin.", correct:"ihre", options:["ihre","seine","ihrem","ihren"], tr:"Çocuklar kendi öğretmenlerini seviyor."},
-  {sentence:"Ich helfe ___ Bruder.", correct:"seinem", options:["sein","seinen","seiner","seinem"], tr:"Ona (erkek) kardeşine yardım ediyorum."},
-  {sentence:"Meine Schwester möchte nicht zur Schule gehen, weil ___ Freunde nicht dort sind.", correct:"ihre", options:["seine","ihre","ihr","sein"], tr:"Kız kardeşim okula gitmek istemiyor çünkü arkadaşları orada değil."},
-  {sentence:"Der Schüler zeigt ___ Eltern das Zeugnis.", correct:"seinen", options:["sein","seine","seinen","seinem"], tr:"Öğrenci karnesini ailesine (onun ailesi) gösteriyor."},
-  {sentence:"Die Lehrerin gibt ___ Klasse eine neue Aufgabe.", correct:"ihrer", options:["ihre","ihrer","ihren","ihr"], tr:"Öğretmen (kadın) kendi sınıfına yeni bir görev veriyor."}
-];
-
-/* ============================================================
-   SRS (basit Leitner sistemi) — localStorage'da tutulur
-   box: 0 (hiç bilinmiyor) -> 4 (iyi biliniyor)
-   ============================================================ */
-const SRS_KEY = "testdaf_srs_v1";
-function loadSRS(){
-  try{
-    const raw = localStorage.getItem(SRS_KEY);
-    return raw ? JSON.parse(raw) : {};
-  }catch(e){ return {}; }
-}
-function saveSRS(state){
-  try{ localStorage.setItem(SRS_KEY, JSON.stringify(state)); }catch(e){}
-}
-let srs = loadSRS();
-DATA.forEach(w=>{ if(!srs[w.id]) srs[w.id] = {box:0, seen:0, correct:0}; });
-saveSRS(srs);
-
-function pickWordWeighted(){
-  // box 0-1 kelimeler daha sık gelsin
-  const pool = [];
-  DATA.forEach(w=>{
-    const box = srs[w.id].box;
-    const weight = box===0?5 : box===1?3 : box===2?2 : 1;
-    for(let i=0;i<weight;i++) pool.push(w);
-  });
-  return pool[Math.floor(Math.random()*pool.length)];
-}
-
-function updateStatsRow(){
-  const boxes=[0,0,0,0,0];
-  DATA.forEach(w=> boxes[srs[w.id].box]++ );
-  const el = document.getElementById("statsRow");
-  el.innerHTML = `
-    <div class="stat-box"><b>${DATA.length}</b>Toplam kelime</div>
-    <div class="stat-box"><b>${boxes[4]}</b>Ustalaşılan (Box 4)</div>
-    <div class="stat-box"><b>${boxes[0]}</b>Zayıf (Box 0)</div>
-  `;
-}
-
-/* ============================================================
-   TAB YÖNETİMİ
-   ============================================================ */
-document.querySelectorAll("nav.tabs button").forEach(btn=>{
-  btn.addEventListener("click", ()=>{
-    document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.remove("active"));
-    document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
-    btn.classList.add("active");
-    const tab = btn.dataset.tab;
-    document.getElementById("panel-"+tab).classList.add("active");
-    if(tab==="cloze") renderCloze();
-    if(tab==="recall") renderRecall();
-    if(tab==="grammar") renderGrammar();
-    if(tab==="list") renderList();
-  });
-});
-
-/* ============================================================
-   MOD 1: LÜCKENTEXT (Cloze)
-   ============================================================ */
-let currentClozeWord = null;
-let currentClozeSentence = null;
-
-function renderCloze(){
-  currentClozeWord = pickWordWeighted();
-  const sList = currentClozeWord.sentences;
-  currentClozeSentence = sList[Math.floor(Math.random()*sList.length)];
-  const panel = document.getElementById("panel-cloze");
-  const blankLen = currentClozeSentence.answer.length;
-  const displaySentence = currentClozeSentence.de.replace("___", `<span class="blank">?</span>`);
-
-  panel.innerHTML = `
-    <div class="card-tag">Aktenzeichen ${DATA.indexOf(currentClozeWord)+1}/${DATA.length} · Box ${srs[currentClozeWord.id].box}</div>
-    <div class="word-title">${currentClozeWord.word}</div>
-    <div class="meta-line">${currentClozeWord.type} · ${currentClozeWord.register}${currentClozeWord.prep!=="—" ? " · "+currentClozeWord.prep : ""}</div>
-    <div class="cloze-sentence">${displaySentence}</div>
-    <div class="translation">${currentClozeSentence.tr}</div>
-    <div class="row">
-      <input type="text" id="clozeInput" placeholder="eksik kelimeyi yaz..." autocomplete="off">
-      <button class="btn" id="clozeCheck">Kontrol et</button>
-      <button class="btn secondary" id="clozeSkip">Geç</button>
-    </div>
-    <div class="feedback" id="clozeFeedback"></div>
-  `;
-  document.getElementById("clozeInput").focus();
-  document.getElementById("clozeCheck").addEventListener("click", checkCloze);
-  document.getElementById("clozeSkip").addEventListener("click", renderCloze);
-  document.getElementById("clozeInput").addEventListener("keydown", e=>{
-    if(e.key==="Enter") checkCloze();
-  });
-}
-
-function normalize(s){
-  return s.trim().toLowerCase()
-    .replace(/ä/g,"a").replace(/ö/g,"o").replace(/ü/g,"u").replace(/ß/g,"ss");
-}
-
-function checkCloze(){
-  const input = document.getElementById("clozeInput");
-  const val = input.value;
-  const correct = normalize(val) === normalize(currentClozeSentence.answer);
-  const fb = document.getElementById("clozeFeedback");
-  const wid = currentClozeWord.id;
-
-  if(correct){
-    srs[wid].box = Math.min(4, srs[wid].box+1);
-    srs[wid].correct++;
-  }else{
-    srs[wid].box = 0;
-  }
-  srs[wid].seen++;
-  saveSRS(srs);
-  updateStatsRow();
-
-  fb.className = "feedback show " + (correct ? "ok" : "bad");
-  fb.innerHTML = `
-    <span class="stamp ${correct?'ok':'bad'}">${correct ? 'BESTANDEN' : 'NICHT BESTANDEN'}</span><br>
-    ${correct ? 'Doğru!' : `Doğrusu: <b>${currentClozeSentence.answer}</b>`}
-    <div class="word-detail">
-      <b>Eş anlamlı:</b> ${currentClozeWord.syn} &nbsp;·&nbsp; <b>Zıt anlamlı:</b> ${currentClozeWord.ant}<br>
-      <b>TR:</b> ${currentClozeWord.tr}
-    </div>
-    <div class="row" style="margin-top:12px;">
-      <button class="btn" id="nextCloze">Sıradaki →</button>
-    </div>
-  `;
-  document.getElementById("nextCloze").addEventListener("click", renderCloze);
-  input.disabled = true;
-  document.getElementById("clozeCheck").disabled = true;
-}
-
-/* ============================================================
-   MOD 2: TR -> DE HIZLI HATIRLAMA
-   ============================================================ */
-let currentRecallWord = null;
-
-function renderRecall(){
-  currentRecallWord = pickWordWeighted();
-  const panel = document.getElementById("panel-recall");
-  panel.innerHTML = `
-    <div class="card-tag">Aktenzeichen ${DATA.indexOf(currentRecallWord)+1}/${DATA.length} · Box ${srs[currentRecallWord.id].box}</div>
-    <div class="drill-q">Türkçesi: <b>${currentRecallWord.tr}</b></div>
-    <div class="meta-line">${currentRecallWord.type}${currentRecallWord.prep!=="—" ? " · "+currentRecallWord.prep : ""}</div>
-    <div class="row">
-      <input type="text" id="recallInput" placeholder="Almancasını yaz..." autocomplete="off">
-      <button class="btn" id="recallCheck">Kontrol et</button>
-      <button class="btn secondary" id="recallSkip">Geç</button>
-    </div>
-    <div class="feedback" id="recallFeedback"></div>
-  `;
-  document.getElementById("recallInput").focus();
-  document.getElementById("recallCheck").addEventListener("click", checkRecall);
-  document.getElementById("recallSkip").addEventListener("click", renderRecall);
-  document.getElementById("recallInput").addEventListener("keydown", e=>{
-    if(e.key==="Enter") checkRecall();
-  });
-}
-
-function checkRecall(){
-  const input = document.getElementById("recallInput");
-  const val = normalize(input.value);
-  // temel kelimeyi (artikel/parantez olmadan) çıkar
-  const baseWord = currentRecallWord.word.split(",")[0].split("/")[0].trim();
-  const strippedBase = normalize(baseWord.replace(/^(die|der|das)\s+/i,""));
-  const correct = normalize(input.value).includes(strippedBase) || strippedBase.includes(normalize(input.value)) && val.length>2;
-
-  const wid = currentRecallWord.id;
-  if(correct){
-    srs[wid].box = Math.min(4, srs[wid].box+1);
-    srs[wid].correct++;
-  }else{
-    srs[wid].box = 0;
-  }
-  srs[wid].seen++;
-  saveSRS(srs);
-  updateStatsRow();
-
-  const fb = document.getElementById("recallFeedback");
-  fb.className = "feedback show " + (correct ? "ok" : "bad");
-  fb.innerHTML = `
-    <span class="stamp ${correct?'ok':'bad'}">${correct ? 'BESTANDEN' : 'NICHT BESTANDEN'}</span><br>
-    Doğrusu: <b>${currentRecallWord.word}</b>
-    <div class="word-detail">
-      <b>Register:</b> ${currentRecallWord.register}<br>
-      <b>Eş/Zıt:</b> ${currentRecallWord.syn} / ${currentRecallWord.ant}
-    </div>
-    <div class="row" style="margin-top:12px;">
-      <button class="btn" id="nextRecall">Sıradaki →</button>
-    </div>
-  `;
-  document.getElementById("nextRecall").addEventListener("click", renderRecall);
-  input.disabled = true;
-  document.getElementById("recallCheck").disabled = true;
-}
-
-/* ============================================================
-   MOD 3: POSSESSIVPRONOMEN DRILL
-   ============================================================ */
-let grammarIdx = 0;
-let grammarOrder = [];
-
-function shuffle(arr){
-  const a = arr.slice();
-  for(let i=a.length-1;i>0;i--){
-    const j = Math.floor(Math.random()*(i+1));
-    [a[i],a[j]]=[a[j],a[i]];
-  }
-  return a;
-}
-
-function renderGrammar(){
-  if(grammarOrder.length===0) grammarOrder = shuffle([...GRAMMAR_DRILL.keys()]);
-  if(grammarIdx >= grammarOrder.length){
-    document.getElementById("panel-grammar").innerHTML = `
-      <div class="empty-state">Bu turu bitirdin! 🎉<br><br>
-      <button class="btn" id="restartGrammar">Baştan başla</button></div>`;
-    document.getElementById("restartGrammar").addEventListener("click", ()=>{
-      grammarIdx=0; grammarOrder=shuffle([...GRAMMAR_DRILL.keys()]); renderGrammar();
-    });
-    return;
-  }
-  const q = GRAMMAR_DRILL[grammarOrder[grammarIdx]];
-  const panel = document.getElementById("panel-grammar");
-  const opts = shuffle(q.options);
-  panel.innerHTML = `
-    <div class="card-tag">Possessivpronomen · Soru ${grammarIdx+1}/${GRAMMAR_DRILL.length}</div>
-    <div class="drill-q">${q.sentence.replace("___", '<span class="blank">___</span>')}</div>
-    <div class="translation">${q.tr}</div>
-    <div class="opt-grid" id="optGrid"></div>
-    <div class="feedback" id="grammarFeedback"></div>
-  `;
-  const grid = document.getElementById("optGrid");
-  opts.forEach(opt=>{
-    const b = document.createElement("button");
-    b.className = "opt-btn";
-    b.textContent = opt;
-    b.addEventListener("click", ()=> checkGrammar(opt, q, b, grid));
-    grid.appendChild(b);
-  });
-}
-
-function checkGrammar(chosen, q, btn, grid){
-  const correct = chosen === q.correct;
-  [...grid.children].forEach(b=>{
-    b.disabled = true;
-    if(b.textContent === q.correct) b.classList.add("correct");
-    else if(b===btn && !correct) b.classList.add("wrong");
-  });
-  const fb = document.getElementById("grammarFeedback");
-  fb.className = "feedback show " + (correct?"ok":"bad");
-  fb.innerHTML = `
-    <span class="stamp ${correct?'ok':'bad'}">${correct?'BESTANDEN':'NICHT BESTANDEN'}</span><br>
-    Doğru cevap: <b>${q.correct}</b>
-    <div class="row" style="margin-top:12px;">
-      <button class="btn" id="nextGrammar">Sıradaki →</button>
-    </div>
-  `;
-  document.getElementById("nextGrammar").addEventListener("click", ()=>{
-    grammarIdx++; renderGrammar();
-  });
-}
-
-/* ============================================================
-   MOD 4: KARTEI (tüm liste + ilerleme durumu)
-   ============================================================ */
-function renderList(){
-  const panel = document.getElementById("panel-list");
-  const boxLabel = {0:"zayıf",1:"tekrar gerek",2:"orta",3:"iyi",4:"ustalaşıldı"};
-  let html = `<div class="card-tag">Tüm kelimeler ve ilerleme durumu</div><div class="word-list">`;
-  DATA.forEach(w=>{
-    const box = srs[w.id].box;
-    html += `
-      <div class="word-list-item">
-        <span>${w.word}</span>
-        <span class="badge b${box}">Box ${box} · ${boxLabel[box]}</span>
-      </div>`;
-  });
-  html += `</div>
-    <div class="row" style="margin-top:18px;">
-      <button class="btn secondary" id="resetProgress">Tüm ilerlemeyi sıfırla</button>
-    </div>`;
-  panel.innerHTML = html;
-  document.getElementById("resetProgress").addEventListener("click", ()=>{
-    if(confirm("Tüm ilerleme silinsin mi?")){
-      DATA.forEach(w=> srs[w.id] = {box:0, seen:0, correct:0});
-      saveSRS(srs);
-      updateStatsRow();
-      renderList();
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelime Kutusu — TestDaF Wortschatz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+    
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
-  });
-}
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
 
-/* ============================================================
-   BAŞLAT
-   ============================================================ */
-updateStatsRow();
-renderCloze();
-</script>
+    /* 3D Flashcard Çevrilme Efekti */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+
+    /* Özel Kaydırma Çubuğu */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col md:flex-row overflow-x-hidden select-none">
+
+  <!-- Mobil Üst Bar -->
+  <div class="md:hidden flex items-center justify-between p-4 bg-slate-950 border-b border-slate-800 z-50">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center text-slate-950 font-black text-lg">K</div>
+      <span class="font-bold text-lg tracking-tight">Kelime Kutusu</span>
+    </div>
+    <button id="mobileMenuBtn" class="p-2 text-slate-400 hover:text-white focus:outline-none">
+      <i class="fa-solid fa-bars text-xl"></i>
+    </button>
+  </div>
+
+  <!-- SOL PANEL (Deste Menüsü) -->
+  <aside id="sidebar" class="fixed md:relative inset-y-0 left-0 w-72 bg-slate-950 border-r border-slate-800 flex flex-col justify-between z-40 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+    <div>
+      <!-- Logo / Başlık -->
+      <div class="p-5 border-b border-slate-800/80 hidden md:flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-amber-500 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-amber-500/20">K</div>
+        <div>
+          <h1 class="font-bold text-slate-100 tracking-tight leading-none">Kelime Kutusu</h1>
+          <span class="text-xs text-amber-400/90 font-mono font-medium">TestDaF S.46-93</span>
+        </div>
+      </div>
+
+      <!-- Desteler Listesi -->
+      <div class="p-4">
+        <div class="flex items-center justify-between mb-3 px-2">
+          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">Destelerim</span>
+          <span id="deckCountBadge" class="text-xs font-mono bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full">0</span>
+        </div>
+        
+        <ul id="deckList" class="space-y-1 max-h-[calc(100vh-280px)] overflow-y-auto pr-1">
+          <!-- JS ile dinamik eklenecek -->
+        </ul>
+      </div>
+    </div>
+
+    <!-- Yeni Deste Ekleme & Veri Aktarımı -->
+    <div class="p-4 border-t border-slate-800/80 bg-slate-950/50 space-y-3">
+      <form id="newDeckForm" class="flex items-center gap-2">
+        <input type="text" id="newDeckName" placeholder="+ Yeni deste adı…" required 
+               class="flex-1 bg-slate-900 border border-slate-700/80 text-sm rounded-lg px-3 py-2 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors">
+        <button type="submit" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-2 rounded-lg text-sm transition-colors">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </form>
+
+      <div class="flex items-center justify-between pt-2 border-t border-slate-800/50 text-xs">
+        <button id="exportDataBtn" class="text-slate-400 hover:text-amber-400 flex items-center gap-1.5 transition-colors">
+          <i class="fa-solid fa-download"></i> Dışa Aktar
+        </button>
+        <label class="text-slate-400 hover:text-amber-400 flex items-center gap-1.5 cursor-pointer transition-colors">
+          <i class="fa-solid fa-upload"></i> İçe Aktar
+          <input type="file" id="importFileInput" accept=".json" class="hidden">
+        </label>
+      </div>
+    </div>
+  </aside>
+
+  <!-- SAĞ PANEL (Ana İçerik) -->
+  <main class="flex-1 flex flex-col h-full bg-slate-900 overflow-y-auto relative">
+
+    <!-- Boş Durum (Deste Yoksa) -->
+    <div id="emptyState" class="flex-1 flex flex-col items-center justify-center p-8 text-center my-auto">
+      <div class="w-20 h-20 bg-slate-800/80 rounded-3xl flex items-center justify-center text-amber-400 text-3xl mb-4 border border-slate-700/50 shadow-xl">
+        <i class="fa-solid fa-folder-plus"></i>
+      </div>
+      <h2 class="text-2xl font-bold text-slate-200 mb-2">Deste Seçin veya Oluşturun</h2>
+      <p class="text-slate-400 max-w-md text-sm leading-relaxed">
+        Sol menüden çalışmak istediğiniz desteyi seçin.
+      </p>
+    </div>
+
+    <!-- Aktif Deste Görünümü -->
+    <div id="deckView" class="flex-1 flex flex-col p-4 md:p-8 max-w-5xl w-full mx-auto hidden">
+
+      <!-- Deste Başlığı ve Mod Seçimi -->
+      <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800 mb-6">
+        <div>
+          <span id="deckBadge" class="text-xs font-mono text-amber-400 font-semibold uppercase tracking-wider">0 KELİME</span>
+          <h2 id="deckTitle" class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">—</h2>
+        </div>
+
+        <div class="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 self-start sm:self-auto">
+          <button class="mode-btn active px-4 py-2 rounded-lg text-xs md:text-sm font-semibold transition-all text-slate-400 hover:text-white" data-mode="cards">
+            <i class="fa-solid fa-list-ul mr-1.5"></i> Kartlar
+          </button>
+          <button class="mode-btn px-4 py-2 rounded-lg text-xs md:text-sm font-semibold transition-all text-slate-400 hover:text-white" data-mode="study">
+            <i class="fa-solid fa-clone mr-1.5"></i> Ezber
+          </button>
+          <button class="mode-btn px-4 py-2 rounded-lg text-xs md:text-sm font-semibold transition-all text-slate-400 hover:text-white" data-mode="quiz">
+            <i class="fa-solid fa-circle-question mr-1.5"></i> Test
+          </button>
+        </div>
+      </header>
+
+      <!-- PANEL 1: KART LİSTESİ VE EKLEME -->
+      <section id="panel-cards" class="space-y-6">
+        <!-- Kart Ekleme Formu -->
+        <form id="newCardForm" class="bg-slate-950/80 border border-slate-800 p-4 md:p-5 rounded-2xl shadow-xl space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-slate-200 flex items-center gap-2">
+              <i class="fa-solid fa-plus text-amber-400"></i> Yeni Kelime Ekle
+            </h3>
+            <span class="text-xs text-slate-500 font-mono">Almanca & Türkçe</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-1">Almanca Kelime / İfade *</label>
+              <input type="text" id="cardTerm" placeholder="örn. sich auswirken auf" required
+                     class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-amber-500">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-1">Türkçe Anlamı *</label>
+              <input type="text" id="cardDef" placeholder="örn. -i etkilemek" required
+                     class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-amber-500">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-400 mb-1">Tür / İlgeç (Grammatik)</label>
+              <input type="text" id="cardType" placeholder="örn. Verb + Akk / Nomen (die)" 
+                     class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-amber-500">
+            </div>
+            <div class="md:col-span-2 lg:col-span-3">
+              <label class="block text-xs font-medium text-slate-400 mb-1">Örnek Cümle ve Türkçe Çevirisi</label>
+              <input type="text" id="cardExample" placeholder="örn. Das hat sich negativ ausgewirkt. (Bu olumsuz etki yarattı.)" 
+                     class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-amber-500">
+            </div>
+          </div>
+
+          <div class="flex justify-end">
+            <button type="submit" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-5 py-2.5 rounded-xl text-sm transition-all shadow-lg shadow-amber-500/10 flex items-center gap-2">
+              <i class="fa-solid fa-check"></i> Kartı Kaydet
+            </button>
+          </div>
+        </form>
+
+        <!-- Arama Alanı -->
+        <div class="flex items-center justify-between gap-4">
+          <div class="relative flex-1">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+            <input type="text" id="cardSearchInput" placeholder="Kelime veya anlam ara…" 
+                   class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500">
+          </div>
+          <span id="searchResultCount" class="text-xs text-slate-400 font-mono whitespace-nowrap"></span>
+        </div>
+
+        <!-- Kart Tablosu -->
+        <div class="bg-slate-950/50 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+          <ul id="cardTable" class="divide-y divide-slate-800/60">
+            <!-- JS ile dinamik dolacak -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- PANEL 2: EZBER (FLASHCARD MODU) -->
+      <section id="panel-study" class="hidden flex-1 flex flex-col items-center justify-center my-auto py-4">
+        <div class="w-full max-w-lg space-y-6">
+          
+          <!-- İlerleme Göstergesi -->
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400 px-1">
+            <span id="studyProgressText">0 / 0</span>
+            <span class="text-amber-400 font-semibold">Ezber Modu</span>
+          </div>
+
+          <!-- 3D Flashcard -->
+          <div class="perspective-1000 w-full h-80 cursor-pointer group" id="flashcardContainer">
+            <div id="flashcardInner" class="relative w-full h-full duration-500 transform-style-3d shadow-2xl rounded-3xl border border-slate-800 bg-slate-950">
+              
+              <!-- ÖN YÜZ (Almanca) -->
+              <div class="absolute inset-0 w-full h-full backface-hidden rounded-3xl p-8 flex flex-col justify-between items-center text-center bg-gradient-to-b from-slate-900 to-slate-950">
+                <div class="w-full flex items-center justify-between text-slate-500 text-xs font-mono">
+                  <span id="flashGrammarFront" class="bg-slate-800/80 px-2.5 py-1 rounded-md text-amber-400">Wort</span>
+                  <button id="ttsFrontBtn" class="p-2 text-slate-400 hover:text-amber-400 text-base transition-colors" title="Dinle">
+                    <i class="fa-solid fa-volume-high"></i>
+                  </button>
+                </div>
+
+                <div class="my-auto px-4">
+                  <h3 id="flashFront" class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-2">—</h3>
+                  <p class="text-xs text-slate-500 font-mono mt-1">çevirmek için tıklayın</p>
+                </div>
+
+                <div class="text-xs text-slate-500 flex items-center gap-1 font-mono">
+                  <i class="fa-solid fa-arrows-rotate text-amber-500"></i> Boşluk tuşu / Dokun
+                </div>
+              </div>
+
+              <!-- ARKA YÜZ (Türkçe Anlam & Örnek) -->
+              <div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-3xl p-8 flex flex-col justify-between items-center text-center bg-slate-950 border border-amber-500/30">
+                <div class="w-full flex items-center justify-between text-slate-500 text-xs font-mono">
+                  <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-1 rounded-md">Türkçe Anlamı</span>
+                  <i class="fa-solid fa-language text-slate-500 text-base"></i>
+                </div>
+
+                <div class="my-auto px-2 space-y-3">
+                  <h4 id="flashBack" class="text-2xl font-bold text-amber-400">—</h4>
+                  <p id="flashExample" class="text-sm text-slate-300 italic bg-slate-900/80 p-3 rounded-xl border border-slate-800 leading-relaxed font-sans max-h-28 overflow-y-auto">—</p>
+                </div>
+
+                <div class="text-xs text-slate-500 font-mono">
+                  Arka yüz
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Kontrol Butonları -->
+          <div class="flex items-center justify-between gap-3 pt-2">
+            <button id="prevCardBtn" class="flex-1 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold py-3 px-4 rounded-xl text-sm transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-arrow-left"></i> Önceki
+            </button>
+            <button id="shuffleStudyBtn" class="bg-slate-950 hover:bg-slate-800 border border-slate-800 text-amber-400 p-3 rounded-xl text-sm transition-all" title="Karıştır">
+              <i class="fa-solid fa-shuffle"></i>
+            </button>
+            <button id="nextCardBtn" class="flex-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 px-4 rounded-xl text-sm transition-all flex items-center justify-center gap-2">
+              Sonraki <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- PANEL 3: TEST (QUIZ MODU) -->
+      <section id="panel-quiz" class="hidden flex-1 flex flex-col items-center justify-center my-auto py-4">
+        <div class="w-full max-w-lg space-y-6">
+          
+          <!-- Test Soru Kartı -->
+          <div id="quizBox" class="bg-slate-950 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl relative">
+            <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-6">
+              <span id="quizProgressText">Soru 0 / 0</span>
+              <button id="quizTtsBtn" class="text-amber-400 hover:text-amber-300 font-semibold flex items-center gap-1.5">
+                <i class="fa-solid fa-volume-high"></i> Dinle
+              </button>
+            </div>
+
+            <!-- Almanca Kelime Soru -->
+            <div class="text-center my-6">
+              <span class="text-xs text-amber-400 font-mono font-semibold uppercase tracking-wider block mb-1">Bu kelimenin anlamı nedir?</span>
+              <h3 id="quizQuestion" class="text-3xl font-extrabold text-white tracking-tight">—</h3>
+            </div>
+
+            <!-- Şıklar -->
+            <div id="quizOptions" class="grid grid-cols-1 gap-3 mt-8">
+              <!-- JS ile doldurulacak -->
+            </div>
+          </div>
+
+          <!-- Test Sonucu Paneli -->
+          <div id="quizResultBox" class="hidden bg-slate-950 border border-slate-800 rounded-3xl p-8 text-center space-y-6 shadow-2xl">
+            <div class="w-16 h-16 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-full flex items-center justify-center text-2xl mx-auto">
+              <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-white mb-1">Test Tamamlandı!</h3>
+              <p id="quizScoreText" class="text-3xl font-extrabold text-amber-400 font-mono my-3">0 / 0 Doğru</p>
+              <p id="quizFeedbackText" class="text-sm text-slate-400">Harika pratik! Eklediğiniz kelimeleri gözden geçirmeye devam edin.</p>
+            </div>
+            <button id="retryQuizBtn" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 px-8 rounded-xl text-sm transition-all shadow-lg shadow-amber-500/20">
+              <i class="fa-solid fa-rotate-right mr-2"></i> Tekrar Dene
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- BİLDİRİM KUTUSU (Toast) -->
+  <div id="toastNotification" class="fixed bottom-5 right-5 bg-slate-800 border border-slate-700 text-slate-100 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 z-50 pointer-events-none">
+    <i id="toastIcon" class="fa-solid fa-circle-check text-amber-400 text-lg"></i>
+    <span id="toastMessage" class="text-sm font-medium">İşlem başarılı!</span>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'kelime-kutusu:pdf-v1';
+
+    const PDF_DATA_DECKS = [
+      {
+        id: 'deck-2-1',
+        name: '2.1 Ernährung (S.46-53)',
+        cards: [
+          { term: 'etw. zu sich nehmen', def: 'bir şeyi yemek/içmek/almak (nötr)', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Besonders im Winter ist es wichtig, genug vitaminreiches Obst und Gemüse zu sich zu nehmen. (Özellikle kışın yeterince vitamince zengin meyve ve sebze tüketmek önemlidir.)' },
+          { term: 'etw. verzehren / der Verzehr', def: 'tüketmek / tüketim', type: 'Fiil/İsim | Wissenschaftssprache', example: 'Ernährungsexperten empfehlen, regelmäßig Seefisch zu verzehren. (Beslenme uzmanları düzenli deniz balığı tüketmeyi önerir.)' },
+          { term: 'etw. konsumieren / der Konsum', def: 'tüketmek (geniş kapsam) / tüketim', type: 'Fiil/İsim | Wissenschaftssprache', example: 'In Deutschland konsumiert man heute deutlich weniger Kartoffeln als vor einigen Jahrzehnten. (Almanya\'da bugün, birkaç on yıl öncesine göre belirgin şekilde daha az patates tüketiliyor.)' },
+          { term: 'etw. zubereiten / die Zubereitung', def: 'hazırlamak, pişirmek / hazırlama', type: 'Fiil/İsim | Wissenschafts-/Alltagssprache', example: 'Gemüse ist am gesündesten, wenn es frisch zubereitet wird. (Sebze, taze hazırlandığında en sağlıklısıdır.)' },
+          { term: 'die Nahrung', def: 'besin, gıda (genel/soyut)', type: 'Nomen (die) | Wissenschaftssprache', example: 'Nicht allen Menschen auf der Welt steht genug Nahrung zur Verfügung. (Dünyadaki tüm insanların yeterli besine erişimi yok.)' },
+          { term: 'die Nahrungsmittel = die Lebensmittel', def: 'gıda maddeleri, besinler', type: 'Nomen (Pl.) | Wissenschafts-/Alltagssprache', example: 'In deutschen Supermärkten wird eine große Auswahl an Nahrungsmitteln angeboten. (Alman süpermarketlerinde geniş bir gıda çeşitliliği sunulur.)' },
+          { term: 'die Speise, Speisen', def: 'yemek (resmi/edebi)', type: 'Nomen (die) | Wissenschaftssprache', example: 'Die Vielfalt an Restaurants bietet die Möglichkeit, Speisen aus verschiedenen Ländern zu probieren. (Restoran çeşitliliği farklı ülkelerden yemekleri deneme imkânı sunar.)' },
+          { term: 'die Kost', def: 'beslenme türü, diyet', type: 'Nomen (die) | Wissenschaftssprache', example: 'Mediterrane Kost gilt als sehr gesund, da zu dieser Art der Ernährung viel Gemüse und Fisch gehören. (Akdeniz tipi beslenme çok sağlıklı sayılır, çünkü çok sebze ve balık içerir.)' },
+          { term: 'das Gericht, Gerichte', def: 'yemek (belirli bir tabak) [Ayrıca: mahkeme]', type: 'Nomen (das) | Alltag/Wissenschaft', example: 'In der Kantine werden nicht nur einheimische Speisen, sondern auch exotische Gerichte angeboten. (Kantinde yerel yemeklerin yanı sıra egzotik yemekler de sunuluyor.)' },
+          { term: 'die Mahlzeit, Mahlzeiten', def: 'öğün', type: 'Nomen (die) | Wissenschafts-/Alltagssprache', example: 'Regelmäßige Mahlzeiten sind für eine gesunde Ernährung wichtig. (Düzenli öğünler sağlıklı beslenme için önemlidir.)' },
+          { term: 'eine Mahlzeit einnehmen', def: 'bir öğün yemek (resmi)', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Heute ist es nicht mehr selbstverständlich, dass eine Familie die Mahlzeiten gemeinsam einnimmt. (Günümüzde bir ailenin öğünleri birlikte yemesi artık her zaman doğal karşılanmıyor.)' },
+          { term: 'das Getreide', def: 'tahıl, hububat', type: 'Nomen (das) | Wissenschaftssprache', example: 'Brot kann aus verschiedenen Getreidesorten hergestellt werden. (Ekmek çeşitli tahıl türlerinden üretilebilir.)' },
+          { term: 'das Müsli', def: 'müsli', type: 'Nomen (das) | Alltagssprache', example: 'Man kann sich sein Müsli aus Haferflocken, Nüssen und Früchten selbst zusammenstellen. (Kişi kendi müslisini yulaf ezmesi, kuruyemiş ve meyvelerden kendisi hazırlayabilir.)' },
+          { term: 'Vollkorn-', def: 'tam tahıllı, kepekli', type: 'Präfix / Sıfat | Wissenschaftssprache', example: 'Wer sich gesund ernähren möchte, sollte viel Vollkornbrot und wenig Weißbrot essen. (Sağlıklı beslenmek isteyen kişi çok kepekli, az beyaz ekmek yemelidir.)' },
+          { term: 'der Kern, Kerne', def: 'çekirdek, öz', type: 'Nomen (der) | Wissenschafts-/Alltagssprache', example: 'Sonnenblumenkerne und Kürbiskerne enthalten wertvolle Öle. (Ayçiçeği ve kabak çekirdekleri değerli yağlar içerir.)' },
+          { term: 'die Schale, Schalen', def: 'kabuk', type: 'Nomen (die) | Wissenschaftssprache', example: 'Es ist empfehlenswert, bestimmte Obstsorten mit der Schale zu essen, da diese viele Nährstoffe enthält. (Belirli meyve türlerini kabuğuyla yemek tavsiye edilir, çünkü kabuk çok besin öğesi içerir.)' },
+          { term: 'das Fertiggericht, -gerichte', def: 'hazır yemek', type: 'Nomen (das) | Alltagssprache', example: 'Berufstätige greifen gerne zu Fertiggerichten, da deren Zubereitung wenig Zeit erfordert. (Çalışanlar, hazırlanması az zaman aldığından hazır yemeklere sıkça yönelir.)' },
+          { term: 'die Bioprodukte (Pl.)', def: 'organik ürünler', type: 'Nomen (Pl.) | Wissenschaftssprache', example: 'Mittlerweile bieten auch Supermärkte Biolebensmittel an. (Artık süpermarketler de organik gıda sunuyor.)' },
+          { term: 'das Biosiegel / etw. kennzeichnen', def: 'organik ürün damgası / işaretlemek', type: 'Nomen (das) / Verb | Wissenschaftssprache', example: 'Nur Bioprodukte, die bestimmte Kriterien erfüllen, dürfen mit einem Biosiegel gekennzeichnet werden. (Sadece belirli kriterleri karşılayan organik ürünler bir damgayla işaretlenebilir.)' },
+          { term: 'kalorienarm = kalorienreduziert', def: 'düşük kalorili', type: 'Sıfat | Wissenschaftssprache', example: 'Da die meisten Menschen schlank bleiben wollen, erfreuen sich kalorienarme Lebensmittel großer Beliebtheit. (Çoğu insan zayıf kalmak istediğinden düşük kalorili gıdalar büyük popülerlik kazanıyor.)' },
+          { term: 'die Kalorie, Kalorien', def: 'kalori', type: 'Nomen (die) | Wissenschaftssprache', example: 'Aufdrucke auf Verpackungen informieren, wie viele Kalorien im Produkt enthalten sind. (Ambalajlardaki baskılar, üründe kaç kalori olduğunu bildirir.)' },
+          { term: 'Kalorien verbrennen', def: 'kalori yakmak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Durch anstrengende Sportarten kann man in einer Stunde viele Kalorien verbrennen. (Yorucu spor dallarıyla bir saatte bir çok kalori yakılabilir.)' },
+          { term: 'das Kilojoule, -joule', def: 'kilojul (enerji birimi)', type: 'Nomen (das) | Wissenschaftssprache', example: 'Der Energiewert von Nahrungsmitteln kann in Kalorien oder in Kilojoule angegeben werden. (Gıda maddelerinin enerji değeri kalori ya da kilojul cinsinden belirtilebilir.)' },
+          { term: 'zuckerfrei', def: 'şekersiz', type: 'Sıfat | Wissenschaftssprache', example: 'Für die Herstellung von zuckerfreien Süßigkeiten werden Süßstoffe verwendet. (Şekersiz şekerlemelerin üretimi için tatlandırıcılar kullanılır.)' },
+          { term: 'fettarm = fettreduziert', def: 'az yağlı', type: 'Sıfat | Wissenschaftssprache', example: 'Alternativ zu Vollmilchprodukten sind auch fettarme Milch und Joghurts erhältlich. (Tam yağlı süt ürünlerine alternatif olarak az yağlı süt ve yoğurt da mevcuttur.)' },
+          { term: 'roh', def: 'çiğ, işlenmemiş', type: 'Sıfat | Wissenschaftssprache', example: 'Der Verzehr von rohem Gemüse gilt als besonders gesund, weil beim Kochen Nährstoffe verloren gehen. (Çiğ sebze tüketimi özellikle sağlıklı sayılır, çünkü pişirmede besin öğeleri kaybolur.)' },
+          { term: 'reif', def: 'olgun', type: 'Sıfat | Wissenschaftssprache', example: 'Tropische Früchte werden oft gepflückt, wenn sie noch nicht ganz reif sind. (Tropikal meyveler çoğu zaman henüz tam olgunlaşmamışken toplanır.)' },
+          { term: 'haltbar / die Haltbarkeit', def: 'dayanıklı / dayanıklılık, raf ömrü', type: 'Sıfat/Nomen | Wissenschaftssprache', example: 'Frische Milch sollte innerhalb weniger Tage getrunken werden, weil sie nicht lange haltbar ist. (Taze süt birkaç gün içinde tüketilmelidir, çünkü uzun süre dayanıklı değildir.)' },
+          { term: 'verderben / verdorben', def: 'bozulmak / bozulmuş', type: 'Verb / Sıfat | Wissenschaftssprache', example: 'Verdorbene Lebensmittel können zu heftigen Bauchschmerzen führen. (Bozulmuş gıdalar şiddetli karın ağrısına yol açabilir.)' },
+          { term: 'verschimmeln / verschimmelt / der Schimmel', def: 'küflenmek / küflenmiş / küf', type: 'Verb/Sıfat/Nomen | Wissenschaftssprache', example: 'Verschimmelte Lebensmittel sollte man auf keinen Fall mehr verzehren. (Küflenmiş gıdalar kesinlikle artık tüketilmemelidir.)' },
+          { term: 'etw. enthalten', def: 'içermek', type: 'Verb (Akk.) | Wissenschaftssprache', example: 'Es ist allgemein bekannt, dass einige Erfrischungsgetränke viel Zucker enthalten. (Bazı meşrubatların çok şeker içerdiği genel olarak bilinir.)' },
+          { term: 'die Zutat, Zutaten', def: 'malzeme (yemek tarifi)', type: 'Nomen (die) | Wissenschaftssprache', example: 'In einem Kochrezept sind die Zutaten und die genauen Mengen aufgelistet. (Bir yemek tarifinde malzemeler ve kesin miktarları listelenmiştir.)' },
+          { term: 'der Nährstoff, -stoffe', def: 'besin öğesi', type: 'Nomen (der) | Wissenschaftssprache', example: 'Obst, Gemüse, Getreide und Fleisch liefern uns wertvolle Nährstoffe. (Meyve, sebze, tahıl ve et bize değerli besin öğeleri sağlar.)' },
+          { term: 'das Vitamin, Vitamine', def: 'vitamin', type: 'Nomen (das) | Wissenschaftssprache', example: 'Vitamine sind für die Gesunderhaltung des Organismus unverzichtbar. (Vitaminler organizmanın sağlıklı kalması için vazgeçilmezdir.)' },
+          { term: 'das Protein = das Eiweiß', def: 'protein', type: 'Nomen (das) | Wissenschaftssprache', example: 'Proteine sind sowohl in tierischen als auch in pflanzlichen Lebensmitteln enthalten. (Proteinler hem hayvansal hem bitkisel gıdalarda bulunur.)' },
+          { term: 'die Kohlehydrate (Pl.)', def: 'karbonhidrat', type: 'Nomen (Pl.) | Wissenschaftssprache', example: 'Zucker liefert uns Kohlehydrate, die wir für körperliche und geistige Leistungen benötigen. (Şeker bize fiziksel ve zihinsel performans için gerekli karbonhidratları sağlar.)' },
+          { term: 'das Fett, Fette', def: 'yağ', type: 'Nomen (das) | Wissenschaftssprache', example: 'Nicht alle Fette sind ungesund. (Tüm yağlar sağlıksız değildir.)' },
+          { term: 'gesättigte/ungesättigte Fettsäuren', def: 'doymuş/doymamış yağ asitleri', type: 'Nomen (Pl.) | Wissenschaftssprache', example: 'Olivenöl gilt als gesund, weil es reich an ungesättigten Fettsäuren ist. (Zeytinyağı, doymamış yağ asitleri açısından zengin olduğu için sağlıklı sayılır.)' },
+          { term: 'das Kalzium', def: 'kalsiyum', type: 'Nomen (das) | Wissenschaftssprache', example: 'Milchprodukte sind eine wichtige Quelle für Kalzium. (Süt ürünleri önemli bir kalsiyum kaynağıdır.)' },
+          { term: 'chemische Zusätze = Zusatzstoffe', def: 'kimyasal katkı maddeleri', type: 'Nomen (Pl.) | Wissenschaftssprache', example: 'Auf Verpackungen müssen alle chemischen Zusätze angegeben werden. (Ambalajlarda tüm kimyasal katkı maddeleri belirtilmelidir.)' },
+          { term: 'der Aromastoff, -stoffe', def: 'aroma maddesi', type: 'Nomen (der) | Wissenschaftssprache', example: 'Manche Fruchtjoghurts enthalten mehr Aromastoffe als echte Früchte. (Bazı meyveli yoğurtlar gerçek meyveden çok aroma maddesi içerir.)' },
+          { term: 'der Farbstoff, -stoffe', def: 'renklendirici', type: 'Nomen (der) | Wissenschaftssprache', example: 'Farbstoffe sollen dafür sorgen, dass Speisen appetitlich aussehen. (Renklendiriciler yemeklerin iştah açıcı görünmesini sağlar.)' },
+          { term: 'das Konservierungsmittel', def: 'koruyucu madde', type: 'Nomen (das) | Wissenschaftssprache', example: 'Konservierungsmittel verhindern, dass Lebensmittel schnell verderben. (Koruyucu maddeler gıdaların hızlı bozulmasını engeller.)' },
+          { term: 'die Landwirtschaft', def: 'tarım', type: 'Nomen (die) | Wissenschaftssprache', example: 'Die Landwirtschaft produziert die Lebensmittel, die zur Ernährung der Bevölkerung benötigt werden. (Tarım, nüfusun beslenmesi için gereken gıdaları üretir.)' },
+          { term: 'agrarisch', def: 'tarımsal', type: 'Sıfat | Wissenschaftssprache', example: 'In agrarischen Gesellschaften ist die Landwirtschaft der wichtigste Wirtschaftszweig. (Tarımsal toplumlarda tarım en önemli ekonomi kolu sayılır.)' },
+          { term: 'das Agrarprodukt, -produkte', def: 'tarım ürünü', type: 'Nomen (das) | Wissenschaftssprache', example: 'In Hofläden können Kunden Agrarprodukte direkt vom Bauern kaufen. (Çiftlik dükkanlarında müşteriler tarım ürünlerini doğrudan çiftçiden alabilir.)' },
+          { term: 'etw. anbauen / der Anbau', def: 'yetiştirmek, ekmek / yetiştirme', type: 'Verb / Nomen | Wissenschaftssprache', example: 'In Südamerika wird Kaffee auf großen Plantagen angebaut. (Güney Amerika\'da kahve büyük plantasyonlarda yetiştirilir.)' },
+          { term: 'aus biologischem Anbau', def: 'organik tarımdan (gelen)', type: 'Kalıp | Wissenschaftssprache', example: 'Immer mehr Verbraucher kaufen Lebensmittel, die aus biologischem Anbau stammen. (Giderek daha fazla tüketici organik tarımdan gelen gıdaları satın alıyor.)' },
+          { term: 'der Acker = das Feld', def: 'tarla', type: 'Nomen (der/das) | Wissenschaftssprache', example: 'Auf den Äckern werden verschiedene Getreidesorten angebaut. (Tarlalarda çeşitli tahıl türleri yetiştirilir.)' },
+          { term: 'der Ackerbau', def: 'tarım, çiftçilik (bitkisel)', type: 'Nomen (der) | Wissenschaftssprache', example: 'Schon sehr früh in der Geschichte begannen die Menschen mit dem Ackerbau. (Tarihte çok erken dönemlerde insanlar tarımla uğraşmaya başladı.)' },
+          { term: 'der Same, Samen', def: 'tohum', type: 'Nomen (der) | Wissenschaftssprache', example: 'Wenn man Samen in die Erde legt, beginnen sie zu keimen. (Tohumlar toprağa konulduğunda çimlenmeye başlar.)' },
+          { term: '(etw.) säen / die Saat', def: 'tohum ekmek / ekim, tohum', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Im Frühling säen die Bauern die Samen, aus denen die Pflanzen wachsen sollen. (İlkbaharda çiftçiler bitkilerin büyümesi gereken tohumları eker.)' },
+          { term: 'etw. bewässern / die Bewässerung', def: 'sulamak / sulama', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Schon in der Antike wurden Kanäle gebaut, um die Felder zu bewässern. (Antik çağda bile tarlaları sulamak için kanallar inşa edilmişti.)' },
+          { term: 'etw. düngen', def: 'gübrelemek', type: 'Verb (Akk.) | Wissenschaftssprache', example: 'Um das Wachstum von Pflanzen zu beschleunigen, werden diese gedüngt. (Bitkilerin büyümesini hızlandırmak için bunlar gübrelenir.)' },
+          { term: 'der Dünger, Dünger', def: 'gübre', type: 'Nomen (der) | Wissenschaftssprache', example: 'Als Dünger kann man den Mist von Tieren verwenden, aber oft werden auch chemische Düngemittel eingesetzt. (Gübre olarak hayvan gübresi kullanılabilir, ama sık sık kimyasal gübreler de kullanılır.)' },
+          { term: 'das Pestizid, Pestizide', def: 'pestisit, zirai ilaç', type: 'Nomen (das) | Wissenschaftssprache', example: 'Die Pflanzen werden mit Pestiziden besprüht, um zu verhindern, dass sie von Kleintieren gefressen werden. (Bitkiler, küçük hayvanlarca yenilmesini önlemek için pestisitlerle ilaçlanır.)' },
+          { term: '(etw.) ernten / die Ernte', def: 'hasat etmek / hasat', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Wenn die Früchte reif sind, können sie geerntet und verkauft werden. (Meyveler olgunlaştığında hasat edilip satılabilir.)' },
+          { term: 'die Missernte, -ernten', def: 'kötü/başarısız hasat', type: 'Nomen (die) | Wissenschaftssprache', example: 'Ungünstige Wetterbedingungen können zu Missernten führen. (Olumsuz hava koşulları kötü hasatlara yol açabilir.)' },
+          { term: 'ertragreich', def: 'yüksek verimli', type: 'Sıfat | Wissenschaftssprache', example: 'Ertragreiche Getreidesorten liefern den Landwirten eine besonders gute Ernte. (Yüksek verimli tahıl türleri çiftçilere özellikle iyi bir hasat sağlar.)' },
+          { term: 'gentechnisch verändern / manipuliert', def: 'genetiğiyle oynamak / genetiği değiştirilmiş', type: 'Verb / Sıfat | Wissenschaftssprache', example: 'Große Teile der Bevölkerung lehnen gentechnisch manipulierte Lebensmittel ab. (Nüfusun büyük bölümü genetiği değiştirilmiş gıdaları reddediyor.)' },
+          { term: 'etw. züchten / die Zucht', def: 'yetiştirmek, ıslah etmek (hayvan) / yetiştiricilik', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Man hat Rinderarten gezüchtet, die besonders viel Milch und Fleisch liefern können. (Özellikle çok süt ve et veren sığır türleri ıslah edilmiştir.)' },
+          { term: 'das Vieh', def: 'çiftlik hayvanları', type: 'Nomen (das) | Wissenschaftssprache', example: 'Manche Landwirte halten Vieh, zum Beispiel Rinder, Schweine oder Schafe. (Bazı çiftçiler örneğin sığır, domuz ya da koyun gibi hayvancılık yaparlar.)' },
+          { term: 'Vieh halten', def: 'hayvancılık yapmak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Kleinbauern halten Vieh, um sich selbst mit Nahrungsmitteln versorgen zu können. (Küçük çiftçiler kendilerini besleyebilmek için hayvancılık yapar.)' },
+          { term: 'die Massentierhaltung', def: 'yoğun/endüstriyel hayvancılık', type: 'Nomen (die) | Wissenschaftssprache', example: 'Die Massentierhaltung ermöglicht eine günstige Fleischherstellung, ist aber ethisch problematisch. (Yoğun hayvancılık ucuz et üretimini mümkün kılar, ama etik açıdan sorunludur.)' },
+          { term: 'der Bioladen, -läden', def: 'organik ürün dükkanı', type: 'Nomen (der) | Wissenschaftssprache', example: 'Da Bioprodukte immer beliebter werden, nimmt die Zahl der Bioläden zu. (Organik ürünler giderek popülerleştiğinden organik dükkanların sayısı artıyor.)' },
+          { term: 'das Reformhaus, -häuser', def: 'sağlıklı/doğal ürün dükkanı', type: 'Nomen (das) | Wissenschaftssprache', example: 'In Reformhäusern findet man Lebensmittel, die in normalen Supermärkten oft nicht erhältlich sind. (Reformhaus\'larda normal süpermarketlerde bulunmayan gıdalar bulunur.)' },
+          { term: 'sich ernähren von + D / die Ernährung', def: '-den beslenmek / beslenme', type: 'Refl. Verb / Nomen | Wissenschaftssprache', example: 'Die frühen Menschen ernährten sich überwiegend von Wurzeln, Beeren und Früchten. (İlk insanlar çoğunlukla kök, yaban meyvesi ve meyveyle beslenirdi.)' },
+          { term: 'sich gesund ernähren', def: 'sağlıklı beslenmek', type: 'Refl. Verb | Wissenschaftssprache', example: 'Man kann sich vor vielen Krankheiten schützen, indem man sich gesund ernährt. (Kişi sağlıklı beslenerek bir çok hastalıktan korunabilir.)' },
+          { term: 'sich ausgewogen ernähren', def: 'dengeli beslenmek', type: 'Refl. Verb | Wissenschaftssprache', example: 'Sie ernähren sich ausgewogen, wenn Sie eine gesunde Mischung aus verschiedenen Lebensmitteln zu sich nehmen. (Farklı gıdalardan sağlıklı bir karışım tükettiğinizde dengeli beslenmiş olursunuz.)' },
+          { term: 'sich einseitig ernähren', def: 'tek yönlü/dengesiz beslenmek', type: 'Refl. Verb | Wissenschaftssprache', example: 'Wer sich einseitig ernährt, indem er viele Kohlehydrate, aber kaum Vitamine zu sich nimmt, muss mit gesundheitlichen Folgen rechnen. (Çok karbonhidrat ama az vitamin tüketerek dengesiz beslenen kişi sağlık sorunlarıyla karşılaşabilir.)' },
+          { term: 'ernährungsbedingt', def: 'beslenmeye bağlı', type: 'Sıfat | Wissenschaftssprache', example: 'Ernährungsbedingte Krankheiten lassen sich durch eine gesunde, ausgewogene Ernährung vermeiden. (Beslenmeye bağlı hastalıklardan sağlıklı, dengeli beslenmeyle kaçınılabilir.)' },
+          { term: 'vegetarisch / der Vegetarier', def: 'vejetaryen / vejetaryen kişi', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Viele Restaurants bieten inzwischen auch vegetarische Gerichte an. (Birçok restoran artık vejetaryen yemekler de sunuyor.)' },
+          { term: 'vegan / der Veganer', def: 'vegan / vegan kişi', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Menschen, die sich vegan ernähren, verzichten vollständig auf tierische Lebensmittel. (Vegan beslenen kişiler hayvansal gıdalardan tamamen vazgeçer.)' },
+          { term: 'verzichten auf + A / der Verzicht', def: '-den vazgeçmek / vazgeçiş', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Es ist nicht immer leicht, auf Nahrungsmittel zu verzichten, die zwar ungesund, aber sehr schmackhaft sind. (Sağlıksız ama çok lezzetli gıdalardan vazgeçmek her zaman kolay değildir.)' },
+          { term: 'fasten / das Fasten', def: 'oruç tutmak / oruç', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Manche Menschen fasten aus religiösen Gründen. (Bazı insanlar dini nedenlerle oruç tutar.)' },
+          { term: 'die Fastenkur, -kuren', def: 'oruç/perhiz kürü', type: 'Nomen (die) | Wissenschaftssprache', example: 'Bei einer Fastenkur verzichtet man auf feste Nahrung und nimmt nur Suppen und Getränke zu sich. (Bir oruç kürü sırasında katı gıdadan vazgeçilir, sadece çorba ve içecek tüketilir.)' },
+          { term: 'die Diät, Diäten', def: 'diyet', type: 'Nomen (die) | Wissenschaftssprache', example: 'Heutzutage gibt es viele verschiedene Diäten, die eine schnelle Gewichtsreduktion versprechen. (Günümüzde hızlı kilo kaybı vadeden bir çok farklı diyet var.)' },
+          { term: '(eine) Diät machen', def: 'diyet yapmak', type: 'Fiil kalıbı | Wissenschafts-/Alltagssprache', example: 'Besonders gegen Ende des Winters machen zahlreiche Menschen eine Diät. (Özellikle kış sonuna doğru bir çok insan diyet yapar.)' },
+          { term: 'zunehmen', def: 'kilo almak', type: 'Verb | Alltagssprache', example: 'Menschen, die mit dem Rauchen aufhören, klagen oft darüber, dass sie zunehmen. (Sigarayı bırakan kişiler genelde kilo aldıklarından şikâyet eder.)' },
+          { term: 'abnehmen', def: 'kilo vermek', type: 'Verb | Alltagssprache', example: 'Nicht jeder nimmt ab, um gesünder zu leben. (Herkes daha sağlıklı yaşamak için kilo vermez.)' },
+          { term: 'hungern', def: 'aç kalmak, açlık çekmek', type: 'Verb | Wissenschaftssprache', example: 'Hilfsorganisationen machen darauf aufmerksam, dass immer noch viele Menschen auf der Welt hungern. (Yardım kuruluşları, dünyada hâlâ bir çok insanın açlık çektiğine dikkat çekiyor.)' },
+          { term: 'Hunger leiden', def: 'açlık çekmek', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Während es in einigen Ländern Nahrung im Überfluss gibt, leiden Menschen in anderen Teilen der Welt Hunger. (Bazı ülkelerde bolca gıda varken, dünyanın diğer bölgelerinde insanlar açlık çekiyor.)' },
+          { term: 'die Hungersnot, -nöte', def: 'kıtlık', type: 'Nomen (die) | Wissenschaftssprache', example: 'Lange Dürreperioden können zu einer Hungersnot führen. (Uzun kuraklık dönemleri kıtlığa yol açabilir.)' },
+          { term: 'verhungern', def: 'açlıktan ölmek', type: 'Verb | Wissenschaftssprache', example: 'Durch Hungersnöte verhungern auch heute noch viele Menschen. (Kıtlıklar yüzünden bugün de bir çok insan açlıktan ölüyor.)' },
+          { term: 'unterernährt sein / Unterernährung', def: 'yetersiz beslenmiş olmak / yetersiz beslenme', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Unterernährung kann schwerwiegende Gesundheitsschäden verursachen. (Yetersiz beslenme ciddi sağlık zararlarına yol açabilir.)' },
+          { term: 'es mangelt jdm. an + D / der Mangel', def: 'birinde bir şey eksik olmak / eksiklik', type: 'Fiil kalıbı / Nomen | Wissenschaftssprache', example: 'Kinder, denen es an Vitamin D mangelt, erkranken oft an Rachitis. (D vitamini eksikliği olan çocuklar sık sık raşitizme yakalanır.)' },
+          { term: 'die Mangelerscheinungen (Pl.)', def: 'eksiklik belirtileri', type: 'Nomen (Pl.) | Wissenschaftssprache', example: 'Einseitige oder unzureichende Ernährung ist oft der Grund für Mangelerscheinungen. (Tek yönlü veya yetersiz beslenme genellikle eksiklik belirtilerinin sebebidir.)' },
+          { term: 'übergewichtig / das Übergewicht', def: 'aşırı kilolu / fazla kilo', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Übergewichtige Kinder sollten mehr Sport treiben und auf kalorienreiche Lebensmittel verzichten. (Aşırı kilolu çocuklar daha çok spor yapmalı ve yüksek kalorili gıdalardan kaçınmalıdır.)' },
+          { term: 'die Essstörung, -störungen', def: 'yeme bozukluğu', type: 'Nomen (die) | Wissenschaftssprache', example: 'Essstörungen wie Magersucht und Bulimie haben meist psychische Ursachen. (Anoreksiya ve bulimya gibi yeme bozuklukları genellikle psikolojik nedenlere dayanır.)' },
+          { term: 'an einer Essstörung leiden', def: 'bir yeme bozukluğu yaşamak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Die meisten, die an Essstörungen leiden, sind Mädchen im Teenageralter. (Yeme bozukluğu yaşayanların çoğu ergen kızlardır.)' },
+          { term: 'etw. verdauen / die Verdauung', def: 'sindirmek / sindirim', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Verschiedene Säuren helfen dabei, die aufgenommene Nahrung zu verdauen. (Çeşitli asitler alınan besinin sindirilmesine yardımcı olur.)' },
+          { term: 'der Stoffwechsel', def: 'metabolizma', type: 'Nomen (der) | Wissenschaftssprache', example: 'Durch den Stoffwechsel wird Nahrung in verschiedene chemische Stoffe zerlegt und umgewandelt. (Metabolizma yoluyla besin çeşitli kimyasal maddelere ayrıştırılıp dönüştürülür.)' },
+          { term: 'allergisch reagieren auf + A', def: 'bir şeye alerjik tepki vermek', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Immer mehr Menschen reagieren allergisch auf bestimmte Bestandteile unserer Nahrung. (Giderek daha fazla insan besinlerdeki belirli bileşenlere alerjik tepki veriyor.)' },
+          { term: 'die Allergie, Allergien', def: 'alerji', type: 'Nomen (die) | Wissenschaftssprache', example: 'Es ist bekannt, dass der Verzehr bestimmter Zusatzstoffe Allergien auslösen kann. (Belirli katkı maddelerinin tüketiminin alerji tetikleyebileceği bilinir.)' },
+          { term: 'der Blutzuckerspiegel', def: 'kan şekeri seviyesi', type: 'Nomen (der) | Wissenschaftssprache', example: 'Nach dem Verzehr bestimmter Lebensmittel steigt der Blutzuckerspiegel sprunghaft an. (Bazı gıdaların tüketiminden sonra kan şekeri seviyesi ani şekilde yükselir.)' },
+          { term: 'der Diabetes = die Zuckerkrankheit', def: 'diyabet, şeker hastalığı', type: 'Nomen (der/die) | Wissenschaftssprache', example: 'Bei Diabetes ist der Körper nicht mehr in der Lage, den Blutzuckerspiegel selbstständig zu regulieren. (Diyabette vücut kan şekerini kendi başına düzenleyemez.)' },
+          { term: 'das Cholesterin', def: 'kolesterol', type: 'Nomen (das) | Wissenschaftssprache', example: 'Man unterscheidet zwei Arten von Cholesterin, das \'gesunde\' HDL und das \'ungesunde\' LDL. (İki tür kolesterol ayırt edilir: \'sağlıklı\' HDL ve \'sağlıksız\' LDL.)' },
+          { term: 'der Cholesterinspiegel', def: 'kolesterol seviyesi', type: 'Nomen (der) | Wissenschaftssprache', example: 'Ein hoher LDL-Cholesterinspiegel gilt als Gesundheitsrisiko. (Yüksek LDL kolesterol seviyesi sağlık riski sayılır.)' }
+        ]
+      },
+      {
+        id: 'deck-2-2',
+        name: '2.2 Körper (S.54-61)',
+        cards: [
+          { term: 'bestehen aus + D', def: '-den oluşmak', type: 'Verb | Wissenschaftssprache', example: 'Das Gehirn besteht aus mehreren Milliarden Nervenzellen. (Beyin, milyarlarca sinir hücresinden oluşur.)' },
+          { term: 'etw. bilden', def: 'oluşturmak', type: 'Verb (Akk.) | Wissenschaftssprache', example: 'Die Knochen bilden ein stabiles Gerüst, das den Körper stützt. (Kemikler, vücudu destekleyen sağlam bir iskelet oluşturur.)' },
+          { term: 'etw. umgeben', def: 'sarmak, çevrelemek', type: 'Verb (Akk.) | Wissenschaftssprache', example: 'Eine Fettschicht umgibt die Nieren und schützt sie vor Erschütterungen. (Bir yağ tabakası böbrekleri sarar ve darbelere karşı korur.)' },
+          { term: 'gelangen in + A / nach + D', def: '-e ulaşmak, varmak', type: 'Verb | Wissenschaftssprache', example: 'Nahrung gelangt durch die Speiseröhre in den Magen. (Besin yemek borusundan mideye ulaşır.)' },
+          { term: 'etw. steuern', def: 'yönetmek, kontrol etmek', type: 'Verb (Akk.) | Wissenschaftssprache', example: 'Verschiedene Hormone steuern wichtige Körperfunktionen, z.B. das Wachstum. (Çeşitli hormonlar büyüme gibi önemli vücut işlevlerini kontrol eder.)' },
+          { term: 'etw. produzieren = herstellen', def: 'üretmek', type: 'Verb (Akk.) | Wissenschaftssprache', example: 'Wenn man sich mit einem Virus infiziert, werden Antikörper produziert, die das Virus bekämpfen. (Bir virüsle enfekte olunduğunda, virüsle savaşan antikorlar üretilir.)' },
+          { term: 'etw./jdn. versorgen mit + D', def: 'bir şeyle donatmak/beslemek', type: 'Verb | Wissenschaftssprache', example: 'Die Lunge versorgt den menschlichen Körper mit lebensnotwendigem Sauerstoff. (Akciğerler insan vücudunu yaşamsal oksijenle besler.)' },
+          { term: 'etw. weiterleiten', def: 'iletmek, aktarmak', type: 'Verb | Wissenschaftssprache', example: 'Die Nerven leiten Informationen in Form von elektrischen Impulsen weiter. (Sinirler bilgiyi elektriksel uyarılar şeklinde iletir.)' },
+          { term: 'das Skelett', def: 'iskelet', type: 'Nomen (das) | Wissenschaftssprache', example: 'Das Skelett besteht aus einer Vielzahl von Knochen, die dem Körper Stabilität verleihen. (İskelet, vücuda sağlamlık veren çok sayıda kemikten oluşur.)' },
+          { term: 'der Knochen, Knochen', def: 'kemik', type: 'Nomen (der) | Wissenschaftssprache', example: 'Die Namen verschiedener Knochen enden auf \'-bein\', z.B. Schlüsselbein. (Çeşitli kemik isimleri \'-bein\' ile biter, örneğin köprücük kemiği.)' },
+          { term: 'das Knochenmark', def: 'kemik iliği', type: 'Nomen (das) | Wissenschaftssprache', example: 'Im roten Knochenmark werden Blutzellen gebildet. (Kırmızı kemik iliğinde kan hücreleri oluşturulur.)' },
+          { term: 'der Schädel, Schädel', def: 'kafatası', type: 'Nomen (der) | Wissenschaftssprache', example: 'Der Schädel umgibt das Gehirn und schützt es vor Verletzungen. (Kafatası beyni sarar ve yaralanmalara karşı korur.)' },
+          { term: 'die Wirbelsäule, -säulen', def: 'omurga', type: 'Nomen (die) | Wissenschaftssprache', example: 'Verletzungen der Wirbelsäule können zu Schmerzen im Rücken führen. (Omurga yaralanmaları sırt ağrısına yol açabilir.)' },
+          { term: 'die Rippe, Rippen', def: 'kaburga', type: 'Nomen (die) | Wissenschaftssprache', example: 'Die Rippen bilden den Brustkorb, der das Herz und andere innere Organe umgibt. (Kaburgalar, kalbi ve diğer iç organları saran göğüs kafesini oluşturur.)' },
+          { term: 'das Gelenk, Gelenke', def: 'eklem', type: 'Nomen (das) | Wissenschaftssprache', example: 'Die Gelenke ermöglichen die Beweglichkeit des Körpers. (Eklemler vücudun hareket kabiliyetini sağlar.)' },
+          { term: 'die Sehne, Sehnen', def: 'tendon, kiriş', type: 'Nomen (die) | Wissenschaftssprache', example: 'Eine Vielzahl von Sehnen verbindet Muskeln und Knochen miteinander. (Çok sayıda tendon kasları ve kemikleri birbirine bağlar.)' },
+          { term: 'die Muskulatur', def: 'kas yapısı', type: 'Nomen (die) | Wissenschaftssprache', example: 'Um die Muskulatur zu stärken, muss man regelmäßig Sport treiben. (Kas yapısını güçlendirmek için düzenli spor yapmak gerekir.)' },
+          { term: 'der Muskel, Muskeln', def: 'kas', type: 'Nomen (der) | Wissenschaftssprache', example: 'Vor dem Joggen sollte man sich aufwärmen und die Muskeln dehnen. (Koşudan önce ısınmalı ve kasları germeli.)' },
+          { term: 'das Gehirn = das Hirn', def: 'beyin', type: 'Nomen (das) | Wissenschaftssprache', example: 'Im Gehirn werden Informationen verarbeitet und gespeichert. (Beyinde bilgi işlenir ve saklanır.)' },
+          { term: 'die Hemisphäre = Hirnhälfte', def: 'beyin yarım küresi', type: 'Nomen (die) | Wissenschaftssprache', example: 'Die beiden Hirnhälften sind durch einen Balken verbunden. (İki beyin yarım küresi bir köprüyle birbirine bağlıdır.)' },
+          { term: 'das Rückenmark', def: 'omurilik', type: 'Nomen (das) | Wissenschaftssprache', example: 'Das Rückenmark verläuft innerhalb der Wirbelsäule und verbindet das Gehirn mit den Nerven. (Omurilik omurga içinde uzanır ve beyni sinirlere bağlar.)' },
+          { term: 'der Nerv, Nerven', def: 'sinir', type: 'Nomen (der) | Wissenschaftssprache', example: 'Zahlreiche Nerven reagieren auf äußere Reize und leiten sie an das Gehirn weiter. (Çok sayıda sinir dış uyaranlara tepki verip beyne iletir.)' },
+          { term: 'das Herz, Herzen', def: 'kalp', type: 'Nomen (das) | Wissenschaftssprache', example: 'Das Herz besteht aus zwei kleinen und zwei großen Kammern. (Kalp iki küçük ve iki büyük odacıktan oluşur.)' },
+          { term: 'etw. pumpen', def: 'pompalamak', type: 'Verb (Akk.) | Wissenschaftssprache', example: 'Bei jedem Herzschlag wird Blut durch den Körper gepumpt. (Her kalp atışında kan vücuda pompalanır.)' },
+          { term: 'das Blutgefäß = die Ader', def: 'kan damarı', type: 'Nomen (das/die) | Wissenschaftssprache', example: 'Durch ein Netz großer und kleiner Blutgefäße wird der Körper mit Sauerstoff versorgt. (Büyük ve küçük kan damarları ağı yoluyla vücut oksijenle beslenir.)' },
+          { term: 'die Arterie, Arterien', def: 'atardamar', type: 'Nomen (die) | Wissenschaftssprache', example: 'Arterien transportieren meist sauerstoffreiches Blut durch den Körper. (Atardamarlar genellikle oksijence zengin kanı vücuda taşır.)' },
+          { term: 'die Vene, Venen', def: 'toplardamar', type: 'Nomen (die) | Wissenschaftssprache', example: 'Durch die Venen fließt vor allem sauerstoffarmes Blut zum Herzen. (Toplardamarlardan öncelikle oksijeni az kan kalbe akar.)' },
+          { term: 'der Puls', def: 'nabız', type: 'Nomen (der) | Wissenschaftssprache', example: 'An den Handgelenken, wo Arterien dicht unter der Haut liegen, kann man den Puls messen. (Atardamarların deri altında yakın olduğu bilekte nabız ölçülebilir.)' },
+          { term: 'atmen / die Atmung', def: 'nefes almak / solunum', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Im Gegensatz zu Fischen kann der Mensch unter Wasser nicht atmen. (Balıkların aksine insan su altında nefes alamaz.)' },
+          { term: 'die Atemwege (Pl.)', def: 'solunum yolları', type: 'Nomen (Pl.) | Wissenschaftssprache', example: 'Über die Atemwege gelangt Sauerstoff in die Lunge und damit in den Körper. (Solunum yolları aracılığıyla oksijen akciğere ve vücuda ulaşır.)' },
+          { term: 'die Lunge, Lungen', def: 'akciğer', type: 'Nomen (die) | Wissenschaftssprache', example: 'In der Lunge wird das Blut mit Sauerstoff angereichert. (Akciğerde kan oksijenle zenginleştirilir.)' },
+          { term: 'der Magen, Mägen', def: 'mide', type: 'Nomen (der) | Wissenschaftssprache', example: 'Die Nahrung gelangt durch die Speiseröhre in den Magen, wo sie mit Verdauungssäften vermischt wird. (Besin yemek borusundan mideye ulaşır ve sindirim sıvılarıyla karışır.)' },
+          { term: 'der Darm, Därme', def: 'bağırsak', type: 'Nomen (der) | Wissenschaftssprache', example: 'Mithilfe von Muskelkontraktionen wird die Nahrung durch den Dünndarm und den Dickdarm geschoben. (Kas kasılmaları yardımıyla besin ince ve kalın bağırsaktan geçirilir.)' },
+          { term: 'die Leber, Lebern', def: 'karaciğer', type: 'Nomen (die) | Wissenschaftssprache', example: 'In der Leber wird Galle produziert, die wichtig für die Verdauung der Nahrung ist. (Karaciğerde sindirim için önemli olan safra üretilir.)' },
+          { term: 'die Niere, Nieren', def: 'böbrek', type: 'Nomen (die) | Wissenschaftssprache', example: 'Der Mensch verfügt über zwei Nieren, kann aber auch mit einer Niere leben. (İnsanın iki böbreği vardır, ama tek böbrekle de yaşayabilir.)' },
+          { term: 'etw. reinigen / Reinigung', def: 'temizlemek / temizleme', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Die beiden Nieren reinigen das Blut von Giftstoffen. (İki böbrek kanı zehirli maddelerden temizler.)' },
+          { term: 'die Zelle, Zellen', def: 'hücre', type: 'Nomen (die) | Wissenschaftssprache', example: 'Die Form und Größe einer Zelle hängt von ihrer Funktion ab. (Bir hücrenin şekli ve boyutu işlevine bağlıdır.)' },
+          { term: 'das Gewebe', def: 'doku', type: 'Nomen (das) | Wissenschaftssprache', example: 'Die Zellen bilden verschiedene Arten von Gewebe, zum Beispiel Haut- oder Knochengewebe. (Hücreler örneğin deri ya da kemik dokusu gibi çeşitli doku türleri oluşturur.)' },
+          { term: 'die Haut', def: 'deri', type: 'Nomen (die) | Wissenschaftssprache', example: 'Verschiedene Stoffe aus unserer Umgebung werden über die Haut aufgenommen. (Çevremizdeki çeşitli maddeler deri yoluyla vücuda alınır.)' },
+          { term: 'die DNA = DNS', def: 'DNA', type: 'Nomen (die) | Wissenschaftssprache', example: 'Die 46 Chromosomen eines Menschen bestehen aus DNA. (Bir insanın 46 kromozomu DNA\'dan oluşur.)' },
+          { term: 'die Erbanlagen (Pl.)', def: 'genetik özellikler, kalıtım', type: 'Nomen (Pl.) | Wissenschaftssprache', example: 'Die Erbanlagen sind die genetischen Eigenschaften eines Menschen, die von den Eltern weitergegeben werden. (Kalıtım, ebeveynlerden çocuklara aktarılan genetik özelliklerdir.)' },
+          { term: 'etw. umwandeln in + A', def: 'bir şeye dönüştürmek', type: 'Verb | Wissenschaftssprache', example: 'Durch den Verdauungsprozess wird Nahrung in verschiedene chemische Substanzen umgewandelt. (Sindirim süreciyle besin çeşitli kimyasal maddelere dönüştürülür.)' },
+          { term: 'das Enzym, Enzyme', def: 'enzim', type: 'Nomen (das) | Wissenschaftssprache', example: 'Enzyme beschleunigen die Umwandlung chemischer Stoffe. (Enzimler kimyasal maddelerin dönüşümünü hızlandırır.)' },
+          { term: 'die Drüse, Drüsen', def: 'bez (organ)', type: 'Nomen (die) | Wissenschaftssprache', example: 'Drüsen sind Organe, die verschiedene Arten von Sekreten produzieren. (Bezler, örneğin hormonlar gibi çeşitli salgılar üreten organlardır.)' },
+          { term: 'das Hormon, Hormone', def: 'hormon', type: 'Nomen (das) | Wissenschaftssprache', example: 'In der Bauchspeicheldrüse wird das Hormon Insulin hergestellt. (Pankreasta insülin hormonu üretilir.)' },
+          { term: 'etw. ausschütten / Ausschüttung', def: 'salgılamak / salgılama', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Bei Stress werden große Mengen des Hormons Adrenalin ausgeschüttet. (Stres altında büyük miktarda adrenalin hormonu salgılanır.)' },
+          { term: 'die Pubertät', def: 'ergenlik', type: 'Nomen (die) | Wissenschaftssprache', example: 'Während der Pubertät verändert sich die Konzentration verschiedener Hormone im Körper. (Ergenlikte vücuttaki çeşitli hormonların konsantrasyonu değişir.)' },
+          { term: 'das Immunsystem', def: 'bağışıklık sistemi', type: 'Nomen (das) | Wissenschaftssprache', example: 'Das Immunsystem bekämpft Krankheitserreger, die in den Körper eindringen. (Bağışıklık sistemi, vücuda giren hastalık etkenleriyle savaşır.)' },
+          { term: 'der Antikörper, Antikörper', def: 'antikor', type: 'Nomen (der) | Wissenschaftssprache', example: 'Antikörper greifen schädliche Organismen an und zerstören sie. (Antikorlar zararlı organizmalara saldırıp onları yok eder.)' },
+          { term: 'etw./jdn. abwehren / Abwehr', def: 'savuşturmak / savunma', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Ein gesundes Immunsystem kann zahlreiche Krankheiten abwehren. (Sağlıklı bir bağışıklık sistemi bir çok hastalığı savuşturabilir.)' },
+          { term: 'die Abwehrkräfte (Pl.)', def: 'bağışıklık gücü', type: 'Nomen (Pl.) | Wissenschaftssprache', example: 'Durch Sport und gesunde Ernährung kann man die körpereigenen Abwehrkräfte stärken. (Spor ve sağlıklı beslenmeyle vücudun bağışıklık gücü güçlendirilebilir.)' },
+          { term: 'sich fortpflanzen / Fortpflanzung', def: 'üremek / üreme', type: 'Refl. Verb / Nomen | Wissenschaftssprache', example: 'Der Wunsch, sich fortzupflanzen, ist ein natürliches Bedürfnis des Menschen. (Üreme isteği insanın doğal bir ihtiyacıdır.)' },
+          { term: 'die Fortpflanzungsorgane (Pl.)', def: 'üreme organları', type: 'Nomen (Pl.) | Wissenschaftssprache', example: 'Hormonelle Veränderungen führen zur vollständigen Entwicklung der Fortpflanzungsorgane. (Hormonal değişimler üreme organlarının tam gelişimine yol açar.)' },
+          { term: 'der Geschlechtsverkehr', def: 'cinsel ilişki', type: 'Nomen (der) | Wissenschaftssprache', example: 'Früher war Geschlechtsverkehr vor der Ehe gesellschaftlich nicht akzeptiert. (Eskiden evlilik öncesi cinsel ilişki toplumsal olarak kabul görmezdi.)' },
+          { term: 'ein Kind zeugen / Zeugung', def: 'bir çocuk döllemek / döllenme', type: 'Fiil kalıbı / Nomen | Wissenschaftssprache', example: 'Die Zeugung eines Kindes bringt eine große Verantwortung mit sich. (Bir çocuk dünyaya getirmek büyük bir sorumluluk taşır.)' },
+          { term: 'befruchten / Befruchtung', def: 'döllemek / döllenme', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Die Befruchtung einer Eizelle mit dem Spermium ist der Beginn eines neuen Lebens. (Kadının yumurta hücresinin sperimle döllenmesi yeni bir hayatın başlangıcıdır.)' },
+          { term: 'künstliche Befruchtung', def: 'yapay döllenme', type: 'Nomen (die) | Wissenschaftssprache', example: 'Eine künstliche Befruchtung ist eine Alternative für Paare, die auf natürlichem Weg kein Kind zeugen können. (Yapay döllenme, doğal yolla çocuk sahibi olamayan çiftler için bir alternatiftir.)' },
+          { term: 'unfruchtbar', def: 'kısır', type: 'Sıfat | Wissenschaftssprache', example: 'Männer oder Frauen leiden sehr darunter, wenn sie erfahren, dass sie unfruchtbar sind. (Çocuk isteyen erkek ya da kadınlar kısır olduklarını öğrendiklerinde çok üzülür.)' },
+          { term: 'das Verhütungsmittel', def: 'doğum kontrol yöntemi', type: 'Nomen (das) | Wissenschaftssprache', example: 'Paare, die kein Kind bekommen möchten, verwenden Verhütungsmittel. (Çocuk istemeyen çiftler cinsel ilişkide doğum kontrol yöntemi kullanır.)' },
+          { term: 'schwanger / Schwangerschaft', def: 'hamile / hamilelik', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Schwangere Frauen sollten auf Alkohol und Nikotin verzichten. (Hamile kadınlar alkol ve nikotinden kaçınmalıdır.)' },
+          { term: 'der Schwangerschaftsabbruch = Abtreibung', def: 'kürtaj, gebeliği sona erdirme', type: 'Nomen (der/die) | Wissenschaftssprache', example: 'Schwangere Frauen müssen sich beraten lassen, bevor sie sich entscheiden. (Hamile kadınlar kürtaja karar vermeden önce danışmanlık almalıdır.)' },
+          { term: 'die Gebärmutter', def: 'rahim', type: 'Nomen (die) | Wissenschaftssprache', example: 'In der Schwangerschaft wächst das Baby in der Gebärmutter heran. (Hamilelikte bebek rahimde gelişir.)' },
+          { term: 'der Embryo, Embryonen', def: 'embriyo', type: 'Nomen (der) | Wissenschaftssprache', example: 'In der ersten Lebensphase bezeichnet man das sich entwickelnde Kind als Embryo. (İlk yaşam evresinde gelişmekte olan çocuğa embriyo denir.)' },
+          { term: 'der Fötus, Föten', def: 'fetüs', type: 'Nomen (der) | Wissenschaftssprache', example: 'Ein Fötus ist weiter entwickelt als ein Embryo. (Bir fetüs, bir embriyodan daha ileri gelişmiştir.)' },
+          { term: 'ein Kind gebären / zur Welt bringen', def: 'çocuk doğurmak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Frauen, die ein Kind gebären, werden meist von einer Hebamme betreut. (Çocuk doğuran kadınlara genellikle bir ebe ve bir doktor eşlik eder.)' },
+          { term: 'die Entbindung = die Geburt', def: 'doğum', type: 'Nomen (die) | Wissenschaftssprache', example: 'Wenn eine natürliche Entbindung nicht möglich ist, kann ein Kaiserschnitt durchgeführt werden. (Doğal doğum mümkün değilse sezaryen uygulanabilir.)' }
+        ]
+      },
+      {
+        id: 'deck-2-3',
+        name: '2.3 Gesundheit (S.62-71)',
+        cards: [
+          { term: 'klagen über + A', def: '-den şikâyet etmek', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Die Patientin klagt über Appetitlosigkeit und starke Bauchschmerzen. (Hasta iştahsızlıktan ve şiddetli karın ağrısından şikâyet ediyor.)' },
+          { term: 'leiden unter + D', def: '-den muzdarip olmak', type: 'Verb | Wissenschaftssprache', example: 'Seit einigen Wochen leidet der junge Mann unter Schlaflosigkeit. (Genç adam birkaç haftadır uykusuzluk ve halsizlikten muzdarip.)' },
+          { term: 'unter Schmerzen leiden', def: 'ağrı çekmek', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Bei Migräne leiden Patienten häufig unter heftigen Kopfschmerzen. (Migrende hastalar sık sık şiddetli baş ağrısı ve bulantı çeker.)' },
+          { term: 'die Beschwerden (Pl.)', def: 'şikâyetler, rahatsızlıklar', type: 'Nomen (Pl.) | Wissenschaftssprache', example: 'Wenn das Wetter wechselt, klagen viele Menschen über verschiedene Beschwerden. (Hava değiştiğinde bir çok insan çeşitli rahatsızlıklardan şikâyet eder.)' },
+          { term: 'das Symptom, Symptome', def: 'belirti', type: 'Nomen (das) | Wissenschaftssprache', example: 'Rote Flecken auf der Haut können ein Symptom für eine allergische Reaktion sein. (Deride kırmızı lekeler bir alerjik reaksiyon belirtisi olabilir.)' },
+          { term: 'erschöpft / die Erschöpfung', def: 'bitkin / bitkinlik', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Man sollte einen Arzt aufsuchen, wenn man sich schon nach einem kurzen Spaziergang erschöpft fühlt. (Kısa bir yürüyüşten sonra bile yorgun ve bitkin hissediliyorsa doktora başvurulmalı.)' },
+          { term: 'jdm. ist schwindlig / Schwindel', def: 'başı dönmek / baş dönmesi', type: 'Kalıp / Nomen | Wissenschaftssprache', example: 'Nach einem heftigen Schlag auf den Kopf wurde ihm schwindlig. (Kafasına aldığı şiddetli darbeden sonra başı döndü ve bilincini kaybedti.)' },
+          { term: 'jdm. ist übel / die Übelkeit', def: 'midesi bulanmak / bulantı', type: 'Kalıp / Nomen | Wissenschaftssprache', example: 'Wenn Ihnen übel ist, haben Sie möglicherweise etwas Verdorbenes gegessen. (Midemiz bulanıyorsa muhtemelen bozuk bir şey yemişizdir.)' },
+          { term: 'sich übergeben = erbrechen', def: 'kusmak', type: 'Refl. Verb | Wissenschaftssprache', example: 'Starke Übelkeit führt häufig dazu, dass man sich übergeben muss. (Şiddetli bulantı çoğu zaman kusmaya yol açar.)' },
+          { term: 'der Durchfall, Durchfälle', def: 'ishal', type: 'Nomen (der) | Wissenschaftssprache', example: 'Magen-Darm-Erkrankungen sind meist mit Erbrechen und Durchfall verbunden. (Mide-bağırsak hastalıkları genellikle kusma ve ishalle birliktedir.)' },
+          { term: 'leiden an + D', def: 'bir hastalıktan muzdarip olmak', type: 'Verb | Wissenschaftssprache', example: 'Die Zahl der Menschen, die an Allergien leiden, nimmt ständig zu. (Alerjiden muzdarip insan sayısı sürekli artıyor.)' },
+          { term: 'erkranken an + D / Erkrankung', def: 'bir hastalığa yakalanmak / hastalık', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Besonders im Winter erkranken viele Menschen an Grippe. (Özellikle kışın bir çok insan gribe yakalanır.)' },
+          { term: 'allergisch sein gegen + A', def: 'bir şeye alerjik olmak', type: 'Sıfat kalıbı | Wissenschaftssprache', example: 'Immer mehr Menschen sind allergisch gegen Nahrungsmittel. (Giderek daha fazla insan örneğin çilek ya da kuruyemişe alerjik.)' },
+          { term: 'der Heuschnupfen', def: 'saman nezlesi (polen alerjisi)', type: 'Nomen (der) | Wissenschaftssprache', example: 'Für Menschen, die an Heuschnupfen leiden, ist der Frühling unangenehm. (Polen alerjisi olan kişiler için ilkbahar rahatsız edici bir dönemdir.)' },
+          { term: 'der Tumor, Tumoren', def: 'tümör', type: 'Nomen (der) | Wissenschaftssprache', example: 'Wenn Zellen sich unkontrolliert vermehren, können sie Tumoren bilden. (Hücreler kontrolsüz çoğaldığında tümör oluşturabilir.)' },
+          { term: 'der Krebs', def: 'kanser', type: 'Nomen (der) | Wissenschaftssprache', example: 'Bei Krebs kann ein Tumor Metastasen bilden und sich im ganzen Körper ausbreiten. (Kanserde bir tümör metastaz yapıp tüm vücuda yayılabilir.)' },
+          { term: 'die Thrombose, Thrombosen', def: 'tromboz, kan pıhtılaşması', type: 'Nomen (die) | Wissenschaftssprache', example: 'Nach Operationen müssen Patienten manchmal spezielle Strümpfe tragen. (Ameliyat sonrası hastalar bazen tromboza karşı özel çorap giymek zorundadır.)' },
+          { term: 'der Schlaganfall, -anfälle', def: 'felç, inme', type: 'Nomen (der) | Wissenschaftssprache', example: 'Wenn das Gehirn nicht ausreichend mit Blut versorgt wird, kann das zu einem Schlaganfall führen. (Beyin yeterince kanla beslenmezse bu felce yol açabilir.)' },
+          { term: 'der Herzinfarkt, -infarkte', def: 'kalp krizi', type: 'Nomen (der) | Wissenschaftssprache', example: 'Ein schwerer Herzinfarkt muss schnell behandelt werden. (Ağır bir kalp krizi hastanın hayatını kurtarmak için hızlıca tedavi edilmelidir.)' },
+          { term: 'einen Schlaganfall/Herzinfarkt erleiden', def: 'felç/kalp krizi geçirmek', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Nachdem er einen Schlaganfall erlitten hatte, wurde er ins Krankenhaus gebracht. (Felç geçirdikten sonra hemen hastaneye götürüldü.)' },
+          { term: 'sich entzünden / Entzündung', def: 'iltihaplanmak / iltihap', type: 'Refl. Verb / Nomen | Wissenschaftssprache', example: 'Wenn eine Wunde nicht desinfiziert wird, kann sie sich entzünden. (Bir yara dezenfekte edilmezse iltihaplanabilir.)' },
+          { term: 'sich anstecken mit', def: 'bulaşmak, yakalanmak', type: 'Refl. Verb | Wissenschaftssprache', example: 'Wer im Beruf viel mit Menschen zu tun hat, steckt sich leicht bei jemandem an. (İşinde çok insanla temas eden kişi gribe daha kolay yakalanır.)' },
+          { term: 'jdn. anstecken / ansteckend', def: 'bulaştırmak / bulaşıcı', type: 'Verb / Sıfat | Wissenschaftssprache', example: 'Menschen mit bestimmten Infektionskrankheiten müssen isoliert werden. (Belirli bulaşıcı hastalığı olan kişiler kimseye bulaştırmamak için izole edilmelidir.)' },
+          { term: 'die Epidemie, Epidemien', def: 'salgın', type: 'Nomen (die) | Wissenschaftssprache', example: 'Hochansteckende Krankheitserreger können eine Epidemie verursachen. (Çok bulaşıcı hastalık etkenleri bir salgına neden olabilir.)' },
+          { term: 'die Pandemie, Pandemien', def: 'pandemi', type: 'Nomen (die) | Wissenschaftssprache', example: 'Bei einigen Grippeviren besteht die Gefahr, dass sie eine Pandemie auslösen. (Bazı grip virüslerinde birden fazla ülkeye yayılıp pandemi başlatma riski vardır.)' },
+          { term: 'der Erreger, Erreger', def: 'hastalık etkeni, patojen', type: 'Nomen (der) | Wissenschaftssprache', example: 'Unser Immunsystem schützt uns vor vielen Krankheitserregern. (Bağışıklık sistemimiz bizi bir çok hastalık etkeninden korur.)' },
+          { term: 'das Bakterium, Bakterien', def: 'bakteri', type: 'Nomen (das) | Wissenschaftssprache', example: 'Desinfektionsmittel werden verwendet, um Bakterien abzutöten. (Dezenfektanlar bakterileri öldürmek için kullanılır.)' },
+          { term: 'das/der Virus, Viren', def: 'virüs', type: 'Nomen (das/der) | Wissenschaftssprache', example: 'Eine AIDS-Erkrankung ist auf eine Infektion mit Viren zurückzuführen. (AIDS hastalığı virüs enfeksiyonuna bağlanır.)' },
+          { term: 'die Grippe', def: 'grip', type: 'Nomen (die) | Wissenschaftssprache', example: 'Unter den vielen Grippeviren gibt es auch gefährliche Formen. (Birçok grip virüsü arasında İspanyol Gribi gibi tehlikeli türler de vardır.)' },
+          { term: 'die Tuberkulose', def: 'verem, tüberküloz', type: 'Nomen (die) | Wissenschaftssprache', example: 'Nicht alle Menschen, die sich mit Tuberkulose infizieren, erkranken daran. (Verem hastalığıyla enfekte olan herkes hastalanmaz.)' },
+          { term: 'die Pest', def: 'veba', type: 'Nomen (die) | Wissenschaftssprache', example: 'Im Mittelalter sind Millionen von Menschen an der Pest gestorben. (Orta Çağ\'da milyonlarca insan veba, yani \'Kara Ölüm\'den öldü.)' },
+          { term: 'die Kinderkrankheit, -krankheiten', def: 'çocuk hastalığı', type: 'Nomen (die) | Wissenschaftssprache', example: 'Kinderkrankheiten wie Windpocken können für Erwachsene gefährlich sein. (Su çiçeği ve kabakulak gibi çocuk hastalıkları yetişkinler için tehlikeli olabilir.)' },
+          { term: 'chronisch', def: 'kronik', type: 'Sıfat | Wissenschaftssprache', example: 'Unter chronischen Krankheiten leiden Patienten manchmal ihr ganzes Leben lang. (Kronik hastalıklardan hastalar uzun süre, bazen tüm hayatları boyunca muzdarip olur.)' },
+          { term: 'das Asthma', def: 'astım', type: 'Nomen (das) | Wissenschaftssprache', example: 'Bei Asthma treten Anfälle von Atemnot auf. (Astımda ilaçlarla hafifletilebilen nefes darlığı atakları görülür.)' },
+          { term: 'sich verletzen / Verletzung', def: 'yaralanmak / yaralanma', type: 'Refl. Verb / Nomen | Wissenschaftssprache', example: 'Bei dem Erdbeben sind Häuser eingestürzt, aber niemand wurde verletzt. (Depremde bazı evler çöktü ama neyse ki kimse yaralanmadı.)' },
+          { term: 'die Wunde, Wunden', def: 'yara', type: 'Nomen (die) | Wissenschaftssprache', example: 'Wenn eine Wunde stark blutet, muss die Blutung gestoppt werden. (Bir yara şiddetli kanıyorsa kanama en kısa sürede durdurulmalıdır.)' },
+          { term: 'sich etw. brechen / Bruch', def: 'kırmak / kırık', type: 'Refl. Verb / Nomen | Wissenschaftssprache', example: 'Bei älteren Menschen ist die Gefahr, sich einen Knochen zu brechen, höher. (Yaşlılarda kemik kırma riski gençlere göre daha yüksektir.)' },
+          { term: 'verbinden / Verband', def: 'pansuman yapmak / sargı', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Kurz nach einer Operation muss die Wunde frisch verbunden werden. (Ameliyattan kısa süre sonra yara düzenli olarak yeniden sarılmalıdır.)' },
+          { term: 'die Narbe, Narben', def: 'yara izi', type: 'Nomen (die) | Wissenschaftssprache', example: 'Nach schweren Verletzungen kann eine Narbe zurückbleiben. (Ağır yaralanmalardan sonra deride bir iz kalabilir.)' },
+          { term: 'Krankheiten vorbeugen', def: 'hastalıklardan korunmak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Durch eine gesunde Lebensweise kann man vielen Krankheiten vorbeugen. (Sağlıklı bir yaşam tarzıyla bir çok hastalıktan korunulabilir.)' },
+          { term: 'eine Krankheit erkennen', def: 'bir hastalığı teşhis etmek', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Ein erfahrener Arzt kann Krankheiten anhand der Symptome erkennen. (Deneyimli bir doktor belirtilerden bir çok hastalığı hızla tanıyabilir.)' },
+          { term: 'die Früherkennung', def: 'erken teşhis', type: 'Nomen (die) | Wissenschaftssprache', example: 'Bei Krebserkrankungen ist die Früherkennung wichtig. (Kanser hastalıklarında erken teşhis, hastalığın yayılmasını önlemek için önemlidir.)' },
+          { term: 'die Vorsorgeuntersuchung', def: 'koruyucu sağlık kontrolü', type: 'Nomen (die) | Wissenschaftssprache', example: 'Vorsorgeuntersuchungen helfen, Krankheiten früh zu erkennen. (Koruyucu sağlık kontrolleri hastalıkları erken evrede fark edip tedavi etmeye yardımcı olur.)' },
+          { term: 'impfen / die Impfung', def: 'aşılamak / aşı', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Es wird empfohlen, sich gegen Malaria impfen zu lassen. (Tropikal bölgelere seyahatten önce sıtmaya karşı aşılanmak önerilir.)' },
+          { term: 'sich untersuchen lassen', def: 'muayene olmak', type: 'Refl. Verb | Wissenschaftssprache', example: 'Bei Beschwerden sollte man sich bald von einem Arzt untersuchen lassen. (Sağlık şikâyetlerinde mümkün olduğunca çabuk doktora muayene olunmalıdır.)' },
+          { term: 'diagnostizieren / Diagnose', def: 'teşhis etmek / teşhis', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Eine eindeutige Diagnose ist Voraussetzung für eine erfolgreiche Behandlung. (Net bir teşhis, başarılı bir tedavinin ön koşuludur.)' },
+          { term: 'röntgen', def: 'röntgen çekmek', type: 'Verb (Akk.) | Wissenschaftssprache', example: 'Damit der Arzt die Verletzung genau sehen kann, muss er den Fuß röntgen. (Doktorun kemik yaralanmasını tam görebilmesi için ayağın röntgenini çekmesi gerekir.)' },
+          { term: 'das Röntgenbild, -bilder', def: 'röntgen filmi', type: 'Nomen (das) | Wissenschaftssprache', example: 'Wegen der Strahlung sollte bei Schwangeren kein Röntgenbild gemacht werden. (Radyasyon nedeniyle hamile kadınlarda röntgen çekilmemelidir.)' },
+          { term: 'der Ultraschall', def: 'ultrason', type: 'Nomen (der) | Wissenschaftssprache', example: 'Eine Untersuchung mit Ultraschall hat den Vorteil, dass keine Strahlung entsteht. (Ultrason muayenesi hastayı radyasyona maruz bırakmadan vücut içini incelemeyi sağlar.)' },
+          { term: 'das Ultraschallbild, -bilder', def: 'ultrason görüntüsü', type: 'Nomen (das) | Wissenschaftssprache', example: 'Werdende Eltern zeigen das Ultraschallbild ihres Babys gerne. (Anne-baba adayları bebeklerinin ultrason görüntüsünü akraba ve arkadaşlarına göstermeyi sever.)' },
+          { term: 'behandeln / die Behandlung', def: 'tedavi etmek / tedavi', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Oft gibt es verschiedene Möglichkeiten, eine Krankheit zu behandeln. (Bir hastalığı tedavi etmenin çoğu zaman çeşitli yolları vardır.)' },
+          { term: 'heilen / die Heilung', def: 'iyileştirmek / iyileşme', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Krankheiten, die früher tödlich waren, können geheilt werden. (Eskiden ölümcül olan hastalıklar modern tıp sayesinde iyileştirilebiliyor.)' },
+          { term: 'das Arzneimittel = Medikament', def: 'ilaç', type: 'Nomen (das) | Wissenschaftssprache', example: 'Die Pharmaindustrie arbeitet an der Entwicklung neuer Arzneimittel. (İlaç sektörü, iyi tolere edilen yeni ilaçların geliştirilmesi üzerinde çalışıyor.)' },
+          { term: 'ein Medikament verschreiben', def: 'ilaç yazmak (reçete)', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Der Arzt verschreibt der Patientin ein Medikament. (Doktor hastaya günde üç kez alması gereken bir ilaç yazıyor.)' },
+          { term: 'ein Medikament verabreichen', def: 'ilaç uygulamak/vermek', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Das Pflegepersonal verabreicht den Patienten die Medikamente. (Bakım personeli hastalara gerekli ilaçları uygular.)' },
+          { term: 'die Nebenwirkungen (Pl.)', def: 'yan etkiler', type: 'Nomen (Pl.) | Wissenschaftssprache', example: 'Der Beipackzettel informiert über mögliche Nebenwirkungen. (Prospektüs, hastaları olası yan etkiler hakkında bilgilendirir.)' },
+          { term: 'das Antibiotikum, Antibiotika', def: 'antibiyotik', type: 'Nomen (das) | Wissenschaftssprache', example: 'Antibiotika werden zur Bekämpfung von Infektionen eingesetzt. (Antibiyotikler enfeksiyonlarla mücadelede kullanılır.)' },
+          { term: 'injizieren / Injektion', def: 'enjekte etmek / enjeksiyon', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Der Arzt kann ein Medikament ins Blut oder in die Muskulatur injizieren. (Doktor bir ilacı kana veya kasa enjekte edebilir.)' },
+          { term: 'die Spritze, Spritzen', def: 'şırınga, iğne', type: 'Nomen (die) | Wissenschaftssprache', example: 'Spritzen müssen nach jedem Gebrauch sorgfältig sterilisiert werden. (Şırıngalar tekrar kullanılacaksa her kullanımdan sonra dikkatlice sterilize edilmelidir.)' },
+          { term: 'die Infusion, Infusionen', def: 'serum, infüzyon', type: 'Nomen (die) | Wissenschaftssprache', example: 'Schmerzmittel können im Krankenhaus per Infusion verabreicht werden. (Ağrı kesiciler hastanede serum yoluyla verilebilir.)' },
+          { term: 'die Chemotherapie', def: 'kemoterapi', type: 'Nomen (die) | Wissenschaftssprache', example: 'Bei Krebserkrankungen soll eine Chemotherapie die Krankheit heilen. (Birçok kanser türünde kemoterapi hastalığı iyileştirmeyi ya da yayılmasını engellemeyi amaçlar.)' },
+          { term: 'die Bestrahlung, Bestrahlungen', def: 'radyoterapi, ışın tedavisi', type: 'Nomen (die) | Wissenschaftssprache', example: 'Neben der Chemotherapie werden Bestrahlungen angewandt. (Tümörle hedefli mücadele için kemoterapinin yanı sıra ışın tedavisi uygulanır.)' },
+          { term: 'die Physiotherapie', def: 'fizyoterapi', type: 'Nomen (die) | Wissenschaftssprache', example: 'Regelmäßige Physiotherapie kann ein gutes Mittel gegen Rückenschmerzen sein. (Düzenli fizyoterapi sırt ağrısına karşı iyi bir çözüm olabilir.)' },
+          { term: 'betäuben / Betäubung', def: 'uyuşturmak / anestezi', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Eine Behandlung ist weniger schmerzhaft, wenn man sich betäuben lässt. (Diş hekiminde tedavi, önceden uyuşturulursa daha az acı verir.)' },
+          { term: 'die Narkose', def: 'narkoz, genel anestezi', type: 'Nomen (die) | Wissenschaftssprache', example: 'Bei größeren Eingriffen ist oft eine Vollnarkose erforderlich. (Büyük müdahalelerde genellikle tam narkoz gereklidir.)' },
+          { term: 'transplantieren / Transplantation', def: 'nakletmek / organ nakli', type: 'Verb / Nomen | Wissenschaftssprache', example: 'In den Sechzigerjahren wurde zum ersten Mal erfolgreich ein Herz transplantiert. (1960\'larda Güney Afrikalı cerrah Christiaan Barnard ilk kez başarılı bir kalp nakli yaptı.)' },
+          { term: 'alternative Therapien', def: 'alternatif tedaviler', type: 'Nomen (Pl.) | Wissenschaftssprache', example: 'Viele Ärzte bieten neben der Schulmedizin auch alternative Therapien an. (Artık bir çok doktor \'klasik tıbbın\' yanı sıra alternatif tedaviler de sunuyor.)' },
+          { term: 'die Naturheilkunde', def: 'doğal tıp', type: 'Nomen (die) | Wissenschaftssprache', example: 'Bereits in der Antike hat man Krankheiten mit Naturheilkunde behandelt. (Antik çağda ve Orta Çağ\'da bile hastalıklar doğal tıp yoluyla tedavi edilirdi.)' },
+          { term: 'die Akupunktur', def: 'akupunktur', type: 'Nomen (die) | Wissenschaftssprache', example: 'Bei der Akupunktur werden an bestimmten Stellen Nadeln gesetzt. (Akupunkturda enerji tıkanıklıklarını çözmek için vücudun belirli noktalarına iğne batırılır.)' },
+          { term: 'homöopathisch / Homöopathie', def: 'homeopatik / homeopati', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Befürworter weisen darauf hin, dass diese weniger Nebenwirkungen haben. (Homeopatik tedavi taraftarları, bunların daha az yan etkisi olduğuna dikkat çeker.)' },
+          { term: 'der Heilpraktiker / die -praktikerin', def: 'doğal tedavi uzmanı', type: 'Nomen (der/die) | Wissenschaftssprache', example: 'Heilpraktiker behandeln Patienten mit alternativen Therapien. (Doğal tedavi uzmanları hastaları alternatif yöntemlerle tedavi etmek üzere eğitilmiştir.)' }
+        ]
+      },
+      {
+        id: 'deck-2-4',
+        name: '2.4 Sport (S.72-79)',
+        cards: [
+          { term: 'Sport treiben', def: 'spor yapmak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Ärzte empfehlen, regelmäßig Sport zu treiben, um Krankheiten vorzubeugen. (Doktorlar, hastalıklardan korunmak için düzenli spor yapılmasını önerir.)' },
+          { term: 'sportlich aktiv sein', def: 'sportif olarak aktif olmak', type: 'Sıfat kalıbı | Wissenschaftssprache', example: 'Viele Touristen möchten im Urlaub sportlich aktiv sein. (Bazı turistler sahilde uzanmayı tercih ederken, diğerleri sportif olarak aktif olmak ister.)' },
+          { term: 'sich sportlich betätigen', def: 'spor yapmak / faaliyet göstermek', type: 'Refl. Verb | Wissenschaftssprache', example: 'Wer sich mehrmals pro Woche sportlich betätigt, hat ein geringeres Diabetes-Risiko. (Haftada birkaç kez spor yapan kişinin diyabet riski daha düşüktür.)' },
+          { term: 'sportlich', def: 'sportif', type: 'Sıfat | Wissenschaftssprache', example: 'Einige Schüler sind sehr sportlich: Sie erbringen gute Leistungen. (Bazı öğrenciler çok sportiftir: beden eğitimi dersinde iyi performans gösterirler.)' },
+          { term: 'unsportlich', def: 'sportif olmayan', type: 'Sıfat | Wissenschaftssprache', example: 'Auch Menschen, die sich für unsportlich halten, können eine Sportart finden. (Kendini sportif bulmayan insanlar bile uygun bir spor dalı bulabilir.)' },
+          { term: 'fit / die Fitness', def: 'formda / fitlik', type: 'Sıfat / Nomen | Alltag/Wissenschaft', example: 'Um fit zu bleiben, braucht man Bewegung ve genügend Schlaf. (Formda kalmak için hareket, ama yeterli uyku da gerekir.)' },
+          { term: 'sich fit halten', def: 'formda kalmak', type: 'Refl. Verb | Wissenschaftssprache', example: 'Auch durch Gymnastik oder Yoga kann man sich fit halten. (Jimnastik, yürüyüş ya da yoga ile de formda kalınabilir.)' },
+          { term: 'die Kraft, Kräfte', def: 'güç, kuvvet', type: 'Nomen (die) | Wissenschaftssprache', example: 'Für das Gewichtheben braucht man viel Kraft. (Halter için çok güç gerekir, bu da düzenli kas antrenmanıyla artırılabilir.)' },
+          { term: 'die Ausdauer', def: 'dayanıklılık', type: 'Nomen (die) | Wissenschaftssprache', example: 'Andere Sportarten erfordern viel Ausdauer, z.B. Schwimmen oder Laufen. (Yüzme ya da koşu gibi diğer spor dalları çok dayanıklılık gerektirir.)' },
+          { term: 'der Sportverein, -vereine', def: 'spor kulübü', type: 'Nomen (der) | Wissenschaftssprache', example: 'Sportvereine bieten regelmäßige Trainingsstunden an. (Spor kulüpleri sadece düzenli antrenman değil, ortak etkinlikler de organize eder.)' },
+          { term: 'einem Sportverein beitreten', def: 'bir spor kulübüne katılmak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Wer Lust hat, Sport zu treiben, kann einem Sportverein beitreten. (Spor yapmak isteyen kişi bir spor kulübüne katılabilir.)' },
+          { term: 'das Mitglied, Mitglieder', def: 'üye', type: 'Nomen (das) | Wissenschaftssprache', example: 'Als Mitglied des Sportvereins kann man die Sportanlagen kostenlos nutzen. (Spor kulübü üyesi olarak antrenman saatleri dışında da tesisleri ücretsiz kullanabilir.)' },
+          { term: 'der Leistungssport', def: 'profesyonel/performans sporu', type: 'Nomen (der) | Wissenschaftssprache', example: 'Leistungssport nimmt viel Zeit in Anspruch. (Performans sporu, yoğun antrenman gerektirdiği için çok zaman alır.)' },
+          { term: 'der Breitensport', def: 'amatör/halk sporu', type: 'Nomen (der) | Wissenschaftssprache', example: 'Beim Breitensport steht die Freude an der Bewegung im Mittelpunkt. (Performans sporunun aksine, halk sporunda hareket zevki ön plandadır.)' },
+          { term: 'die Sportart, -arten', def: 'spor dalı', type: 'Nomen (die) | Wissenschaftssprache', example: 'Jeder sollte verschiedene Sportarten ausprobieren. (Herkes en çok keyif aldığı spor dalını bulmak için çeşitli dalları denemelidir.)' },
+          { term: 'eine Sportart betreiben', def: 'bir spor dalıyla uğraşmak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Erfolgreiche Sportler betreiben ihre Sportart seit frühester Kindheit. (Başarılı sporcular genellikle spor dallarıyla çok küçük yaştan beri uğraşır.)' },
+          { term: 'die Leichtathletik', def: 'atletizm', type: 'Nomen (die) | Wissenschaftssprache', example: 'Zur Leichtathletik zählen Laufen, Werfen und Springen. (Atletizm; koşu, atma ve atlama gibi çeşitli dalları kapsar.)' },
+          { term: 'turnen / das Turnen', def: 'cimnastik yapmak / cimnastik', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Das Turnen an Sportgeräten erfordert Kraft und Geschicklichkeit. (Aletlerde cimnastik çok güç ve beceri gerektirir.)' },
+          { term: 'der Kampfsport', def: 'dövüş sporu', type: 'Nomen (der) | Wissenschaftssprache', example: 'Kampfsportarten fördern Konzentration und Disziplin. (Dövüş sporları güç ve çevikliğin yanı sıra konsantrasyon ve disiplini de geliştirir.)' },
+          { term: 'der Wintersport', def: 'kış sporu', type: 'Nomen (der) | Wissenschaftssprache', example: 'Wintersport ist in Deutschland sehr beliebt. (Almanya\'da kış sporları çok popülerdir, Alp\'lerdeki kayak bölgeleri ideal koşullar sunar.)' },
+          { term: 'der Mannschaftssport', def: 'takım sporu', type: 'Nomen (der) | Wissenschaftssprache', example: 'Mannschaftssport fördert auch soziale Kompetenzen. (Takım sporu sadece fiziksel formu değil, sosyal becerileri de geliştirir.)' },
+          { term: 'die Mannschaft, Mannschaften', def: 'takım', type: 'Nomen (die) | Wissenschaftssprache', example: 'Die Fans stehen treu zu ihrer Mannschaft. (Taraftarlar, takımı bir maçı kaybetse bile ona sadık kalır.)' },
+          { term: 'der Profi, Profis', def: 'profesyonel (sporcu)', type: 'Nomen (der) | Alltagssprache', example: 'Eine Karriere als Fußballprofi erfordert harte Arbeit. (Profesyonel futbolcu kariyeri para ve şöhret getirebilir, ama her şeyden önce sıkı çalışma gerektirir.)' },
+          { term: 'der Amateur, Amateure', def: 'amatör', type: 'Nomen (der) | Wissenschaftssprache', example: 'Es gibt auch Wettbewerbe für Amateure. (Profesyonel sporcular için turnuvaların yanı sıra amatörler için de yarışmalar var.)' },
+          { term: 'der Athlet, Athleten', def: 'atlet, sporcu', type: 'Nomen (der) | Wissenschaftssprache', example: 'Am Tag vor dem Wettbewerb absolvieren die Athleten ein Training. (Yarışmadan önceki gün atletler son bir antrenman yapar.)' },
+          { term: 'das Stadion, Stadien', def: 'stadyum', type: 'Nomen (das) | Wissenschaftssprache', example: 'Für Fans ist es ein Erlebnis, ein Spiel im Stadion zu sehen. (Futbol taraftarları için stadyumda bir maçı birlikte izlemek özel bir deneyimdir.)' },
+          { term: 'das Spielfeld, -felder', def: 'saha', type: 'Nomen (das) | Wissenschaftssprache', example: 'Der verletzte Spieler muss das Spielfeld verlassen. (Yaralanan oyuncu tedavi olmak için sahayı terk etmelidir.)' },
+          { term: 'die Sporthalle, -hallen', def: 'spor salonu', type: 'Nomen (die) | Wissenschaftssprache', example: 'Wenn es zu kalt ist, findet das Training in der Sporthalle statt. (Dışarıda antrenman için hava çok soğuksa antrenman spor salonunda yapılır.)' },
+          { term: 'der Wettkampf, -kämpfe', def: 'yarışma', type: 'Nomen (der) | Wissenschaftssprache', example: 'Während der Olympischen Spiele werden Wettkämpfe übertragen. (Olimpiyat Oyunları sırasında sportif yarışmalar televizyonda yayınlanır.)' },
+          { term: 'der Wettbewerb, -bewerbe', def: 'yarışma, müsabaka', type: 'Nomen (der) | Wissenschaftssprache', example: 'Die Teilnahme an einem Wettbewerb kann die Motivation erhöhen. (Bir yarışmaya katılıp başka sporcularla yarışma imkânı motivasyonu artırabilir.)' },
+          { term: 'an einem Wettbewerb teilnehmen', def: 'bir yarışmaya katılmak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Erfolgreiche Mannschaften nehmen an Wettbewerben teil. (Başarılı takımlar ülke çapında hatta uluslararası yarışmalara katılabilir.)' },
+          { term: 'die Olympischen Spiele = Olympiade', def: 'Olimpiyat Oyunları', type: 'Nomen (Pl./die) | Wissenschaftssprache', example: 'Es ist der Traum jedes Athleten, an den Olympischen Spielen teilzunehmen. (Olimpiyat Oyunları\'na katılmak her sporcunun hayalidir.)' },
+          { term: 'die Meisterschaft, -schaften', def: 'şampiyona', type: 'Nomen (die) | Wissenschaftssprache', example: 'Die Schwimmerin hat bei den Meisterschaften den zweiten Platz belegt. (Genç yüzücü, eyalet şampiyonasında ikincilik elde etti.)' },
+          { term: 'sich qualifizieren für + A / Qualifikation', def: 'hak kazanmak / eleme', type: 'Refl. Verb / Nomen | Wissenschaftssprache', example: 'Die Mannschaft hat trainiert, um sich für die EM zu qualifizieren. (Takım Avrupa şampiyonasına hak kazanmak için sıkı çalıştı.)' },
+          { term: 'der Rekord, Rekorde', def: 'rekor', type: 'Nomen (der) | Wissenschaftssprache', example: 'Der Weltrekord im Kugelstoßen liegt zurzeit bei 23,12 Metern. (Gülle atmada dünya rekoru şu anda 23,12 metredir.)' },
+          { term: 'einen Rekord aufstellen', def: 'rekor kırmak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Sportler stellen immer wieder neue Rekorde auf. (Sportif performans sınırlarına ulaşıldığı düşünülse de sporcular sürekli yeni rekorlar kırıyor.)' },
+          { term: 'das Finale, Finale', def: 'final', type: 'Nomen (das) | Wissenschaftssprache', example: 'Zwei Mannschaften treten im Finale gegeneinander an. (Dünya şampiyonası sonunda iki takım finalde karşı karşıya gelir.)' },
+          { term: 'das Finale erreichen', def: 'finale çıkmak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Die Mannschaft wolle auf jeden Fall das Finale erreichen. (Antrenör, takımının kesinlikle finale çıkmak istediğini gazetecilere açıkladı.)' },
+          { term: 'der Gegner, Gegner', def: 'rakip', type: 'Nomen (der) | Wissenschaftssprache', example: 'Sportler studieren ihren Gegner vor einem Wettkampf genau. (Sporcular yarışmadan önce rakiplerinin stratejisine hazırlanmak için onları dikkatle inceler.)' },
+          { term: 'den Gegner besiegen', def: 'rakibi yenmek', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Um die gegnerische Mannschaft zu besiegen, muss man sich vorbereiten. (Rakip takımı yenmek için sporcular hem fiziksel hem zihinsel hazırlanmalıdır.)' },
+          { term: 'der Sieger, Sieger', def: 'galip, kazanan', type: 'Nomen (der) | Wissenschaftssprache', example: 'Der Sieger des Halbfinales tritt im Finale an. (Yarı finalin galibi, finalde yeni bir rakiple karşılaşır.)' },
+          { term: 'die Medaille, Medaillen', def: 'madalya', type: 'Nomen (die) | Wissenschaftssprache', example: 'Die drei besten Sportler erhalten eine Medaille. (Bir yarışmanın en iyi üç sporcusu altın, gümüş ya da bronz madalya alır.)' },
+          { term: 'der Pokal, Pokale', def: 'kupa', type: 'Nomen (der) | Wissenschaftssprache', example: 'In einer Zeremonie wird dem Sieger der Pokal überreicht. (Törenle galibe altın kupa takdim edilir.)' },
+          { term: 'eine Medaille/einen Pokal gewinnen', def: 'madalya/kupa kazanmak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Die Sportlerin hat bei den Spielen zwei Medaillen gewonnen. (Sporcu, Olimpiyat Oyunları\'nda iki madalya kazandı.)' },
+          { term: 'sich fair verhalten', def: 'adil davranmak', type: 'Refl. Verb | Wissenschaftssprache', example: 'Beim Sport lernen Jugendliche, sich fair zu verhalten. (Sporda gençler başkalarına karşı adil davranmayı öğrenebilir.)' },
+          { term: 'die Regeln einhalten', def: 'kurallara uymak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Schiedsrichter sorgen dafür, dass die Sportler die Regeln einhalten. (Hakemler sporcuların kurallara uymasını sağlar.)' },
+          { term: 'gegen die Regeln verstoßen', def: 'kurallara aykırı davranmak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Wenn Sportler gegen die Regeln verstoßen, werden sie ausgeschlossen. (Sporcular kurallara aykırı davranırsa yarışmadan diskalifiye edilebilir.)' },
+          { term: 'der Schiedsrichter, Schiedsrichter', def: 'hakem', type: 'Nomen (der) | Wissenschaftssprache', example: 'Der Schiedsrichter kann Spieler vom Platz schicken. (Hakem, adil davranmayan oyuncuları sahadan atabilir.)' },
+          { term: 'dopen / das Doping', def: 'doping yapmak / doping', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Sportler, die gedopt haben, dürfen jahrelang nicht antreten. (Doping yapan sporcular yıllarca yarışmalara katılamaz.)' },
+          { term: 'jdn. sperren / die Sperre', def: 'men etmek / men cezası', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Der Athlet wurde wegen Dopings für zwei Jahre gesperrt. (Sporcu doping nedeniyle iki yıl men cezası aldı.)' }
+        ]
+      },
+      {
+        id: 'deck-2-5',
+        name: '2.5 Geist und Seele (S.80-93)',
+        cards: [
+          { term: 'etw. wahrnehmen / Wahrnehmung', def: 'algılamak / algı', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Auf manche Geräusche reagieren wir, andere nehmen wir gar nicht wahr. (Bazı seslere hemen tepki veririz, bazılarını ise hiç bilinçli algılamayız.)' },
+          { term: 'der Reiz = der Stimulus', def: 'uyaran', type: 'Nomen (der) | Wissenschaftssprache', example: 'Menschen werden krank, wenn es zu viele oder zu wenige Reize gibt. (Çevrede çok fazla ya da çok az uyaran olduğunda insanlar hastalanır.)' },
+          { term: 'der Reflex, Reflexe', def: 'refleks', type: 'Nomen (der) | Wissenschaftssprache', example: 'Der Körper reagiert auf bestimmte Reize mit einem Reflex. (Sağlıklı bir insanın vücudu bazı uyaranlara, irademizle kontrol edemediğimiz bir refleksle tepki verir.)' },
+          { term: 'der Sinn, Sinne', def: 'duyu', type: 'Nomen (der) | Wissenschaftssprache', example: 'Radioaktive Strahlung können wir mit den Sinnen nicht wahrnehmen. (Radyoaktif ışınımın tehlikelerinden biri, onu duyularımızla algılayamamamızdır.)' },
+          { term: 'das Sinnesorgan, -organe', def: 'duyu organı', type: 'Nomen (das) | Wissenschaftssprache', example: 'Die Sinnesorgane nehmen Reize auf und leiten sie weiter. (Duyu organları uyaranları alıp beyne iletir.)' },
+          { term: 'akustisch', def: 'işitsel', type: 'Sıfat | Wissenschaftssprache', example: 'Hunde können Töne hören, die für Menschen akustisch nicht wahrnehmbar sind. (Köpekler insanlar için işitilemez çok yüksek tonları duyabilir.)' },
+          { term: 'optisch', def: 'görsel', type: 'Sıfat | Wissenschaftssprache', example: 'Wir sind heute mehr optischen Reizen ausgesetzt als früher. (Yeni medyanın gelişimiyle bugün eskisinden daha fazla görsel ve işitsel uyarana maruz kalıyoruz.)' },
+          { term: 'das Geräusch, Geräusche', def: 'ses, gürültü', type: 'Nomen (das) | Wissenschaftssprache', example: 'Regelmäßig wiederkehrende Geräusche machen Menschen nervös. (Bir musluğun damlaması gibi düzenli tekrarlayan sesler çoğu insanı sinirlendirir.)' },
+          { term: 'riechen', def: 'koklamak, kokmak', type: 'Verb | Wissenschaftssprache', example: 'Wenn wir an einem Lebensmittel riechen, wissen wir wie es schmeckt. (Bir gıdayı kokladığımızda genellikle nasıl tadacağı hakkında da fikir sahibi oluruz.)' },
+          { term: 'der Geruch, Gerüche', def: 'koku', type: 'Nomen (der) | Wissenschaftssprache', example: 'Ein Geruch kann einfache Erinnerungen auslösen. (Bir koku, bir duruma dair yoğun anılar tetikleyebilir.)' },
+          { term: 'duften / duftend', def: 'hoş kokmak / mis kokulu', type: 'Verb / Sıfat | Wissenschaftssprache', example: 'Es regt den Appetit an, wenn es nach Essen duftet. (Evde belirli gıdaların kokusu olması iştahı açtığı söylenir.)' },
+          { term: 'der Duft, Düfte', def: 'koku, esans', type: 'Nomen (der) | Wissenschaftssprache', example: 'In Geschäften werden Düfte verbreitet, um Kunden zu beeinflussen. (Dükkanlarda müşterilerin satın alma davranışını etkilemek için kokular yayılır.)' },
+          { term: 'berühren / die Berührung', def: 'dokunmak / dokunma', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Wenn wir eine heiße Fläche berühren, ziehen wir die Hand zurück. (Sıcak bir yüzeye dokunduğumuzda elimizi otomatik olarak hemen geri çekeriz.)' },
+          { term: 'etw. spüren = fühlen', def: 'hissetmek', type: 'Verb (Akk.) | Wissenschaftssprache', example: 'Es kann entspannend sein, das Gras unter den Füßen zu spüren. (Çıplak ayak yürüyüp çimeni ayak altında hissetmek çok rahatlatıcı olabilir.)' },
+          { term: 'empfinden / die Empfindung', def: 'hissetmek / his', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Vor einer Operation wird der Patient betäubt, damit er keine Schmerzen empfindet. (Ameliyattan önce ağrı hissetmemesi için hasta uyuşturulur.)' },
+          { term: 'empfindlich', def: 'hassas', type: 'Sıfat | Wissenschaftssprache', example: 'Wenn Sie empfindlich auf Lärm reagieren, tragen Sie Ohrstöpsel. (Gürültüye çok hassas tepki veriyorsanız kulak tıkacıyla uyumalısınız.)' },
+          { term: 'sensibel / Sensibilität', def: 'duyarlı / duyarlılık', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Sensible Menschen können Gefühle anderer genau wahrnehmen. (Duyarlı insanlar başkalarının duygularını çok net algılayabilir.)' },
+          { term: 'unbewusst', def: 'bilinçsiz, farkında olmadan', type: 'Sıfat | Wissenschaftssprache', example: 'Unbewusste Gesten können verraten, dass jemand lügt. (Bilinçsiz jestler birinin yalan söylediğini ele verebilir.)' },
+          { term: 'bewusst / das Bewusstsein', def: 'bilinçli / bilinç', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Bei starken Schmerzen verlieren wir das Bewusstsein. (Şiddetli ağrıda bilincimizi kaybederiz ve artık hiçbir şey hissetmeyiz.)' },
+          { term: 'bewusstlos', def: 'bilinçsiz, baygın', type: 'Sıfat | Wissenschaftssprache', example: 'Wenn die Luft nicht genug Sauerstoff enthält, wird man bewusstlos. (Havada yeterince oksijen yoksa bir süre sonra bayılınır.)' },
+          { term: 'die Hirnströme (Pl.)', def: 'beyin dalgaları', type: 'Nomen (Pl.) | Wissenschaftssprache', example: 'Durch ein EEG kann man die Hirnströme messen. (Bir EEG (elektroensefalogram) ile bir kişinin beyin dalgaları ölçülebilir.)' },
+          { term: 'die Nervenzelle, -zellen', def: 'sinir hücresi', type: 'Nomen (die) | Wissenschaftssprache', example: 'Das Gehirn besteht aus Milliarden von Nervenzellen. (Beyin, birbiriyle iletişim kuran milyarlarca sinir hücresinden oluşur.)' },
+          { term: 'die Synapse, Synapsen', def: 'sinaps', type: 'Nomen (die) | Wissenschaftssprache', example: 'An den Enden befinden sich Synapsen für Informationsaustausch. (Bir beyin hücresinin uçlarında, diğer hücrelerle bilgi alışverişinin yapıldığı sinapslar bulunur.)' },
+          { term: 'Informationen verarbeiten', def: 'bilgi işlemek', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Unser Gehirn verarbeitet im Schlaf Informationen. (Beynimiz uykuda bile aktiftir ve gün içinde aldığımız bilgileri işler.)' },
+          { term: 'verknüpfen mit + D', def: 'bir şeyle ilişkilendirmek', type: 'Verb | Wissenschaftssprache', example: 'Am besten lernen wir, wenn wir neue Infos mit bekannten verknüpfen. (Yeni bilgileri zaten bilinen olgularla ilişkilendirdiğimizde en iyi öğreniriz.)' },
+          { term: 'das Gedächtnis', def: 'hafıza', type: 'Nomen (das) | Wissenschaftssprache', example: 'Durch gezielte Übungen lässt sich das Gedächtnis trainieren. (Hedefli alıştırmalarla hafıza eğitilebilir.)' },
+          { term: 'im Gedächtnis behalten', def: 'hafızada tutmak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Bedeutsame Infos können wir am besten im Gedächtnis behalten. (Bizim için kişisel olarak anlamlı bilgileri en iyi hafızada tutabiliriz.)' },
+          { term: 'sich etw. merken', def: 'aklında tutmak', type: 'Refl. Verb | Wissenschaftssprache', example: 'Manche klagen darüber, dass sie sich keine Namen merken können. (Bazı insanlar isimleri aklında tutamadığından şikâyet eder.)' },
+          { term: 'sich etw. einprägen', def: 'zihnine kazımak', type: 'Refl. Verb | Wissenschaftssprache', example: 'Um uns eine Nummer einzuprägen, müssen wir sie wiederholen. (Bir telefon numarasını zihnimize kazımak için birkaç kez tekrarlamamız gerekir.)' },
+          { term: 'kognitiv', def: 'bilişsel', type: 'Sıfat | Wissenschaftssprache', example: 'Einige lernen eine Sprache am besten kognitiv durch Grammatik. (Bazıları bir dili en iyi gramer yapılarını analiz ederek bilişsel şekilde öğrenirken, diğerleri yaratıcı yöntemleri tercih eder.)' },
+          { term: 'rational', def: 'rasyonel, akılcı', type: 'Sıfat | Wissenschaftssprache', example: 'Wenn man Vor- und Nachteile abwägt, trifft man rationale Entscheidungen. (Artı ve eksileri tartarak rasyonel bir karar verilebilir.)' },
+          { term: 'irrational', def: 'irrasyonel, akıl dışı', type: 'Sıfat | Wissenschaftssprache', example: 'Phobien sind Störungen mit irrationaler Angst. (Fobiler, kişinin belirli nesnelere karşı akıl dışı korku duyduğu psikolojik bozukluklardır.)' },
+          { term: 'vernünftig / Vernunft', def: 'makul / akıl, sağduyu', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Wir verhalten uns nicht immer vernünftig. (Her zaman akıllıca davranmayız: en iyi kararın ne olduğunu biliriz ama yine de tersini yaparız.)' },
+          { term: 'neurologisch / Neurologie', def: 'nörolojik / nöroloji', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Wenn man Körperteile nicht spürt, liegt evtl. eine neurologische Erkrankung vor. (Vücudun belirli bölgelerini hissedememek ya da kontrollü hareket ettirememek, nörolojik bir hastalıktan kaynaklanabilir.)' },
+          { term: 'lähmen / Lähmung / gelähmt', def: 'felç etmek / felç / felçli', type: 'Verb/Nomen/Sıfat | Wissenschaftssprache', example: 'Seit einem Unfall sind ihre Beine gelähmt. (Bir kazadan beri bacakları felçli, tekerlekli sandalyeye muhtaç.)' },
+          { term: 'das Koma', def: 'koma', type: 'Nomen (das) | Wissenschaftssprache', example: 'Ob Menschen im Koma ihre Umgebung wahrnehmen, weiß man nicht genau. (Bugün bile komadaki insanların çevrelerini algılayıp algılamadığı tam olarak bilinmiyor.)' },
+          { term: 'dement / die Demenz', def: 'demanslı / demans', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Menschen werden dement, wenn Nervenzellen im Gehirn absterben. (Beyindeki sinir hücreleri öldüğünde ve zihinsel performans ciddi azaldığında insanlar demanslı olur.)' },
+          { term: 'die Alzheimerkrankheit', def: 'Alzheimer hastalığı', type: 'Nomen (die) | Wissenschaftssprache', example: 'Die Alzheimerkrankheit führt zur Demenz. (Alzheimer hastalığı, demansa yol açan bir hastalığa örnektir.)' },
+          { term: 'emotional / die Emotion', def: 'duygusal / duygu', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Wenn wir verliebt sind, reagieren wir oft emotional. (Aşık olduğumuzda ya da korktuğumuzda genelde makul değil, duygusal davranırız.)' },
+          { term: 'euphorisch / Euphorie', def: 'coşkulu / öfori', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Bestimmte Drogen machen euphorisch. (İnsanlar bazı maddeleri, onları öforik hissettirdiği için kullanır.)' },
+          { term: 'enttäuscht / Enttäuschung', def: 'hayal kırıklığına uğramış / hayal kırıklığı', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Wir sind enttäuscht, wenn Erwartungen nicht erfüllt werden. (Umutlarımız ya da beklentilerimiz gerçekleşmediğinde hayal kırıklığına uğrarız.)' },
+          { term: 'verzweifelt / Verzweiflung', def: 'çaresiz / çaresizlik', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'In aussichtsloser Lage fühlt man sich verzweifelt. (Çaresiz bir durumda insan kendini yardımsız ve umutsuz hisseder.)' },
+          { term: 'panisch / die Panik', def: 'panik halinde / panik', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Wenn Menschen panisch reagieren, kann das zu Verletzten führen. (İnsanlar bir felakette panikle tepki verirse bu bir çok ölüm ve yaralanmaya yol açabilir.)' },
+          { term: 'Panik bricht aus', def: 'panik yayılmak/başlamak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Sicherheitskräfte versuchen zu verhindern, dass Panik ausbricht. (Güvenlik güçleri paniğin yayılmasını önlemeye çalışıyor.)' },
+          { term: 'in Panik geraten', def: 'paniğe kapılmak', type: 'Fiil kalıbı | Wissenschaftssprache', example: 'Versuchen Sie, ruhig zu bleiben und nicht in Panik zu geraten. (Sakin kalmaya ve paniğe kapılmamaya çalışın.)' },
+          { term: 'trauern um + A / die Trauer', def: 'yasını tutmak / yas', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Früher trugen Witwen ein Jahr lang schwarze Kleidung, um zu trauern. (Eskiden dul kadınlar kocalarının yasını tuttuklarını göstermek için bir yıl siyah giyerdi.)' },
+          { term: 'jdn. belasten / Belastung', def: 'üzerinde yük oluşturmak / yük', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Krankheiten und Stress belasten die Betroffenen. (Hastalık, stres ve mali sıkıntılar hem kişiyi hem yakınlarını yıpratır.)' },
+          { term: 'verdrängen / Verdrängung', def: 'bastırmak, görmezden gelmek', type: 'Verb / Nomen | Wissenschaftssprache', example: 'Manche Probleme verdrängen wir, indem wir sie ignorieren. (Bazı sorunları ya da olayları görmezden gelmeye çalışarak bastırırız.)' },
+          { term: 'traumatisiert / Trauma', def: 'travmatize olmuş / travma', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Nach Einsätzen in Kriegsgebieten sind viele Soldaten traumatisiert. (Savaş bölgelerindeki görevlerden sonra bir çok asker yaşadıkları korkunç şeylerden travmatize olur.)' },
+          { term: 'seelisch = psychisch', def: 'ruhsal', type: 'Sıfat | Wissenschaftssprache', example: 'Seelische Belastungen können zu körperlichen Erkrankungen führen. (Ruhsal yükler bedensel hastalıklara yol açabilir.)' },
+          { term: 'die Psychoanalyse', def: 'psikanaliz', type: 'Nomen (die) | Wissenschaftssprache', example: 'Durch Psychoanalyse können verdrängte Erinnerungen bewusst werden. (Sigmund Freud\'un geliştirdiği psikanaliz sayesinde bastırılmış anılar tekrar bilince çıkarılabilir.)' },
+          { term: 'depressiv / Depression', def: 'depresif / depresyon', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Depressive Menschen sind oft traurig ve antriebslos. (Depresif insanlar genellikle üzgündür ve hiçbir şey yapmak istemez.)' },
+          { term: 'süchtig nach + D / Sucht', def: 'bağımlı / bağımlılık', type: 'Sıfat / Nomen | Wissenschaftssprache', example: 'Manche Menschen sind süchtig nach Glücksspiel. (Bazı insanlar belirli maddelere bağımlıyken, bazıları kumar ya da medya tüketimine bağımlıdır.)' },
+          { term: 'der Charakter, Charaktere', def: 'karakter', type: 'Nomen (der) | Wissenschaftssprache', example: 'Wissenschaftler streiten darüber, wie stark Gene den Charakter prägen. (Bilim insanları genlerin karakterimizi ne kadar etkilediği konusunda tartışıyor.)' },
+          { term: 'prägen', def: 'şekillendirmek, damga vurmak', type: 'Verb (Akk.) | Wissenschaftssprache', example: 'Erfahrungen in der Kindheit prägen den Charakter eines Menschen. (Çocukluk ve gençlikteki deneyimler bir insanın karakterini şekillendirir.)' },
+          { term: 'sich verhalten / Verhalten', def: 'davranmak / davranış', type: 'Refl. Verb / Nomen | Wissenschaftssprache', example: 'In der Pubertät verhalten sich Jugendliche oft unberechenbar. (Ergenlikte gençler genellikle öngörülemez davranır.)' },
+          { term: 'die Eigenschaft, -schaften', def: 'özellik', type: 'Nomen (die) | Wissenschaftssprache', example: 'Wir müssen akzeptieren, dass jeder auch negative Eigenschaften hat. (Zor gelse de her birimizin olumsuz özellikleri de olduğunu kabul etmeliyiz.)' },
+          { term: 'introvertiert', def: 'içedönük', type: 'Sıfat | Wissenschaftssprache', example: 'Introvertierte Persönlichkeiten verbringen Zeit gerne alleine. (İçedönük kişilikler genellikle okumak ya da yaratıcı olmak için yalnız vakit geçirir.)' },
+          { term: 'schüchtern', def: 'utangaç', type: 'Sıfat | Wissenschaftssprache', example: 'Viele Kinder sind in einem bestimmten Alter schüchtern. (Birçok çocuk belirli bir yaşta utangaçtır ve ebeveynlerinin arkasına saklanır.)' },
+          { term: 'extrovertiert', def: 'dışadönük', type: 'Sıfat | Wissenschaftssprache', example: 'Extrovertierten Menschen fällt es leicht, ins Gespräch zu kommen. (Dışadönük insanlar genellikle başkalarıyla sohbete kolayca girer.)' }
+        ]
+      }
+    ];
+
+    let state = loadState();
+
+    let studyOrder = [];
+    let studyIndex = 0;
+    let isFlipped = false;
+
+    let quizOrder = [];
+    let quizIndex = 0;
+    let quizScore = 0;
+    let quizLocked = false;
+
+    function loadState(){
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) return JSON.parse(raw);
+      } catch(e) {
+        console.warn('Veri okuma hatası:', e);
+      }
+      return { decks: PDF_DATA_DECKS, activeDeckId: 'deck-2-1' };
+    }
+
+    function saveState(){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function uid(){
+      return Math.random().toString(36).slice(2, 9);
+    }
+
+    function getActiveDeck(){
+      return state.decks.find(d => d.id === state.activeDeckId) || null;
+    }
+
+    function shuffle(arr){
+      const a = arr.slice();
+      for(let i = a.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    /* ---------------- Almanca Sesli Telaffuz (TTS) ---------------- */
+    function speakGerman(text){
+      if (!('speechSynthesis' in window)) {
+        showToast('Tarayıcınız sesli okumayı desteklemiyor.', 'error');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const cleanText = text.replace(/\(.*?\)/g, '').trim();
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.lang = 'de-DE';
+      utterance.rate = 0.88;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    /* ---------------- DOM Referansları ---------------- */
+    const sidebar = document.getElementById('sidebar');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const deckList = document.getElementById('deckList');
+    const deckCountBadge = document.getElementById('deckCountBadge');
+    const newDeckForm = document.getElementById('newDeckForm');
+    const newDeckName = document.getElementById('newDeckName');
+
+    const emptyState = document.getElementById('emptyState');
+    const deckView = document.getElementById('deckView');
+    const deckBadge = document.getElementById('deckBadge');
+    const deckTitle = document.getElementById('deckTitle');
+
+    const modeButtons = document.querySelectorAll('.mode-btn');
+    const panels = {
+      cards: document.getElementById('panel-cards'),
+      study: document.getElementById('panel-study'),
+      quiz:  document.getElementById('panel-quiz'),
+    };
+
+    const newCardForm = document.getElementById('newCardForm');
+    const cardTermInput = document.getElementById('cardTerm');
+    const cardDefInput = document.getElementById('cardDef');
+    const cardTypeInput = document.getElementById('cardType');
+    const cardExampleInput = document.getElementById('cardExample');
+    const cardSearchInput = document.getElementById('cardSearchInput');
+    const cardTable = document.getElementById('cardTable');
+    const searchResultCount = document.getElementById('searchResultCount');
+
+    // Ezber elemanları
+    const flashcardInner = document.getElementById('flashcardInner');
+    const flashFront = document.getElementById('flashFront');
+    const flashBack = document.getElementById('flashBack');
+    const flashGrammarFront = document.getElementById('flashGrammarFront');
+    const flashExample = document.getElementById('flashExample');
+    const studyProgressText = document.getElementById('studyProgressText');
+    const prevCardBtn = document.getElementById('prevCardBtn');
+    const nextCardBtn = document.getElementById('nextCardBtn');
+    const shuffleStudyBtn = document.getElementById('shuffleStudyBtn');
+    const ttsFrontBtn = document.getElementById('ttsFrontBtn');
+
+    // Test elemanları
+    const quizQuestion = document.getElementById('quizQuestion');
+    const quizOptions = document.getElementById('quizOptions');
+    const quizProgressText = document.getElementById('quizProgressText');
+    const quizBox = document.getElementById('quizBox');
+    const quizResultBox = document.getElementById('quizResultBox');
+    const quizScoreText = document.getElementById('quizScoreText');
+    const retryQuizBtn = document.getElementById('retryQuizBtn');
+    const quizTtsBtn = document.getElementById('quizTtsBtn');
+
+    // Aktarım elemanları
+    const exportDataBtn = document.getElementById('exportDataBtn');
+    const importFileInput = document.getElementById('importFileInput');
+
+    /* ---------------- Mobil Menü ---------------- */
+    mobileMenuBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+    });
+
+    /* ---------------- Toast Bildirim ---------------- */
+    function showToast(message, type = 'success'){
+      const toast = document.getElementById('toastNotification');
+      const toastMsg = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+
+      toastMsg.textContent = message;
+      if (type === 'error') {
+        toastIcon.className = 'fa-solid fa-circle-exclamation text-red-400 text-lg';
+      } else {
+        toastIcon.className = 'fa-solid fa-circle-check text-amber-400 text-lg';
+      }
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    /* ---------------- Desteleri Listeleme ---------------- */
+    function renderDeckList(){
+      deckList.innerHTML = '';
+      deckCountBadge.textContent = state.decks.length;
+
+      state.decks.forEach(deck => {
+        const li = document.createElement('li');
+        const isActive = deck.id === state.activeDeckId;
+
+        li.className = `flex items-center justify-between rounded-xl px-3 py-2.5 transition-all cursor-pointer ${
+          isActive 
+            ? 'bg-amber-500/10 text-amber-400 font-bold border border-amber-500/30' 
+            : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
+        }`;
+
+        li.innerHTML = `
+          <div class="flex items-center gap-2.5 min-w-0 flex-1">
+            <i class="fa-solid fa-folder${isActive ? '-open text-amber-400' : ''} text-sm"></i>
+            <span class="truncate text-sm">${escapeHtml(deck.name)}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-mono px-2 py-0.5 rounded-full ${isActive ? 'bg-amber-500/20 text-amber-300' : 'bg-slate-900 text-slate-500'}">${deck.cards.length}</span>
+            <button class="delete-deck-btn p-1 text-slate-600 hover:text-red-400 transition-colors" title="Desteyi Sil">
+              <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+          </div>
+        `;
+
+        li.addEventListener('click', (e) => {
+          if (e.target.closest('.delete-deck-btn')) return;
+          selectDeck(deck.id);
+          if (window.innerWidth < 768) sidebar.classList.add('-translate-x-full');
+        });
+
+        const delBtn = li.querySelector('.delete-deck-btn');
+        delBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          state.decks = state.decks.filter(d => d.id !== deck.id);
+          if (state.activeDeckId === deck.id) {
+            state.activeDeckId = state.decks[0]?.id || null;
+          }
+          saveState();
+          renderAll();
+          showToast(`"${deck.name}" silindi.`);
+        });
+
+        deckList.appendChild(li);
+      });
+    }
+
+    function selectDeck(id){
+      state.activeDeckId = id;
+      saveState();
+      setMode('cards');
+      renderAll();
+    }
+
+    newDeckForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = newDeckName.value.trim();
+      if (!name) return;
+      const deck = { id: uid(), name, cards: [] };
+      state.decks.push(deck);
+      state.activeDeckId = deck.id;
+      newDeckName.value = '';
+      saveState();
+      renderAll();
+      showToast('Yeni deste oluşturuldu!');
+    });
+
+    /* ---------------- Kart Yönetimi ---------------- */
+    newCardForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const deck = getActiveDeck();
+      if(!deck) return;
+
+      const term = cardTermInput.value.trim();
+      const def = cardDefInput.value.trim();
+      const type = cardTypeInput.value.trim() || 'Wort';
+      const example = cardExampleInput.value.trim();
+
+      if(!term || !def) return;
+
+      deck.cards.unshift({ term, def, type, example });
+      
+      cardTermInput.value = '';
+      cardDefInput.value = '';
+      cardTypeInput.value = '';
+      cardExampleInput.value = '';
+      cardTermInput.focus();
+
+      saveState();
+      renderDeckList();
+      renderCardTable();
+      showToast('Kelime başarıyla eklendi.');
+    });
+
+    cardSearchInput.addEventListener('input', renderCardTable);
+
+    function renderCardTable(){
+      const deck = getActiveDeck();
+      cardTable.innerHTML = '';
+
+      if(!deck || deck.cards.length === 0){
+        cardTable.innerHTML = `
+          <li class="p-8 text-center text-slate-500 italic text-sm">
+            Bu destede henüz kelime yok. Yukarıdaki formdan yeni kelimeler ekleyebilirsiniz.
+          </li>`;
+        searchResultCount.textContent = '';
+        return;
+      }
+
+      const query = cardSearchInput.value.toLowerCase().trim();
+      const filtered = deck.cards.filter(c => 
+        c.term.toLowerCase().includes(query) || 
+        c.def.toLowerCase().includes(query)
+      );
+
+      searchResultCount.textContent = query ? `${filtered.length} sonuç bulundu` : '';
+
+      if (filtered.length === 0) {
+        cardTable.innerHTML = `<li class="p-6 text-center text-slate-500 text-sm">Aramanızla eşleşen kelime bulunamadı.</li>`;
+        return;
+      }
+
+      filtered.forEach((card, i) => {
+        const li = document.createElement('li');
+        li.className = 'p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:bg-slate-900/60 transition-colors';
+
+        li.innerHTML = `
+          <div class="flex items-start gap-3 min-w-0 flex-1">
+            <span class="font-mono text-xs text-slate-600 mt-1">${i + 1}</span>
+            <div class="space-y-1 min-w-0 flex-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-bold text-slate-100 text-base">${escapeHtml(card.term)}</span>
+                <span class="text-xs font-mono bg-slate-800 text-amber-400 px-2 py-0.5 rounded">${escapeHtml(card.type || 'Wort')}</span>
+                <button class="tts-card-btn text-slate-500 hover:text-amber-400 text-xs p-1" title="Telaffuz Et">
+                  <i class="fa-solid fa-volume-high"></i>
+                </button>
+              </div>
+              <p class="text-sm text-slate-400">${escapeHtml(card.def)}</p>
+              ${card.example ? `<p class="text-xs text-slate-500 italic font-sans border-l-2 border-slate-700 pl-2 mt-1">${escapeHtml(card.example)}</p>` : ''}
+            </div>
+          </div>
+
+          <div class="flex items-center justify-end gap-2 border-t md:border-t-0 border-slate-800/60 pt-2 md:pt-0">
+            <button class="del-card-btn text-slate-500 hover:text-red-400 p-2 text-sm transition-colors" title="Kartı Sil">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        `;
+
+        li.querySelector('.tts-card-btn').addEventListener('click', () => speakGerman(card.term));
+        
+        li.querySelector('.del-card-btn').addEventListener('click', () => {
+          const originalIndex = deck.cards.indexOf(card);
+          if (originalIndex > -1) {
+            deck.cards.splice(originalIndex, 1);
+            saveState();
+            renderDeckList();
+            renderCardTable();
+            showToast('Kart silindi.');
+          }
+        });
+
+        cardTable.appendChild(li);
+      });
+    }
+
+    /* ---------------- Mod Geçişleri ---------------- */
+    modeButtons.forEach(btn => {
+      btn.addEventListener('click', () => setMode(btn.dataset.mode));
+    });
+
+    function setMode(mode){
+      modeButtons.forEach(b => {
+        const active = b.dataset.mode === mode;
+        b.className = `mode-btn px-4 py-2 rounded-lg text-xs md:text-sm font-semibold transition-all ${
+          active ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/10' : 'text-slate-400 hover:text-white'
+        }`;
+      });
+
+      Object.entries(panels).forEach(([key, el]) => {
+        el.classList.toggle('hidden', key !== mode);
+      });
+
+      const deck = getActiveDeck();
+      if(!deck) return;
+
+      if(mode === 'study') startStudy();
+      if(mode === 'quiz') startQuiz();
+    }
+
+    /* ---------------- Ezber (Flashcard) Modu ---------------- */
+    function startStudy(){
+      const deck = getActiveDeck();
+      if(!deck || deck.cards.length === 0) {
+        flashFront.textContent = 'Kart yok';
+        flashBack.textContent = '—';
+        studyProgressText.textContent = '0 / 0';
+        return;
+      }
+      studyOrder = deck.cards.map((_, i) => i);
+      studyIndex = 0;
+      isFlipped = false;
+      renderStudyCard();
+    }
+
+    function renderStudyCard(){
+      const deck = getActiveDeck();
+      isFlipped = false;
+      flashcardInner.classList.remove('rotate-y-180');
+
+      if(!deck || deck.cards.length === 0){
+        flashFront.textContent = 'Kart yok';
+        flashBack.textContent = '—';
+        studyProgressText.textContent = '0 / 0';
+        return;
+      }
+
+      const card = deck.cards[studyOrder[studyIndex]];
+      flashFront.textContent = card.term;
+      flashBack.textContent = card.def;
+      flashGrammarFront.textContent = card.type || 'Wort';
+      flashExample.textContent = card.example || 'Örnek cümle girilmemiş.';
+      studyProgressText.textContent = `${studyIndex + 1} / ${studyOrder.length}`;
+    }
+
+    // Kart çevirme
+    flashcardInner.parentElement.addEventListener('click', (e) => {
+      if (e.target.closest('#ttsFrontBtn')) return;
+      isFlipped = !isFlipped;
+      flashcardInner.classList.toggle('rotate-y-180', isFlipped);
+    });
+
+    ttsFrontBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const deck = getActiveDeck();
+      if (deck && deck.cards[studyOrder[studyIndex]]) {
+        speakGerman(deck.cards[studyOrder[studyIndex]].term);
+      }
+    });
+
+    prevCardBtn.addEventListener('click', () => {
+      if(studyOrder.length === 0) return;
+      studyIndex = (studyIndex - 1 + studyOrder.length) % studyOrder.length;
+      renderStudyCard();
+    });
+
+    nextCardBtn.addEventListener('click', () => {
+      if(studyOrder.length === 0) return;
+      studyIndex = (studyIndex + 1) % studyOrder.length;
+      renderStudyCard();
+    });
+
+    shuffleStudyBtn.addEventListener('click', () => {
+      if(studyOrder.length === 0) return;
+      studyOrder = shuffle(studyOrder);
+      studyIndex = 0;
+      renderStudyCard();
+      showToast('Kartlar karıştırıldı!');
+    });
+
+    // Klavye Kısayolları (Boşluk = Çevir, Yön Tuşları = İleri/Geri)
+    document.addEventListener('keydown', (e) => {
+      const activePanel = document.querySelector('.mode-btn.bg-amber-500')?.dataset.mode;
+      if (activePanel !== 'study') return;
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      if (e.code === 'Space') {
+        e.preventDefault();
+        isFlipped = !isFlipped;
+        flashcardInner.classList.toggle('rotate-y-180', isFlipped);
+      } else if (e.code === 'ArrowRight') {
+        nextCardBtn.click();
+      } else if (e.code === 'ArrowLeft') {
+        prevCardBtn.click();
+      }
+    });
+
+    /* ---------------- Test (Quiz) Modu ---------------- */
+    function startQuiz(){
+      const deck = getActiveDeck();
+      quizBox.classList.remove('hidden');
+      quizResultBox.classList.add('hidden');
+
+      if(!deck || deck.cards.length < 2){
+        quizQuestion.textContent = 'Test için en az 2 kelime gereklidir.';
+        quizOptions.innerHTML = '';
+        quizProgressText.textContent = '0 / 0';
+        return;
+      }
+
+      quizOrder = shuffle(deck.cards.map((_, i) => i));
+      quizIndex = 0;
+      quizScore = 0;
+      renderQuizQuestion();
+    }
+
+    function renderQuizQuestion(){
+      const deck = getActiveDeck();
+      quizLocked = false;
+
+      if(quizIndex >= quizOrder.length){
+        finishQuiz();
+        return;
+      }
+
+      const correctIdx = quizOrder[quizIndex];
+      const correctCard = deck.cards[correctIdx];
+
+      quizQuestion.textContent = correctCard.term;
+      quizProgressText.textContent = `Soru ${quizIndex + 1} / ${quizOrder.length}`;
+
+      // Yanlış seçenekleri oluştur
+      const otherIndices = deck.cards.map((_, i) => i).filter(i => i !== correctIdx);
+      const wrongPicks = shuffle(otherIndices).slice(0, Math.min(3, otherIndices.length));
+      const options = shuffle([correctIdx, ...wrongPicks]);
+
+      quizOptions.innerHTML = '';
+      options.forEach(optIdx => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-opt-btn w-full bg-slate-900 hover:bg-slate-800 border border-slate-700/80 rounded-2xl p-4 text-left font-medium text-slate-200 text-sm md:text-base transition-all flex items-center justify-between group';
+        btn.innerHTML = `
+          <span>${escapeHtml(deck.cards[optIdx].def)}</span>
+          <i class="fa-regular fa-circle text-slate-600 group-hover:text-amber-400 transition-colors"></i>
+        `;
+        btn.addEventListener('click', () => handleQuizAnswer(btn, optIdx === correctIdx, correctIdx));
+        quizOptions.appendChild(btn);
+      });
+    }
+
+    quizTtsBtn.addEventListener('click', () => {
+      const deck = getActiveDeck();
+      if (deck && quizOrder[quizIndex] !== undefined) {
+        speakGerman(deck.cards[quizOrder[quizIndex]].term);
+      }
+    });
+
+    function handleQuizAnswer(selectedBtn, isCorrect, correctIdx){
+      if(quizLocked) return;
+      quizLocked = true;
+
+      const deck = getActiveDeck();
+      const allBtns = quizOptions.querySelectorAll('.quiz-opt-btn');
+
+      allBtns.forEach(btn => {
+        btn.classList.add('pointer-events-none');
+      });
+
+      if(isCorrect){
+        selectedBtn.className = 'quiz-opt-btn w-full bg-emerald-500/20 border-2 border-emerald-500 rounded-2xl p-4 text-left font-bold text-emerald-300 text-sm md:text-base flex items-center justify-between';
+        selectedBtn.querySelector('i').className = 'fa-solid fa-circle-check text-emerald-400 text-lg';
+        quizScore++;
+      } else {
+        selectedBtn.className = 'quiz-opt-btn w-full bg-rose-500/20 border-2 border-rose-500 rounded-2xl p-4 text-left font-bold text-rose-300 text-sm md:text-base flex items-center justify-between';
+        selectedBtn.querySelector('i').className = 'fa-solid fa-circle-xmark text-rose-400 text-lg';
+
+        allBtns.forEach(btn => {
+          if (btn.textContent.trim().includes(deck.cards[correctIdx].def.trim())) {
+            btn.className = 'quiz-opt-btn w-full bg-emerald-500/10 border border-emerald-500/50 rounded-2xl p-4 text-left font-semibold text-emerald-400 text-sm md:text-base flex items-center justify-between';
+          }
+        });
+      }
+
+      setTimeout(() => {
+        quizIndex++;
+        renderQuizQuestion();
+      }, 1000);
+    }
+
+    function finishQuiz(){
+      quizBox.classList.add('hidden');
+      quizResultBox.classList.remove('hidden');
+      quizScoreText.textContent = `${quizScore} / ${quizOrder.length} Doğru`;
+    }
+
+    retryQuizBtn.addEventListener('click', startQuiz);
+
+    /* ---------------- Veri Dışa / İçe Aktarma ---------------- */
+    exportDataBtn.addEventListener('click', () => {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `kelime-kutusu-testdaf-${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast('Veriler indirildi.');
+    });
+
+    importFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const parsed = JSON.parse(event.target.result);
+          if (parsed && Array.isArray(parsed.decks)) {
+            state = parsed;
+            saveState();
+            renderAll();
+            showToast('Veriler içe aktarıldı!');
+          } else {
+            showToast('Geçersiz JSON formatı.', 'error');
+          }
+        } catch(err) {
+          showToast('Dosya okuma hatası.', 'error');
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    /* ---------------- Yardımcı Metotlar ---------------- */
+    function escapeHtml(str){
+      if(!str) return '';
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function renderAll(){
+      renderDeckList();
+      const deck = getActiveDeck();
+
+      if(!deck){
+        emptyState.classList.remove('hidden');
+        deckView.classList.add('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      deckView.classList.remove('hidden');
+      deckBadge.textContent = `${deck.cards.length} KELİME`;
+      deckTitle.textContent = deck.name;
+      
+      renderCardTable();
+    }
+
+    // İlk Çalıştırma
+    if(!state.activeDeckId && state.decks.length > 0){
+      state.activeDeckId = state.decks[0].id;
+    }
+    renderAll();
+
+  </script>
 </body>
 </html>
